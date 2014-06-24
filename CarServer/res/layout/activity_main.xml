@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="cn.com.hyrt.carserver.base.activity.MainActivity" >
+    tools:context="cn.com.hyrt.carserver.base.activity.MainActivity" 
+    android:background="@drawable/full_bg">
 
     <FrameLayout
         android:id="@+id/layout_contain"
@@ -13,16 +14,14 @@
         android:layout_weight="1" >
     </FrameLayout>
 
+    <View 
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="#e7e7e7"/>
+    
     <android.support.v4.app.FragmentTabHost
         android:id="@android:id/tabhost"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_weight="0" />
-    </android.support.v4.app.FragmentTabHost>
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:paddingBottom="@dimen/tab_text_buttom_padding"
+    android:background="@drawable/bg_tab_btn">
     
     <ImageView 
         android:id="@+id/iv_btn_icon"
@@ -14,6 +16,8 @@
     <TextView 
         android:id="@+id/tv_btn_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:textColor="@color/tab_text"
+        android:textSize="@dimen/tab_text"/>
     
 </LinearLayout>

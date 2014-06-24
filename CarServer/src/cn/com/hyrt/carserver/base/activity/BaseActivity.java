@@ -96,6 +96,11 @@ public class BaseActivity extends ActionBarActivity{
 	}
 	
 	protected void showActionBar(boolean isShow){
+		if(isShow){
+			actionBar.show();
+		}else{
+			actionBar.hide();
+		}
 	}
 	
 	/**
