@@ -54,7 +54,6 @@ public class MainActivity extends BaseActivity {
 		showActionBar(false);
 		initView();
 		
-		LogHelper.i("tag", "sp:"+ScreenHelper.px2sp(this, 24)+" dp:"+ScreenHelper.px2dip(this, 24));
 	}
 	
 	private void initView(){
