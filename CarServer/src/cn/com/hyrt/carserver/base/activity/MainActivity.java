@@ -7,11 +7,13 @@ import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.base.helper.ScreenHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.classify.fragment.ClassifyFragment;
 import cn.com.hyrt.carserver.emergency.fragment.EmergencyFragment;
@@ -38,12 +40,21 @@ public class MainActivity extends BaseActivity {
 			R.string.classify_label, R.string.knowledge_label,
 			R.string.question_label, R.string.info_label,
 			R.string.emergency_label}; 
+	
+	private int mImgArray[] = {
+			R.drawable.bg_classify_tab, R.drawable.bg_knowledge_tab,
+			R.drawable.bg_question_tab, R.drawable.bg_info_tab,
+			R.drawable.bg_emergency_tab
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		showActionBar(false);
 		initView();
+		
+		LogHelper.i("tag", "sp:"+ScreenHelper.px2sp(this, 24)+" dp:"+ScreenHelper.px2dip(this, 24));
 	}
 	
 	private void initView(){
@@ -69,6 +80,8 @@ public class MainActivity extends BaseActivity {
 	private View getTabItemView(int index){
 		LayoutInflater mLayoutInflater = LayoutInflater.from(this);
 		View btnView = mLayoutInflater.inflate(R.layout.layout_main_btn_item, null);
+		ImageView ivBtnIcon = (ImageView) btnView.findViewById(R.id.iv_btn_icon);
+		ivBtnIcon.setImageResource(mImgArray[index]);
 		TextView btnText = (TextView) btnView.findViewById(R.id.tv_btn_text);
 		btnText.setText(getString(mTextArray[index]));
 		return btnView;
