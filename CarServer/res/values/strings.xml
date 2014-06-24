@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CarServer</string>
+	<string name="pull_to_refresh_release_label">下拉刷新...</string>
+	<string name="pull_to_refresh_footer_release_label">松开以加载...</string>
+	<string name="pull_to_refresh_footer_pull_label">上拉加载更多...</string>
+	<string name="pull_to_refresh_pull_label">多</string>
+	<string name="pull_to_refresh_footer_refreshing_label">正在加载...</string>
+	<string name="pull_to_refresh_refreshing_label">正在刷新...</string>
+	<string name="classify_label">分类服务</string>
+	<string name="knowledge_label">车辆知识</string>
+	<string name="question_label">车辆问答</string>
+	<string name="info_label">我的信息</string>
+	<string name="emergency_label">紧急救援</string>
+</resources>
