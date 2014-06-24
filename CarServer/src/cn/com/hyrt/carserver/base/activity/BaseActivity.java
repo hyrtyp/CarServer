@@ -96,7 +96,6 @@ public class BaseActivity extends ActionBarActivity{
 	}
 	
 	protected void showActionBar(boolean isShow){
-		actionBar.set
 	}
 	
 	/**
