@@ -4,7 +4,9 @@
     android:layout_height="73dp"
     android:orientation="horizontal" 
     android:gravity="center"
-    android:background="@drawable/item_bg">
+    android:background="@drawable/item_bg"
+    android:paddingTop="@dimen/main_top_margin"
+    android:paddingBottom="@dimen/main_top_margin">
     
 	<ImageView 
 	    android:id="@+id/iv_portal_img"

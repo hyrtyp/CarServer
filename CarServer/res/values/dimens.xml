@@ -15,4 +15,6 @@
     
     <dimen name="main_top_margin">10dp</dimen>
     <dimen name="text_size">15sp</dimen>
+    <dimen name="line_size">3px</dimen>
+    <dimen name="small_line_size">1px</dimen>
 </resources>

@@ -24,7 +24,7 @@
 
         <View 
             android:layout_width="fill_parent"
-		    android:layout_height="3px"
+		    android:layout_height="@dimen/line_size"
 		    android:background="@color/line_color"
             android:layout_marginBottom="@dimen/main_top_margin"/>
 
@@ -40,7 +40,7 @@
 
     <View
         android:layout_width="fill_parent"
-        android:layout_height="1px"
+        android:layout_height="@dimen/small_line_size"
         android:background="@color/line_color" />
 
     <android.support.v4.app.FragmentTabHost

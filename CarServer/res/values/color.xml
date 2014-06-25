@@ -4,4 +4,7 @@
     <color name="tab_text">#949494</color>
     <color name="tab_bg">#f9f9f9</color>
     <color name="line_color">#e7e7e7</color>
+    <color name="edittext_border_color">#c6c4c4</color>
+    <color name="edittext_bg_color">#f8f8f6</color>
+    <color name="search_btn_bg_color">#00c4ea</color>
 </resources>

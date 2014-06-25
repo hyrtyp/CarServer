@@ -47,7 +47,7 @@
     
     <View 
         android:layout_width="match_parent"
-	    android:layout_height="3px"
+	    android:layout_height="@dimen/line_size"
 	    android:background="@color/line_color"
 	    android:layout_marginTop="@dimen/view_margin_big"/>
     <GridView 

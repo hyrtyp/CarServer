@@ -6,7 +6,7 @@
     
     <View
             android:layout_width="fill_parent"
-            android:layout_height="1px"
+            android:layout_height="@dimen/small_line_size"
             android:background="@color/line_color" />
 
 </LinearLayout>

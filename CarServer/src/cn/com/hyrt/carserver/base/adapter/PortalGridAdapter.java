@@ -9,6 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * 首页入口表格适配器
+ * @author zoe
+ *
+ */
 public class PortalGridAdapter extends BaseAdapter{
 
 	private int[] imgArray;
