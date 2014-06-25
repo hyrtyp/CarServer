@@ -33,6 +33,7 @@ public class MainActivity extends BaseActivity {
 	@ViewInject(id=android.R.id.tabhost) FragmentTabHost mTabHost;
 	@ViewInject(id=R.id.mainTitle) TextView mainTitle;
 	@ViewInject(id=R.id.layout_main_top) LinearLayout layoutMainTop;
+	@ViewInject(id=R.id.layout_line) LinearLayout layout_line;
 	
 	private Class<?> fragmentArray[] = 
 		{ClassifyFragment.class,KnowledgeFragment.class,
@@ -94,9 +95,12 @@ public class MainActivity extends BaseActivity {
 	}
 	
 	private void changeActionBar(int index){
-		if(index == 2 || index == 4){
+		if(index == 2){
 			layoutMainTop.setVisibility(View.GONE);
+		}else if(index == 4){
+			layout_line.setVisibility(View.GONE);
 		}else{
+			layout_line.setVisibility(View.VISIBLE);
 			layoutMainTop.setVisibility(View.VISIBLE);
 		}
 		mainTitle.setText(mTextArray[index]);

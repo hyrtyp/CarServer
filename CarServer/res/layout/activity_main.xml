@@ -22,6 +22,11 @@
             android:textColor="#505050"
             android:textSize="30sp" />
 
+        <LinearLayout 
+            android:id="@+id/layout_line"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
         <View 
             android:layout_width="fill_parent"
 		    android:layout_height="@dimen/line_size"
@@ -29,6 +34,7 @@
             android:layout_marginBottom="@dimen/main_top_margin"/>
 
         <include layout="@layout/layout_line"/>
+        </LinearLayout>
     </LinearLayout>
 
     <FrameLayout
