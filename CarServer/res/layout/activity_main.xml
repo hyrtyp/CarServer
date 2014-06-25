@@ -27,11 +27,12 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-        <View 
-            android:layout_width="fill_parent"
-		    android:layout_height="@dimen/line_size"
-		    android:background="@color/line_color"
-            android:layout_marginBottom="@dimen/main_top_margin"/>
+        <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_line"
+        android:scaleType="fitXY"
+        android:layout_marginBottom="@dimen/main_top_margin"/>
 
         <include layout="@layout/layout_line"/>
         </LinearLayout>

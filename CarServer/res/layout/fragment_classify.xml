@@ -4,47 +4,66 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
     
-    <ImageView 
+    <ScrollView 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="138dp"
-        android:src="@drawable/classify_banner"
-        android:scaleType="centerCrop"/>
-    
-    <include layout="@layout/layout_line" />
-    <GridView
-        android:id="@+id/gvServer"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:numColumns="2"
-	    android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"/>
-<View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/small_line_size"
-        android:layout_marginBottom="@dimen/main_top_margin"
-        android:background="@color/line_color" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/classify_banner" />
 
-<TextView 
+    <include layout="@layout/layout_line" />
+
+    <cn.com.hyrt.carserver.base.view.FullGridView
+        android:id="@+id/gvServer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="1dp"
+        android:numColumns="2"
+        android:verticalSpacing="1dp" />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/main_top_margin"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_line" />
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/main_top_margin"
         android:text="@string/classify_kjrk"
         android:textColor="@color/tab_text"
         android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:layout_marginLeft="@dimen/main_top_margin"/>
-<View
+        android:textStyle="bold" />
+
+    <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/small_line_size"
         android:layout_marginTop="@dimen/main_top_margin"
         android:background="@color/line_color" />
-<GridView
+
+    <cn.com.hyrt.carserver.base.view.FullGridView
         android:id="@+id/gvkjrk"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:numColumns="2"
-	    android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"/>
- <include layout="@layout/layout_line" />
- 
- 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="1dp"
+        android:numColumns="2"
+        android:verticalSpacing="1dp" 
+        />
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_line" />
+    </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

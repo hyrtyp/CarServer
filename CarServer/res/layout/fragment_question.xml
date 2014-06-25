@@ -2,88 +2,114 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@drawable/full_bg">
+    android:background="@drawable/full_bg"
+    android:orientation="vertical" >
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/bannerPager"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="152dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_question_banner" />
+        android:layout_height="fill_parent" >
 
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/line_size"
-        android:layout_marginBottom="@dimen/main_top_margin"
-        android:background="@color/line_color" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <include layout="@layout/layout_line" />
+            <android.support.v4.view.ViewPager
+                android:id="@+id/bannerPager"
+                android:layout_width="fill_parent"
+                android:layout_height="152dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_question_banner" />
 
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="119dp"
-        android:background="#fff"
-        android:orientation="vertical"
-        android:gravity="center">
-        	<Button 
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    android:background="@drawable/bg_question_btn"
-        	    android:text="@string/question_label"
-        	    android:textColor="#fff"
-        	    android:textSize="24sp"
-        	    android:gravity="center"/>
-        	<TextView 
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    android:background="@drawable/bg_question_note"
-        	    android:layout_marginTop="3dp"
-        	    android:text="@string/question_note"
-        	    android:gravity="center_horizontal"
-        	    android:paddingTop="12dp"
-        	    android:textColor="#111"/>
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/main_top_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_line" />
+
+            <include layout="@layout/layout_line" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="119dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_question_btn"
+                    android:gravity="center"
+                    android:text="@string/question_label"
+                    android:textColor="#fff"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:background="@drawable/bg_question_note"
+                    android:gravity="center_horizontal"
+                    android:paddingTop="12dp"
+                    android:text="@string/question_note"
+                    android:textColor="#111" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/main_top_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_line" />
+
+            <include layout="@layout/layout_line" />
+
+            <cn.com.hyrt.carserver.base.view.FullGridView
+                android:id="@+id/gvQuestion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="1dp"
+                android:numColumns="2"
+                android:verticalSpacing="1dp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/main_top_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_line" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:text="@string/question_find_experts"
+                android:textColor="@color/tab_text"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/line_size"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:background="@color/line_color" />
+
+            <cn.com.hyrt.carserver.base.view.FullGridView
+                android:id="@+id/gvExperts"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="1dp"
+                android:numColumns="2"
+                android:verticalSpacing="1dp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_line" />
         </LinearLayout>
-        <View
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/line_size"
-        android:layout_marginBottom="@dimen/main_top_margin"
-        android:background="@color/line_color" />
+    </ScrollView>
 
-    <include layout="@layout/layout_line" />
-    
-	<GridView 
-	    android:id="@+id/gvQuestion"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:numColumns="2"
-	    android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"/>
-	<View
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/line_size"
-        android:layout_marginBottom="@dimen/main_top_margin"
-        android:background="@color/line_color" />
-
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/question_find_experts"
-        android:textColor="@color/tab_text"
-        android:textSize="@dimen/text_size"
-        android:textStyle="bold"
-        android:layout_marginLeft="@dimen/main_top_margin"/>
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/line_size"
-        android:layout_marginTop="@dimen/main_top_margin"
-        android:background="@color/line_color" />
-    <GridView
-        android:id="@+id/gvExperts"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:numColumns="2"
-	    android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"/>
-    <include layout="@layout/layout_line" />
 </LinearLayout>

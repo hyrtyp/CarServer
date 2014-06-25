@@ -2,28 +2,51 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" 
-    android:background="@drawable/full_bg">
-    
-    <LinearLayout 
+    android:background="@drawable/full_bg"
+    android:orientation="vertical" >
+
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@drawable/banner">
-    </LinearLayout>
-    <include layout="@layout/layout_line"/>
-    <View 
-        android:layout_width="match_parent"
-	    android:layout_height="1px"
-	    android:background="@color/line_color"
-	    android:layout_marginTop="@dimen/main_top_margin"/>
-    <GridView 
-        android:id="@+id/gv_emergency"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="2"
-        android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"/>
-    <include layout="@layout/layout_line"/>
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/banner"
+                android:orientation="horizontal" >
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:background="@color/line_color" />
+
+            <cn.com.hyrt.carserver.base.view.FullGridView
+                android:id="@+id/gv_emergency"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="1dp"
+                android:numColumns="2"
+                android:verticalSpacing="1dp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_line" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
