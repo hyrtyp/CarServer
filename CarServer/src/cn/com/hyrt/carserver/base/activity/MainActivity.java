@@ -94,7 +94,7 @@ public class MainActivity extends BaseActivity {
 	}
 	
 	private void changeActionBar(int index){
-		if(index == 2){
+		if(index == 2 || index == 4){
 			layoutMainTop.setVisibility(View.GONE);
 		}else{
 			layoutMainTop.setVisibility(View.VISIBLE);

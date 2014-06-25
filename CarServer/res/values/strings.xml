@@ -31,4 +31,10 @@
 	<string name="question_cosmetology">美容装潢</string>
 	<string name="question_find_specialty">按专长找</string>
 	<string name="question_find_brand">按品牌找</string>
+	
+	<!-- emergency -->
+	<string name="emergency_bxlp">保险理赔</string>
+	<string name="emergency_jtbj">交通报警</string>
+	<string name="emergency_ksqz">快速求助</string>
+	<string name="emergency_yjjy">一键救援</string>
 </resources>
