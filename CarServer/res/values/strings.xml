@@ -2,17 +2,19 @@
 <resources>
 
     <string name="app_name">CarServer</string>
-	<string name="pull_to_refresh_release_label">下拉刷新...</string>
-	<string name="pull_to_refresh_footer_release_label">松开以加载...</string>
-	<string name="pull_to_refresh_footer_pull_label">上拉加载更多...</string>
+	<string name="pull_to_refresh_release_label">下拉刷新&#8230;</string>
+	<string name="pull_to_refresh_footer_release_label">松开以加载&#8230;</string>
+	<string name="pull_to_refresh_footer_pull_label">上拉加载更多&#8230;</string>
 	<string name="pull_to_refresh_pull_label">多</string>
-	<string name="pull_to_refresh_footer_refreshing_label">正在加载...</string>
-	<string name="pull_to_refresh_refreshing_label">正在刷新...</string>
+	<string name="pull_to_refresh_footer_refreshing_label">正在加载&#8230;</string>
+	<string name="pull_to_refresh_refreshing_label">正在刷新&#8230;</string>
 	<string name="classify_label">分类服务</string>
 	<string name="knowledge_label">车辆知识</string>
 	<string name="question_label">车辆问答</string>
 	<string name="info_label">我的信息</string>
 	<string name="emergency_label">紧急救援</string>
+	<string name="serarch_btn_label">搜索</string>
+	<string name="blank_text"></string>
 	
 	<!-- info -->
 	<string name="info_new_question">最新资讯</string>
@@ -37,4 +39,14 @@
 	<string name="emergency_jtbj">交通报警</string>
 	<string name="emergency_ksqz">快速求助</string>
 	<string name="emergency_yjjy">一键救援</string>
+	
+	<!-- knowledge -->
+	<string name="knowledge_search_hint">输入查询信息&#8230;</string>
+	<string name="knowledge_related_question">相关问答</string>
+	<string name="knowledge_related_knowledge">相关知识</string>
+	<string name="iknowledge_examination">维修自查</string>
+	<string name="knowledge_decoration">汽车装饰</string>
+	<string name="knowledge_detail">维保详情</string>
+	<string name="knowledge_insurance">保险知识</string>
+	<string name="knowledge_experience">经验心得</string>
 </resources>
