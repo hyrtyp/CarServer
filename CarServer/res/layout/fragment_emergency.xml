@@ -2,12 +2,32 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@drawable/full_bg">
     
-    <TextView 
-        android:layout_width="wrap_content"
+    <LinearLayout 
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/emergency_label"/>
+        android:orientation="horizontal"
+        android:background="#fff">
+        <ImageView 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/banner"/>
+    </LinearLayout>
+    <include layout="@layout/layout_line"/>
+    <View 
+        android:layout_width="match_parent"
+	    android:layout_height="3px"
+	    android:background="@color/line_color"
+	    android:layout_marginTop="@dimen/view_margin_big"/>
+    <GridView 
+        android:id="@+id/gv_myInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"/>
+    <include layout="@layout/layout_line"/>
 
 </LinearLayout>
