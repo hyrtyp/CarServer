@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="73dp"
+    android:orientation="horizontal" 
+    android:gravity="center"
+    android:background="@drawable/item_bg">
+    
+	<ImageView 
+	    android:id="@+id/iv_portal_img"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/ic_question_history"/>
+	
+	<TextView 
+	    android:id="@+id/tv_portal_text"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:text="最新资讯"
+	    android:textColor="#838484"
+	    android:textSize="@dimen/text_size"/>
+    
+</LinearLayout>
