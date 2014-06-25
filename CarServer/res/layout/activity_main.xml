@@ -3,9 +3,33 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/full_bg"
     android:orientation="vertical"
-    tools:context="cn.com.hyrt.carserver.base.activity.MainActivity" 
-    android:background="@drawable/full_bg">
+    tools:context="cn.com.hyrt.carserver.base.activity.MainActivity" >
+
+    <LinearLayout
+        android:id="@+id/layout_main_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/mainTitle"
+            android:layout_width="fill_parent"
+            android:layout_height="65dp"
+            android:background="#fff"
+            android:gravity="center"
+            android:textColor="#505050"
+            android:textSize="30sp" />
+
+        <View 
+            android:layout_width="fill_parent"
+		    android:layout_height="3px"
+		    android:background="@color/line_color"
+            android:layout_marginBottom="@dimen/main_top_margin"/>
+
+        <include layout="@layout/layout_line"/>
+    </LinearLayout>
 
     <FrameLayout
         android:id="@+id/layout_contain"
@@ -14,14 +38,14 @@
         android:layout_weight="1" >
     </FrameLayout>
 
-    <View 
+    <View
         android:layout_width="fill_parent"
         android:layout_height="1px"
-        android:background="#e7e7e7"/>
-    
+        android:background="@color/line_color" />
+
     <android.support.v4.app.FragmentTabHost
         android:id="@android:id/tabhost"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

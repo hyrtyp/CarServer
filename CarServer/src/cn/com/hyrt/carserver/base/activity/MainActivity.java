@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
@@ -30,6 +31,8 @@ public class MainActivity extends BaseActivity {
 	
 	@ViewInject(id=R.id.layout_contain) FrameLayout layoutContain;
 	@ViewInject(id=android.R.id.tabhost) FragmentTabHost mTabHost;
+	@ViewInject(id=R.id.mainTitle) TextView mainTitle;
+	@ViewInject(id=R.id.layout_main_top) LinearLayout layoutMainTop;
 	
 	private Class<?> fragmentArray[] = 
 		{ClassifyFragment.class,KnowledgeFragment.class,
@@ -53,7 +56,6 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.activity_main);
 		showActionBar(false);
 		initView();
-		
 		LogHelper.i("tag", "sp:"+ScreenHelper.px2sp(this, 24)+" dp:"+ScreenHelper.px2dip(this, 24));
 	}
 	
@@ -64,7 +66,9 @@ public class MainActivity extends BaseActivity {
 					.setIndicator(getTabItemView(i));
 			mTabHost.addTab(mTabSpec, fragmentArray[i], null);
 		}
-		mTabHost.setCurrentTab(StorageHelper.getInstance(this).getTabIndex());
+		int index = StorageHelper.getInstance(this).getTabIndex();
+		changeActionBar(index);
+		mTabHost.setCurrentTab(index);
 		mTabHost.setOnTabChangedListener(mTabChangeListener);
 	}
 	
@@ -73,7 +77,9 @@ public class MainActivity extends BaseActivity {
 		@Override
 		public void onTabChanged(String arg0) {
 			LogHelper.i("tag", "onChange:"+arg0);
-			StorageHelper.getInstance(MainActivity.this).saveTabIndex(Integer.parseInt(arg0));
+			int index = Integer.parseInt(arg0);
+			StorageHelper.getInstance(MainActivity.this).saveTabIndex(index);
+			changeActionBar(index);
 		}
 	};
 	
@@ -85,6 +91,15 @@ public class MainActivity extends BaseActivity {
 		TextView btnText = (TextView) btnView.findViewById(R.id.tv_btn_text);
 		btnText.setText(getString(mTextArray[index]));
 		return btnView;
+	}
+	
+	private void changeActionBar(int index){
+		if(index == 2){
+			layoutMainTop.setVisibility(View.GONE);
+		}else{
+			layoutMainTop.setVisibility(View.VISIBLE);
+		}
+		mainTitle.setText(mTextArray[index]);
 	}
 	
 

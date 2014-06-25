@@ -5,7 +5,14 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 	
     <dimen name="view_margin_small">6dp</dimen>
+    <dimen name="view_margin">15dp</dimen>
+    <dimen name="view_margin_big">25dp</dimen>
+    
+    <dimen name="face_img_size">91dp</dimen>
     
     <dimen name="tab_text">12sp</dimen>
     <dimen name="tab_text_buttom_padding">9dp</dimen>
+    
+    <dimen name="main_top_margin">10dp</dimen>
+    <dimen name="text_size">15sp</dimen>
 </resources>

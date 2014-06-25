@@ -13,4 +13,12 @@
 	<string name="question_label">车辆问答</string>
 	<string name="info_label">我的信息</string>
 	<string name="emergency_label">紧急救援</string>
+	
+	<!-- info -->
+	<string name="info_new_question">最新资讯</string>
+	<string name="info_question_history">提问历史</string>
+	<string name="info_my_appointment">我的预约</string>
+	<string name="info_my_experts">我的专家</string>
+	<string name="info_condition">车辆状况</string>
+	<string name="info_my_car">我的爱车</string>
 </resources>

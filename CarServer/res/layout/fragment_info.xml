@@ -2,12 +2,61 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@drawable/full_bg">
     
-    <TextView 
-        android:layout_width="wrap_content"
+    <LinearLayout 
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/info_label"/>
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/view_margin"
+        android:paddingRight="@dimen/view_margin"
+        android:paddingTop="11dp"
+        android:paddingBottom="11dp"
+        android:background="#fff">
+        <ImageView 
+            android:layout_width="@dimen/face_img_size"
+            android:layout_height="@dimen/face_img_size"
+            android:src="@drawable/img_car_default"
+            android:background="@drawable/face_img_border"
+            android:padding="1dp"/>
+        
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/view_margin_big"
+            android:layout_marginTop="12dp">
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#373737"
+                android:textSize="@dimen/text_size"
+                android:text="用户名：理理事情"
+                android:layout_marginBottom="@dimen/view_margin"/>
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#838484"
+                android:textSize="@dimen/text_size"
+                android:text="我的爱车：宝马X3、\n宝马X5"/>
+
+        </LinearLayout>
+    </LinearLayout>
+    <include layout="@layout/layout_line"/>
+    
+    <View 
+        android:layout_width="match_parent"
+	    android:layout_height="3px"
+	    android:background="@color/line_color"
+	    android:layout_marginTop="@dimen/view_margin_big"/>
+    <GridView 
+        android:id="@+id/gv_myInfo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2"
+        android:horizontalSpacing="1dp"
+        android:verticalSpacing="1dp"/>
+    <include layout="@layout/layout_line"/>
 
 </LinearLayout>
