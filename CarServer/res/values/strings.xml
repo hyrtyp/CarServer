@@ -49,4 +49,17 @@
 	<string name="knowledge_detail">维保详情</string>
 	<string name="knowledge_insurance">保险知识</string>
 	<string name="knowledge_experience">经验心得</string>
+	
+	<!-- classify -->
+	<string name="classify_kjrk">快捷入口</string>
+	<string name="classify_wxby">维修保养</string>
+	<string name="classify_pjgz">配件改装</string>
+	<string name="classify_nwzx">内外装饰</string>
+	<string name="classify_dzpj">电子配件</string>
+	<string name="classify_caryy">车辆预约</string>
+	<string name="classify_loclser">本地服务</string>
+	<string name="classify_zfw">找服务</string>
+	<string name="classify_zsj">找商家</string>
+	
+	
 </resources>
