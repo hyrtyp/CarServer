@@ -44,4 +44,8 @@
 	<string name="classify_dzpj">电子配件</string>
 	<string name="classify_caryy">车辆预约</string>
 	<string name="classify_loclser">本地服务</string>
+	<string name="classify_zfw">找服务</string>
+	<string name="classify_zsj">找商家</string>
+	
+	
 </resources>

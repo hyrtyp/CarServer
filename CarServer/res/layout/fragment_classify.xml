@@ -7,7 +7,7 @@
     <ImageView 
         android:layout_width="fill_parent"
         android:layout_height="138dp"
-        android:src="@drawable/img_car_default"
+        android:src="@drawable/classify_banner"
         android:scaleType="centerCrop"/>
     
     <include layout="@layout/layout_line" />
@@ -38,12 +38,14 @@
         android:layout_marginTop="@dimen/main_top_margin"
         android:background="@color/line_color" />
 <GridView
-        android:id="@+id/gvServer"
+        android:id="@+id/gvkjrk"
 	    android:layout_width="fill_parent"
-	    android:layout_height="212dp"
+	    android:layout_height="wrap_content"
 	    android:numColumns="2"
 	    android:horizontalSpacing="1dp"
         android:verticalSpacing="1dp"
         android:background="#fff"/>
  <include layout="@layout/layout_line" />
+ 
+ 
 </LinearLayout>
