@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical" 
     android:background="@drawable/full_bg">
     
@@ -9,20 +9,17 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#fff">
-        <ImageView 
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:src="@drawable/banner"/>
+        android:background="@drawable/banner">
+        
     </LinearLayout>
     <include layout="@layout/layout_line"/>
     <View 
         android:layout_width="match_parent"
-	    android:layout_height="3px"
+	    android:layout_height="1px"
 	    android:background="@color/line_color"
 	    android:layout_marginTop="@dimen/view_margin_big"/>
     <GridView 
-        android:id="@+id/gv_myInfo"
+        android:id="@+id/gv_emergency"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:numColumns="2"

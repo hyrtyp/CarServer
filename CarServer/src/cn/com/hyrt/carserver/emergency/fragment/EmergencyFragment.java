@@ -19,17 +19,15 @@ public class EmergencyFragment extends Fragment{
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_emergency, null);
 		findView();
-		int[] imgArray = new int[]{R.drawable.emergency_bxlp, R.drawable.emergency_jtbj,
-				R.drawable.emergency_ksqz, R.drawable.emergency_yjjy};
-		int[] textSourceArray = new int[]{R.string.emergency_bxlp, R.string.emergency_jtbj,
-				R.string.emergency_ksqz, R.string.emergency_yjjy};
+		int[] imgArray = new int[]{R.drawable.emergency_ksqz,R.drawable.emergency_yjjy, R.drawable.emergency_bxlp, R.drawable.emergency_jtbj};
+		int[] textSourceArray = new int[]{R.string.emergency_ksqz, R.string.emergency_yjjy,R.string.emergency_bxlp, R.string.emergency_jtbj};
 		PortalGridAdapter mAdapter = new PortalGridAdapter(imgArray, textSourceArray, getActivity());
 		gvMyInfo.setAdapter(mAdapter);
 		return rootView;
 	}
 	
 	private void findView(){
-		gvMyInfo = (GridView) rootView.findViewById(R.id.gv_myInfo);
+		gvMyInfo = (GridView) rootView.findViewById(R.id.gv_emergency);
 	}
 
 }
