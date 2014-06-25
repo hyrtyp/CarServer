@@ -99,6 +99,7 @@ public class MainActivity extends BaseActivity {
 			layoutMainTop.setVisibility(View.GONE);
 		}else if(index == 4){
 			layout_line.setVisibility(View.GONE);
+			layoutMainTop.setVisibility(View.VISIBLE);
 		}else{
 			layout_line.setVisibility(View.VISIBLE);
 			layoutMainTop.setVisibility(View.VISIBLE);
