@@ -46,13 +46,23 @@ public class QuestionFragment extends Fragment{
 	}
 	
 	private void initBanner(){
+		LayoutInflater mInflater = LayoutInflater.from(getActivity());
+		View view1 = mInflater.inflate(R.layout.layout_banner, null);
+		((ImageView)view1.findViewById(R.id.iv_banner)).setImageResource(R.drawable.img_question_banner);
+		View view2 = mInflater.inflate(R.layout.layout_banner, null);
+		((ImageView)view2.findViewById(R.id.iv_banner)).setImageResource(R.drawable.classify_banner);
+		View view3 = mInflater.inflate(R.layout.layout_banner, null);
+		((ImageView)view3.findViewById(R.id.iv_banner)).setImageResource(R.drawable.img_car_default);
+		
+		
 		List<View> views = new ArrayList<View>();
-		ImageView imageview1 = new ImageView(getActivity());
-		imageview1.setImageResource(R.drawable.img_question_banner);
-		ImageView imageview2 = new ImageView(getActivity());
-		imageview2.setImageResource(R.drawable.img_question_banner);
-		views.add(imageview1);
-		views.add(imageview2);
+//		ImageView imageview1 = new ImageView(getActivity());
+//		imageview1.setImageResource(R.drawable.img_question_banner);
+//		ImageView imageview2 = new ImageView(getActivity());
+//		imageview2.setImageResource(R.drawable.classify_banner);
+		views.add(view1);
+		views.add(view2);
+		views.add(view3);
 		bannerPager.setAdapter(new QuestionBannerAdapter(views));
 		
 	}

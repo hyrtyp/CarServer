@@ -52,6 +52,12 @@ public class PortalGridAdapter extends BaseAdapter{
 			convertView = mInflater.inflate(R.layout.layout_portal_item, null);
 		}
 		
+		if(mContext.getString(textSourceArray[index]).toString().length() <= 0){
+			convertView.setBackgroundResource(android.R.color.white);
+		}else{
+			convertView.setBackgroundResource(R.drawable.item_bg);
+		}
+		
 		ImageView img = (ImageView) convertView.findViewById(R.id.iv_portal_img);
 		TextView text = (TextView) convertView.findViewById(R.id.tv_portal_text);
 		
