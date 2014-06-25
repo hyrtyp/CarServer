@@ -38,6 +38,7 @@
 	<string name="emergency_ksqz">快速求助</string>
 	<string name="emergency_yjjy">一键救援</string>
 	<!-- classify -->
+	<string name="classify_kjrk">快捷入口</string>
 	<string name="classify_wxby">维修保养</string>
 	<string name="classify_pjgz">配件改装</string>
 	<string name="classify_nwzx">内外装饰</string>
