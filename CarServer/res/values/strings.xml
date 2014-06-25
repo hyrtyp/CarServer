@@ -37,4 +37,11 @@
 	<string name="emergency_jtbj">交通报警</string>
 	<string name="emergency_ksqz">快速求助</string>
 	<string name="emergency_yjjy">一键救援</string>
+	<!-- classify -->
+	<string name="classify_wxby">维修保养</string>
+	<string name="classify_pjgz">配件改装</string>
+	<string name="classify_nwzx">内外装饰</string>
+	<string name="classify_dzpj">电子配件</string>
+	<string name="classify_caryy">车辆预约</string>
+	<string name="classify_loclser">本地服务</string>
 </resources>
