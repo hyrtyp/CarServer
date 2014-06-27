@@ -11,6 +11,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.content.Context;
+import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
@@ -39,16 +40,13 @@ public class BaseWebServiceHelper {
 		this.mContext = context;
 	}
 
-	protected void get(final String method, final Map<String, String> params, final Class<?> clazz){
+	protected void get(final String method, final String params, final Class<?> clazz){
 		
 		Thread mThread = new Thread(){
 			public void run() {
 				SoapObject soapObject = new SoapObject(NAME_SPACE, method);
-				Iterator<String> keys = params.keySet().iterator();
-				while(keys.hasNext()){
-					  String key = (String) keys.next();
-					   String value = params.get(key);
-					soapObject.addProperty(key, value.toString());
+				if(params != null){
+					soapObject.addProperty("jsonstr", params);
 				}
 		        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
 		        envelope.bodyOut = soapObject;
@@ -78,10 +76,16 @@ public class BaseWebServiceHelper {
 						
 					}
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
+					LogHelper.i("tag", "e1:"+e.getMessage());
+					if(e.getMessage().contains("Network is unreachable")){
+						if(mCallback != null){
+							mCallback.onFailure(Define.REQUEST_ERROR_CODE,
+									mContext.getString(R.string.net_error_msg));
+						}
+					}
 					e.printStackTrace();
 				} catch (XmlPullParserException e) {
-					// TODO Auto-generated catch block
+					LogHelper.i("tag", "e2:"+e.getMessage());
 					e.printStackTrace();
 				}
 			};

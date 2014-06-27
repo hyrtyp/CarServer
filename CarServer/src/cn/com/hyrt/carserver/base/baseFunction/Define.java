@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Define {
 	
 	public static int REQUEST_SUCCESS_CODE = 200;
+	public static int REQUEST_ERROR_CODE = 500;
 	
 	public static class TEST{
 		public int code;
@@ -71,5 +72,16 @@ public class Define {
 	 */
 	public static class INFO_SAVE extends BASE{
 		
+	}
+	
+	/**
+	 * 登陆信息
+	 * @author zoe
+	 *
+	 */
+	public static class INFO_LOGIN extends BASE{
+		public String id;//用户ID
+		public String loginname;//用户登陆账号
+		public String name;//用户名称
 	}
 }

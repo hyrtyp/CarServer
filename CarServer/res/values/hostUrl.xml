@@ -3,6 +3,8 @@
     <string name="emergencyjtbj">110</string>
     <string name="emergencyyjjy">112</string>
     
-    <!-- 编码表统一接口 -->
+    <!-- 接口方法 -->
     <string name="method_getcode">getCode</string>
+    <string name="method_login">getLogininfo</string>
+    <string name="method_getUserInfo">getUserInfo</string>
 </resources>

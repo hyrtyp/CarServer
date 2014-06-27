@@ -15,6 +15,7 @@
 	<string name="emergency_label">紧急救援</string>
 	<string name="serarch_btn_label">搜索</string>
 	<string name="blank_text"></string>
+	<string name="net_error_msg">网络发生异常</string>
 	
 	<!-- info -->
 	<string name="info_new_question">最新资讯</string>
@@ -30,6 +31,7 @@
 	<string name="info_confirm_pwd_label">确认密码</string>
 	<string name="info_mycar_label">我的车辆</string>
 	<string name="info_save_change">保存修改</string>
+	<string name="info_login_label">登录</string>
 	
 	<!-- question -->
 	<string name="question_note">知名维修专家，实时车辆问题排查</string>
