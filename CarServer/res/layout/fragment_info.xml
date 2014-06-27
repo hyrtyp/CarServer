@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/full_bg"
@@ -25,11 +24,13 @@
                 android:paddingTop="11dp" >
 
                 <ImageView
+                    android:id="@+id/iv_face_img"
                     android:layout_width="@dimen/face_img_size"
                     android:layout_height="@dimen/face_img_size"
                     android:background="@drawable/face_img_border"
                     android:padding="1dp"
-                    android:src="@drawable/img_car_default" />
+                    android:src="@drawable/img_car_default" 
+                    android:scaleType="centerCrop"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -82,5 +83,6 @@
                 android:src="@drawable/bg_line" />
         </LinearLayout>
     </ScrollView>
+
 
 </LinearLayout>

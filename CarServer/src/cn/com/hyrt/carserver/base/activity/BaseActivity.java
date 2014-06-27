@@ -4,6 +4,7 @@ import net.tsz.afinal.FinalActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -78,8 +79,8 @@ public class BaseActivity extends ActionBarActivity{
         actionBar.setHomeButtonEnabled(true);
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
-		actionBar.setDisplayShowHomeEnabled(false);
-		actionBar.setIcon(R.drawable.ic_actionbar_back);
+		actionBar.setDisplayShowHomeEnabled(true);
+		actionBar.setIcon(R.drawable.ic_back);
 		View layoutActionBar = actionBar.getCustomView();
 		titleText = (TextView) layoutActionBar.findViewById(R.id.tv_actionbar_title);
 		if(getTitle() != null && getTitle().toString().length() > 0){

@@ -13,6 +13,9 @@ import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TabHost.TabSpec;
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.baseFunction.Define;
+import cn.com.hyrt.carserver.base.baseFunction.Define.TEST;
+import cn.com.hyrt.carserver.base.helper.HttpHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.ScreenHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
@@ -56,6 +59,7 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		showActionBar(false);
+		
 		initView();
 		LogHelper.i("tag", "sp:"+ScreenHelper.px2sp(this, 24)+" dp:"+ScreenHelper.px2dip(this, 24));
 	}

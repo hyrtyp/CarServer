@@ -2,4 +2,7 @@
 <resources>
     <string name="emergencyjtbj">110</string>
     <string name="emergencyyjjy">112</string>
+    
+    <!-- 编码表统一接口 -->
+    <string name="method_getcode">getCode</string>
 </resources>

@@ -7,4 +7,5 @@
     <color name="edittext_border_color">#c6c4c4</color>
     <color name="edittext_bg_color">#f8f8f7</color>
     <color name="search_btn_bg_color">#00c4e9</color>
+    <color name="input_laber_color">#7e7e7e</color>
 </resources>

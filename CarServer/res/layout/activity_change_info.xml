@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/full_bg"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/main_top_margin" >
+
+                <ImageView
+                    android:id="@+id/iv_face_img"
+                    android:layout_width="@dimen/face_img_size"
+                    android:layout_height="@dimen/face_img_size"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/face_img_border_not_click"
+                    android:padding="1dp"
+                    android:src="@drawable/img_car_default" />
+
+                <TextView
+                    android:layout_width="94dp"
+                    android:layout_height="33dp"
+                    android:layout_alignBottom="@id/iv_face_img"
+                    android:layout_marginLeft="21dp"
+                    android:layout_toRightOf="@id/iv_face_img"
+                    android:background="@drawable/bg_btn"
+                    android:gravity="center"
+                    android:text="修改头像"
+                    android:textColor="#fff"
+                    android:textSize="18sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/main_top_margin"
+                android:background="@drawable/bg_input_block"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/main_top_margin"
+                        android:text="@string/info_username_label"
+                        android:textColor="@color/input_laber_color"
+                        android:textSize="@dimen/input_text_size" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
+                        android:background="#fff"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="49dp"
+                        android:singleLine="true"
+                        android:text="于柳柳"
+                        android:textColor="#000"
+                        android:textSize="@dimen/input_text_size" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/small_line_size"
+                    android:background="#a8a7a8" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/main_top_margin"
+                        android:text="@string/info_old_pwd_label"
+                        android:textColor="@color/input_laber_color"
+                        android:textSize="@dimen/input_text_size" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="1dp"
+                        android:background="#fff"
+                        android:gravity="center_vertical"
+                        android:inputType="textPassword"
+                        android:paddingLeft="49dp"
+                        android:singleLine="true"
+                        android:text="123456"
+                        android:textColor="#000"
+                        android:textSize="@dimen/input_text_size" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/small_line_size"
+                    android:background="#a8a7a8" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/main_top_margin"
+                        android:text="@string/info_new_pwd_label"
+                        android:textColor="@color/input_laber_color"
+                        android:textSize="@dimen/input_text_size" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="1dp"
+                        android:background="#fff"
+                        android:gravity="center_vertical"
+                        android:inputType="textPassword"
+                        android:paddingLeft="49dp"
+                        android:singleLine="true"
+                        android:text="123456"
+                        android:textColor="#000"
+                        android:textSize="@dimen/input_text_size" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/small_line_size"
+                    android:background="#a8a7a8" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/main_top_margin"
+                        android:text="@string/info_confirm_pwd_label"
+                        android:textColor="@color/input_laber_color"
+                        android:textSize="@dimen/input_text_size" />
+
+                    <EditText
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
+                        android:background="#fff"
+                        android:gravity="center_vertical"
+                        android:inputType="textPassword"
+                        android:paddingLeft="49dp"
+                        android:singleLine="true"
+                        android:text="123456"
+                        android:textColor="#000"
+                        android:textSize="@dimen/input_text_size" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/main_top_margin"
+                android:background="@drawable/bg_input_block"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/main_top_margin"
+                        android:text="@string/info_mycar_label"
+                        android:textColor="@color/input_laber_color"
+                        android:textSize="@dimen/input_text_size" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
+                        android:background="#fff"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="49dp"
+                        android:singleLine="true"
+                        android:text="宝马X5"
+                        android:textColor="#000"
+                        android:textSize="@dimen/input_text_size" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/small_line_size"
+                    android:background="#a8a7a8" />
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/main_top_margin"
+                        android:text="@string/info_mycar_label"
+                        android:textColor="@color/input_laber_color"
+                        android:textSize="@dimen/input_text_size" />
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="2dp"
+                        android:background="#fff"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="49dp"
+                        android:singleLine="true"
+                        android:text="宝马X3"
+                        android:textColor="#000"
+                        android:textSize="@dimen/input_text_size" />
+                </LinearLayout>
+            </LinearLayout>
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_add_car"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/view_margin_small"/>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_question_btn"
+                    android:gravity="center"
+                    android:text="@string/info_save_change"
+                    android:textColor="#fff"
+                    android:textSize="24sp" 
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/main_top_margin"
+                    android:layout_marginBottom="@dimen/view_margin"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

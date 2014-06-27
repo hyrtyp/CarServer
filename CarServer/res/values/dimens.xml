@@ -18,4 +18,5 @@
     <dimen name="search_btn_text_size">20sp</dimen>
     <dimen name="line_size">3px</dimen>
     <dimen name="small_line_size">1px</dimen>
+    <dimen name="input_text_size">17sp</dimen>
 </resources>
