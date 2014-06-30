@@ -33,6 +33,7 @@
 	<string name="info_new_pwd_label">新改密码</string>
 	<string name="info_confirm_pwd_label">确认密码</string>
 	<string name="info_mycar_label">我的车辆</string>
+	<string name="info_mycar_addstatus">添\n加\n车\n况</string>
 	<string name="info_save_change">保存修改</string>
 	<string name="info_login_label">登录</string>
 	<string name="info_add_car">增加车辆</string>
@@ -50,6 +51,8 @@
 	<string name="info_insurancetype_label">保险种类</string>
 	<string name="info_insurancenum_label">保险单号</string>
 	<string name="info_insurancecompany_label">保险公司</string>
+	
+	
 	
 	<!-- question -->
 	<string name="question_note">知名维修专家，实时车辆问题排查</string>
