@@ -26,6 +26,7 @@ import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR_LIST;
+import cn.com.hyrt.carserver.base.helper.FileHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
@@ -43,6 +44,8 @@ public class ChangeInfoActivity extends BaseActivity{
 	@ViewInject(id=R.id.lv_car) ListView lvCar;
 	@ViewInject(id=R.id.btn_add_car,click="addCar") ImageView btnAddCar;
 	
+	private Uri faceUri;
+	private PhotoHelper mPhotoHelper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +97,11 @@ public class ChangeInfoActivity extends BaseActivity{
 	}
 	
 	public void changeFace(View view){
-		PhotoHelper ph = new PhotoHelper(this);
-		ph.getFromLocal(-1);
+		if(faceUri == null){
+			faceUri = Uri.fromFile(FileHelper.createFile("carserver", "face.jpg"));
+		}
+		mPhotoHelper = new PhotoHelper(this, faceUri, 50);
+		mPhotoHelper.getPhoto();
 	}
 	
 	@Override
@@ -115,16 +121,17 @@ public class ChangeInfoActivity extends BaseActivity{
                 ivFaceImg.setImageBitmap(bitmap);
 //                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 String uploadBuffer = new String(Base64.encode(baos.toByteArray()));
-//                File targetFile = FileUtils.writeFile(baos.toByteArray(), "cnp", "face.png");
-//
-//                //上传图片资源
-//                UserFaceRequest request = new UserFaceRequest(this, targetFile);
-//                String lastRequestCacheKey = request.createCacheKey();
-//                UserFaceRequestListener userFaceRequestListener = new UserFaceRequestListener(this);
-//                spiceManager.execute(request, lastRequestCacheKey, DurationInMillis.ONE_SECOND, userFaceRequestListener.start());
 
             }
 
+        }else if (requestCode == PhotoHelper.FROM_CAMERA) {
+            if(mPhotoHelper == null){
+                if(faceUri == null){
+                    faceUri = Uri.fromFile(FileHelper.createFile("cnp", "face.jpg"));
+                }
+                mPhotoHelper = new PhotoHelper(ChangeInfoActivity.this, faceUri, 50);
+            }
+            mPhotoHelper.startPhotoZoom(faceUri, 50);
         }
 	}
 
