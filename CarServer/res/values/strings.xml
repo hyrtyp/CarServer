@@ -27,6 +27,7 @@
 	<string name="info_my_experts">我的专家</string>
 	<string name="info_condition">车辆状况</string>
 	<string name="info_my_car">我的车辆</string>
+	<string name="info_mycar_addstatus">添\n加\n车\n况</string>
 	<string name="info_change_label">修改信息</string>
 	<string name="info_username_label">用户名称</string>
 	<string name="info_old_pwd_label">原始密码</string>
@@ -92,3 +93,6 @@
 	<string name="photo_from_album">从相册选择</string>
 	
 </resources>
+
+   
+	
