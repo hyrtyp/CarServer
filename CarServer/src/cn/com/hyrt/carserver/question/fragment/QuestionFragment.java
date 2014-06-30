@@ -75,8 +75,8 @@ public class QuestionFragment extends Fragment{
 		PortalGridAdapter mQuestionAdapter = new PortalGridAdapter(questionImgArray, questionTextSourceArray, getActivity());
 		gvQuestion.setAdapter(mQuestionAdapter);
 		
-		int[] expertsImgArray = new int[]{R.drawable.ic_question_specialty, R.drawable.ic_question_mend};
-		int[] expertsTextSourceArray = new int[]{R.string.question_find_specialty, R.string.question_mend};
+		int[] expertsImgArray = new int[]{R.drawable.ic_question_specialty, R.drawable.ic_question_brand};
+		int[] expertsTextSourceArray = new int[]{R.string.question_find_specialty, R.string.question_find_brand};
 		PortalGridAdapter mExpertsAdapter = new PortalGridAdapter(expertsImgArray, expertsTextSourceArray, getActivity());
 		gvExperts.setAdapter(mExpertsAdapter);
 	}
