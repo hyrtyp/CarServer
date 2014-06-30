@@ -30,6 +30,7 @@
                     android:src="@drawable/img_car_default" />
 
                 <TextView
+                    android:id="@+id/btn_change_face"
                     android:layout_width="94dp"
                     android:layout_height="33dp"
                     android:layout_alignBottom="@id/iv_face_img"
@@ -65,6 +66,7 @@
                         android:textSize="@dimen/input_text_size" />
 
                     <EditText
+                        android:id="@+id/et_username"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:layout_margin="2dp"
@@ -72,7 +74,6 @@
                         android:gravity="center_vertical"
                         android:paddingLeft="49dp"
                         android:singleLine="true"
-                        android:text="于柳柳"
                         android:textColor="#000"
                         android:textSize="@dimen/input_text_size" />
                 </LinearLayout>
@@ -97,6 +98,7 @@
                         android:textSize="@dimen/input_text_size" />
 
                     <EditText
+                        android:id="@+id/et_old_pwd"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:layout_margin="1dp"
@@ -105,7 +107,6 @@
                         android:inputType="textPassword"
                         android:paddingLeft="49dp"
                         android:singleLine="true"
-                        android:text="123456"
                         android:textColor="#000"
                         android:textSize="@dimen/input_text_size" />
                 </LinearLayout>
@@ -130,6 +131,7 @@
                         android:textSize="@dimen/input_text_size" />
 
                     <EditText
+                        android:id="@+id/et_new_pwd"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:layout_margin="1dp"
@@ -138,7 +140,6 @@
                         android:inputType="textPassword"
                         android:paddingLeft="49dp"
                         android:singleLine="true"
-                        android:text="123456"
                         android:textColor="#000"
                         android:textSize="@dimen/input_text_size" />
                 </LinearLayout>
@@ -163,6 +164,7 @@
                         android:textSize="@dimen/input_text_size" />
 
                     <EditText
+                        android:id="@+id/et_confirm_pwd"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
                         android:layout_margin="2dp"
@@ -171,95 +173,39 @@
                         android:inputType="textPassword"
                         android:paddingLeft="49dp"
                         android:singleLine="true"
-                        android:text="123456"
                         android:textColor="#000"
                         android:textSize="@dimen/input_text_size" />
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <cn.com.hyrt.carserver.base.view.FullListView
+                android:id="@+id/lv_car"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/main_top_margin"
                 android:background="@drawable/bg_input_block"
-                android:orientation="vertical" >
+                android:divider="@color/car_divider"
+                android:dividerHeight="1px" />
 
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="60dp"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/main_top_margin"
-                        android:text="@string/info_mycar_label"
-                        android:textColor="@color/input_laber_color"
-                        android:textSize="@dimen/input_text_size" />
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_margin="2dp"
-                        android:background="#fff"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="49dp"
-                        android:singleLine="true"
-                        android:text="宝马X5"
-                        android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/small_line_size"
-                    android:background="#a8a7a8" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="60dp"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/main_top_margin"
-                        android:text="@string/info_mycar_label"
-                        android:textColor="@color/input_laber_color"
-                        android:textSize="@dimen/input_text_size" />
-
-                    <TextView
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"
-                        android:layout_margin="2dp"
-                        android:background="#fff"
-                        android:gravity="center_vertical"
-                        android:paddingLeft="49dp"
-                        android:singleLine="true"
-                        android:text="宝马X3"
-                        android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
-                </LinearLayout>
-            </LinearLayout>
-            <ImageView 
+            <ImageView
+                android:id="@+id/btn_add_car"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_add_car"
                 android:layout_gravity="center_horizontal"
-                android:layout_margin="@dimen/view_margin_small"/>
+                android:layout_margin="@dimen/view_margin_small"
+                android:src="@drawable/ic_add_car" />
+
             <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_question_btn"
-                    android:gravity="center"
-                    android:text="@string/info_save_change"
-                    android:textColor="#fff"
-                    android:textSize="24sp" 
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/main_top_margin"
-                    android:layout_marginBottom="@dimen/view_margin"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:background="@drawable/bg_question_btn"
+                android:gravity="center"
+                android:text="@string/info_save_change"
+                android:textColor="#fff"
+                android:textSize="24sp" />
         </LinearLayout>
     </ScrollView>
 

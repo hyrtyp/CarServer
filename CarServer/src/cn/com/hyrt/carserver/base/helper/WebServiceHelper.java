@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import android.content.Context;
 
@@ -90,14 +91,46 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
 	
+	/**
+	 * 登录
+	 * @param loginname
+	 * @param password
+	 */
 	public void login(String loginname, String password){
-		String json = String.format("{\"loginname\":%s,\"password\":%s}", loginname, password);
-		get(getString(R.string.method_login), json, Define.INFO_LOGIN.class);
+		String params = String.format("{\"loginname\":%s,\"password\":%s}", loginname, password);
+		get(getString(R.string.method_login), params, Define.INFO_LOGIN.class);
 	}
 	
-	public void getUserInfo(String id){
-		String json = String.format("{\"id\":\"%s\"}", id);
-		get(mContext.getString(R.string.method_getUserInfo), json, Define.INFO.class);
+	/**
+	 * 获取用户信息
+	 * @param id
+	 */
+	public void getUserInfo(){
+		String id = getUserId();
+		if(id == null){
+			return;
+		}
+		String params = String.format("{\"id\":\"%s\"}", id);
+		get(mContext.getString(R.string.method_getUserInfo), params, Define.INFO.class);
+	}
+	
+	/**
+	 * 获取车辆列表
+	 */
+	public void getTerminalCarList(){
+		String id = getUserId();
+		if(id == null){
+			return;
+		}
+		String params = String.format("{\"id\":\"%s\"}", id);
+		get(mContext.getString(R.string.method_getTerminalCar), params, Define.INFO_CAR_LIST.class);
+	}
+	
+	private String getUserId(){
+		if(CarServerApplication.loginInfo == null){
+			CarServerApplication.loginInfo = StorageHelper.getInstance(mContext).getLoginInfo();
+		}
+		return CarServerApplication.loginInfo.id;
 	}
 	
 	

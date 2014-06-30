@@ -51,6 +51,10 @@
          <activity 
             android:name=".info.activity.LoginActivity"
             android:label="@string/info_login_label"/>
+         
+         <activity 
+            android:name=".info.activity.AlterCarActivity"
+            android:label="@string/info_add_car"/>
     </application>
 
 </manifest>
