@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:background="#fff">
+    
+    <cn.com.hyrt.carserver.base.view.ImageLoaderView 
+        android:id="@+id/iv_face_img"
+        android:layout_width="@dimen/face_img_size"
+        android:layout_height="@dimen/face_img_size"
+        android:background="@drawable/face_img_border_not_click"
+        android:src="@drawable/img_car_default"
+        android:padding="1dp"
+        android:layout_marginLeft="@dimen/view_margin"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/view_margin"
+        android:layout_marginBottom="@dimen/view_margin"
+        android:scaleType="centerCrop"/>
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/main_top_margin"
+        android:layout_toRightOf="@id/iv_face_img"
+        android:layout_alignTop="@id/iv_face_img">
+        <TextView 
+            android:id="@+id/tv_car_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size"
+            android:textColor="#000"
+            android:text="宝马X5（进口）"
+            android:layout_marginBottom="@dimen/main_top_margin"/>
+        <include layout="@layout/layout_line_small"/>
+        <TextView 
+            android:id="@+id/tv_add_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size"
+            android:textColor="#000"
+            android:text="添加时间：2014-06-10"
+            android:layout_marginTop="@dimen/main_top_margin"/>
+    </LinearLayout>
+    <!-- 	<ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_line" 
+                android:layout_alignParentBottom="true"/>
+ -->
+</RelativeLayout>

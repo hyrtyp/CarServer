@@ -1,7 +1,12 @@
 package cn.com.hyrt.carserver.base.helper;
 
+import cn.com.hyrt.carserver.R;
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.widget.Toast;
 
 /**
@@ -13,6 +18,7 @@ public class AlertHelper {
 	
 	public static AlertHelper mAlertHelper;
 	private static Context mContext;
+	MyProgressDialog mProgressDialog;
 	
 	private AlertHelper(){}
 	
@@ -54,5 +60,58 @@ public class AlertHelper {
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
+	
+	/**
+	 * 显示加载框
+	 */
+	public void showLoading(String msg){
+		if(mProgressDialog == null){
+			mProgressDialog = new MyProgressDialog(mContext);
+			mProgressDialog.setIndeterminateDrawable(
+					mContext.getResources().getDrawable(R.drawable.bg_loading));
+		}
+		if(msg != null){
+			mProgressDialog.setMessage(msg);
+		}
+		mProgressDialog.setCancelable(false);
+		mProgressDialog.setCanceledOnTouchOutside(false);
+		mProgressDialog.show();
+		
+	}
+	
+	public void hideLoading(){
+		if(mProgressDialog != null){
+			mProgressDialog.dismiss();
+			mProgressDialog = null;
+		}
+	}
+	
+	private class MyProgressDialog extends ProgressDialog{
+		
+		private Context mContext;
+
+		public MyProgressDialog(Context context) {
+			super(context);
+			this.mContext = context;
+		}
+
+		public MyProgressDialog(Context context, int theme) {
+			super(context, theme);
+			this.mContext = context;
+		}
+		
+		@Override
+		public boolean dispatchKeyEvent(KeyEvent event) {
+			if(event.getAction() == KeyEvent.ACTION_DOWN
+					&& event.getKeyCode() == KeyEvent.KEYCODE_BACK){
+				if(mContext != null){
+					((Activity)mContext).finish();
+				}
+				hideLoading();
+			}
+			return super.dispatchKeyEvent(event);
+		}
+		
+	}
 	
 }

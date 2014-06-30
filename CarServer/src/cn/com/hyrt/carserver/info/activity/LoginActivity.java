@@ -11,6 +11,7 @@ import android.widget.Toast;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.activity.MainActivity;
+import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_LOGIN;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
@@ -39,6 +40,7 @@ public class LoginActivity extends BaseActivity{
 					public void onSuccess(INFO_LOGIN result) {
 						if(result != null){
 							AlertHelper.getInstance(LoginActivity.this).showCenterToast("登录成功");
+							CarServerApplication.loginInfo = result;
 							StorageHelper.getInstance(LoginActivity.this).saveLoginInfo(result);
 							Intent intent = new Intent();
 							intent.setClass(LoginActivity.this, MainActivity.class);

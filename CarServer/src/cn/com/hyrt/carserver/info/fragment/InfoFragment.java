@@ -19,6 +19,7 @@ import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
+import cn.com.hyrt.carserver.info.activity.MyCarActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,71 +48,6 @@ public class InfoFragment extends Fragment{
 		findView();
 		initView();
 		setListener();
-		
-		
-		Thread mThread = new Thread(){
-			@Override
-			public void run() {
-				super.run();
-				
-				WebServiceHelper mServiceHelper = 
-						new WebServiceHelper(new WebServiceHelper.RequestCallback<Define.CODE>() {
-
-							@Override
-							public void onSuccess(CODE result) {
-								for(int i=0,j=result.data.size(); i<j; i++){
-									LogHelper.i("tag", "result:"+result.data.get(i).name);
-								}
-							}
-
-							@Override
-							public void onFailure(int errorNo, String errorMsg) {
-								LogHelper.i("tag", "errorNo:"+errorNo+" errorMsg:"+errorMsg);
-							}
-				
-				}, getActivity());
-				mServiceHelper.getTerminalUserinfoOccupationCode();
-				
-				
-				
-				/*// 命名空间  
-		        String nameSpace = "http://webservice.csp.hyrt.com";  
-		        // 调用的方法名称  
-		        String methodName = "getCode";  
-		        // EndPoint  
-		        String wsd = "http://192.168.10.135:8080/CSPInterface/services/CspInterface";  
-		        // SOAP Action  
-		        String soapAction = "urn:getCode";  
-
-		        SoapObject soapObject = new SoapObject(nameSpace, methodName);
-		        soapObject.addProperty("jsonstr", "{\"type\":\"TERMINAL_USERINFO_OCCUPATION\"}");
-		        
-		        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
-		        envelope.bodyOut = soapObject;
-		        envelope.dotNet = true;
-		        envelope.setOutputSoapObject(soapObject);
-
-		        HttpTransportSE ht = new HttpTransportSE(wsd);
-		        ht.debug = true;
-				try {
-					ht.call(soapAction, envelope);
-					String result = envelope.getResponse().toString();
-					LogHelper.i("tag", "result:"+result);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} catch (XmlPullParserException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}*/
-				
-			}
-		};
-		
-		mThread.start();
-		
-		
-		
 		return rootView;
 	}
 	
@@ -133,6 +69,7 @@ public class InfoFragment extends Fragment{
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
 			LogHelper.i("tag", "position:"+position);
+			Intent intent = new Intent();
 			switch (position) {
 			case 0:
 				//最新资讯
@@ -151,10 +88,12 @@ public class InfoFragment extends Fragment{
 				break;
 			case 5:
 				//我的爱车
+				intent.setClass(getActivity(), MyCarActivity.class);
 				break;
 			default:
-				break;
+				return;
 			}
+			startActivity(intent);
 		}
 	};
 	

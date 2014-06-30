@@ -95,7 +95,7 @@ public class ChangeInfoActivity extends BaseActivity{
 	
 	public void changeFace(View view){
 		PhotoHelper ph = new PhotoHelper(this);
-		ph.getFromLocal();
+		ph.getFromLocal(-1);
 	}
 	
 	@Override
@@ -104,9 +104,11 @@ public class ChangeInfoActivity extends BaseActivity{
 		if (resultCode == RESULT_CANCELED) {
 			return;
 		}
+		
         if (requestCode == PhotoHelper.PHOTO_ZOOM && data != null) {
             //保存剪切好的图片
-        	LogHelper.i("tag", "data:"+data.getParcelableExtra("data"));
+        	LogHelper.i("tag", "data:"+data.getParcelableExtra("data")+"---"+data.getData());
+        	
             if (data.getParcelableExtra("data") != null) {
                 Bitmap bitmap = data.getParcelableExtra("data");
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();

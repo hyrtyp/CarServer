@@ -17,6 +17,8 @@
 	<string name="blank_text"></string>
 	<string name="net_error_msg">网络发生异常</string>
 	<string name="upload_photo">上传照片</string>
+	<string name="no_data">暂无数据</string>
+	<string name="loading_msg">正在加载&#8230;</string>
 	
 	<!-- info -->
 	<string name="info_new_question">最新资讯</string>
@@ -24,7 +26,7 @@
 	<string name="info_my_appointment">我的预约</string>
 	<string name="info_my_experts">我的专家</string>
 	<string name="info_condition">车辆状况</string>
-	<string name="info_my_car">我的爱车</string>
+	<string name="info_my_car">我的车辆</string>
 	<string name="info_change_label">修改信息</string>
 	<string name="info_username_label">用户名称</string>
 	<string name="info_old_pwd_label">原始密码</string>
