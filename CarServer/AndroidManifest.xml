@@ -55,6 +55,9 @@
          <activity 
             android:name=".info.activity.AlterCarActivity"
             android:label="@string/info_add_car"/>
+         <activity 
+             android:name=".info.activity.MyCarActivity"
+             android:label="@string/info_my_car"/>
     </application>
 
 </manifest>

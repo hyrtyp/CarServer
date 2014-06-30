@@ -10,13 +10,16 @@
     
     <dimen name="face_img_size">91dp</dimen>
     
-    <dimen name="tab_text">12sp</dimen>
+    
     <dimen name="tab_text_buttom_padding">9dp</dimen>
     
     <dimen name="main_top_margin">10dp</dimen>
-    <dimen name="text_size">15sp</dimen>
-    <dimen name="search_btn_text_size">20sp</dimen>
     <dimen name="line_size">3px</dimen>
     <dimen name="small_line_size">1px</dimen>
+    
+    <dimen name="tab_text">12sp</dimen>
+    <dimen name="text_size">15sp</dimen>
     <dimen name="input_text_size">17sp</dimen>
+    <dimen name="search_btn_text_size">20sp</dimen>
+    
 </resources>
