@@ -151,9 +151,6 @@ public class InfoFragment extends Fragment{
 				break;
 			case 5:
 				//我的爱车
-				Intent intent = new Intent();
-				intent.setClass(getActivity(), ChangeInfoActivity.class);
-				startActivity(intent);
 				break;
 			default:
 				break;
