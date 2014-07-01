@@ -3,6 +3,8 @@ package cn.com.hyrt.carserver.base.helper;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
@@ -115,6 +117,16 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 	}
 	
 	/**
+	 * 保存用户信息
+	 */
+	public void saveUserInfo(Define.INFO_SAVE info){
+		Gson mGson = new Gson();
+		String params = mGson.toJson(info);
+		LogHelper.i("tag", "params:"+params);
+		get(mContext.getString(R.string.method_saveUserinfo), params, Define.BASE.class);
+	}
+	
+	/**
 	 * 获取车辆列表
 	 */
 	public void getTerminalCarList(){
@@ -124,6 +136,13 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 		}
 		String params = String.format("{\"id\":\"%s\"}", id);
 		get(mContext.getString(R.string.method_getTerminalCar), params, Define.INFO_CAR_LIST.class);
+	}
+	
+	/**
+	 * 添加车辆
+	 */
+	public void addCar(){
+		
 	}
 	
 	private String getUserId(){

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 @SuppressWarnings("unused")
 public class Define {
 	
-	public static int REQUEST_SUCCESS_CODE = 200;
-	public static int REQUEST_ERROR_CODE = 500;
+	public static String REQUEST_SUCCESS_CODE = "200";
+	public static String REQUEST_ERROR_CODE = "500";
 	
 	public static int RESULT_FROM_ALTER_CAR = 101;
 	
@@ -28,7 +28,7 @@ public class Define {
 	}
 	
 	public static class BASE{
-		public int code;
+		public String code;
 		public String message;
 	}
 	
@@ -84,7 +84,14 @@ public class Define {
 	 *
 	 */
 	public static class INFO_SAVE extends BASE{
-		
+		public String id;//登陆时传入的用户ID
+		public String name;//用户姓名
+		public String password;//密码
+		public String newpassword;//新密码
+		public String sex;//性别
+		public String occupation;//职业
+		public String unitname;//单位名称
+		public String image;//用户头像
 	}
 	
 	/**
@@ -138,6 +145,21 @@ public class Define {
 			}
 			
 		}
+	}
+	
+	public static class INFO_CAR{
+		public String carid;//当前车辆主键ID
+		public String terminaluserid;//终端用户ID
+		public String insurancedate;//保险时间
+		public String carnumber;//车牌号"
+		public String model;//型号
+		public String mileage;//行驶里程
+		public String insurancenum;//保险单号
+		public String cartype;//车辆类型
+		public String submodel;//子型号
+		public String insurancecompany;//保险公司名称
+		public String checkdate;//登记日期
+		public String imagepath;
 	}
 
 }

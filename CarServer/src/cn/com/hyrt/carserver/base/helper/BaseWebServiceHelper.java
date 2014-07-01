@@ -65,10 +65,10 @@ public class BaseWebServiceHelper {
 							@Override
 							public void run() {
 								Define.BASE base = (BASE) mGson.fromJson(result, clazz);
-								if(base.code == Define.REQUEST_SUCCESS_CODE){
+								if(Define.REQUEST_SUCCESS_CODE.equals(base.code)){
 									mCallback.onSuccess(base);
 								}else{
-									mCallback.onFailure(base.code, base.message);
+									mCallback.onFailure(Integer.parseInt(base.code), base.message);
 								}
 								
 							}
@@ -77,10 +77,17 @@ public class BaseWebServiceHelper {
 					}
 				} catch (IOException e) {
 					LogHelper.i("tag", "e1:"+e.getMessage());
-					if(e.getMessage().contains("Network is unreachable")){
+					if(e.getMessage().contains("Network is unreachable")|| e.getMessage().contains("ECONNREFUSED")){
 						if(mCallback != null){
-							mCallback.onFailure(Define.REQUEST_ERROR_CODE,
-									mContext.getString(R.string.net_error_msg));
+							((BaseActivity)mContext).runOnUiThread(new Runnable() {
+								
+								@Override
+								public void run() {
+									mCallback.onFailure(Integer.parseInt(Define.REQUEST_ERROR_CODE),
+											mContext.getString(R.string.net_error_msg));
+								}
+							});
+							
 						}
 					}
 					e.printStackTrace();

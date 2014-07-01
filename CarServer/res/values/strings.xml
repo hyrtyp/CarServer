@@ -51,6 +51,12 @@
 	<string name="info_insurancetype_label">保险种类</string>
 	<string name="info_insurancenum_label">保险单号</string>
 	<string name="info_insurancecompany_label">保险公司</string>
+	<string name="info_change_success">信息保存成功</string>
+	<string name="info_username_is_null">用户名不能为空！</string>
+	<string name="info_oldpwd_is_null">原始密码不能为空！</string>
+	<string name="info_newpwd_is_null">新改密码不能为空！</string>
+	<string name="info_confirmpwd_is_null">确认密码不能为空！</string>
+	<string name="info_confirmpwd_not_tally">确认密码与密码不符！</string>
 	
 	<!-- question -->
 	<string name="question_note">知名维修专家，实时车辆问题排查</string>

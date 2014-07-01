@@ -8,4 +8,5 @@
     <string name="method_login">getLogininfo</string>
     <string name="method_getUserInfo">getUserInfo</string>
     <string name="method_getTerminalCar">getTerminalCar</string>
+    <string name="method_saveUserinfo">saveUserinfo</string>
 </resources>

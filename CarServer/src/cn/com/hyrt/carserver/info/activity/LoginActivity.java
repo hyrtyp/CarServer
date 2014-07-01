@@ -53,7 +53,7 @@ public class LoginActivity extends BaseActivity{
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
-						AlertHelper.getInstance(LoginActivity.this).showCenterToast("登录失败");
+						AlertHelper.getInstance(LoginActivity.this).showCenterToast(errorMsg);
 					}
 					
 		}, this);
