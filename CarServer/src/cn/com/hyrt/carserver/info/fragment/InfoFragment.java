@@ -12,6 +12,7 @@ import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.CODE;
@@ -20,6 +21,7 @@ import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
 import cn.com.hyrt.carserver.info.activity.MyCarActivity;
+import cn.com.hyrt.carserver.info.activity.QuestionActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -54,10 +56,10 @@ public class InfoFragment extends Fragment{
 	private void initView(){
 		int[] imgArray = new int[]{R.drawable.ic_new_question, R.drawable.ic_question_history,
 				R.drawable.ic_my_appointment, R.drawable.ic_my_experts,
-				R.drawable.ic_condition, R.drawable.ic_my_car};
+				R.drawable.ic_condition, R.drawable.ic_my_car, R.drawable.ic_info_jfdh, R.drawable.bg_blank};
 		int[] textSourceArray = new int[]{R.string.info_new_question, R.string.info_question_history,
 				R.string.info_my_appointment, R.string.info_my_experts, R.string.info_condition,
-				R.string.info_my_car};
+				R.string.info_my_car, R.string.info_jfdh, R.string.blank_text};
 		PortalGridAdapter mAdapter = new PortalGridAdapter(imgArray, textSourceArray, getActivity());
 		gvMyInfo.setAdapter(mAdapter);
 		gvMyInfo.setOnItemClickListener(mOnItemClickListener);
@@ -73,12 +75,18 @@ public class InfoFragment extends Fragment{
 			switch (position) {
 			case 0:
 				//最新资讯
+				intent.setClass(getActivity(), QuestionActivity.class);
+				intent.putExtra("type", QuestionActivity.TYPE_NEW);
 				break;
 			case 1:
 				//提问历史
+				intent.setClass(getActivity(), QuestionActivity.class);
+				intent.putExtra("type", QuestionActivity.TYPE_HISTORY);
 				break;
 			case 2:
 				//我的预约
+				intent.setClass(getActivity(), WebActivity.class);
+				intent.putExtra("url", "http://192.168.10.238:8080/cspportal/");
 				break;
 			case 3:
 				//我的专家
@@ -89,6 +97,9 @@ public class InfoFragment extends Fragment{
 			case 5:
 				//我的爱车
 				intent.setClass(getActivity(), MyCarActivity.class);
+				break;
+			case 6:
+				//积分兑换
 				break;
 			default:
 				return;

@@ -23,6 +23,7 @@ public class MyCarActivity extends BaseActivity{
 	@ViewInject(id=R.id.tv_noData) TextView tvNoData;
 	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
 	@ViewInject(id=R.id.btn_add_car,click="addCar") ImageView btnAddCar;
+	
 	private MyCarAdapter mAdapter;
 	private Define.INFO_CAR_LIST cars;
 	private WebServiceHelper mWebServiceHelper;
@@ -75,12 +76,6 @@ public class MyCarActivity extends BaseActivity{
 		mWebServiceHelper.getTerminalCarList();
 	}
 	
-	public void addCar(View view){
-		Intent intent = new Intent();
-		intent.setClass(this, AlterCarActivity.class);
-		startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
-	}
-	
 	private void setListener(){
 		ptrv.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
 			
@@ -89,5 +84,19 @@ public class MyCarActivity extends BaseActivity{
 				loadData();
 			}
 		});
+	}
+	
+	public void addCar(View view){
+		Intent intent = new Intent();
+		intent.setClass(this, AlterCarActivity.class);
+		startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == Define.RESULT_FROM_ALTER_CAR){
+			loadData();
+		}
 	}
 }

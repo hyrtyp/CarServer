@@ -96,5 +96,11 @@ public class StorageHelper {
 		mSharedPreferences.edit().remove(INFO_LOGIN_NAME);
 	}
 	
+	public void saveTest(String test){
+		Editor mEditor = mSharedPreferences.edit();
+		mEditor.putString("test", test);
+		mEditor.commit();
+	}
+	
 	
 }

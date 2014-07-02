@@ -9,7 +9,7 @@
     <dimen name="view_margin_big">25dp</dimen>
     
     <dimen name="face_img_size">91dp</dimen>
-    
+    <dimen name="face_img_size_small">45dp</dimen>
     
     <dimen name="tab_text_buttom_padding">9dp</dimen>
     
@@ -18,8 +18,12 @@
     <dimen name="small_line_size">1px</dimen>
     
     <dimen name="tab_text">12sp</dimen>
+    <dimen name="text_size_small">10sp</dimen>
     <dimen name="text_size">15sp</dimen>
-    <dimen name="input_text_size">17sp</dimen>
+    <dimen name="input_text_size">18sp</dimen>
     <dimen name="search_btn_text_size">20sp</dimen>
+    
+    <dimen name="title_text">20sp</dimen>
+    <dimen name="title_text_big">30sp</dimen>
     
 </resources>

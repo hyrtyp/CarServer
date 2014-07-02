@@ -9,12 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class MyCarAdapter extends BaseAdapter{
 
 	private Define.INFO_CAR_LIST cars;
 	private Context mContext;
+	private View.OnClickListener mClickListener;
+	private MyCarOnClickListener mListener;
 	
 	public MyCarAdapter(INFO_CAR_LIST cars, Context mContext) {
 		super();
@@ -45,14 +48,49 @@ public class MyCarAdapter extends BaseAdapter{
 		if(convertView == null){
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_my_car_item, null);
 		}
-		ImageLoaderView ivFaceImg = (ImageLoaderView) convertView.findViewById(R.id.iv_face_img);
-		TextView tvCarModel = (TextView) convertView.findViewById(R.id.tv_car_model);
-		TextView tvAddTime = (TextView) convertView.findViewById(R.id.tv_add_time);
+		final ImageLoaderView ivFaceImg = (ImageLoaderView) convertView.findViewById(R.id.iv_face_img);
+		final TextView tvCarModel = (TextView) convertView.findViewById(R.id.tv_car_model);
+		final TextView tvAddTime = (TextView) convertView.findViewById(R.id.tv_add_time);
+		final LinearLayout layoutAddCarCondition 
+		= (LinearLayout) convertView.findViewById(R.id.layout_add_car_condition);
+		
+		if(mClickListener == null){
+			mClickListener = new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View view) {
+					if(mListener != null){
+						int id = view.getId();
+						if(id == ivFaceImg.getId()){
+							mListener.onClick(1);
+						}else if(id == layoutAddCarCondition.getId()){
+							mListener.onClick(2);
+						}else{
+							mListener.onClick(3);
+						}
+					}
+					
+				}
+			};
+		}
+		
 		Define.INFO_CAR_LIST.CDATA car = cars.data.get(position);
 		ivFaceImg.setImageUrl(car.imagepath);
 		tvCarModel.setText(car.model);
 		tvAddTime.setText(car.checkdate);
 		return convertView;
 	}
-
+	
+	public void setOnClickListener(MyCarOnClickListener listener){
+		this.mListener = listener;
+	}
+	
+	public static interface MyCarOnClickListener{
+		/**
+		 * 
+		 * @param position(1:头像；2：添加车况；3:其他)
+		 */
+		public void onClick(int position);
+	}
+	
 }

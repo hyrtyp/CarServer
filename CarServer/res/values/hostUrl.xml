@@ -8,4 +8,7 @@
     <string name="method_login">getLogininfo</string>
     <string name="method_getUserInfo">getUserInfo</string>
     <string name="method_getTerminalCar">getTerminalCar</string>
+    <string name="method_saveUserinfo">saveUserinfo</string>
+    <string name="method_seekReplyList">getTerminalSeekReplyNumList</string>
+    <string name="method_replyDetail">getCLWDwd</string>
 </resources>

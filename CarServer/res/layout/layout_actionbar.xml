@@ -12,5 +12,5 @@
         android:singleLine="true"
         android:ellipsize="end"
         android:textColor="#505050"
-        android:textSize="30sp"/>
+        android:textSize="@dimen/title_text_big"/>
 </RelativeLayout>

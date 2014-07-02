@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/main_top_margin" >
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+        	<ImageView 
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:src="@drawable/ic_time"/>
+        	<TextView 
+        	    android:id="@+id/tv_time"
+        	    android:layout_width="wrap_content"
+        	    android:layout_height="wrap_content"
+        	    android:text="2014-06-24"
+        	    android:layout_marginLeft="@dimen/view_margin_small"/>
+        </LinearLayout>
+<LinearLayout 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginLeft="@dimen/tab_text_buttom_padding"
+    android:layout_marginTop="@dimen/view_margin">
+    <cn.com.hyrt.carserver.base.view.ImageLoaderView 
+        android:id="@+id/iv_face"
+        android:layout_width="@dimen/face_img_size_small"
+        android:layout_height="@dimen/face_img_size_small"
+        android:src="@drawable/img_car_default"
+        android:background="@drawable/face_img_border_not_click"
+        android:padding="1dp"
+        android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="239dp"
+            android:layout_height="wrap_content"
+            android:text="飒飒啊" 
+            android:background="@drawable/bg_chat_me" 
+            android:layout_marginLeft="@dimen/view_margin_small"/>
+
+</LinearLayout>
+</LinearLayout>
