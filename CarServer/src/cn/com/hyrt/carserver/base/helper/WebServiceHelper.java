@@ -141,14 +141,29 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 			return;
 		}
 		String params = String.format("{\"id\":\"%s\"}", id);
-		get(mContext.getString(R.string.method_getTerminalCar), params, Define.INFO_CAR_LIST.class);
+		get(mContext.getString(R.string.method_getTerminalCar), params,
+				Define.INFO_CAR_LIST.class);
 	}
 	
 	/**
-	 * 添加车辆
+	 * 添加&修改车辆（carid如果有值,代表修改某个用户的所属车辆,如果没值,则新增）
 	 */
-	public void addCar(){
-		
+	public void alterCar(Define.INFO_CAR car){
+		String id = getUserId();
+		if(id == null){
+			return;
+		}
+		car.terminaluserid = id;
+		Gson mGson = new Gson();
+		String params = mGson.toJson(car);
+		LogHelper.i("tag", "params:"+params);
+		get(mContext.getString(R.string.method_saveTerminalCar), params,
+				Define.INFO_CAR.class);
+	}
+	
+	public void getCarInfo(String id){
+		String params = String.format("{\"id\":\"%s\"}", id);
+		get(mContext.getString(R.string.method_getTerminalCarInfo), params, Define.INFO_CAR.class);
 	}
 	
 	/**

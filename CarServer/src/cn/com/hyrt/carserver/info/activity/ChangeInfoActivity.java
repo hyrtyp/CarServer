@@ -16,6 +16,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,6 +36,7 @@ import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 
 public class ChangeInfoActivity extends BaseActivity{
 	
@@ -44,55 +46,78 @@ public class ChangeInfoActivity extends BaseActivity{
 	@ViewInject(id=R.id.et_new_pwd) EditText etNewPwd;
 	@ViewInject(id=R.id.et_confirm_pwd) EditText etConfirmPwd;
 	@ViewInject(id=R.id.btn_change_face,click="changeFace") TextView btnChangeFace;
-	@ViewInject(id=R.id.iv_face_img) ImageView ivFaceImg;
+	@ViewInject(id=R.id.iv_face_img) ImageLoaderView ivFaceImg;
 	@ViewInject(id=R.id.lv_car) ListView lvCar;
 	@ViewInject(id=R.id.btn_add_car,click="addCar") ImageView btnAddCar;
 	@ViewInject(id=R.id.btn_save,click="saveUserInfo") Button btnSave;
+	private List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
 	
 	private Uri faceUri;
 	private PhotoHelper mPhotoHelper;
 	private String imgBuffer;
+	private WebServiceHelper mWebServiceHelper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_info);
+		
+		LogHelper.i("tag", "info:"+CarServerApplication.info);
 		if(CarServerApplication.loginInfo == null){
 			CarServerApplication.loginInfo = StorageHelper.getInstance(this).getLoginInfo();
 		}
-		etUserName.setText(CarServerApplication.loginInfo.name);
+		etUserName.setText(CarServerApplication.loginInfo.loginname);
+		ivFaceImg.setImageUrl(CarServerApplication.info.imagepath);
+		AlertHelper.getInstance(this).showLoading(null);
 		loadData();
+		setListener();
+	}
+	
+	private void setListener(){
+		lvCar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				Intent intent = new Intent();
+				intent.setClass(ChangeInfoActivity.this, AlterCarActivity.class);
+				intent.putExtra("id", (String)data.get(position).get("id"));
+				startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
+			}
+		});
 	}
 	
 	private void loadData() {
-		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
-				new WebServiceHelper.RequestCallback<Define.INFO_CAR_LIST>() {
+		
+		if(mWebServiceHelper == null){
+			mWebServiceHelper = new WebServiceHelper(
+					new WebServiceHelper.RequestCallback<Define.INFO_CAR_LIST>() {
 
-					@Override
-					public void onSuccess(INFO_CAR_LIST result) {
-						LogHelper.i("tag", "result:"+result.data.get(2));
-						List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
-						for(int i=0,j=result.data.size(); i<j; i++){
-							Map<String, Object> map = new HashMap<String, Object>();
-							map.put("model", result.data.get(i).model);
-							data.add(map);
+						@Override
+						public void onSuccess(INFO_CAR_LIST result) {
+							AlertHelper.getInstance(ChangeInfoActivity.this).hideLoading();
+							data.clear();
+							for(int i=0,j=result.data.size(); i<j; i++){
+								Map<String, Object> map = new HashMap<String, Object>();
+								map.put("model", result.data.get(i).model);
+								map.put("id", result.data.get(i).id);
+								data.add(map);
+							}
+							String[] from = new String[]{"model"};
+							int[] to = new int[]{R.id.tv_model};
+							SimpleAdapter mAdapter = new SimpleAdapter(
+									ChangeInfoActivity.this,
+									data, R.layout.layout_car_item,
+									from, to);
+							lvCar.setAdapter(mAdapter);
 						}
-						String[] from = new String[]{"model"};
-						int[] to = new int[]{R.id.tv_model};
-						SimpleAdapter mAdapter = new SimpleAdapter(
-								ChangeInfoActivity.this,
-								data, R.layout.layout_car_item,
-								from, to);
-						lvCar.setAdapter(mAdapter);
-					}
 
-					@Override
-					public void onFailure(int errorNo, String errorMsg) {
+						@Override
+						public void onFailure(int errorNo, String errorMsg) {
 
-					}
-				}, this);
-		LogHelper.i("tag", "CarServerApplication.loginInfo:"
-				+ CarServerApplication.loginInfo);
+						}
+					}, this);
+		}
 		mWebServiceHelper.getTerminalCarList();
 	}
 	
@@ -127,7 +152,6 @@ public class ChangeInfoActivity extends BaseActivity{
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 imgBuffer = new String(Base64.encode(baos.toByteArray()));
-                LogHelper.i("tag", "imgBuffer:"+imgBuffer);
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
@@ -138,6 +162,9 @@ public class ChangeInfoActivity extends BaseActivity{
                 mPhotoHelper = new PhotoHelper(ChangeInfoActivity.this, faceUri, 50);
             }
             mPhotoHelper.startPhotoZoom(faceUri, 50);
+        }else if(resultCode == Define.RESULT_FROM_ALTER_CAR){
+        	AlertHelper.getInstance(this).showLoading(null);
+        	loadData();
         }
 	}
 	
@@ -194,12 +221,16 @@ public class ChangeInfoActivity extends BaseActivity{
 					public void onSuccess(BASE result) {
 						LogHelper.i("tag", "result:"+result.message);
 						AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(R.string.info_change_success);
+						setResult(Define.RESULT_FROM_CHANGE_INFO);
+						finish();
 					}
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
 						LogHelper.i("tag", "onFailure:"+errorMsg);
 						AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(errorMsg);
+						setResult(Define.RESULT_FROM_CHANGE_INFO);
+						finish();
 					}
 		}, this);
 		mWebServiceHelper.saveUserInfo(info);

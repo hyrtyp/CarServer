@@ -1,6 +1,8 @@
 package cn.com.hyrt.carserver.base.activity;
 
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,7 +27,9 @@ public class WebActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_web);
+		AlertHelper.getInstance(this).showLoading(null);
 		initWebView();
+		mWebView.setVisibility(View.INVISIBLE);
 		Intent intent = getIntent();
 		mUrl = intent.getStringExtra("url");
 		if(mUrl != null && mUrl.trim().length() > 0){
@@ -69,6 +73,13 @@ public class WebActivity extends BaseActivity{
 		});
 		
 		mWebView.setWebChromeClient(new WebChromeClient(){
+
+			@Override
+			public void onProgressChanged(WebView view, int newProgress) {
+				super.onProgressChanged(view, newProgress);
+				mWebView.setVisibility(View.VISIBLE);
+				AlertHelper.getInstance(WebActivity.this).hideLoading();
+			}
 
 			@Override
 			public void onReceivedTitle(WebView view, String title) {
