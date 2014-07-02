@@ -1,8 +1,10 @@
 package cn.com.hyrt.carserver.info.activity;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
@@ -20,7 +22,7 @@ public class MyCarActivity extends BaseActivity{
 	@ViewInject(id=R.id.lv_my_car) FullListView lvMyCar;
 	@ViewInject(id=R.id.tv_noData) TextView tvNoData;
 	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
-	
+	@ViewInject(id=R.id.btn_add_car,click="addCar") ImageView btnAddCar;
 	private MyCarAdapter mAdapter;
 	private Define.INFO_CAR_LIST cars;
 	private WebServiceHelper mWebServiceHelper;
@@ -71,6 +73,12 @@ public class MyCarActivity extends BaseActivity{
 			}, this);
 		}
 		mWebServiceHelper.getTerminalCarList();
+	}
+	
+	public void addCar(View view){
+		Intent intent = new Intent();
+		intent.setClass(this, AlterCarActivity.class);
+		startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
 	}
 	
 	private void setListener(){
