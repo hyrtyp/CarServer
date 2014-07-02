@@ -27,7 +27,7 @@
         android:layout_marginLeft="@dimen/main_top_margin">
     <LinearLayout 
         android:id="@+id/iv_face_text"
-        android:layout_width="0dp"
+        android:layout_width="80dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
         android:orientation="vertical">
@@ -39,7 +39,7 @@
             android:textColor="#000"
             android:text="宝马X5（进口）"
             android:layout_marginBottom="@dimen/main_top_margin"/>
-        <include layout="@layout/layout_line_small"/>
+        <include layout="@layout/layout_line"/>
         <TextView 
             android:id="@+id/tv_add_time"
             android:layout_width="wrap_content"
@@ -51,24 +51,23 @@
     </LinearLayout>
     <LinearLayout
         android:id="@+id/layout_add_car_condition"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="fill_parent"
         android:orientation="horizontal">
-        <View 
-            android:layout_width="@dimen/small_line_size"
-            android:layout_height="fill_parent"
-            android:background="@color/line_color" 
-            android:layout_gravity="left"/>
+        <View
+    android:layout_width="@dimen/line_size"
+    android:layout_height="fill_parent"
+    android:background="@color/line_color"/>
         <TextView 
             android:id="@+id/tv_add_catstatus"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
-            android:textSize="@dimen/text_size"
-            android:textColor="#646363"
             android:text="@string/info_mycar_addstatus"
-            android:layout_marginLeft="@dimen/view_margin_small"
-            android:layout_marginRight="@dimen/view_margin_small"
-            android:gravity="center"/>
+            android:layout_marginLeft="@dimen/view_margin"
+            android:layout_marginRight="@dimen/view_margin"
+            android:gravity="center"
+            android:textSize="@dimen/input_text_size"
+            android:textColor="#676767"/>
     </LinearLayout>
     </LinearLayout>
     

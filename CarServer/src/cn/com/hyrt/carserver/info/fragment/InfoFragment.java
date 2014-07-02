@@ -117,6 +117,8 @@ public class InfoFragment extends Fragment{
 				break;
 			case 3:
 				//我的专家
+				intent.setClass(getActivity(), WebActivity.class);
+				intent.putExtra("url", "http://www.baidu.com/");
 				break;
 			case 4:
 				//车辆状况

@@ -33,8 +33,8 @@ public class MyCarActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_car);
 		ptrv.disableScroolUp();
-		setListener();
 		loadData();
+		
 	}
 	
 	private void loadData(){
@@ -55,13 +55,16 @@ public class MyCarActivity extends BaseActivity{
 								tvNoData.setVisibility(View.GONE);
 								lvMyCar.setVisibility(View.VISIBLE);
 							}
+							
 							cars = result;
 							if(mAdapter == null){
 								mAdapter = new MyCarAdapter(cars, MyCarActivity.this);
 								lvMyCar.setAdapter(mAdapter);
+								setListener();
 							}else{
 								mAdapter.notifyDataSetChanged();
 							}
+							
 						}
 
 						@Override
@@ -84,6 +87,22 @@ public class MyCarActivity extends BaseActivity{
 				loadData();
 			}
 		});
+		mAdapter.setOnClickListener(new MyCarAdapter.MyCarOnClickListener() {
+			
+			@Override
+			public void onClick(int position) {
+				LogHelper.i("tag", "Position = "+position);
+				if(position==2){
+					//进入添加车况页面
+					AlertHelper.getInstance(getApplicationContext()).showCenterToast("正在开发中");
+				}else{
+					//进入我的车辆详细信息页面
+					Intent it = new Intent();
+					it.setClass(MyCarActivity.this, AlterCarActivity.class);
+					startActivityForResult(it, Define.RESULT_FROM_ALTER_CAR);
+				}
+				}
+		});
 	}
 	
 	public void addCar(View view){
@@ -99,4 +118,5 @@ public class MyCarActivity extends BaseActivity{
 			loadData();
 		}
 	}
+
 }
