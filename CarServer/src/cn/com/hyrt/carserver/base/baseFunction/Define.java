@@ -92,6 +92,7 @@ public class Define {
 		public String occupation;//职业
 		public String unitname;//单位名称
 		public String image;//用户头像
+		public String imagename;//图像名称
 	}
 	
 	/**
@@ -147,11 +148,16 @@ public class Define {
 		}
 	}
 	
-	public static class INFO_CAR{
+	/**
+	 * 保存车辆信息
+	 * @author zoe
+	 *
+	 */
+	public static class INFO_CAR extends BASE{
 		public String carid;//当前车辆主键ID
 		public String terminaluserid;//终端用户ID
 		public String insurancedate;//保险时间
-		public String carnumber;//车牌号"
+		public String carnumber;//车牌号
 		public String model;//型号
 		public String mileage;//行驶里程
 		public String insurancenum;//保险单号
@@ -160,6 +166,47 @@ public class Define {
 		public String insurancecompany;//保险公司名称
 		public String checkdate;//登记日期
 		public String imagepath;
+	}
+	
+	/**
+	 * 最新咨询列表
+	 * @author zoe
+	 *status （排队中pd 已关闭gb 未解决wjj）
+	 */
+	public static class SEEK_REPLY_LIST extends BASE{
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String content;//咨询内容
+			public String consultationid;//咨询主键ID
+			public String seekdate;//咨询时间
+			public String status;//问题状态
+			public String isfree;//是否免费
+			public String classname;//分类名称
+			public String classid;//分类ID
+		}
+	}
+	
+	/**
+	 * 问题详情
+	 * @author zoe
+	 *
+	 */
+	public static class REPLY_DETAIL extends BASE{
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String userterminalid;//发言人ID
+			public String id;//回复ID
+			public String username;//发言人姓名
+			public String replytype;//发言人类型
+			public String contenttime;//发言时间
+			public String attacpathname;//头像图片名称
+			public String attacpath;//图片路径
+			public String replycontent;//发言内容
+		}
 	}
 
 }

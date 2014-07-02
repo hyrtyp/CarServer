@@ -21,9 +21,9 @@ public class ClassifyFragment extends Fragment{
 		rootView = inflater.inflate(R.layout.fragment_classify, null);
 		findView();
 		int[] imgArray = new int[]{R.drawable.classify_wxby,R.drawable.classify_pjgz, R.drawable.classify_nwzx, 
-				R.drawable.classify_dzpj, R.drawable.classify_caryy, R.drawable.classify_loclser};
+				R.drawable.classify_djfw, R.drawable.classify_bxyh, R.drawable.classify_qcmr};
 		int[] textSourceArray = new int[]{R.string.classify_wxby, R.string.classify_pjgz,R.string.classify_nwzx, 
-				R.string.classify_dzpj,R.string.classify_caryy,R.string.classify_loclser};
+				R.string.classify_djfw,R.string.classify_bxyh,R.string.classify_bxyh};
 		PortalGridAdapter mAdapter = new PortalGridAdapter(imgArray, textSourceArray, getActivity());
 		gvMyInfo.setAdapter(mAdapter);
 		

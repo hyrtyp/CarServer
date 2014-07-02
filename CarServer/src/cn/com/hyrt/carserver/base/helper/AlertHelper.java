@@ -65,6 +65,9 @@ public class AlertHelper {
 	 * 显示加载框
 	 */
 	public void showLoading(String msg){
+		if(msg == null){
+			msg = mContext.getString(R.string.loading_msg);
+		}
 		if(mProgressDialog == null){
 			mProgressDialog = new MyProgressDialog(mContext);
 			mProgressDialog.setIndeterminateDrawable(

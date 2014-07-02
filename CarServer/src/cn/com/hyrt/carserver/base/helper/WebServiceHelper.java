@@ -16,6 +16,12 @@ import android.content.Context;
  *
  */
 public class WebServiceHelper extends BaseWebServiceHelper{
+	
+	public static final String SEEK_REPLY_HISTORY = "gb";
+	public static final String SEEK_REPLY_QUESTION = "zx";
+	
+	public static final String REPLY_DETAIL_QUESTION = "consultationid";
+	public static final String REPLY_DETAIL_HISTORY = "wtid";
 
 	public WebServiceHelper(RequestCallback mCallback, Context context) {
 		super(mCallback, context);
@@ -145,13 +151,44 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 		
 	}
 	
+	/**
+	 * 获取提问回复列表
+	 * @param page
+	 * @param type
+	 */
+	public void getSeekReplyList(int page, String type){
+		String id = getUserId();
+		if(id == null){
+			return;
+		}
+		String params = 
+				String.format(
+						"{\"userid\":\"%s\",\"page\":\"%s\",\"type\":\"%s\"}",
+						id, page+"", type);
+		LogHelper.i("tag", "params:"+params);
+		get(getString(R.string.method_seekReplyList), params, Define.SEEK_REPLY_LIST.class);
+	}
+	
+	/**
+	 * 获取回复详情
+	 * @param replyId
+	 * @param type
+	 */
+	public void getReplyDetail(String replyId, String type){
+		String params = String.format("{\"%s\":\"%s\"}", type, replyId);
+		get(getString(R.string.method_replyDetail), params, Define.REPLY_DETAIL.class);
+	}
+	
+	/**
+	 * 获取用户ID
+	 * @return
+	 */
 	private String getUserId(){
 		if(CarServerApplication.loginInfo == null){
 			CarServerApplication.loginInfo = StorageHelper.getInstance(mContext).getLoginInfo();
 		}
 		return CarServerApplication.loginInfo.id;
 	}
-	
 	
 	private String getString(int resId){
 		if(mContext == null){

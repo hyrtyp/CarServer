@@ -59,6 +59,7 @@ public class BaseWebServiceHelper {
 				try {
 					ht.call("urn:"+method, envelope);
 					final String result = envelope.getResponse().toString();
+					LogHelper.i("tag", "result:"+result);
 					if(mCallback != null && result != null && mContext != null){
 						((BaseActivity)mContext).runOnUiThread(new Runnable() {
 							

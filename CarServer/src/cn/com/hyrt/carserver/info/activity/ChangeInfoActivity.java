@@ -183,6 +183,7 @@ public class ChangeInfoActivity extends BaseActivity{
 		
 		if(imgBuffer != null && !"".equals(imgBuffer)){
 			info.image = imgBuffer;
+			info.imagename = "face.jpg";
 		}
 		
 		
@@ -191,11 +192,13 @@ public class ChangeInfoActivity extends BaseActivity{
 
 					@Override
 					public void onSuccess(BASE result) {
+						LogHelper.i("tag", "result:"+result.message);
 						AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(R.string.info_change_success);
 					}
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
+						LogHelper.i("tag", "onFailure:"+errorMsg);
 						AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(errorMsg);
 					}
 		}, this);

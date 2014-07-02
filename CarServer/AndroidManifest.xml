@@ -58,6 +58,12 @@
          <activity 
              android:name=".info.activity.MyCarActivity"
              android:label="@string/info_my_car"/>
+         <activity 
+             android:name=".info.activity.QuestionActivity"
+             android:label="@string/info_new_question"/>
+         <activity 
+             android:name=".info.activity.QuestionDetailActivity"
+             android:label="@string/info_question_detial"/>
     </application>
 
 </manifest>

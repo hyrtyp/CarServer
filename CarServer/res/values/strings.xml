@@ -12,16 +12,20 @@
 	<string name="knowledge_label">车辆知识</string>
 	<string name="question_label">车辆问答</string>
 	<string name="info_label">我的信息</string>
-	<string name="emergency_label">紧急救援</string>
+	<string name="emergency_label">在线帮助</string>
 	<string name="serarch_btn_label">搜索</string>
 	<string name="blank_text"></string>
 	<string name="net_error_msg">网络发生异常</string>
 	<string name="upload_photo">上传照片</string>
 	<string name="no_data">暂无数据</string>
 	<string name="loading_msg">正在加载&#8230;</string>
+	<string name="photo_from_camera">拍照</string>
+	<string name="cancle">取消</string>
+	<string name="photo_from_album">从相册选择</string>
+	<string name="load_done">已加载全部数据</string>
 	
 	<!-- info -->
-	<string name="info_new_question">最新资讯</string>
+	<string name="info_new_question">最新咨询</string>
 	<string name="info_question_history">提问历史</string>
 	<string name="info_my_appointment">我的预约</string>
 	<string name="info_my_experts">我的专家</string>
@@ -57,6 +61,12 @@
 	<string name="info_newpwd_is_null">新改密码不能为空！</string>
 	<string name="info_confirmpwd_is_null">确认密码不能为空！</string>
 	<string name="info_confirmpwd_not_tally">确认密码与密码不符！</string>
+	<string name="info_status_pdz">排\n队\n中</string>
+	<string name="info_status_wjj">未\n解\n决</string>
+	<string name="info_status_yjj">已\n解\n决</string>
+	<string name="info_status_ygb">已\n关\n闭</string>
+	<string name="info_jfdh">积分兑换</string>
+	<string name="info_question_detial">问题详情</string>
 	
 	<!-- question -->
 	<string name="question_note">知名维修专家，实时车辆问题排查</string>
@@ -71,7 +81,8 @@
 	<!-- emergency -->
 	<string name="emergency_bxlp">保险理赔</string>
 	<string name="emergency_jtbj">交通报警</string>
-	<string name="emergency_ksqz">快速求助</string>
+	<!-- <string name="emergency_ksqz">快速求助</string> -->
+	<string name="emergency_wzcx">违章查询</string>
 	<string name="emergency_yjjy">一键救援</string>
 	
 	<!-- knowledge -->
@@ -89,14 +100,11 @@
 	<string name="classify_wxby">维修保养</string>
 	<string name="classify_pjgz">配件改装</string>
 	<string name="classify_nwzx">内外装饰</string>
-	<string name="classify_dzpj">电子配件</string>
-	<string name="classify_caryy">车辆预约</string>
-	<string name="classify_loclser">本地服务</string>
+	<string name="classify_djfw">代驾服务</string>
+	<string name="classify_bxyh">保险优惠</string>
+	<string name="classify_qcmr">汽车美容</string>
 	<string name="classify_zfw">找服务</string>
 	<string name="classify_zsj">找商家</string>
-	<string name="photo_from_camera">拍照</string>
-	<string name="cancle">取消</string>
-	<string name="photo_from_album">从相册选择</string>
 	
 </resources>
 
