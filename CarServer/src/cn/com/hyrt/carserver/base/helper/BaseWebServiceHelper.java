@@ -26,7 +26,7 @@ import com.google.gson.Gson;
 public class BaseWebServiceHelper {
 
 	private static  String NAME_SPACE = "http://webservice.csp.hyrt.com";
-	private static final String END_POINT = "http://192.168.10.135:8080/CSPInterface/services/CspInterface?wsdl";
+	private static final String END_POINT = "http://192.168.10.238:8080/CSPInterface/services/CspInterface?wsdl";
 	private RequestCallback mCallback;
 	private Gson mGson;
 	protected Context mContext;

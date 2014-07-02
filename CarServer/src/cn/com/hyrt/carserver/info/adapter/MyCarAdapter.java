@@ -3,6 +3,7 @@ package cn.com.hyrt.carserver.info.adapter;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR_LIST;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -51,6 +52,7 @@ public class MyCarAdapter extends BaseAdapter{
 		final ImageLoaderView ivFaceImg = (ImageLoaderView) convertView.findViewById(R.id.iv_face_img);
 		final TextView tvCarModel = (TextView) convertView.findViewById(R.id.tv_car_model);
 		final TextView tvAddTime = (TextView) convertView.findViewById(R.id.tv_add_time);
+		final LinearLayout layoutcarContent =(LinearLayout)convertView.findViewById(R.id.iv_face_text); 
 		final LinearLayout layoutAddCarCondition 
 		= (LinearLayout) convertView.findViewById(R.id.layout_add_car_condition);
 		
@@ -73,6 +75,12 @@ public class MyCarAdapter extends BaseAdapter{
 				}
 			};
 		}
+		ivFaceImg.setOnClickListener(mClickListener);
+		//tvCarModel.setOnClickListener(mClickListener);
+		//tvAddTime.setOnClickListener(mClickListener);
+		layoutAddCarCondition.setOnClickListener(mClickListener);
+		layoutcarContent.setOnClickListener(mClickListener);
+		
 		
 		Define.INFO_CAR_LIST.CDATA car = cars.data.get(position);
 		ivFaceImg.setImageUrl(car.imagepath);
