@@ -10,6 +10,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.app.Activity;
 import android.content.Context;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
@@ -26,7 +27,7 @@ import com.google.gson.Gson;
 public class BaseWebServiceHelper {
 
 	private static  String NAME_SPACE = "http://webservice.csp.hyrt.com";
-	private static final String END_POINT = "http://192.168.10.135:8080/CSPInterface/services/CspInterface?wsdl";
+	private static final String END_POINT = "http://192.168.10.238:8080/CSPInterface/services/CspInterface?wsdl";
 	private RequestCallback mCallback;
 	private Gson mGson;
 	protected Context mContext;
@@ -61,12 +62,12 @@ public class BaseWebServiceHelper {
 					final String result = envelope.getResponse().toString();
 					LogHelper.i("tag", "result:"+result);
 					if(mCallback != null && result != null && mContext != null){
-						((BaseActivity)mContext).runOnUiThread(new Runnable() {
+						((Activity)mContext).runOnUiThread(new Runnable() {
 							
 							@Override
 							public void run() {
 								Define.BASE base = (BASE) mGson.fromJson(result, clazz);
-								if(Define.REQUEST_SUCCESS_CODE.equals(base.code)){
+								if(Define.REQUEST_SUCCESS_CODE.equals(base.code) || Define.REQUEST_SAVE_SUCCESS_CODE.equals(base.code)){
 									mCallback.onSuccess(base);
 								}else{
 									mCallback.onFailure(Integer.parseInt(base.code), base.message);
@@ -80,7 +81,7 @@ public class BaseWebServiceHelper {
 					LogHelper.i("tag", "e1:"+e.getMessage());
 					if(e.getMessage().contains("Network is unreachable")|| e.getMessage().contains("ECONNREFUSED")){
 						if(mCallback != null){
-							((BaseActivity)mContext).runOnUiThread(new Runnable() {
+							((Activity)mContext).runOnUiThread(new Runnable() {
 								
 								@Override
 								public void run() {

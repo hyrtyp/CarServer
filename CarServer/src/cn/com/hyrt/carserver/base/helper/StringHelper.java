@@ -83,4 +83,23 @@ public class StringHelper {
 		}
 		return date;
 	}
+	
+	/**
+	 * 格式化时间
+	 * @param time
+	 * @return
+	 */
+	public static String formatDate(String time){
+		if(time == null || "".equals(time)){
+			return "";
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		return sdf.format(string2Date(time));
+	}
+	
+	public static String getNowTime(){
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		return sdf.format(date);
+	}
 }

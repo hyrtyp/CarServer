@@ -10,11 +10,15 @@ import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.FullListView;
+import cn.com.hyrt.carserver.base.view.PullToRefreshView;
+import cn.com.hyrt.carserver.base.view.PullToRefreshView.OnHeaderRefreshListener;
 import cn.com.hyrt.carserver.info.adapter.QuestionDetailAdapter;
 
 public class QuestionDetailActivity extends BaseActivity{
 
 	@ViewInject(id=R.id.lv_replys) FullListView lv_replys;
+	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
+	
 	private int type;
 	private String replyId;
 	private QuestionDetailAdapter mQuestionAdapter;
@@ -26,6 +30,8 @@ public class QuestionDetailActivity extends BaseActivity{
 		Intent intent = getIntent();
 		type = intent.getIntExtra("type", QuestionActivity.TYPE_NEW);
 		replyId = intent.getStringExtra("replyId");
+		ptrv.disableScroolUp();
+		setListener();
 		AlertHelper.getInstance(this).showLoading(null);
 		loadData();
 	}
@@ -47,11 +53,13 @@ public class QuestionDetailActivity extends BaseActivity{
 					AlertHelper.getInstance(QuestionDetailActivity.this).hideLoading();
 					LogHelper.i("tag", "result:"+result.data.size());
 					setData(result);
+					ptrv.onHeaderRefreshComplete();
 				}
 
 				@Override
 				public void onFailure(int errorNo, String errorMsg) {
 					AlertHelper.getInstance(QuestionDetailActivity.this).hideLoading();
+					ptrv.onHeaderRefreshComplete();
 				}
 	}, this);
 	
@@ -62,6 +70,16 @@ public class QuestionDetailActivity extends BaseActivity{
 		}else{
 			mQuestionAdapter.notifyDataSetChanged();
 		}
+	}
+	
+	private void setListener(){
+		ptrv.setOnHeaderRefreshListener(new OnHeaderRefreshListener() {
+			
+			@Override
+			public void onHeaderRefresh(PullToRefreshView view) {
+				loadData();
+			}
+		});
 	}
 	
 }

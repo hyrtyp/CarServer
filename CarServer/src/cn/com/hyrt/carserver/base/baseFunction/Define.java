@@ -11,9 +11,11 @@ import java.util.ArrayList;
 public class Define {
 	
 	public static String REQUEST_SUCCESS_CODE = "200";
+	public static String REQUEST_SAVE_SUCCESS_CODE = "205";
 	public static String REQUEST_ERROR_CODE = "500";
 	
 	public static int RESULT_FROM_ALTER_CAR = 101;
+	public static int RESULT_FROM_CHANGE_INFO = 102;
 	
 	public static class TEST{
 		public int code;
@@ -154,6 +156,7 @@ public class Define {
 	 *
 	 */
 	public static class INFO_CAR extends BASE{
+		public String id;//当前车辆主键ID
 		public String carid;//当前车辆主键ID
 		public String terminaluserid;//终端用户ID
 		public String insurancedate;//保险时间
@@ -165,7 +168,12 @@ public class Define {
 		public String submodel;//子型号
 		public String insurancecompany;//保险公司名称
 		public String checkdate;//登记日期
-		public String imagepath;
+		public String imagepath;//图片Base64
+		public String imagename;//图像名称
+		public String manufacturer;//生产厂家
+		public String insurancetype;//保险种类
+		public String brand;//品牌
+		public String yearcheckdate;//年检日期
 	}
 	
 	/**

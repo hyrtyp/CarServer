@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/full_bg"
+    android:orientation="vertical"
+    android:padding="@dimen/main_top_margin" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_block"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp" >
+
+                    <cn.com.hyrt.carserver.base.view.ImageLoaderView
+                        android:id="@+id/iv_face_img"
+                        android:layout_width="@dimen/face_img_size_small"
+                        android:layout_height="@dimen/face_img_size_small"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/main_top_margin"
+                        android:background="@drawable/face_img_border_not_click"
+                        android:padding="1dp"
+                        android:src="@drawable/img_car_default" 
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:id="@+id/tv_username"
+                        android:layout_width="210dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:textSize="@dimen/input_text_size"
+                        android:singleLine="true"
+                        android:ellipsize="end" />
+                </RelativeLayout>
+
+                <include layout="@layout/layout_line_small" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/main_top_margin"
+                        android:text="@string/phonenum_label"
+                        android:textColor="@color/input_laber_color"
+                        android:textSize="@dimen/input_text_size" />
+
+                    <TextView
+                        android:id="@+id/tv_phonenum"
+                        android:layout_width="210dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:textSize="@dimen/input_text_size" />
+                </RelativeLayout>
+ <include layout="@layout/layout_line_small" />
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="60dp" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/main_top_margin"
+                        android:text="@string/viplevel_label"
+                        android:textColor="@color/input_laber_color"
+                        android:textSize="@dimen/input_text_size" />
+
+                    <LinearLayout
+                        android:layout_width="210dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true" >
+
+                        <LinearLayout
+                            android:id="@+id/layout_star"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginRight="@dimen/view_margin_big"
+                            android:orientation="horizontal" >
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_viplevel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#000"
+                            android:textSize="@dimen/input_text_size" />
+                    </LinearLayout>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <cn.com.hyrt.carserver.base.view.FullListView
+                android:id="@+id/lv_car"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_input_block"
+                android:divider="@color/car_divider"
+                android:dividerHeight="1px" 
+                android:layout_marginTop="@dimen/main_top_margin"/>
+            <Button
+                android:id="@+id/btn_change_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/view_margin"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:background="@drawable/bg_question_btn"
+                android:gravity="center"
+                android:text="@string/info_change_label"
+                android:textColor="#fff"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

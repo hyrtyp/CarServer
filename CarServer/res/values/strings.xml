@@ -23,6 +23,10 @@
 	<string name="cancle">取消</string>
 	<string name="photo_from_album">从相册选择</string>
 	<string name="load_done">已加载全部数据</string>
+	<string name="info_load_fail">信息加载失败</string>
+	<string name="userpwd_label">用户密码</string>
+	<string name="phonenum_label">手机号码</string>
+	<string name="viplevel_label">会员等级</string>
 	
 	<!-- info -->
 	<string name="info_new_question">最新咨询</string>
@@ -67,11 +71,12 @@
 	<string name="info_status_ygb">已\n关\n闭</string>
 	<string name="info_jfdh">积分兑换</string>
 	<string name="info_question_detial">问题详情</string>
+	<string name="info_detail">详情信息</string>
 	
 	<!-- question -->
 	<string name="question_note">知名维修专家，实时车辆问题排查</string>
 	<string name="question_find_experts">找专家</string>
-	<string name="question_mend">维修保养</string>
+	<string name="question_mend">维修自查</string>
 	<string name="question_custmon">配件改装</string>
 	<string name="question_insurance">保险直通</string>
 	<string name="question_cosmetology">美容装潢</string>
@@ -105,6 +110,7 @@
 	<string name="classify_qcmr">汽车美容</string>
 	<string name="classify_zfw">找服务</string>
 	<string name="classify_zsj">找商家</string>
+	
 	
 </resources>
 

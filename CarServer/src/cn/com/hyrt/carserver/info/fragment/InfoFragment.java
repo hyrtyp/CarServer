@@ -14,12 +14,17 @@ import org.xmlpull.v1.XmlPullParserException;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
+import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.CODE;
+import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
+import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
+import cn.com.hyrt.carserver.info.activity.InfoDetailActivity;
 import cn.com.hyrt.carserver.info.activity.MyCarActivity;
 import cn.com.hyrt.carserver.info.activity.QuestionActivity;
 import android.content.Intent;
@@ -41,7 +46,7 @@ public class InfoFragment extends Fragment{
 	
 	private View rootView;
 	private GridView gvMyInfo;
-	private ImageView ivFaceImg;
+	private ImageLoaderView ivFaceImg;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +55,29 @@ public class InfoFragment extends Fragment{
 		findView();
 		initView();
 		setListener();
+		loadData();
 		return rootView;
+	}
+	
+	private void loadData(){
+		AlertHelper.getInstance(getActivity()).showLoading(null);
+		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
+				new WebServiceHelper.RequestCallback<Define.INFO>() {
+
+					@Override
+					public void onSuccess(INFO result) {
+						AlertHelper.getInstance(getActivity()).hideLoading();
+						CarServerApplication.info = result;
+						ivFaceImg.setImageUrl(CarServerApplication.info.imagepath);
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						AlertHelper.getInstance(getActivity()).showCenterToast(R.string.info_load_fail);
+						AlertHelper.getInstance(getActivity()).hideLoading();
+					}
+		}, getActivity());
+		mWebServiceHelper.getUserInfo();
 	}
 	
 	private void initView(){
@@ -86,7 +113,7 @@ public class InfoFragment extends Fragment{
 			case 2:
 				//我的预约
 				intent.setClass(getActivity(), WebActivity.class);
-				intent.putExtra("url", "http://192.168.10.238:8080/cspportal/");
+				intent.putExtra("url", "http://192.168.10.238:8083/cspportal/");
 				break;
 			case 3:
 				//我的专家
@@ -110,7 +137,9 @@ public class InfoFragment extends Fragment{
 	
 	private void findView(){
 		gvMyInfo = (GridView) rootView.findViewById(R.id.gv_myInfo);
-		ivFaceImg = (ImageView) rootView.findViewById(R.id.iv_face_img);
+		ivFaceImg = (ImageLoaderView) rootView.findViewById(R.id.iv_face_img);
+		
+		ivFaceImg.setImageUrl(CarServerApplication.info.imagepath);
 	}
 	
 	private void setListener(){
@@ -119,10 +148,18 @@ public class InfoFragment extends Fragment{
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent();
-				intent.setClass(getActivity(), ChangeInfoActivity.class);
-				startActivity(intent);
+				intent.setClass(getActivity(), InfoDetailActivity.class);
+				startActivityForResult(intent, Define.RESULT_FROM_CHANGE_INFO);
 			}
 		});
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == Define.RESULT_FROM_CHANGE_INFO){
+			ivFaceImg.setImageUrl(CarServerApplication.info.imagepath);
+		}
 	}
 	
 }

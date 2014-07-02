@@ -13,6 +13,7 @@ import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.activity.MainActivity;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
+import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_LOGIN;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
@@ -42,10 +43,7 @@ public class LoginActivity extends BaseActivity{
 							AlertHelper.getInstance(LoginActivity.this).showCenterToast("登录成功");
 							CarServerApplication.loginInfo = result;
 							StorageHelper.getInstance(LoginActivity.this).saveLoginInfo(result);
-							Intent intent = new Intent();
-							intent.setClass(LoginActivity.this, MainActivity.class);
-							startActivity(intent);
-							finish();
+							getUserInfo();
 						}else{
 							AlertHelper.getInstance(LoginActivity.this).showCenterToast("登录失败");
 						}
@@ -58,5 +56,28 @@ public class LoginActivity extends BaseActivity{
 					
 		}, this);
 		mWebServiceHelper.login(etUserName.getText().toString(), etPwd.getText().toString());
+	}
+	
+	private void getUserInfo(){
+		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
+				new WebServiceHelper.RequestCallback<Define.INFO>() {
+
+					@Override
+					public void onSuccess(INFO result) {
+						CarServerApplication.info = result;
+						Intent intent = new Intent();
+						intent.setClass(LoginActivity.this, MainActivity.class);
+						startActivity(intent);
+						finish();
+						
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						// TODO Auto-generated method stub
+						
+					}
+		}, this);
+		mWebServiceHelper.getUserInfo();
 	}
 }

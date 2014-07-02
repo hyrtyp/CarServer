@@ -6,6 +6,7 @@
     android:background="@drawable/full_bg">
 
     <cn.com.hyrt.carserver.base.view.PullToRefreshView 
+        android:id="@+id/ptrv"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
         <ScrollView 
