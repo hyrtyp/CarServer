@@ -67,6 +67,8 @@
 	<string name="info_status_ygb">已\n关\n闭</string>
 	<string name="info_jfdh">积分兑换</string>
 	<string name="info_question_detial">问题详情</string>
+	<string name="info_car_detial">车辆详情</string>
+	
 	
 	<!-- question -->
 	<string name="question_note">知名维修专家，实时车辆问题排查</string>

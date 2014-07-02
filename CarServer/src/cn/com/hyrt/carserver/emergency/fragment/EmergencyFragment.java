@@ -41,13 +41,12 @@ public class EmergencyFragment extends Fragment{
 			LogHelper.i("tag", "position:"+position);
 			switch (position) {
 			case 0:
-				//快速求助
+				//一键救援
+				Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+getString(R.string.emergencyyjjy)));  
+				EmergencyFragment.this.startActivity(intent);
 				break;
 			case 1:
-				//一键救援
-				Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+getString(R.string.emergencyyjjy))); 
-                //开始处理意图        执行 
-				EmergencyFragment.this.startActivity(intent);
+				//违章查询
 				break;
 			case 2:
 				//保险理赔
@@ -55,7 +54,6 @@ public class EmergencyFragment extends Fragment{
 			case 3:
 				//交通报警
 				intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+getString(R.string.emergencyjtbj))); 
-                //开始处理意图        执行 
 				EmergencyFragment.this.startActivity(intent);
 				break;
 			default:

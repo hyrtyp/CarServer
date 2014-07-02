@@ -64,6 +64,9 @@
          <activity 
              android:name=".info.activity.QuestionDetailActivity"
              android:label="@string/info_question_detial"/>
+         <activity 
+             android:name=".info.activity.CarDetailActivity"
+             android:label="@string/info_car_detial"/>
     </application>
 
 </manifest>
