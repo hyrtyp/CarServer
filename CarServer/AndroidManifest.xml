@@ -70,6 +70,9 @@
 		<activity 
              android:name=".info.activity.InfoDetailActivity"
              android:label="@string/info_detail"/>
+		<activity 
+             android:name=".emergency.activity.InsuranceClaimActivity"
+             android:label="@string/emergency_bxlp"/>
 
     </application>
 

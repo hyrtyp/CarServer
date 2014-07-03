@@ -2,7 +2,9 @@ package cn.com.hyrt.carserver.emergency.fragment;
 
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
+import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.emergency.activity.InsuranceClaimActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -39,17 +41,21 @@ public class EmergencyFragment extends Fragment{
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
 			LogHelper.i("tag", "position:"+position);
+			Intent intent = new Intent();
 			switch (position) {
 			case 0:
 				//一键救援
-				Intent intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+getString(R.string.emergencyyjjy)));  
+				intent=new Intent(Intent.ACTION_CALL,Uri.parse("tel:"+getString(R.string.emergencyyjjy)));  
 				EmergencyFragment.this.startActivity(intent);
 				break;
 			case 1:
 				//违章查询
+				AlertHelper.getInstance(getActivity()).showCenterToast("正在开发中");
 				break;
 			case 2:
 				//保险理赔
+				intent.setClass(getActivity(), InsuranceClaimActivity.class); 
+				EmergencyFragment.this.startActivity(intent);
 				break;
 			case 3:
 				//交通报警
