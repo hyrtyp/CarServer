@@ -84,11 +84,12 @@ public class InsuranceClaimActivity extends BaseActivity{
 
 		loadData();
 		mAdapter.setOnClickListener(new InsuranceClaimAdapter.MyIcOnClickListener() {
-			
+
 			@Override
 			public void onClick(int position) {
 				LogHelper.i("tag", "Position = "+position);
-					AlertHelper.getInstance(getApplicationContext()).showCenterToast("正在开发中"+icm.data.get(position).sjtel);
+				    
+					AlertHelper.getInstance(getApplicationContext()).showCenterToast(""+icm.data.get(position).sjtel);
 				}
 		});
 		lvclaim.setOnItemClickListener(new AdapterView.OnItemClickListener() {
