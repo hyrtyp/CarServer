@@ -1,74 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="122dp"
-    android:orientation="horizontal" 
-    android:background="#fff">
- <LinearLayout 
+    android:layout_height="match_parent"
+    android:background="@drawable/full_bg"
+    android:orientation="vertical" >
+
+    <cn.com.hyrt.carserver.base.view.PullToRefreshView
+        android:id="@+id/ptrv"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal">
-    <ImageView
-        android:id="@+id/iv_ic_img"
-        android:layout_width="@dimen/face_img_size"
-        android:layout_height="@dimen/face_img_size"
-        android:background="@drawable/face_img_border_not_click"
-        android:src="@drawable/emergency_pa"
-        android:padding="1dp"
-        android:layout_marginLeft="@dimen/view_margin"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="@dimen/view_margin"
-        android:layout_marginBottom="@dimen/view_margin"
-        android:scaleType="centerCrop"/>
-    
-    <LinearLayout 
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal"
-        android:layout_toRightOf="@id/iv_ic_img"
-        android:layout_alignTop="@id/iv_ic_img"
-        android:layout_marginLeft="@dimen/main_top_margin">
-    <LinearLayout 
-        android:id="@+id/iv_face_text1"
-        android:layout_width="80dp"
-        android:layout_height="fill_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-        <TextView 
-            android:id="@+id/tv_bx_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/input_text_size"
-            android:textColor="#000"
-            android:text="中国平安"
-            android:layout_marginBottom="@dimen/main_top_margin"/>
-        <include layout="@layout/layout_line"/>
-        <TextView 
-            android:id="@+id/tv_bx_tel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size"
-            android:textColor="#646363"
-            android:text="电话：955406"
-            android:layout_marginTop="@dimen/main_top_margin"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/layout_bx_p"
-        android:layout_width="50dp"
-        android:layout_height="fill_parent"
-        android:orientation="horizontal">
-        <View
-	    android:layout_width="@dimen/line_size"
-	    android:layout_height="fill_parent"
-	    android:background="@color/line_color"/>
-        <ImageView
-            android:id="@+id/tv_add_catstatus"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="@dimen/view_margin_small"
-            android:gravity="center"
-            android:src="@drawable/emergency_tel"/>
-    </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
-</RelativeLayout>
+        android:layout_height="fill_parent" >
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_noData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/main_top_margin"
+                    android:text="@string/no_data"
+                    android:visibility="gone" />
+
+                <cn.com.hyrt.carserver.base.view.FullListView
+                    android:id="@+id/lv_insuranceclaim"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/bg_line"
+                    android:dividerHeight="@dimen/main_top_margin" />
+
+            </LinearLayout>
+        </ScrollView>
+    </cn.com.hyrt.carserver.base.view.PullToRefreshView>
+
+</LinearLayout>
