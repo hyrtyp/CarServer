@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/full_bg"
+    android:orientation="vertical" >
+
+    <cn.com.hyrt.carserver.base.view.PullToRefreshView
+        android:id="@+id/ptrv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/tv_noData"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/main_top_margin"
+                    android:text="@string/no_data"
+                    android:visibility="gone" />
+
+                <cn.com.hyrt.carserver.base.view.FullListView
+                    android:id="@+id/lv_insuranceclaim"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="@drawable/bg_line"
+                    android:dividerHeight="@dimen/main_top_margin" />
+
+            </LinearLayout>
+        </ScrollView>
+    </cn.com.hyrt.carserver.base.view.PullToRefreshView>
+
+</LinearLayout>

@@ -31,6 +31,8 @@ public class CarDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.tv_insurancetype) TextView tv_insurancetype;
 	@ViewInject(id=R.id.tv_insurancenum) TextView tv_insurancenum;
 	@ViewInject(id=R.id.tv_insurancecompany) TextView tv_insurancecompany;
+	@ViewInject(id=R.id.tv_carname) TextView tv_carname;
+	@ViewInject(id=R.id.tv_addtime) TextView tv_addtime;
 	
 	private String carid;
 	
@@ -78,6 +80,8 @@ public class CarDetailActivity extends BaseActivity{
 		tv_insurancetype.setText(car.insurancetype);
 		tv_insurancenum.setText(car.insurancenum);
 		tv_insurancecompany.setText(car.insurancecompany);
+		tv_addtime.setText(car.checkdate);
+		tv_carname.setText(car.brand);
 	}
 	
 	private void errorExit(){

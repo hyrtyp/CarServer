@@ -283,6 +283,13 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 	}
 	
 	/**
+	 * 获取 保险理陪 列表
+	 */
+	public void getInsuranceClaim(){
+		get(getString(R.string.method_insuranceClaim), null, Define.INSURANCE_CLAIM_LIST.class);
+	}
+	
+	/**
 	 * 获取用户ID
 	 * @return
 	 */
@@ -300,3 +307,4 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 		return mContext.getString(resId);
 	}
 }
+
