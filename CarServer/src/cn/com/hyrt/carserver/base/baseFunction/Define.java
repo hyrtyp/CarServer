@@ -216,5 +216,98 @@ public class Define {
 			public String replycontent;//发言内容
 		}
 	}
+	
+	public static class INFO_YEAR extends BASE{
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String time;
+		}
+	}
+	
+	/**
+	 * 维修信息
+	 * @author zoe
+	 *
+	 */
+	public static class INFO_REPAIR_LIST extends BASE{
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String id;//主键ID
+			public String mileage;//维修里程数
+			public String wxtime;//维修时间
+			public String reason;//维修人
+			public String company;//维修单位
+			public String item;//维修项目
+			public String carid;//车辆主键ID
+			public String repair;//送修人
+			public String cost;//维修费用
+			public String situation;//维修情况
+		}
+	}
+	
+	/**
+	 * 保养信息
+	 * @author zoe
+	 *
+	 */
+	public static class INFO_MAINTENANCE_LIST extends BASE {
+		
+		public ArrayList<CDATA> data;
+
+		public class CDATA {
+			public String id;// 主键ID
+			public String bytime;// 保养时间
+			public String bypeople;// 保养人
+			public String bymileage;// 保养里程数
+			public String byitem;// 保养项目
+			public String byunit;// 保养服务单位
+			public String bycost;// 保养费用
+			public String nextbymileage;// 下次保养里程数
+			public String carid;// 车辆ID
+		}
+	}
+	
+	/**
+	 * 保险信息
+	 * @author zoe
+	 *
+	 */
+	public static class INFO_INSURANCE_LIST extends BASE{
+		public ArrayList<CDATA> data;
+
+		public class CDATA {
+			public String id;// 主键ID
+			public String bxtime;//保险时间
+			public String bxtype;//保险种类
+			public String bxcost;//保险费用
+			public String bxunit1;//保险单位
+			public String bxcompany;//保险公司
+			public String carid;//车辆ID
+		}
+	}
+	
+	/**
+	 * 年检信息
+	 * @author zoe
+	 *
+	 */
+	public static class INFO_YEARCHECK_LIST extends BASE{
+		public ArrayList<CDATA> data;
+
+		public class CDATA {
+			public String id;// 主键ID
+			public String njtime;//年检时间
+			public String njpeople;//送检人
+			public String shouldtime;//本车应检日期
+			public String njefftime;//年检有效期
+			public String njcost;//年检费用
+			public String carid;//车辆ID
+		}
+		
+	}
 
 }

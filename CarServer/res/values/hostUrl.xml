@@ -13,4 +13,12 @@
     <string name="method_saveUserinfo">saveUserinfo</string>
     <string name="method_seekReplyList">getTerminalSeekReplyNumList</string>
     <string name="method_replyDetail">getCLWDwd</string>
+    <string name="method_maintenance_for_year">getTerminalCarMaintenanceList</string>
+	<string name="method_repair_for_year">getTerminalCarStatusYearList</string>
+	<string name="method_insurance_for_year">getTerminalCarInsuranceList</string>
+	<string name="method_yearcheck_for_year">getTerminalCarCheckList</string>
+	<string name="method_maintenance_year">getTerminalCarMaintenanceYear</string>
+	<string name="method_repair_year">getTerminalCarStatusYear</string>
+	<string name="method_insurance_year">getTerminalCarMaintenanceYear</string>
+	<string name="method_yearcheck_year">getTerminalCarCheckYear</string>
 </resources>

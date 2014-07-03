@@ -17,7 +17,6 @@ public class MyCarAdapter extends BaseAdapter{
 
 	private Define.INFO_CAR_LIST cars;
 	private Context mContext;
-	private View.OnClickListener mClickListener;
 	private MyCarOnClickListener mListener;
 	
 	public MyCarAdapter(INFO_CAR_LIST cars, Context mContext) {
@@ -44,11 +43,17 @@ public class MyCarAdapter extends BaseAdapter{
 		return arg0;
 	}
 
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
+		
 		if(convertView == null){
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_my_car_item, null);
 		}
+		
+		final Define.INFO_CAR_LIST.CDATA car = cars.data.get(position);
+		convertView.setTag(car.id);
+		
 		final ImageLoaderView ivFaceImg = (ImageLoaderView) convertView.findViewById(R.id.iv_face_img);
 		final TextView tvCarModel = (TextView) convertView.findViewById(R.id.tv_car_model);
 		final TextView tvAddTime = (TextView) convertView.findViewById(R.id.tv_add_time);
@@ -56,25 +61,24 @@ public class MyCarAdapter extends BaseAdapter{
 		final LinearLayout layoutAddCarCondition 
 		= (LinearLayout) convertView.findViewById(R.id.layout_add_car_condition);
 		
-		if(mClickListener == null){
-			mClickListener = new View.OnClickListener() {
+			View.OnClickListener mClickListener = new View.OnClickListener() {
 				
 				@Override
 				public void onClick(View view) {
 					if(mListener != null){
 						int id = view.getId();
 						if(id == ivFaceImg.getId()){
-							mListener.onClick(1);
+							mListener.onClick(1, car.id);
 						}else if(id == layoutAddCarCondition.getId()){
-							mListener.onClick(2);
+							mListener.onClick(2, car.id);
 						}else{
-							mListener.onClick(3);
+							mListener.onClick(3,  car.id);
 						}
 					}
 					
 				}
 			};
-		}
+		
 		ivFaceImg.setOnClickListener(mClickListener);
 		//tvCarModel.setOnClickListener(mClickListener);
 		//tvAddTime.setOnClickListener(mClickListener);
@@ -82,7 +86,8 @@ public class MyCarAdapter extends BaseAdapter{
 		layoutcarContent.setOnClickListener(mClickListener);
 		
 		
-		Define.INFO_CAR_LIST.CDATA car = cars.data.get(position);
+		
+		
 		ivFaceImg.setImageUrl(car.imagepath);
 		tvCarModel.setText(car.model);
 		tvAddTime.setText(car.checkdate);
@@ -96,9 +101,9 @@ public class MyCarAdapter extends BaseAdapter{
 	public static interface MyCarOnClickListener{
 		/**
 		 * 
-		 * @param position(1:头像；2：添加车况；3:其他)
+		 * @param type(1:头像；2：添加车况；3:其他)
 		 */
-		public void onClick(int position);
+		public void onClick(int type , String carid);
 	}
 	
 }

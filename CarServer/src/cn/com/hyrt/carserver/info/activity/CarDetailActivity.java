@@ -12,6 +12,11 @@ import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.StringHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 
+/**
+ * 车辆详情
+ * @author zoe
+ *
+ */
 public class CarDetailActivity extends BaseActivity{
 
 	@ViewInject(id=R.id.tv_carnumber) TextView tv_carnumber;

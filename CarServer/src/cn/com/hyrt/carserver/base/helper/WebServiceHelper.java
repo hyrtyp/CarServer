@@ -23,6 +23,7 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 	public static final String REPLY_DETAIL_QUESTION = "consultationid";
 	public static final String REPLY_DETAIL_HISTORY = "wtid";
 
+	
 	public WebServiceHelper(RequestCallback mCallback, Context context) {
 		super(mCallback, context);
 	}
@@ -192,6 +193,93 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 	public void getReplyDetail(String replyId, String type){
 		String params = String.format("{\"%s\":\"%s\"}", type, replyId);
 		get(getString(R.string.method_replyDetail), params, Define.REPLY_DETAIL.class);
+	}
+	
+	/**
+	 * 获取年份类别
+	 * @param carid 车辆ID
+	 * @param type （0：保养信息 1：维修信息 2：保险信息 3：年检信息）
+	 */
+	public void getConditionYear(String carid, int type){
+		String method;
+		switch (type) {
+		case 0:
+			method = getString(R.string.method_maintenance_year);
+			break;
+		case 1:
+			method = getString(R.string.method_repair_year);
+			break;
+		case 2:
+			method = getString(R.string.method_insurance_year);
+			break;
+		case 3:
+			method = getString(R.string.method_yearcheck_year);
+			break;
+
+		default:
+			return;
+		}
+		
+		LogHelper.i("tag", "method:"+method+" type:"+type);
+		
+		String params = String.format("{\"carid\":\"%s\"}", carid);
+		get(method, params, Define.INFO_YEAR.class);
+	}
+	
+	/**
+	 * 获取保养信息
+	 * @param carid  车辆主键ID
+	 * @param year   所选年份
+	 * @param page   页码
+	 */
+	public void getMaintenanceInfo(String carid, String year, int page){
+		String params = 
+				String.format("{\"carid\":\"%s\","
+						+ "\"year\":\"%s\",\"page\":\"%s\"}",
+						carid, year, page+"");
+		get(getString(R.string.method_maintenance_for_year), params, Define.INFO_MAINTENANCE_LIST.class);
+	}
+	
+	/**
+	 * 获取维修信息
+	 * @param carid  车辆主键ID
+	 * @param year   所选年份
+	 * @param page   页码
+	 */
+	public void getRepairInfo(String carid, String year, int page){
+		String params = 
+				String.format("{\"carid\":\"%s\","
+						+ "\"year\":\"%s\",\"page\":\"%s\"}",
+						carid, year, page+"");
+		get(getString(R.string.method_repair_for_year), params, Define.INFO_REPAIR_LIST.class);
+	}
+	
+	/**
+	 * 获取保险信息
+	 * @param carid  车辆主键ID
+	 * @param year   所选年份
+	 * @param page   页码
+	 */
+	public void getInsuranceInfo(String carid, String year, int page){
+		String params = 
+				String.format("{\"carid\":\"%s\","
+						+ "\"year\":\"%s\",\"page\":\"%s\"}",
+						carid, year, page+"");
+		get(getString(R.string.method_insurance_for_year), params, Define.INFO_INSURANCE_LIST.class);
+	}
+	
+	/**
+	 * 获取年检信息
+	 * @param carid  车辆主键ID
+	 * @param year   所选年份
+	 * @param page   页码
+	 */
+	public void getYearCheckInfo(String carid, String year, int page){
+		String params = 
+				String.format("{\"carid\":\"%s\","
+						+ "\"year\":\"%s\",\"page\":\"%s\"}",
+						carid, year, page+"");
+		get(getString(R.string.method_yearcheck_for_year), params, Define.INFO_YEARCHECK_LIST.class);
 	}
 	
 	/**

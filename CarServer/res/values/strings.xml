@@ -34,6 +34,7 @@
 	<string name="info_my_appointment">我的预约</string>
 	<string name="info_my_experts">我的专家</string>
 	<string name="info_condition">车辆状况</string>
+	<string name="info_condition_detail">车况详情</string>
 	<string name="info_my_car">我的车辆</string>
 	<string name="info_mycar_addstatus">添\n加\n车\n况</string>
 	<string name="info_change_label">修改信息</string>

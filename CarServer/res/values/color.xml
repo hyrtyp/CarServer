@@ -10,4 +10,6 @@
     <color name="input_laber_color">#7e7e7e</color>
     <color name="car_divider">#a8a7a8</color>
      <color name="dialog_bg">#45000000</color>
+     <color name="condition_tab_btn_focus">#d9f7fd</color>
+     <color name="condition_tab_btn_text">#5c5b5b</color>
 </resources>

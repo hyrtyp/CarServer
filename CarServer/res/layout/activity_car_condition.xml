@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/full_bg"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/main_top_margin" >
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#00c4e9" />
+
+    <RadioGroup
+        android:id="@+id/rg_tab"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <RadioButton
+            android:id="@+id/btn_wxxx"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_condition_tab_selector"
+            android:button="@null"
+            android:checked="true"
+            android:gravity="center"
+            android:text="维修信息"
+            android:textColor="@drawable/color_condition_tab_selector"
+            android:textSize="@dimen/input_text_size" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#00c4e9" />
+
+        <RadioButton
+            android:id="@+id/btn_byxx"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_condition_tab_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="保养信息"
+            android:textColor="@drawable/color_condition_tab_selector"
+            android:textSize="@dimen/input_text_size" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#00c4e9" />
+
+        <RadioButton
+            android:id="@+id/btn_njxx"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_condition_tab_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="年检信息"
+            android:textColor="@drawable/color_condition_tab_selector"
+            android:textSize="@dimen/input_text_size" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="fill_parent"
+            android:background="#00c4e9" />
+
+        <RadioButton
+            android:id="@+id/btn_bxxx"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_condition_tab_selector"
+            android:button="@null"
+            android:gravity="center"
+            android:text="保险信息"
+            android:textColor="@drawable/color_condition_tab_selector"
+            android:textSize="@dimen/input_text_size" />
+    </RadioGroup>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#00c4e9" />
+
+    <FrameLayout
+        android:id="@+id/layout_content"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

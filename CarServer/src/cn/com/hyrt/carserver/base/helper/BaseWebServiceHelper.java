@@ -31,7 +31,7 @@ public class BaseWebServiceHelper {
 	private Gson mGson;
 	protected Context mContext;
 	
-	
+	private BaseWebServiceHelper(){};
 	
 	protected BaseWebServiceHelper(RequestCallback mCallback, Context context) {
 		super();
@@ -45,6 +45,7 @@ public class BaseWebServiceHelper {
 		Thread mThread = new Thread(){
 			public void run() {
 				SoapObject soapObject = new SoapObject(NAME_SPACE, method);
+				LogHelper.i("tag", "params:"+params+" method:"+method);
 				if(params != null){
 					soapObject.addProperty("jsonstr", params);
 				}
@@ -81,7 +82,7 @@ public class BaseWebServiceHelper {
 					LogHelper.i("tag", "e1:"+e.getMessage());
 					if(e.getMessage().contains("Network is unreachable")|| e.getMessage().contains("ECONNREFUSED")){
 						if(mCallback != null){
-							((BaseActivity)mContext).runOnUiThread(new Runnable() {
+							((Activity)mContext).runOnUiThread(new Runnable() {
 								
 								@Override
 								public void run() {

@@ -70,7 +70,13 @@
 		<activity 
              android:name=".info.activity.InfoDetailActivity"
              android:label="@string/info_detail"/>
+		<activity 
+		    android:name=".info.activity.CarConditionActivity"
+		    android:label="@string/info_condition_detail"/>
 
+		<activity 
+		    android:name=".info.activity.CarConditionDetailActivity"/>
+		
     </application>
 
 </manifest>

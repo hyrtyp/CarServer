@@ -122,6 +122,8 @@ public class InfoFragment extends Fragment{
 				break;
 			case 4:
 				//车辆状况
+				intent.setClass(getActivity(), MyCarActivity.class);
+				intent.putExtra("isMyCar", false);
 				break;
 			case 5:
 				//我的爱车
