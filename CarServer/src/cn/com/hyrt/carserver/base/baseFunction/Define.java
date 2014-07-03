@@ -216,5 +216,23 @@ public class Define {
 			public String replycontent;//发言内容
 		}
 	}
+	
+	/**
+	 * 保险理陪列表
+	 * @author jch
+	 *
+	 */
+	public static class INSURANCE_CLAIM_LIST extends BASE{
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String sjtel;//电话
+			public String imagepath;//图片地址
+			public String sjname;//名称
+			public String website;//网址
+			public String sjaddress;//地址
+		}
+	}
 
 }

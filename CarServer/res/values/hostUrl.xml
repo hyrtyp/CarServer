@@ -13,4 +13,5 @@
     <string name="method_saveUserinfo">saveUserinfo</string>
     <string name="method_seekReplyList">getTerminalSeekReplyNumList</string>
     <string name="method_replyDetail">getCLWDwd</string>
+    <string name="method_insuranceClaim">getMerchant</string>
 </resources>
