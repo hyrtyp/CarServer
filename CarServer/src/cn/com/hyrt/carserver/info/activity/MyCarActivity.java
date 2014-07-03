@@ -99,6 +99,7 @@ public class MyCarActivity extends BaseActivity{
 					//进入我的车辆详细信息页面
 					Intent it = new Intent();
 					it.setClass(MyCarActivity.this, CarDetailActivity.class);
+					it.putExtra("id", cars.data.get(position).id);
 					startActivityForResult(it, Define.RESULT_FROM_ALTER_CAR);
 				}
 				}

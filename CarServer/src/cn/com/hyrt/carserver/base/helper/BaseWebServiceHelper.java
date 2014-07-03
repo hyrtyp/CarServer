@@ -2,8 +2,6 @@
 package cn.com.hyrt.carserver.base.helper;
 
 import java.io.IOException;
-import java.util.Iterator;
-import java.util.Map;
 
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
@@ -11,6 +9,7 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
+import android.app.Activity;
 import android.content.Context;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
@@ -62,12 +61,13 @@ public class BaseWebServiceHelper {
 					final String result = envelope.getResponse().toString();
 					LogHelper.i("tag", "result:"+result);
 					if(mCallback != null && result != null && mContext != null){
-						((BaseActivity)mContext).runOnUiThread(new Runnable() {
+						((Activity)mContext).runOnUiThread(new Runnable() {
 							
 							@Override
 							public void run() {
 								Define.BASE base = (BASE) mGson.fromJson(result, clazz);
-								if(Define.REQUEST_SUCCESS_CODE.equals(base.code)){
+								if(Define.REQUEST_SUCCESS_CODE.equals(base.code)
+										|| Define.REQUEST_SAVE_SUCCESS_CODE.equals(base.code)){
 									mCallback.onSuccess(base);
 								}else{
 									mCallback.onFailure(Integer.parseInt(base.code), base.message);

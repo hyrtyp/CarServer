@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@drawable/full_bg">
+    android:background="@drawable/full_bg"
+    android:orientation="vertical" >
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -12,32 +12,37 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:background="#fff"
+            android:orientation="vertical" 
+            android:layout_marginTop="@dimen/main_top_margin">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff"
                 android:orientation="horizontal"
-                android:paddingBottom="11dp"
-                android:paddingLeft="@dimen/view_margin"
-                android:paddingRight="@dimen/view_margin"
-                android:paddingTop="11dp" >
+                android:paddingBottom="@dimen/view_margin"
+                android:paddingLeft="@dimen/view_margin_big"
+                android:paddingTop="@dimen/view_margin" >
 
-                <ImageView
-                    android:id="@+id/iv_face_img"
-                    android:layout_width="@dimen/face_img_size"
-                    android:layout_height="@dimen/face_img_size"
-                    android:background="@drawable/face_img_border"
-                    android:padding="1dp"
-                    android:src="@drawable/img_car_default" 
-                    android:scaleType="centerCrop"/>
+                <RelativeLayout
+                    android:layout_width="154dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/face_img_border_not_click"
+                    android:padding="1dp" >
+
+                    <ImageView
+                        android:id="@+id/iv_face_img"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/img_car_default" />
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/view_margin_big"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginLeft="@dimen/main_top_margin"
+                    android:layout_marginTop="@dimen/main_top_margin"
                     android:orientation="vertical" >
 
                     <TextView
@@ -51,50 +56,386 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="我的爱车：宝马X3、\n宝马X5"
+                        android:lineSpacingExtra="@dimen/main_top_margin"
+                        android:text="添加时间：\n2014-06-25"
                         android:textColor="#838484"
                         android:textSize="@dimen/text_size" />
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <include
+                android:layout_width="wrap_content"
+                layout="@layout/layout_line" />
+
+            <TableLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/main_top_margin"
-                 android:background="#fff"
-                android:orientation="vertical" 
-                android:paddingLeft="@dimen/main_top_margin">
+                android:layout_marginBottom="@dimen/view_margin_big"
+                android:layout_marginLeft="@dimen/view_margin_big"
+                android:layout_marginRight="@dimen/view_margin_big"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:background="@drawable/face_img_border_not_click" >
 
-                <LinearLayout
+                <TableRow
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingRight="@dimen/main_top_margin" >
+                    android:layout_height="wrap_content" >
 
                     <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="@string/info_carnumber_label"
-                        android:textColor="@color/input_laber_color"
-                        android:textSize="@dimen/input_text_size" />
-
-                    <TextView
-                        android:id="@+id/et_carnumber"
-                        android:layout_width="193dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
-                        android:gravity="center_vertical"
-                        android:paddingBottom="@dimen/view_margin_small"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="@dimen/view_margin_small"
-                        android:singleLine="true"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_carnumber_label"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
-                </LinearLayout>
+                        android:textSize="@dimen/text_size" />
 
-            </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_carnumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_brand_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_brand"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_model_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_model"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_submodel_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_submodel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_cartype_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_cartype"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_mileage_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_mileage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_yearcheckdate_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_yearcheckdate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_manufacturer_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_manufacturer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_insurancedate_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_insurancedate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_insurancetype_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_insurancetype"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_insurancenum_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_insurancenum"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+                <include layout="@layout/layout_line_small" />
+
+                <TableRow
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/view_margin"
+                        android:text="@string/info_insurancecompany_label"
+                        android:textColor="#000"
+                        android:textSize="@dimen/text_size" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <include layout="@layout/layout_vertical_line_small" />
+
+                        <TextView
+                            android:id="@+id/tv_insurancecompany"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="@dimen/view_margin"
+                            android:textColor="#000"
+                            android:textSize="@dimen/text_size" />
+                    </LinearLayout>
+                </TableRow>
+            </TableLayout>
         </LinearLayout>
     </ScrollView>
 

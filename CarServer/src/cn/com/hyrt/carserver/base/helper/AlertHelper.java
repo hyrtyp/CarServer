@@ -83,7 +83,9 @@ public class AlertHelper {
 	}
 	
 	public void hideLoading(){
-		if(mProgressDialog != null){
+		if(mProgressDialog != null 
+				&& mContext != null 
+				&& !((Activity)mContext).isFinishing()){
 			mProgressDialog.dismiss();
 			mProgressDialog = null;
 		}
