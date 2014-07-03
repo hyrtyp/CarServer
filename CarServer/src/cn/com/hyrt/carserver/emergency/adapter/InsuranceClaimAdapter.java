@@ -3,6 +3,7 @@ package cn.com.hyrt.carserver.emergency.adapter;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INSURANCE_CLAIM_LIST;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -75,6 +76,7 @@ public class InsuranceClaimAdapter extends BaseAdapter{
 		bxname.setText(icc.sjname);
 		bxtel.setText(icc.sjtel);
 		bxcall.setImageResource(R.drawable.emergency_tel);
+		bxcall.setTag(position);
 		return convertView;
 	}
 	
