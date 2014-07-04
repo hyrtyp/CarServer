@@ -15,9 +15,11 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:text="动力总成"
-            android:textSize="26sp" />
+            android:textColor="#fff"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="fill_parent"

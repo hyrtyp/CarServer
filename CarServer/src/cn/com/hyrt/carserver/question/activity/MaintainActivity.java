@@ -24,7 +24,7 @@ public class MaintainActivity extends BaseActivity {
 
 	private Button leftBtn, rightBtn;
 	private ListView leftls,rightls;
-	private TextView text;
+//	private TextView text;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,7 @@ public class MaintainActivity extends BaseActivity {
 		leftBtn = (Button) findViewById(R.id.btn_left);
 		rightBtn = (Button) findViewById(R.id.btn_right);
 		
-		text = (TextView)findViewById(R.id.text);
+		
 		
 		leftls = (ListView) findViewById(R.id.list_left);
 		leftls.setAdapter(new leftAdapter(text1));
@@ -123,6 +123,7 @@ public class MaintainActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			convertView = View.inflate(MaintainActivity.this,
 					R.layout.question_maintain_left_item, null);
+			TextView text = (TextView)convertView.findViewById(R.id.text);
 			text.setText(str[position]);
 			return convertView;
 		}
@@ -160,6 +161,7 @@ public class MaintainActivity extends BaseActivity {
 			// TODO Auto-generated method stub
 			convertView = View.inflate(MaintainActivity.this,
 					R.layout.question_maintain_right_item, null);
+			TextView text = (TextView)convertView.findViewById(R.id.text);
 			text.setText(str[position]);
 			return convertView;
 		}

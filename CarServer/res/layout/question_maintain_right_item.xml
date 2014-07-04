@@ -15,12 +15,13 @@
             android:id="@+id/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:layout_marginTop="10dp"
             android:text="汽缸体"
-            android:textSize="26sp" />
+            android:textColor="#3a3a3a"
+            android:textSize="16sp" />
 
-        <include 
-            layout="@layout/layout_line"/>
+        <include layout="@layout/layout_line" />
     </LinearLayout>
 
 </LinearLayout>
