@@ -30,7 +30,7 @@
                     android:background="@drawable/face_img_border_not_click"
                     android:padding="1dp" >
 
-                    <ImageView
+                    <cn.com.hyrt.carserver.base.view.ImageLoaderView
                         android:id="@+id/iv_face_img"
                         android:layout_width="fill_parent"
                         android:layout_height="fill_parent"
@@ -50,7 +50,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/view_margin"
-                        android:text="用户名：理理事情"
                         android:textColor="#373737"
                         android:textSize="@dimen/text_size" />
 
@@ -59,7 +58,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:lineSpacingExtra="@dimen/main_top_margin"
-                        android:text="添加时间：\n2014-06-25"
                         android:textColor="#838484"
                         android:textSize="@dimen/text_size" />
                 </LinearLayout>
@@ -440,5 +438,4 @@
             </TableLayout>
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

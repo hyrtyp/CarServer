@@ -199,13 +199,19 @@ public class MaintenanceInfoFragment extends Fragment{
 	private void jump(int position){
 		if(titles == null){
 			titles = new ArrayList<String>();
-			titles.add("保养时间");
-			titles.add("保养人");
-			titles.add("保养里程数");
-			titles.add("保养项目");
-			titles.add("保养服务单位");
-			titles.add("保养费用");
-			titles.add("下次保养里程数");
+//			titles.add("保养时间");
+//			titles.add("保养人");
+//			titles.add("保养里程数");
+//			titles.add("保养项目");
+//			titles.add("保养服务单位");
+//			titles.add("保养费用");
+//			titles.add("下次保养里程数");
+			
+			String[] array = getResources()
+					.getStringArray(R.array.info_maintenance_labels);
+			for (String str : array) {
+				titles.add(str);
+			}
 		}
 		
 		ArrayList<String> contents = new ArrayList<String>();

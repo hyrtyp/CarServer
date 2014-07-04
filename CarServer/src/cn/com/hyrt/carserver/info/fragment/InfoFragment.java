@@ -1,9 +1,14 @@
 package cn.com.hyrt.carserver.info.fragment;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.SoapObject;
@@ -11,13 +16,18 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
+import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.CODE;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
+import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR_LIST;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
@@ -27,6 +37,7 @@ import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
 import cn.com.hyrt.carserver.info.activity.InfoDetailActivity;
 import cn.com.hyrt.carserver.info.activity.MyCarActivity;
 import cn.com.hyrt.carserver.info.activity.QuestionActivity;
+import cn.com.hyrt.carserver.info.adapter.MyCarAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,6 +47,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * 我的信息主页
@@ -47,11 +59,16 @@ public class InfoFragment extends Fragment{
 	private View rootView;
 	private GridView gvMyInfo;
 	private ImageLoaderView ivFaceImg;
+	private TextView tv_username;
+	private TextView tv_cars;
+	private WebServiceHelper mCalWebServiceHelper;
+	private List<String> cars = new ArrayList<String>();
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_info, null);
+		
 		findView();
 		initView();
 		setListener();
@@ -78,6 +95,34 @@ public class InfoFragment extends Fragment{
 					}
 		}, getActivity());
 		mWebServiceHelper.getUserInfo();
+		
+		if(mCalWebServiceHelper == null){
+			mCalWebServiceHelper = new WebServiceHelper(
+					new WebServiceHelper.RequestCallback<Define.INFO_CAR_LIST>() {
+						@Override
+						public void onSuccess(INFO_CAR_LIST result) {
+							String strCars = "";
+							for(int i=0,j=result.data.size(); i<j; i++){
+								cars.add(result.data.get(i).model);
+								if(i < j-1){
+									strCars += result.data.get(i).model+"、";
+								}
+								
+							}
+							
+							tv_cars.setText("我的爱车："+strCars);
+							
+							
+						}
+
+						@Override
+						public void onFailure(int errorNo, String errorMsg) {
+							
+						}
+						
+			}, getActivity());
+		}
+		mCalWebServiceHelper.getTerminalCarList();
 	}
 	
 	private void initView(){
@@ -139,11 +184,15 @@ public class InfoFragment extends Fragment{
 		}
 	};
 	
+	
 	private void findView(){
 		gvMyInfo = (GridView) rootView.findViewById(R.id.gv_myInfo);
 		ivFaceImg = (ImageLoaderView) rootView.findViewById(R.id.iv_face_img);
-		
+		LogHelper.i("tag", "CarServerApplication.info:"+CarServerApplication.info);
 		ivFaceImg.setImageUrl(CarServerApplication.info.imagepath);
+		tv_username = (TextView) rootView.findViewById(R.id.tv_username);
+		tv_cars = (TextView) rootView.findViewById(R.id.tv_cars);
+		tv_username.setText("用户名："+CarServerApplication.info.unitname);
 	}
 	
 	private void setListener(){

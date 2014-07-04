@@ -44,6 +44,7 @@
 	<string name="info_confirm_pwd_label">确认密码</string>
 	<string name="info_mycar_label">我的车辆</string>
 	<string name="info_save_change">保存修改</string>
+	<string name="info_save">保存</string>
 	<string name="info_login_label">登录</string>
 	<string name="info_add_car">增加车辆</string>
 	<string name="info_change_car">修改车辆</string>
@@ -53,7 +54,7 @@
 	<string name="info_model_label">型号</string>
 	<string name="info_submodel_label">子型号</string>
 	<string name="info_cartype_label">车辆类型</string>
-	<string name="info_mileage_label">行驶里程</string>
+	<string name="info_mileage_label">维修里程数</string>
 	<string name="info_yearcheckdate_label">年检日期</string>
 	<string name="info_manufacturer_label">生产厂家</string>
 	<string name="info_insurancedate_label">保险时间</string>
@@ -61,6 +62,7 @@
 	<string name="info_insurancenum_label">保险单号</string>
 	<string name="info_insurancecompany_label">保险公司</string>
 	<string name="info_change_success">信息保存成功</string>
+	<string name="info_change_fail">信息保存失败</string>
 	<string name="info_username_is_null">用户名不能为空！</string>
 	<string name="info_oldpwd_is_null">原始密码不能为空！</string>
 	<string name="info_newpwd_is_null">新改密码不能为空！</string>
@@ -74,6 +76,40 @@
 	<string name="info_question_detial">问题详情</string>
 	<string name="info_car_detial">车辆详情</string>
 	<string name="info_detail">详情信息</string>
+	
+	<string-array name="info_repair_labels">
+	    <item>维修里程数</item>
+	    <item>维修时间</item>
+	    <item>维修原因</item>
+	    <item>维修单位</item>
+	    <item>维修项目</item>
+	    <item>送修人</item>
+	    <item>维修费用</item>
+	    <item>维修情况</item>
+	</string-array>
+	<string-array name="info_insurance_labels">
+	    <item>保险时间</item>
+	    <item>保险种类</item>
+	    <item>保险费用</item>
+	    <item>保险单位</item>
+	    <item>保险公司</item>
+	</string-array>
+	<string-array name="info_maintenance_labels">
+	    <item>保养时间</item>
+	    <item>保养人</item>
+	    <item>保养里程数</item>
+	    <item>保养项目</item>
+	    <item>保养服务单位</item>
+	    <item>保养费用</item>
+	    <item>下次保养里程数</item>
+	</string-array>
+	<string-array name="info_yearcheck_labels">
+	    <item>年检时间</item>
+	    <item>送检人</item>
+	    <item>本车应检日期</item>
+	    <item>年检有效期</item>
+	    <item>年检费用</item>
+	</string-array>
 	
 	<!-- question -->
 	<string name="question_note">知名维修专家，实时车辆问题排查</string>
@@ -145,6 +181,34 @@
 	<string name="classify_qcmr">汽车美容</string>
 	<string name="classify_zfw">找服务</string>
 	<string name="classify_zsj">找商家</string>
+	<string name="info_wxtime_label">维修时间</string>
+	<string name="info_reason_label">维修原因</string>
+	<string name="info_company_label">维修单位</string>
+	<string name="info_item_label">维修项目</string>
+	<string name="info_repair_label">送修人</string>
+	<string name="info_cost_label">维修费用</string>
+	<string name="info_situation_label">维修情况</string>
+	<string name="info_remarks_label">备注</string>
+	<string name="info_add_condition">添加车况</string>
+	<string name="info_change_condition">修改车况</string>
+	<string name="info_bytime_label">保养时间</string>
+	<string name="info_bypeople_label">保养人</string>
+	<string name="info_bymileage_label">保养里程数</string>
+	<string name="info_byitem_label">保养项目</string>
+	<string name="info_byunit_label">保养服务单位</string>
+	<string name="info_bycost_label">保养费用</string>
+	<string name="info_nextbymileage_label">下次保养里程数</string>
+	<string name="info_bxtime_label">保险时间</string>
+	<string name="info_bxtype_label">保险种类</string>
+	<string name="info_bxcost_label">保险费用</string>
+	<string name="info_bxunit1_label">保险单位</string>
+	<string name="info_bxcompany_label">保险公司</string>
+	<string name="info_njtime_label">年检时间</string>
+	<string name="info_njpeople_label">送检人</string>
+	<string name="info_shouldtime_label">本车应年检时间</string>
+	<string name="info_njefftime_label">年检有效期</string>
+	<string name="info_njcost_label">年检费用</string>
+	<string name="search_result">搜索结果</string>
 	
 	
 	

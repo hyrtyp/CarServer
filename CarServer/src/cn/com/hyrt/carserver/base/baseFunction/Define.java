@@ -2,12 +2,13 @@ package cn.com.hyrt.carserver.base.baseFunction;
 
 import java.util.ArrayList;
 
+
 /**
  * 全局定义
  * @author zoe
  *
  */
-@SuppressWarnings("unused")
+
 public class Define {
 	
 	public static String REQUEST_SUCCESS_CODE = "200";
@@ -235,17 +236,18 @@ public class Define {
 		
 		public ArrayList<CDATA> data;
 		
-		public class CDATA{
+		public static class CDATA{
 			public String id;//主键ID
 			public String mileage;//维修里程数
 			public String wxtime;//维修时间
-			public String reason;//维修人
+			public String reason;//维修原因
 			public String company;//维修单位
 			public String item;//维修项目
 			public String carid;//车辆主键ID
 			public String repair;//送修人
 			public String cost;//维修费用
 			public String situation;//维修情况
+			public String remarks;//备注（保存接口）
 		}
 	}
 	
@@ -258,7 +260,7 @@ public class Define {
 		
 		public ArrayList<CDATA> data;
 
-		public class CDATA {
+		public static class CDATA {
 			public String id;// 主键ID
 			public String bytime;// 保养时间
 			public String bypeople;// 保养人
@@ -268,6 +270,7 @@ public class Define {
 			public String bycost;// 保养费用
 			public String nextbymileage;// 下次保养里程数
 			public String carid;// 车辆ID
+			public String remarks;//备注（保存接口）
 		}
 	}
 	
@@ -279,7 +282,7 @@ public class Define {
 	public static class INFO_INSURANCE_LIST extends BASE{
 		public ArrayList<CDATA> data;
 
-		public class CDATA {
+		public static class CDATA {
 			public String id;// 主键ID
 			public String bxtime;//保险时间
 			public String bxtype;//保险种类
@@ -287,6 +290,7 @@ public class Define {
 			public String bxunit1;//保险单位
 			public String bxcompany;//保险公司
 			public String carid;//车辆ID
+			public String remarks;//备注（保存接口）
 		}
 	}
 	
@@ -298,7 +302,7 @@ public class Define {
 	public static class INFO_YEARCHECK_LIST extends BASE{
 		public ArrayList<CDATA> data;
 
-		public class CDATA {
+		public static class CDATA {
 			public String id;// 主键ID
 			public String njtime;//年检时间
 			public String njpeople;//送检人
@@ -306,6 +310,7 @@ public class Define {
 			public String njefftime;//年检有效期
 			public String njcost;//年检费用
 			public String carid;//车辆ID
+			public String remarks;//备注（保存接口）
 		}
 		
 	}
@@ -330,7 +335,7 @@ public class Define {
 	
 	/**
 	 * 维修保养分类
-	 * @author zoe
+	 * @author gsl
 	 *
 	 */
 	public static class QUESTION_MAINTAIN_FL extends BASE{
@@ -346,6 +351,32 @@ public class Define {
 			}
 			
 		}
+	}
+		
+	public static class QUESTION_SEARCH_RESULT extends BASE{
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String id;//问题ID
+			public String content;//问题内容
+			public String zyname;//专家专业名称
+			public String username;//专家姓名
+			public String seekdate;//提问时间
+			public String userid;//专家ID
+			public String seektype;//分类id
+			public String attacpathname;//图片名称
+			public String terminalid;//终端用户ID
+			public String attacpath;//图片路径
+		}
+	}
+	
+	
+	public static class CLASSIFY{
+		
+		public String[][][][] data;
+		
+		public int size;
 	}
 
 }

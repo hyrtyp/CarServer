@@ -26,14 +26,15 @@ public class ImageLoaderView extends ImageView{
 	}
 	
 	public void setImageUrl(String url){
-		if(url != null){
+//		if(url != null){
 			if(mFinalBitmap == null){
 				mFinalBitmap = FinalBitmap.create(getContext());
 				mFinalBitmap.configLoadingImage(R.drawable.ic_launcher);
 				mFinalBitmap.configLoadfailImage(R.drawable.ic_launcher);
 			}
 			mFinalBitmap.display(this, url);
-		}
+//		}
 	}
 
 }
+

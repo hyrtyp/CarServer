@@ -200,11 +200,17 @@ public class InsuranceInfoFragment extends Fragment{
 	private void jump(int position){
 		if(titles == null){
 			titles = new ArrayList<String>();
-			titles.add("保险时间");
-			titles.add("保险种类");
-			titles.add("保险费用");
-			titles.add("保险单位");
-			titles.add("保险公司");
+//			titles.add("保险时间");
+//			titles.add("保险种类");
+//			titles.add("保险费用");
+//			titles.add("保险单位");
+//			titles.add("保险公司");
+			
+			String[] array = getResources()
+					.getStringArray(R.array.info_insurance_labels);
+			for (String str : array) {
+				titles.add(str);
+			}
 		}
 		
 		ArrayList<String> contents = new ArrayList<String>();

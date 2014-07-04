@@ -6,6 +6,9 @@ import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.info.activity.QuestionActivity;
+import cn.com.hyrt.carserver.knowledge.activity.KnowledgeSearchResultActivity;
+import cn.com.hyrt.carserver.knowledge.activity.RepairSelfActivity;
+import cn.com.hyrt.carserver.question.activity.InsuranceActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 
 public class KnowledgeFragment extends Fragment{
 
@@ -25,11 +30,31 @@ public class KnowledgeFragment extends Fragment{
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_knowledge, null);
 		findView();
+		setListener();
 		initGrid();
 		return rootView;
 	}
 	
+	private void setListener(){
+		layout_search.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				String str = et_search.getText().toString();
+				if(str == null || "".equals(str)){
+					return;
+				}
+				Intent intent = new Intent();
+				intent.putExtra("str", str);
+				intent.setClass(getActivity(), KnowledgeSearchResultActivity.class);
+				startActivity(intent);
+			}
+		});
+	}
+	
 	private void findView(){
+		et_search = (EditText) rootView.findViewById(R.id.et_search);
+		layout_search = (LinearLayout) rootView.findViewById(R.id.layout_search);
 		gvRelatedQuestion = (GridView) rootView.findViewById(R.id.gvRelatedQuestion);
 		gvRelatedKnowledge = (GridView) rootView.findViewById(R.id.gvRelatedKnowledge);
 	}
@@ -72,13 +97,13 @@ public class KnowledgeFragment extends Fragment{
 				switch(position){
 				//维修自查
 				case 0:
-					AlertHelper.getInstance(getActivity()).showCenterToast("等待开发中");
-					gvRelatedQuestionIntent.setClass(getActivity(), KnowledgeFragment.class);
+					gvRelatedQuestionIntent.setClass(getActivity(), RepairSelfActivity.class);
+					gvRelatedQuestionIntent.putExtra("type", QuestionActivity.TYPE_HISTORY);
 				    break;
 				//配件改装
 				case 1:
-					AlertHelper.getInstance(getActivity()).showCenterToast("等待开发中");
-					gvRelatedQuestionIntent.setClass(getActivity(), KnowledgeFragment.class);
+					gvRelatedQuestionIntent.setClass(getActivity(), RepairSelfActivity.class);
+					gvRelatedQuestionIntent.putExtra("type", QuestionActivity.TYPE_HISTORY);
 				    break;
 				default:
 					return;  
@@ -119,6 +144,8 @@ public class KnowledgeFragment extends Fragment{
 		}
 		
 	};
+	private EditText et_search;
+	private LinearLayout layout_search;
 	
 	
 }

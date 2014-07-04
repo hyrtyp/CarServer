@@ -198,11 +198,17 @@ public class YearCheckInfoFragment extends Fragment{
 	private void jump(int position){
 		if(titles == null){
 			titles = new ArrayList<String>();
-			titles.add("年检时间");
-			titles.add("送检人");
-			titles.add("本车应检日期");
-			titles.add("年检有效期");
-			titles.add("年检费用");
+//			titles.add("年检时间");
+//			titles.add("送检人");
+//			titles.add("本车应检日期");
+//			titles.add("年检有效期");
+//			titles.add("年检费用");
+			
+			String[] array = getResources()
+					.getStringArray(R.array.info_yearcheck_labels);
+			for (String str : array) {
+				titles.add(str);
+			}
 		}
 		
 		ArrayList<String> contents = new ArrayList<String>();
