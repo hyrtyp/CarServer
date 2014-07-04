@@ -26,4 +26,7 @@
     <dimen name="title_text">20sp</dimen>
     <dimen name="title_text_big">30sp</dimen>
     
+    <dimen name="cosmetology_title_text">30sp</dimen>
+    <dimen name="cosmetology_content_text">20sp</dimen>
+    
 </resources>

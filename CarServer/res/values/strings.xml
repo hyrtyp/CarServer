@@ -121,6 +121,39 @@
 	<string name="question_find_specialty">按专长找</string>
 	<string name="question_find_brand">按品牌找</string>
 	
+	<string name="question_title">车辆问答</string>
+	<string name="question_beauty">美  容</string>
+	<string name="question_mount">装  潢</string>
+	<string name="question_servicing">维  修</string>
+	<string name="question_maintain">保  养</string>
+	<string name="question_insure">投  保</string>
+	<string name="question_payfor">理 赔</string>
+	<string name="question_hint">请详细描写您的爱车所出现的车辆状态，以方便专家对您的爱车做出正确的评估···</string>
+	<string name="question_submit">提交问题</string>
+	<string name="question_up_photo">上传照片</string>
+	<string name="question_commit">问题提交</string>
+	<string name="question_correlation">相关问题</string>
+	
+	<string name="question_select_position">选择部位</string>
+	<string name="question_engine">发动机</string>
+	<string name="question_crankcase">曲轴箱</string>
+	<string name="question_cylinder_heat">汽缸盖</string>
+	<string name="question_cylinder_liner">汽缸垫</string>
+	<string name="question_ohv">O H V</string>
+	<string name="question_knock_sensor">爆震传感器</string>
+	<string name="question_sparking_plug">铂金火花塞</string>
+	<string name="question_camshaft">顶置凸轮轴</string>
+	<string name="question_distributor">分电器</string>
+	
+	<string name="question_waxing">洗车打蜡</string>
+	<string name="question_coating_film">封釉镀膜</string>
+	<string name="question_pad_pasting">玻璃贴膜</string>
+	<string name="question_there_filter">更换三滤</string>
+	<string name="question_engineoil">更换机油/机滤</string>
+	<string name="question_tyre_server">轮胎服务</string>
+	<string name="question_paint">钣金油漆</string>
+	<string name="question_car_light">车灯安装</string>
+	
 	<!-- emergency -->
 	<string name="emergency_bxlp">保险理赔</string>
 	<string name="emergency_jtbj">交通报警</string>
@@ -175,6 +208,7 @@
 	<string name="info_shouldtime_label">本车应年检时间</string>
 	<string name="info_njefftime_label">年检有效期</string>
 	<string name="info_njcost_label">年检费用</string>
+	
 	
 	
 </resources>

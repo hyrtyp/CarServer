@@ -150,7 +150,7 @@ public class InfoFragment extends Fragment{
 			case 2:
 				//我的预约
 				intent.setClass(getActivity(), WebActivity.class);
-				intent.putExtra("url", "http://192.168.10.238:8083/cspportal/");
+				intent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
 				break;
 			case 3:
 				//我的专家
