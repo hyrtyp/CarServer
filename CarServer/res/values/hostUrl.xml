@@ -23,6 +23,11 @@
 	<string name="method_yearcheck_year">getTerminalCarCheckYear</string>
     <string name="method_insuranceClaim">getMerchant</string>
     
+    <string name="method_question_maintainfl">getCLWDfl</string>
+    
+    <!-- 分类id -->
+    <string name="id_question_maintainfl">000011</string>
+    
     <!-- 汽车服务HTML地址 -->
     <string name="method_weburl">http://192.168.10.238:8083</string>
 </resources>

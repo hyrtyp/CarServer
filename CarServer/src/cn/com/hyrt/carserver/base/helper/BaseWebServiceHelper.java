@@ -66,6 +66,8 @@ public class BaseWebServiceHelper {
 							
 							@Override
 							public void run() {
+								System.out.println("result=========="+result);
+								System.out.println("clazz============="+clazz);
 								Define.BASE base = (BASE) mGson.fromJson(result, clazz);
 								if(Define.REQUEST_SUCCESS_CODE.equals(base.code)
 										|| Define.REQUEST_SAVE_SUCCESS_CODE.equals(base.code)){

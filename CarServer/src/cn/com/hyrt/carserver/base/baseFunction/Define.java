@@ -327,5 +327,25 @@ public class Define {
 			public String sjaddress;//地址
 		}
 	}
+	
+	/**
+	 * 维修保养分类
+	 * @author zoe
+	 *
+	 */
+	public static class QUESTION_MAINTAIN_FL extends BASE{
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String id;
+			public String name;
+			
+			@Override
+			public String toString() {
+				return "CDATA [ id=" + id + "name=" + name+ "]";
+			}
+			
+		}
+	}
 
 }

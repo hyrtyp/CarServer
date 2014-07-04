@@ -112,62 +112,63 @@ public class QuestionFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-					Intent intent = new Intent();
-					intent.setClass(getActivity(), QuestionActivity.class);
-					startActivity(intent);
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), QuestionActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
-	
+
 	private AdapterView.OnItemClickListener questionItemClickListener = new AdapterView.OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
-			LogHelper.i("tag", "position:"+position);
 			Intent intent = new Intent();
+			intent.setClass(getActivity(), MaintainActivity.class);
 			switch (position) {
 			case 0:
-				//维修保养
-				intent.setClass(getActivity(), MaintainActivity.class);
+				// 维修自查
+				intent.putExtra("title", "维修自查");
 				break;
 			case 1:
-				//配件改装
-				intent.setClass(getActivity(), null);
+				// 配件改装
+				intent.putExtra("title", "配件改装");
 				break;
 			case 2:
-				//保险直通
-				intent.setClass(getActivity(), InsuranceActivity.class);
+				// 保险直通
+				intent.putExtra("title", "保险直通");
 				break;
 			case 3:
-				//美容装潢
-				intent.setClass(getActivity(), CosmetologyActivity.class);
+				// 美容装潢
+				intent.putExtra("title", "美容装潢");
 				break;
-				
+
 			default:
 				return;
 			}
+			
 			startActivity(intent);
 		}
 	};
-	
+
 	private AdapterView.OnItemClickListener ExpertItemClickListener = new AdapterView.OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
-			LogHelper.i("tag", "position:"+position);
+			LogHelper.i("tag", "position:" + position);
 			Intent intent = new Intent();
 			switch (position) {
 			case 0:
-				//按专长找
-				intent.setClass(getActivity(), null);
+				// 按专长找
+				intent.setClass(getActivity(), InsuranceActivity.class);
 				break;
 			case 1:
-				//按品牌找
+				// 按品牌找
 				intent.setClass(getActivity(), null);
 				break;
-				
+
 			default:
 				return;
 			}
