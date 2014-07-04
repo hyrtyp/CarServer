@@ -11,13 +11,20 @@ import org.json.JSONObject;
 
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 
-
+/**
+ * 分类json解析
+ * @author zoe
+ *
+ */
 public class ClassifyJsonParser {
 
+	//一级分类
 	private List<Map<String, String>> oneList = new ArrayList<Map<String,String>>();
 	
+	//二级分类
 	private List<List<Map<String, String>>> twoList = new ArrayList<List<Map<String,String>>>();
 	
+	//三级分类
 	private List<List<List<Map<String, String>>>> threeList = new ArrayList<List<List<Map<String,String>>>>();
 	
 	

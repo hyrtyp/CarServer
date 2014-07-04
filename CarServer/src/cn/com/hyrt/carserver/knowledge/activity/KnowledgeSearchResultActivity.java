@@ -1,5 +1,8 @@
 package cn.com.hyrt.carserver.knowledge.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,22 +15,52 @@ import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_SEARCH_RESULT;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.base.view.PullToRefreshView;
+import cn.com.hyrt.carserver.knowledge.adapter.QuestionResultAdapter;
 
 public class KnowledgeSearchResultActivity extends BaseActivity{
 
 	@ViewInject(id=R.id.lv_content)ListView lv_content;
+	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
 	
 	private String searchStr;
 	
-	private int pageNo = 0;
+	private List<Define.QUESTION_SEARCH_RESULT.CDATA> datas = new ArrayList<Define.QUESTION_SEARCH_RESULT.CDATA>();
+	
+	private int pageNo = 1;
+	private boolean isLoadMore = false;
+
+	private QuestionResultAdapter mAdapter;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activitiy_knowledge_search_result);
 		Intent intent = getIntent();
 		searchStr = intent.getStringExtra("str");
 		AlertHelper.getInstance(this).showLoading(null);
+		setListener();
 		loadData();
+	}
+	
+	private void setListener(){
+		ptrv.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
+			
+			@Override
+			public void onHeaderRefresh(PullToRefreshView view) {
+				isLoadMore = false;
+				loadData();
+			}
+		});
+		
+		ptrv.setOnFooterRefreshListener(new PullToRefreshView.OnFooterRefreshListener() {
+			
+			@Override
+			public void onFooterRefresh(PullToRefreshView view) {
+				isLoadMore = true;
+				loadData();
+			}
+		});
 	}
 	
 	private void loadData(){
@@ -36,6 +69,7 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 
 					@Override
 					public void onSuccess(QUESTION_SEARCH_RESULT result) {
+						setData(result);
 						AlertHelper.getInstance(KnowledgeSearchResultActivity.this).hideLoading();
 						LogHelper.i("tag", "result:"+result.data.size());
 					}
@@ -43,10 +77,47 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
 						AlertHelper.getInstance(KnowledgeSearchResultActivity.this).hideLoading();
+						if(datas.size()>0){
+							AlertHelper.getInstance(KnowledgeSearchResultActivity.this).showCenterToast(R.string.load_done);
+							ptrv.onFooterRefreshComplete();
+							return;
+						}
 						AlertHelper.getInstance(KnowledgeSearchResultActivity.this).showCenterToast(R.string.info_load_fail);
 						
 					}
 		}, this);
+		if(isLoadMore){
+			pageNo++;
+		}else{
+			pageNo = 1;
+		}
 		mWebServiceHelper.searchQuestion(searchStr, pageNo);
 	}
+	
+	private void setData(QUESTION_SEARCH_RESULT result){
+		
+		if(result == null && datas.size()>0){
+			AlertHelper.getInstance(this).showCenterToast(R.string.load_done);
+		}
+		
+		if(!isLoadMore){
+			datas.clear();
+			ptrv.onHeaderRefreshComplete();
+		}else{
+			ptrv.onFooterRefreshComplete();
+			
+		}
+		
+		
+		isLoadMore = false;
+		datas.addAll(result.data);
+		if(mAdapter == null){
+			mAdapter = new QuestionResultAdapter(datas, searchStr, this);
+			lv_content.setAdapter(mAdapter);;
+		}else{
+			mAdapter.notifyDataSetChanged();
+		}
+		
+	}
 }
+

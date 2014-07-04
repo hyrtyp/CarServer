@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.text.Html;
+import android.text.Spanned;
+
 
 /**
  * 字符串处理助手
@@ -101,5 +104,19 @@ public class StringHelper {
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		return sdf.format(date);
+	}
+	
+	/**
+	 * 关键字高亮
+	 * @param str
+	 * @param keyword
+	 */
+	public static Spanned KeywordHighlight(String str, String keyword){
+		if(str == null || "".equals(str) 
+				|| keyword == null || "".equals(keyword)){
+			return Html.fromHtml("");
+		}
+		String newStr = str.replace(keyword, "<u ><font color='#00c4e9'>"+keyword+"</font></u>");
+		return Html.fromHtml(newStr);
 	}
 }

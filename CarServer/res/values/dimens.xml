@@ -10,6 +10,7 @@
     
     <dimen name="face_img_size">91dp</dimen>
     <dimen name="face_img_size_small">45dp</dimen>
+    <dimen name="face_img_size_least">30dp</dimen>
     
     <dimen name="tab_text_buttom_padding">9dp</dimen>
     
