@@ -331,5 +331,23 @@ public class Define {
 			public String sjaddress;//地址
 		}
 	}
+	
+	public static class KNOWLEDGE_SEARCH_RESULT extends BASE{
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String id;//问题ID
+			public String content;//问题内容
+			public String zyname;//专家专业名称
+			public String username;//专家姓名
+			public String seekdate;//提问时间
+			public String userid;//专家ID
+			public String seektype;//分类id
+			public String attacpathname;//图片名称
+			public String terminalid;//终端用户ID
+			public String attacpath;//图片路径
+		}
+	}
 
 }
