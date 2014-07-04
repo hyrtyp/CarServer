@@ -338,6 +338,22 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 	}
 	
 	/**
+	 * 搜索问答
+	 * @param str 搜索值
+	 * @param pageNo 页码
+	 */
+	public void searchQuestion(String str, int pageNo){
+		String params = 
+				String.format(
+						"{\"jsname\":\"%s\";\"pageNo\":\"%s\"}",
+						str, pageNo);
+		
+		get(
+				getString(R.string.method_search_question),
+				params, Define.QUESTION_SEARCH_RESULT.class);
+	}
+	
+	/**
 	 * 获取用户ID
 	 * @return
 	 */

@@ -27,6 +27,8 @@
     <string name="method_save_maintenance">saveTerminalCarMaintenance</string>
 	<string name="method_save_insurance">saveTerminalCarInsurance</string>
 	<string name="method_save_yearcheck">saveTerminalCarCheck</string>
+	<string name="method_search_question">getCLWDwdlb</string>
+	
     <!-- 汽车服务HTML地址 -->
     <string name="method_weburl">http://192.168.10.238:8083</string>
 </resources>

@@ -6,6 +6,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.SoapFault;
 import org.ksoap2.serialization.SoapObject;
@@ -13,10 +16,14 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
 import org.xmlpull.v1.XmlPullParserException;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
+import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.CODE;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
@@ -61,6 +68,24 @@ public class InfoFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_info, null);
+		
+//		Gson gson = new Gson();
+//		String json = "{\"data\":[[{\"id\":\"4028818b3da0c5ea013dc4bf58325001\",\"name\":\"美容\"},{\"id\":\"4028818b3da0c5ea013dc4bf58325002\",\"name\":\"装潢\"}],[[{\"id\":\"4028818b3da0c5ea013dc4bf58325004\",\"name\":\"车内\"},{\"id\":\"4028818b3da0c5ea013dc4bf58325003\",\"name\":\"车表\"}],[{\"id\":\"4028818b3da0c5ea013dc4bf58325012\",\"name\":\"挡泥板\"},{\"id\":\"4028818b3da0c5ea013dc4bf58325011\",\"name\":\"铺地胶\"},{\"id\":\"4028818b3da0c5ea013dc4bf58325010\",\"name\":\"全身镀膜\"}]],[[[{\"id\":\"4028818b3da0c5ea013dc4bf58325008\",\"name\":\"顶棚\"},{\"id\":\"4028818b3da0c5ea013dc4bf58325009\",\"name\":\"地毯\"}],[{\"id\":\"4028818b3da0c5ea013dc4bf58325005\",\"name\":\"洗车\"},{\"id\":\"4028818b3da0c5ea013dc4bf58325006\",\"name\":\"底盘清理\"}]],[[],[],[]]]],\"size\":\"3\"}";
+//		try {
+//			JSONObject mJsonObject = new JSONObject(json);
+//			JSONArray mJsonArray = mJsonObject.getJSONArray("data");
+//			int size = mJsonObject.getInt("size");
+//			for(int i=0,j=mJsonArray.length(); i<j; i++){
+//				JSONArray mcJsonArray = mJsonArray.getJSONArray(i);
+//				LogHelper.i("tag", "mcJsonArray:"+mcJsonArray);
+//			}
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		ClassifyJsonParser.get();
+		
 		findView();
 		initView();
 		setListener();
@@ -180,6 +205,7 @@ public class InfoFragment extends Fragment{
 	private void findView(){
 		gvMyInfo = (GridView) rootView.findViewById(R.id.gv_myInfo);
 		ivFaceImg = (ImageLoaderView) rootView.findViewById(R.id.iv_face_img);
+		LogHelper.i("tag", "CarServerApplication.info:"+CarServerApplication.info);
 		ivFaceImg.setImageUrl(CarServerApplication.info.imagepath);
 		tv_username = (TextView) rootView.findViewById(R.id.tv_username);
 		tv_cars = (TextView) rootView.findViewById(R.id.tv_cars);

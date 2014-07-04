@@ -111,6 +111,9 @@
 		<activity 
 		    android:name=".info.activity.AlterConditionActivity"
 		    android:label="@string/info_add_condition"/>
+		
+		<activity android:name=".knowledge.activity.KnowledgeSearchResultActivity"
+		    android:label="@string/search_result"/>
 
     </application>
 

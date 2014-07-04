@@ -3,6 +3,7 @@ package cn.com.hyrt.carserver.base.activity;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.info.activity.LoginActivity;
@@ -16,15 +17,7 @@ public class StarActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		CarServerApplication.loginInfo = StorageHelper.getInstance(this).getLoginInfo();
 		Intent intent = new Intent();
-		if(CarServerApplication.loginInfo == null){
-			intent.setClass(this, LoginActivity.class);
-		}else{
-			intent.setClass(this, MainActivity.class);
-		}
-		startActivity(intent);
-
 		CarServerApplication.loginInfo = StorageHelper.getInstance(this).getLoginInfo();
 		if(CarServerApplication.loginInfo == null){
 			intent.setClass(this, LoginActivity.class);
@@ -44,8 +37,10 @@ public class StarActivity extends Activity{
 
 					@Override
 					public void onSuccess(INFO result) {
-						jump();
+						LogHelper.i("tag", "result:"+result);
 						CarServerApplication.info = result;
+						jump();
+						
 					}
 
 					@Override

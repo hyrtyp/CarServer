@@ -208,6 +208,7 @@
 	<string name="info_shouldtime_label">本车应年检时间</string>
 	<string name="info_njefftime_label">年检有效期</string>
 	<string name="info_njcost_label">年检费用</string>
+	<string name="search_result">搜索结果</string>
 	
 	
 	

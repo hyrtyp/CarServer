@@ -1,6 +1,7 @@
 package cn.com.hyrt.carserver.base.baseFunction;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 全局定义
@@ -332,7 +333,7 @@ public class Define {
 		}
 	}
 	
-	public static class KNOWLEDGE_SEARCH_RESULT extends BASE{
+	public static class QUESTION_SEARCH_RESULT extends BASE{
 		
 		public ArrayList<CDATA> data;
 		
@@ -348,6 +349,14 @@ public class Define {
 			public String terminalid;//终端用户ID
 			public String attacpath;//图片路径
 		}
+	}
+	
+	
+	public static class CLASSIFY{
+		
+		public String[][][][] data;
+		
+		public int size;
 	}
 
 }
