@@ -73,17 +73,16 @@ public class KnowledgeFragment extends Fragment{
 				//维修自查
 				case 0:
 					AlertHelper.getInstance(getActivity()).showCenterToast("等待开发中");
-					gvRelatedQuestionIntent.setClass(getActivity(), KnowledgeFragment.class);
+					
 				    break;
 				//配件改装
 				case 1:
 					AlertHelper.getInstance(getActivity()).showCenterToast("等待开发中");
-					gvRelatedQuestionIntent.setClass(getActivity(), KnowledgeFragment.class);
 				    break;
 				default:
 					return;  
 				}
-				startActivity(gvRelatedQuestionIntent);
+				//startActivity(gvRelatedQuestionIntent);
 			}
 			
 		};
