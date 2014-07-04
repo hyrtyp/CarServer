@@ -3,7 +3,9 @@ package cn.com.hyrt.carserver.knowledge.fragment;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
+import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.info.activity.QuestionActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -41,7 +43,7 @@ public class KnowledgeFragment extends Fragment{
 						relatedQuestionTextSourceArray,
 						getActivity());
 		gvRelatedQuestion.setAdapter(mRelatedQuestionAdapter);
-		
+		gvRelatedQuestion.setOnItemClickListener(gvRelatedQuestionListener);
 		int[] relatedKnowledgeImgArray = 
 				new int[]{
 				R.drawable.ic_knowledge_detail, R.drawable.ic_knowledge_insurance,
@@ -58,6 +60,33 @@ public class KnowledgeFragment extends Fragment{
 		gvRelatedKnowledge.setAdapter(mRelatedKnowledgeAdapter);
 		gvRelatedKnowledge.setOnItemClickListener(gvRelatedKnowledgeListener);
 	}
+	
+	//相关问答
+	private AdapterView.OnItemClickListener gvRelatedQuestionListener = new AdapterView.OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				LogHelper.i("tag", ""+position); 
+				Intent gvRelatedQuestionIntent = new Intent();
+				switch(position){
+				//维修自查
+				case 0:
+					AlertHelper.getInstance(getActivity()).showCenterToast("等待开发中");
+					gvRelatedQuestionIntent.setClass(getActivity(), KnowledgeFragment.class);
+				    break;
+				//配件改装
+				case 1:
+					AlertHelper.getInstance(getActivity()).showCenterToast("等待开发中");
+					gvRelatedQuestionIntent.setClass(getActivity(), KnowledgeFragment.class);
+				    break;
+				default:
+					return;  
+				}
+				startActivity(gvRelatedQuestionIntent);
+			}
+			
+		};
 	
 	//相关知识
 	private AdapterView.OnItemClickListener gvRelatedKnowledgeListener = new AdapterView.OnItemClickListener() {
