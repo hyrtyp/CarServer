@@ -15,9 +15,18 @@ public class StarActivity extends Activity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		CarServerApplication.loginInfo = StorageHelper.getInstance(this).getLoginInfo();
+		Intent intent = new Intent();
+		if(CarServerApplication.loginInfo == null){
+			intent.setClass(this, LoginActivity.class);
+		}else{
+			intent.setClass(this, MainActivity.class);
+		}
+		startActivity(intent);
+
 		CarServerApplication.loginInfo = StorageHelper.getInstance(this).getLoginInfo();
 		if(CarServerApplication.loginInfo == null){
-			Intent intent = new Intent();
 			intent.setClass(this, LoginActivity.class);
 			startActivity(intent);
 			finish();

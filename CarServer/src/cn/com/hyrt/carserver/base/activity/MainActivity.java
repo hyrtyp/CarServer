@@ -2,6 +2,7 @@ package cn.com.hyrt.carserver.base.activity;
 
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import cn.com.hyrt.carserver.classify.fragment.ClassifyFragment;
 import cn.com.hyrt.carserver.emergency.fragment.EmergencyFragment;
 import cn.com.hyrt.carserver.info.fragment.InfoFragment;
 import cn.com.hyrt.carserver.knowledge.fragment.KnowledgeFragment;
+import cn.com.hyrt.carserver.question.activity.QuestionActivity;
 import cn.com.hyrt.carserver.question.fragment.QuestionFragment;
 
 /**
@@ -110,6 +112,5 @@ public class MainActivity extends BaseActivity {
 		}
 		mainTitle.setText(mTextArray[index]);
 	}
-	
 
 }

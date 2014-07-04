@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="transparent">#00000000</color>
+    <color name="transparent">#09000000</color>
     <color name="tab_text">#949494</color>
     <color name="tab_bg">#f9f9f9</color>
     <color name="line_color">#e7e7e7</color>
@@ -12,4 +12,9 @@
      <color name="dialog_bg">#45000000</color>
      <color name="condition_tab_btn_focus">#d9f7fd</color>
      <color name="condition_tab_btn_text">#5c5b5b</color>
+     <color name="select_btn_color">#ffffff</color>
+     <color name="no_select_btn_color">#505050</color>
+     <color name="blue">#81e2f4</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 </resources>
