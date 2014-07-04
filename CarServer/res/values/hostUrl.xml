@@ -22,4 +22,7 @@
 	<string name="method_insurance_year">getTerminalCarMaintenanceYear</string>
 	<string name="method_yearcheck_year">getTerminalCarCheckYear</string>
     <string name="method_insuranceClaim">getMerchant</string>
+    
+    <!-- 汽车服务HTML地址 -->
+    <string name="method_weburl">http://192.168.10.238:8083</string>
 </resources>
