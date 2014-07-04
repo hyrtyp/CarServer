@@ -6,6 +6,7 @@ import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.info.activity.QuestionActivity;
+import cn.com.hyrt.carserver.question.activity.InsuranceActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -73,16 +74,19 @@ public class KnowledgeFragment extends Fragment{
 				//维修自查
 				case 0:
 					AlertHelper.getInstance(getActivity()).showCenterToast("等待开发中");
-					
+					gvRelatedQuestionIntent.setClass(getActivity(), InsuranceActivity.class);
+					gvRelatedQuestionIntent.putExtra("type", QuestionActivity.TYPE_HISTORY);
 				    break;
 				//配件改装
 				case 1:
 					AlertHelper.getInstance(getActivity()).showCenterToast("等待开发中");
+					gvRelatedQuestionIntent.setClass(getActivity(), InsuranceActivity.class);
+					gvRelatedQuestionIntent.putExtra("type", QuestionActivity.TYPE_HISTORY);
 				    break;
 				default:
 					return;  
 				}
-				//startActivity(gvRelatedQuestionIntent);
+				startActivity(gvRelatedQuestionIntent);
 			}
 			
 		};
