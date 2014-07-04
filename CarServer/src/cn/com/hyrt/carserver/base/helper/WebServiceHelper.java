@@ -290,6 +290,54 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 	}
 	
 	/**
+	 * 新增&修改 维修信息
+	 * id如果有值,代表修改某个车辆的维修信息,如果没值,则新增
+	 * carid必须添入该值
+	 * @param repairInfo
+	 */
+	public void alterRepairInfo(Define.INFO_REPAIR_LIST.CDATA repairInfo){
+		Gson mGson = new Gson();
+		String params = mGson.toJson(repairInfo);
+		get(getString(R.string.method_save_repair), params, Define.BASE.class);
+	}
+	
+	/**
+	 * 新增&修改 保险信息
+	 * id如果有值,代表修改某个车辆的保险信息,如果没值,则新增
+	 * carid必须添入该值
+	 * @param repairInfo
+	 */
+	public void alterInsuranceInfo(Define.INFO_INSURANCE_LIST.CDATA repairInfo){
+		Gson mGson = new Gson();
+		String params = mGson.toJson(repairInfo);
+		get(getString(R.string.method_save_insurance), params, Define.BASE.class);
+	}
+	
+	/**
+	 * 新增&修改 保养信息
+	 * id如果有值,代表修改某个车辆的保养信息,如果没值,则新增
+	 * carid必须添入该值
+	 * @param repairInfo
+	 */
+	public void alterMaintenanceInfo(Define.INFO_MAINTENANCE_LIST.CDATA repairInfo){
+		Gson mGson = new Gson();
+		String params = mGson.toJson(repairInfo);
+		get(getString(R.string.method_save_maintenance), params, Define.BASE.class);
+	}
+	
+	/**
+	 * 新增&修改 年检信息
+	 * id如果有值,代表修改某个车辆的年检信息,如果没值,则新增
+	 * carid必须添入该值
+	 * @param repairInfo
+	 */
+	public void alterYearCheckInfo(Define.INFO_YEARCHECK_LIST.CDATA repairInfo){
+		Gson mGson = new Gson();
+		String params = mGson.toJson(repairInfo);
+		get(getString(R.string.method_save_yearcheck), params, Define.BASE.class);
+	}
+	
+	/**
 	 * 获取用户ID
 	 * @return
 	 */

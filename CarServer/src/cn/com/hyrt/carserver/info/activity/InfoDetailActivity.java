@@ -67,13 +67,13 @@ public class InfoDetailActivity extends BaseActivity{
 	
 	private void loadData() {
 		String level = CarServerApplication.info.level;
-		level = "2";
 		tvUserName.setText(CarServerApplication.info.unitname);
 		tvPhoneNum.setText(CarServerApplication.info.phone);
 		tvVipLevel.setText(level+"级");
 		ivFaceImg.setImageUrl(CarServerApplication.info.imagepath);
 		if(level == null || "".equals(level)){
 			layoutStar.setVisibility(View.GONE);
+			tvVipLevel.setVisibility(View.GONE);
 		}else{
 			int levelNum = Integer.parseInt(level);
 			if(levelNum > 0){
@@ -83,6 +83,7 @@ public class InfoDetailActivity extends BaseActivity{
 					iv.setImageResource(R.drawable.ic_star);
 					layoutStar.addView(iv);
 				}
+				tvVipLevel.setVisibility(View.VISIBLE);
 				layoutStar.setVisibility(View.VISIBLE);
 			}
 			

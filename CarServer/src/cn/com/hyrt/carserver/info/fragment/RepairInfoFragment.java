@@ -198,14 +198,11 @@ public class RepairInfoFragment extends Fragment{
 	private void jump(int position){
 		if(titles == null){
 			titles = new ArrayList<String>();
-			titles.add("维修里程数");
-			titles.add("维修时间");
-			titles.add("维修人");
-			titles.add("维修单位");
-			titles.add("维修项目");
-			titles.add("送修人");
-			titles.add("维修费用");
-			titles.add("维修情况");
+			String[] array = getResources()
+					.getStringArray(R.array.info_repair_labels);
+			for (String str : array) {
+				titles.add(str);
+			}
 		}
 		
 		ArrayList<String> contents = new ArrayList<String>();

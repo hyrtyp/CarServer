@@ -40,19 +40,24 @@
                     android:orientation="vertical" >
 
                     <TextView
+                        android:id="@+id/tv_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/view_margin"
-                        android:text="用户名：理理事情"
                         android:textColor="#373737"
-                        android:textSize="@dimen/text_size" />
+                        android:textSize="@dimen/text_size"
+                        android:singleLine="true"
+                        android:ellipsize="end" />
 
                     <TextView
+                        android:id="@+id/tv_cars"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="我的爱车：宝马X3、\n宝马X5"
                         android:textColor="#838484"
-                        android:textSize="@dimen/text_size" />
+                        android:textSize="@dimen/text_size"
+                        android:maxLines="2"
+                        android:ellipsize="end"
+                         />
                 </LinearLayout>
             </LinearLayout>
 

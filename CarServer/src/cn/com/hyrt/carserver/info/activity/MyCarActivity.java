@@ -43,8 +43,10 @@ public class MyCarActivity extends BaseActivity{
 		Intent intent = getIntent();
 		isMyCar = intent.getBooleanExtra("isMyCar", true);
 		if(isMyCar){
+			btnAddCar.setVisibility(View.VISIBLE);
 			setTitle(getString(R.string.info_my_car));
 		}else{
+			btnAddCar.setVisibility(View.GONE);
 			setTitle(getString(R.string.info_condition));
 		}
 		ptrv.disableScroolUp();
@@ -109,7 +111,11 @@ public class MyCarActivity extends BaseActivity{
 				LogHelper.i("tag", "type = "+type+" carid:"+carid);
 				if(type==2){
 					//进入添加车况页面
-					AlertHelper.getInstance(getApplicationContext()).showCenterToast("正在开发中");
+					Intent intent = new Intent();
+					intent.setClass(MyCarActivity.this, AlterConditionActivity.class);
+					intent.putExtra("id", carid);
+					startActivity(intent);
+//					AlertHelper.getInstance(getApplicationContext()).showCenterToast("正在开发中");
 				}else{
 					//进入我的车辆详细信息页面
 					Intent it = new Intent();

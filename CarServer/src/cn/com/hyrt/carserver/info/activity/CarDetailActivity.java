@@ -11,6 +11,7 @@ import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.StringHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 
 /**
  * 车辆详情
@@ -33,6 +34,7 @@ public class CarDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.tv_insurancecompany) TextView tv_insurancecompany;
 	@ViewInject(id=R.id.tv_carname) TextView tv_carname;
 	@ViewInject(id=R.id.tv_addtime) TextView tv_addtime;
+	@ViewInject(id=R.id.iv_face_img) ImageLoaderView iv_face_img;
 	
 	private String carid;
 	
@@ -68,6 +70,7 @@ public class CarDetailActivity extends BaseActivity{
 	}
 	
 	private void setData(Define.INFO_CAR car){
+		iv_face_img.setImageUrl(car.imagepath);
 		tv_carnumber.setText(car.carnumber);
 		tv_brand.setText(car.brand);
 		tv_model.setText(car.model);
@@ -80,7 +83,7 @@ public class CarDetailActivity extends BaseActivity{
 		tv_insurancetype.setText(car.insurancetype);
 		tv_insurancenum.setText(car.insurancenum);
 		tv_insurancecompany.setText(car.insurancecompany);
-		tv_addtime.setText(car.checkdate);
+		tv_addtime.setText("添加时间：\n"+car.checkdate);
 		tv_carname.setText(car.brand);
 	}
 	

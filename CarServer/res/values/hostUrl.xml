@@ -22,4 +22,9 @@
 	<string name="method_insurance_year">getTerminalCarMaintenanceYear</string>
 	<string name="method_yearcheck_year">getTerminalCarCheckYear</string>
     <string name="method_insuranceClaim">getMerchant</string>
+    
+    <string name="method_save_repair">saveTerminalCarStatus</string>
+    <string name="method_save_maintenance">saveTerminalCarMaintenance</string>
+	<string name="method_save_insurance">saveTerminalCarInsurance</string>
+	<string name="method_save_yearcheck">saveTerminalCarCheck</string>
 </resources>
