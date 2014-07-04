@@ -1,12 +1,16 @@
 package cn.com.hyrt.carserver.knowledge.fragment;
 
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 public class KnowledgeFragment extends Fragment{
@@ -52,5 +56,40 @@ public class KnowledgeFragment extends Fragment{
 						relatedKnowledgeTextSourceArray,
 						getActivity());
 		gvRelatedKnowledge.setAdapter(mRelatedKnowledgeAdapter);
+		gvRelatedKnowledge.setOnItemClickListener(gvRelatedKnowledgeListener);
 	}
+	
+	//相关知识
+	private AdapterView.OnItemClickListener gvRelatedKnowledgeListener = new AdapterView.OnItemClickListener() {
+		
+		@Override
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+				long arg3) {
+			LogHelper.i("tag", ""+position); 
+			Intent gvRelatedKnowledgeIntent = new Intent();
+			switch(position){
+			//维保详情
+			case 0:
+				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
+				gvRelatedKnowledgeIntent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+			    break;
+			//保险知识
+			case 1:
+				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
+				gvRelatedKnowledgeIntent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+			    break;
+			//经验心得
+			case 2:
+				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
+				gvRelatedKnowledgeIntent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				break;
+			default:
+				return;  
+			}
+			startActivity(gvRelatedKnowledgeIntent);
+		}
+		
+	};
+	
+	
 }
