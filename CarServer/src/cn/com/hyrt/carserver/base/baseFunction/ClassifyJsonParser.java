@@ -19,13 +19,13 @@ import cn.com.hyrt.carserver.base.helper.LogHelper;
 public class ClassifyJsonParser {
 
 	//一级分类
-	private List<Map<String, String>> oneList = new ArrayList<Map<String,String>>();
+	public List<Map<String, String>> oneList = new ArrayList<Map<String,String>>();
 	
 	//二级分类
-	private List<List<Map<String, String>>> twoList = new ArrayList<List<Map<String,String>>>();
+	public List<List<Map<String, String>>> twoList = new ArrayList<List<Map<String,String>>>();
 	
 	//三级分类
-	private List<List<List<Map<String, String>>>> threeList = new ArrayList<List<List<Map<String,String>>>>();
+	public List<List<List<Map<String, String>>>> threeList = new ArrayList<List<List<Map<String,String>>>>();
 	
 	
 	

@@ -10,7 +10,12 @@ import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
 
-public class InsuranceActivity extends BaseActivity {
+/**
+ * 按专长找
+ * @author Administrator
+ *
+ */
+public class BySpecialityActivity extends BaseActivity {
 
 	private ListView lst;
 	private myAdapter ma, ma1;
@@ -94,7 +99,7 @@ public class InsuranceActivity extends BaseActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-			convertView = View.inflate(InsuranceActivity.this,
+			convertView = View.inflate(BySpecialityActivity.this,
 					R.layout.question_insurance_item, null);
 			TextView text = (TextView) convertView.findViewById(R.id.text);
 			text.setText(str[position]);

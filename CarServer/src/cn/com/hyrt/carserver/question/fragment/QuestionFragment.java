@@ -3,28 +3,22 @@ package cn.com.hyrt.carserver.question.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import cn.com.hyrt.carserver.R;
-import cn.com.hyrt.carserver.base.activity.MainActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
-import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
-import cn.com.hyrt.carserver.info.activity.MyCarActivity;
-import cn.com.hyrt.carserver.question.activity.CosmetologyActivity;
-import cn.com.hyrt.carserver.question.activity.InsuranceActivity;
-import cn.com.hyrt.carserver.question.activity.MaintainActivity;
+import cn.com.hyrt.carserver.question.activity.ClassificationActivity;
+import cn.com.hyrt.carserver.question.activity.BySpecialityActivity;
 import cn.com.hyrt.carserver.question.activity.QuestionActivity;
 import cn.com.hyrt.carserver.question.adapter.QuestionBannerAdapter;
 
@@ -125,7 +119,7 @@ public class QuestionFragment extends Fragment {
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
 			Intent intent = new Intent();
-			intent.setClass(getActivity(), MaintainActivity.class);
+			intent.setClass(getActivity(), ClassificationActivity.class);
 			switch (position) {
 			case 0:
 				// 维修自查
@@ -162,7 +156,7 @@ public class QuestionFragment extends Fragment {
 			switch (position) {
 			case 0:
 				// 按专长找
-				intent.setClass(getActivity(), InsuranceActivity.class);
+				intent.setClass(getActivity(), BySpecialityActivity.class);
 				break;
 			case 1:
 				// 按品牌找

@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.tsz.afinal.annotation.view.ViewInject;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,25 +21,31 @@ import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.R.color;
 import cn.com.hyrt.carserver.R.drawable;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
+import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
-import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_MAINTAIN_FL;
+import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_CLASSIFICATION;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.base.view.PullToRefreshView;
 
 /**
- * 维修保养
+ * 通用的分类Activity
  * 
  * @author Administrator
  * 
  */
-public class MaintainActivity extends BaseActivity {
+public class ClassificationActivity extends BaseActivity {
 
+	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
+	
 	private Button leftBtn, rightBtn;
 	private ListView leftls, rightls;
 
 	private String title;
 
 	private WebServiceHelper mWebServiceHelper;
+	private ClassifyJsonParser jsonParser;
 
 	private List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
 
@@ -48,11 +56,11 @@ public class MaintainActivity extends BaseActivity {
 
 		Intent intent = getIntent();
 		title = intent.getStringExtra("title");
-		getWindow().setTitle(title);
-		setContentView(R.layout.layout_question_maintain);
+		setTitle(title);
+		setContentView(R.layout.layout_question_classification);
 
 		initView();
-//		leftLoadData();
+		 leftLoadData();
 	}
 
 	// private String[] text1 = { "维修1", "维修1", "维修1", "维修1", "维修1"};
@@ -77,12 +85,10 @@ public class MaintainActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				leftBtn.setTextColor(getResources().getColor(
 						color.select_btn_color));
-				leftBtn.setBackgroundDrawable(getResources().getDrawable(
-						drawable.title_select_left));
+				leftBtn.setBackgroundResource(drawable.title_select_left);
 				rightBtn.setTextColor(getResources().getColor(
 						color.no_select_btn_color));
-				rightBtn.setBackgroundDrawable(getResources().getDrawable(
-						drawable.title_right));
+				rightBtn.setBackgroundResource(drawable.title_right);
 
 				// leftls.setAdapter(new leftAdapter(text1));
 				rightls.setAdapter(new rightAdapter(text3));
@@ -96,12 +102,11 @@ public class MaintainActivity extends BaseActivity {
 				// TODO Auto-generated method stub
 				leftBtn.setTextColor(getResources().getColor(
 						color.no_select_btn_color));
-				leftBtn.setBackgroundDrawable(getResources().getDrawable(
-						drawable.title_left));
+				leftBtn.setBackgroundResource(drawable.title_left);
+
 				rightBtn.setTextColor(getResources().getColor(
 						color.select_btn_color));
-				rightBtn.setBackgroundDrawable(getResources().getDrawable(
-						drawable.title_select_right));
+				rightBtn.setBackgroundResource(drawable.title_select_right);
 
 				leftls.setAdapter(new leftAdapter(text2));
 				rightls.setAdapter(new rightAdapter(text4));
@@ -110,45 +115,49 @@ public class MaintainActivity extends BaseActivity {
 	}
 
 	private void leftLoadData() {
-
+		AlertHelper.getInstance(this).showLoading(getString(R.string.loading_msg));
 		if (mWebServiceHelper == null) {
 			mWebServiceHelper = new WebServiceHelper(
-					new WebServiceHelper.RequestCallback<Define.QUESTION_MAINTAIN_FL>() {
+					new WebServiceHelper.RequestCallback<Define.QUESTION_CLASSIFICATION>() {
 
 						@Override
-						public void onSuccess(QUESTION_MAINTAIN_FL result) {
-							System.out.println("=========="+result);
-							AlertHelper.getInstance(MaintainActivity.this)
-									.hideLoading();
+						public void onSuccess(QUESTION_CLASSIFICATION result) {
+							ptrv.onHeaderRefreshComplete();
+							LogHelper.i("tag", "result:"+result.data.size());
+							AlertHelper.getInstance(ClassificationActivity.this).hideLoading();
 							data.clear();
-							System.out.println("========="+result.data.size());
+							System.out.println("=========" + result.data.size());
 							for (int i = 0, j = result.data.size(); i < j; i++) {
 								Map<String, Object> map = new HashMap<String, Object>();
 								map.put("id", result.data.get(i).id);
 								map.put("name", result.data.get(i).name);
-								System.out.println("========="+result.data.get(i).id);
-								System.out.println("result.data.get(i).name========="+result.data.get(i).name);
+								System.out.println("========="
+										+ result.data.get(i).id);
+								System.out.println("result.data.get(i).name========="+ result.data.get(i).name);
 								System.out.println();
 								data.add(map);
 							}
 							String[] from = new String[] { "name" };
 							int[] to = new int[] { R.id.text };
 							SimpleAdapter mAdapter = new SimpleAdapter(
-									MaintainActivity.this, data,
+									ClassificationActivity.this, data,
 									R.layout.question_maintain_left_item, from,
 									to);
 							leftls.setAdapter(mAdapter);
+
+							// jsonParser.parse(result);
 						}
 
 						@Override
 						public void onFailure(int errorNo, String errorMsg) {
-							
+
 						}
+
 					}, this);
 		}
-		
+
 		mWebServiceHelper.getMaintainFL();
-		
+
 	}
 
 	private class leftAdapter extends BaseAdapter {
@@ -180,7 +189,7 @@ public class MaintainActivity extends BaseActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-			convertView = View.inflate(MaintainActivity.this,
+			convertView = View.inflate(ClassificationActivity.this,
 					R.layout.question_maintain_left_item, null);
 			TextView text = (TextView) convertView.findViewById(R.id.text);
 			text.setText(str[position]);
@@ -218,7 +227,7 @@ public class MaintainActivity extends BaseActivity {
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			// TODO Auto-generated method stub
-			convertView = View.inflate(MaintainActivity.this,
+			convertView = View.inflate(ClassificationActivity.this,
 					R.layout.question_maintain_right_item, null);
 			TextView text = (TextView) convertView.findViewById(R.id.text);
 			text.setText(str[position]);

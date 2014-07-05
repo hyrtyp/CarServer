@@ -1,14 +1,15 @@
 package cn.com.hyrt.carserver.base.helper;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Type;
+import java.util.LinkedList;
 
-import com.google.gson.Gson;
-
+import android.content.Context;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
-import android.content.Context;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * WebService请求助手
@@ -319,8 +320,8 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	 */
 	public void getMaintainFL(){
 		String params = 
-				String.format("{\"path\":\"%s\"}",getString(R.string.id_question_maintainfl));
-		get(getString(R.string.method_question_maintainfl), params, Define.QUESTION_MAINTAIN_FL.class);
+				String.format("{\"flid\":\"%s\"}",getString(R.string.id_question_maintainfl));
+		get(getString(R.string.method_question_maintainfl), params, Define.QUESTION_CLASSIFICATION.class);
 	}
 
 	/**
