@@ -5,6 +5,7 @@
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/llayout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -20,6 +21,13 @@
             android:text="汽缸体"
             android:textColor="#3a3a3a"
             android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/itemid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="汽缸体"
+            android:visibility="invisible" />
 
         <include layout="@layout/layout_line" />
     </LinearLayout>

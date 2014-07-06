@@ -64,8 +64,13 @@
         <activity
             android:name=".question.activity.QuestionActivity"
             android:label="@string/question_title" />
+       <activity android:name=".question.activity.CorrelationActivity"
+		    android:label="@string/info_my_car"/>
         <activity
             android:name=".question.activity.CosmetologyActivity"
+            android:label="@string/question_cosmetology" />
+        <activity
+            android:name=".question.activity.BySpecialityActivity"
             android:label="@string/question_cosmetology" />
         <activity
             android:name=".question.activity.PositionActivity"
@@ -114,6 +119,7 @@
 		<activity android:name=".knowledge.activity.RelatedQuestionActivity"
 		    android:label="@string/question_mend"/>
 
+		
     </application>
 
 </manifest>

@@ -43,10 +43,17 @@
         android:background="#fff"
         android:orientation="horizontal" >
 
-        <ListView
+       <cn.com.hyrt.carserver.base.view.PullToRefreshView 
+        android:id="@+id/ptrv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ListView 
             android:id="@+id/ls_correlation"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"/>
+   	   </cn.com.hyrt.carserver.base.view.PullToRefreshView>
     </LinearLayout>
 
+    
 </LinearLayout>
