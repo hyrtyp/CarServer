@@ -2,6 +2,7 @@ package cn.com.hyrt.carserver.knowledge.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
+import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_SEARCH_RESULT;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
@@ -86,6 +88,22 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 						
 					}
 		}, this);
+//		mWebServiceHelper.setOnSuccessListener(new WebServiceHelper.OnSuccessListener() {
+//			
+//			@Override
+//			public void onSuccess(String result) {
+//				ClassifyJsonParser mClassifyJsonParser = new ClassifyJsonParser();
+//				mClassifyJsonParser.parse(result);
+//				//一级分类
+//				List<Map<String, String>> oneList = mClassifyJsonParser.getOneList();
+//				
+//				//二级分类
+//				List<List<Map<String, String>>> twoList = mClassifyJsonParser.getTwoList();
+//				
+//				//三级分类(如果没有三级分类 threeList size为空)
+//				List<List<List<Map<String, String>>>> threeList = mClassifyJsonParser.getThreeList();
+//			}
+//		});
 		if(isLoadMore){
 			pageNo++;
 		}else{

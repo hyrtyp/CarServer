@@ -30,6 +30,7 @@ public class BaseWebServiceHelper {
 	private RequestCallback mCallback;
 	private Gson mGson;
 	protected Context mContext;
+	private OnSuccessListener mListener;
 	
 	private BaseWebServiceHelper(){};
 	
@@ -63,9 +64,11 @@ public class BaseWebServiceHelper {
 					LogHelper.i("tag", "result:"+result);
 					if(mCallback != null && result != null && mContext != null){
 						((Activity)mContext).runOnUiThread(new Runnable() {
-							
 							@Override
 							public void run() {
+								if(mListener != null){
+									mListener.onSuccess(result);
+								}
 								Define.BASE base = (BASE) mGson.fromJson(result, clazz);
 								if(Define.REQUEST_SUCCESS_CODE.equals(base.code)
 										|| Define.REQUEST_SAVE_SUCCESS_CODE.equals(base.code)){
@@ -106,5 +109,13 @@ public class BaseWebServiceHelper {
 	public static interface RequestCallback<T>{
 		public void onSuccess(T result);
 		public void onFailure(int errorNo, String errorMsg);
+	}
+	
+	public void setOnSuccessListener(OnSuccessListener listener){
+		this.mListener = listener;
+	}
+	
+	public static interface OnSuccessListener{
+		public void onSuccess(String result);
 	}
 }
