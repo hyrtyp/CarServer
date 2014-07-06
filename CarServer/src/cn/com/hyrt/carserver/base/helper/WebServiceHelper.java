@@ -7,6 +7,7 @@ import android.content.Context;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
+import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper.OnSuccessListener;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -27,6 +28,10 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 
 	public WebServiceHelper(RequestCallback mCallback, Context context) {
 		super(mCallback, context);
+	}
+	
+	public WebServiceHelper(OnSuccessListener listener, Context context) {
+		super(listener, context);
 	}
 
 	/**
@@ -321,7 +326,7 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	public void getMaintainFL(){
 		String params = 
 				String.format("{\"flid\":\"%s\"}",getString(R.string.id_question_maintainfl));
-		get(getString(R.string.method_question_maintainfl), params, Define.QUESTION_CLASSIFICATION.class);
+		get(getString(R.string.method_question_maintainfl), params, Define.BASE.class);
 	}
 	
 	/**
