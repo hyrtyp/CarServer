@@ -68,18 +68,19 @@ public class BaseWebServiceHelper {
 							public void run() {
 								if(mListener != null){
 									mListener.onSuccess(result);
+									return;
 								}
 								Define.BASE base = (BASE) mGson.fromJson(result, clazz);
+								System.out.println("Integer.parseInt(base.code)==="+base.code);
+								System.out.println("base.message==="+base.message);
 								if(Define.REQUEST_SUCCESS_CODE.equals(base.code)
 										|| Define.REQUEST_SAVE_SUCCESS_CODE.equals(base.code)){
 									mCallback.onSuccess(base);
 								}else{
 									mCallback.onFailure(Integer.parseInt(base.code), base.message);
 								}
-								
 							}
 						});
-						
 					}
 				} catch (IOException e) {
 					LogHelper.i("tag", "e1:"+e.getMessage());

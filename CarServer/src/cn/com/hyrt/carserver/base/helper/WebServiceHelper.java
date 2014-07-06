@@ -321,7 +321,7 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	public void getMaintainFL(){
 		String params = 
 				String.format("{\"flid\":\"%s\"}",getString(R.string.id_question_maintainfl));
-		get(getString(R.string.method_question_maintainfl), params, Define.QUESTION_CLASSIFICATION.class);
+		get(getString(R.string.method_question_maintainfl), params, Define.BASE.class);
 	}
 
 	/**
