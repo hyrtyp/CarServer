@@ -111,6 +111,8 @@
 		
 		<activity android:name=".knowledge.activity.KnowledgeSearchResultActivity"
 		    android:label="@string/search_result"/>
+		<activity android:name=".knowledge.activity.RelatedQuestionActivity"
+		    android:label="@string/question_mend"/>
 
     </application>
 

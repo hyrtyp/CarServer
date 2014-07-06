@@ -40,6 +40,14 @@ public class BaseWebServiceHelper {
 		this.mGson = new Gson();
 		this.mContext = context;
 	}
+	
+	protected BaseWebServiceHelper(OnSuccessListener listener, Context context) {
+		super();
+		this.mListener = listener;
+		this.mGson = new Gson();
+		this.mContext = context;
+	}
+
 
 	protected void get(final String method, final String params, final Class<?> clazz){
 		
@@ -62,21 +70,22 @@ public class BaseWebServiceHelper {
 					ht.call("urn:"+method, envelope);
 					final String result = envelope.getResponse().toString();
 					LogHelper.i("tag", "result:"+result);
-					if(mCallback != null && result != null && mContext != null){
+					if(result != null && mContext != null){
 						((Activity)mContext).runOnUiThread(new Runnable() {
 							@Override
 							public void run() {
 								if(mListener != null){
 									mListener.onSuccess(result);
 								}
-								Define.BASE base = (BASE) mGson.fromJson(result, clazz);
-								if(Define.REQUEST_SUCCESS_CODE.equals(base.code)
-										|| Define.REQUEST_SAVE_SUCCESS_CODE.equals(base.code)){
-									mCallback.onSuccess(base);
-								}else{
-									mCallback.onFailure(Integer.parseInt(base.code), base.message);
+								if(mCallback != null){
+									Define.BASE base = (BASE) mGson.fromJson(result, clazz);
+									if(Define.REQUEST_SUCCESS_CODE.equals(base.code)
+											|| Define.REQUEST_SAVE_SUCCESS_CODE.equals(base.code)){
+										mCallback.onSuccess(base);
+									}else{
+										mCallback.onFailure(Integer.parseInt(base.code), base.message);
+									}
 								}
-								
 							}
 						});
 						

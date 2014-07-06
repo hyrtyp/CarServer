@@ -31,6 +31,7 @@
     <string name="method_question_maintainfl">getCLWDfl</string>
     
     <!-- 分类id -->
+    <!-- 维修保养 -->
     <string name="id_question_maintainfl">000011</string>
 	
     <!-- 汽车服务HTML地址 -->
