@@ -65,6 +65,7 @@ public class MyCarActivity extends BaseActivity{
 							ptrv.onHeaderRefreshComplete();
 							LogHelper.i("tag", "result:"+result.data.size());
 							AlertHelper.getInstance(MyCarActivity.this).hideLoading();
+							
 							if(result == null || result.data.size() <= 0){
 								tvNoData.setVisibility(View.VISIBLE);
 								lvMyCar.setVisibility(View.GONE);
@@ -104,7 +105,7 @@ public class MyCarActivity extends BaseActivity{
 				loadData();
 			}
 		});
-		mAdapter.setOnClickListener(new MyCarAdapter.MyCarOnClickListener() {
+		mAdapter.setOnClickListener(new MyCarAdapter.MyCarOnClickListener() { 
 			
 			@Override
 			public void onClick(int type, String carid) {

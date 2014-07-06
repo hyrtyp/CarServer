@@ -70,11 +70,8 @@
         <activity
             android:name=".question.activity.PositionActivity"
             android:theme="@style/Transparent" />
-        <activity
-            android:name=".question.activity.UpphotoActivity"
-            android:theme="@style/Transparent" />
         <activity 
-            android:name=".question.activity.MaintainActivity"
+            android:name=".question.activity.ClassificationActivity"
             android:label="@string/classify_wxby"/>
         <activity 
             android:name=".question.activity.InsuranceActivity"

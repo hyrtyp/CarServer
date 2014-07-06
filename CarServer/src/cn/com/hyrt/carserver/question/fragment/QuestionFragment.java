@@ -3,28 +3,22 @@ package cn.com.hyrt.carserver.question.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import cn.com.hyrt.carserver.R;
-import cn.com.hyrt.carserver.base.activity.MainActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
-import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
-import cn.com.hyrt.carserver.info.activity.MyCarActivity;
-import cn.com.hyrt.carserver.question.activity.CosmetologyActivity;
-import cn.com.hyrt.carserver.question.activity.InsuranceActivity;
-import cn.com.hyrt.carserver.question.activity.MaintainActivity;
+import cn.com.hyrt.carserver.question.activity.ClassificationActivity;
+import cn.com.hyrt.carserver.question.activity.BySpecialityActivity;
 import cn.com.hyrt.carserver.question.activity.QuestionActivity;
 import cn.com.hyrt.carserver.question.adapter.QuestionBannerAdapter;
 
@@ -112,62 +106,63 @@ public class QuestionFragment extends Fragment {
 
 			@Override
 			public void onClick(View v) {
-					Intent intent = new Intent();
-					intent.setClass(getActivity(), QuestionActivity.class);
-					startActivity(intent);
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), QuestionActivity.class);
+				startActivity(intent);
 			}
 		});
 	}
-	
+
 	private AdapterView.OnItemClickListener questionItemClickListener = new AdapterView.OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
-			LogHelper.i("tag", "position:"+position);
 			Intent intent = new Intent();
+			intent.setClass(getActivity(), ClassificationActivity.class);
 			switch (position) {
 			case 0:
-				//维修保养
-				intent.setClass(getActivity(), MaintainActivity.class);
+				// 维修自查
+				intent.putExtra("title", "维修自查");
 				break;
 			case 1:
-				//配件改装
-				intent.setClass(getActivity(), null);
+				// 配件改装
+				intent.putExtra("title", "配件改装");
 				break;
 			case 2:
-				//保险直通
-				intent.setClass(getActivity(), InsuranceActivity.class);
+				// 保险直通
+				intent.putExtra("title", "保险直通");
 				break;
 			case 3:
-				//美容装潢
-				intent.setClass(getActivity(), CosmetologyActivity.class);
+				// 美容装潢
+				intent.putExtra("title", "美容装潢");
 				break;
-				
+
 			default:
 				return;
 			}
+			
 			startActivity(intent);
 		}
 	};
-	
+
 	private AdapterView.OnItemClickListener ExpertItemClickListener = new AdapterView.OnItemClickListener() {
 
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 				long arg3) {
-			LogHelper.i("tag", "position:"+position);
+			LogHelper.i("tag", "position:" + position);
 			Intent intent = new Intent();
 			switch (position) {
 			case 0:
-				//按专长找
-				intent.setClass(getActivity(), null);
+				// 按专长找
+				intent.setClass(getActivity(), BySpecialityActivity.class);
 				break;
 			case 1:
-				//按品牌找
+				// 按品牌找
 				intent.setClass(getActivity(), null);
 				break;
-				
+
 			default:
 				return;
 			}

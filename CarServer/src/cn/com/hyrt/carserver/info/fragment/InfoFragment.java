@@ -1,43 +1,8 @@
 package cn.com.hyrt.carserver.info.fragment;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.ksoap2.SoapEnvelope;
-import org.ksoap2.SoapFault;
-import org.ksoap2.serialization.SoapObject;
-import org.ksoap2.serialization.SoapSerializationEnvelope;
-import org.ksoap2.transport.HttpTransportSE;
-import org.xmlpull.v1.XmlPullParserException;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-
-import cn.com.hyrt.carserver.R;
-import cn.com.hyrt.carserver.base.activity.WebActivity;
-import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
-import cn.com.hyrt.carserver.base.application.CarServerApplication;
-import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
-import cn.com.hyrt.carserver.base.baseFunction.Define;
-import cn.com.hyrt.carserver.base.baseFunction.Define.CODE;
-import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
-import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR_LIST;
-import cn.com.hyrt.carserver.base.helper.AlertHelper;
-import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
-import cn.com.hyrt.carserver.base.helper.LogHelper;
-import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
-import cn.com.hyrt.carserver.base.view.ImageLoaderView;
-import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
-import cn.com.hyrt.carserver.info.activity.InfoDetailActivity;
-import cn.com.hyrt.carserver.info.activity.MyCarActivity;
-import cn.com.hyrt.carserver.info.activity.QuestionActivity;
-import cn.com.hyrt.carserver.info.adapter.MyCarAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -46,8 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.TextView;
+import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.activity.WebActivity;
+import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
+import cn.com.hyrt.carserver.base.application.CarServerApplication;
+import cn.com.hyrt.carserver.base.baseFunction.Define;
+import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
+import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR_LIST;
+import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.base.view.ImageLoaderView;
+import cn.com.hyrt.carserver.info.activity.InfoDetailActivity;
+import cn.com.hyrt.carserver.info.activity.MyCarActivity;
+import cn.com.hyrt.carserver.info.activity.QuestionActivity;
 
 /**
  * 我的信息主页

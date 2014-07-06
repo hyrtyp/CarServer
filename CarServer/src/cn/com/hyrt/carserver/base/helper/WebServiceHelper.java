@@ -1,29 +1,30 @@
 package cn.com.hyrt.carserver.base.helper;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Type;
+import java.util.LinkedList;
 
-import com.google.gson.Gson;
-
+import android.content.Context;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
-import android.content.Context;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * WebService请求助手
+ * 
  * @author zoe
- *
+ * 
  */
-public class WebServiceHelper extends BaseWebServiceHelper{
-	
+public class WebServiceHelper extends BaseWebServiceHelper {
+
 	public static final String SEEK_REPLY_HISTORY = "gb";
 	public static final String SEEK_REPLY_QUESTION = "zx";
-	
+
 	public static final String REPLY_DETAIL_QUESTION = "consultationid";
 	public static final String REPLY_DETAIL_HISTORY = "wtid";
 
-	
 	public WebServiceHelper(RequestCallback mCallback, Context context) {
 		super(mCallback, context);
 	}
@@ -31,176 +32,188 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 	/**
 	 * 获取 用户基本信息-专业类型 编码表
 	 */
-	public void getTerminalUserinfoOccupationCode(){
+	public void getTerminalUserinfoOccupationCode() {
 		String params = "{\"type\":\"TERMINAL_USERINFO_OCCUPATION\"}";
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
-	
+
 	/**
 	 * 获取 商家服务项目-商家提供服务 编码表
 	 */
-	public void getMerchantServiceCode(){
+	public void getMerchantServiceCode() {
 		String params = "{\"type\":\"MERCHANT_SERVICE\"}";
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
-	
+
 	/**
 	 * 获取 车辆基本信息-品牌（大众） 编码表
 	 */
-	public void getCarBrandCode(){
+	public void getCarBrandCode() {
 		String params = "{\"type\":\"CAR_BRAND\"}";
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
-	
+
 	/**
 	 * 获取 车辆基本信息-型号（捷达） 编码表
 	 */
-	public void getCarModelCode(){
+	public void getCarModelCode() {
 		String params = "{\"type\":\"CAR_MODEL\"}";
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
-	
+
 	/**
 	 * 获取 车辆基本信息-子型号 编码表
 	 */
-	public void getCarSubmodelCode(){
+	public void getCarSubmodelCode() {
 		String params = "{\"type\":\"CAR_SUBMODEL\"}";
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
-	
+
 	/**
 	 * 获取 车辆基本信息-车辆类型 编码表
 	 */
-	public void getCarCartypeCode(){
+	public void getCarCartypeCode() {
 		String params = "{\"type\":\"CAR_CARTYPE\"}";
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
-	
+
 	/**
 	 * 获取 车辆基本信息-保险种类 编码表
 	 */
-	public void getCarInsurancetypeCode(){
+	public void getCarInsurancetypeCode() {
 		String params = "{\"type\":\"CAR_INSURANCETYPE\"}";
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
-	
+
 	/**
 	 * 获取 咨询-咨询类型 编码表
 	 */
-	public void getSeekSeekTypeCode(){
+	public void getSeekSeekTypeCode() {
 		String params = "{\"type\":\"SEEK_SEEKTYPE\"}";
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
-	
+
 	/**
 	 * 获取 新闻类型 编码表
 	 */
-	public void getNewNewTypeCode(){
+	public void getNewNewTypeCode() {
 		String params = "{\"type\":\"NEW_NEWTYPE\"}";
 		get(getString(R.string.method_getcode), params, Define.CODE.class);
 	}
-	
+
 	/**
 	 * 登录
+	 * 
 	 * @param loginname
 	 * @param password
 	 */
-	public void login(String loginname, String password){
-		String params = String.format("{\"loginname\":%s,\"password\":%s}", loginname, password);
+	public void login(String loginname, String password) {
+		String params = String.format("{\"loginname\":%s,\"password\":%s}",
+				loginname, password);
 		get(getString(R.string.method_login), params, Define.INFO_LOGIN.class);
 	}
-	
+
 	/**
 	 * 获取用户信息
+	 * 
 	 * @param id
 	 */
-	public void getUserInfo(){
+	public void getUserInfo() {
 		String id = getUserId();
-		if(id == null){
+		if (id == null) {
 			return;
 		}
 		String params = String.format("{\"id\":\"%s\"}", id);
-		get(mContext.getString(R.string.method_getUserInfo), params, Define.INFO.class);
+		get(mContext.getString(R.string.method_getUserInfo), params,
+				Define.INFO.class);
 	}
-	
+
 	/**
 	 * 保存用户信息
 	 */
-	public void saveUserInfo(Define.INFO_SAVE info){
+	public void saveUserInfo(Define.INFO_SAVE info) {
 		Gson mGson = new Gson();
 		String params = mGson.toJson(info);
-		LogHelper.i("tag", "params:"+params);
-		get(mContext.getString(R.string.method_saveUserinfo), params, Define.BASE.class);
+		LogHelper.i("tag", "params:" + params);
+		get(mContext.getString(R.string.method_saveUserinfo), params,
+				Define.BASE.class);
 	}
-	
+
 	/**
 	 * 获取车辆列表
 	 */
-	public void getTerminalCarList(){
+	public void getTerminalCarList() {
 		String id = getUserId();
-		if(id == null){
+		if (id == null) {
 			return;
 		}
 		String params = String.format("{\"id\":\"%s\"}", id);
 		get(mContext.getString(R.string.method_getTerminalCar), params,
 				Define.INFO_CAR_LIST.class);
 	}
-	
+
 	/**
 	 * 添加&修改车辆（carid如果有值,代表修改某个用户的所属车辆,如果没值,则新增）
 	 */
-	public void alterCar(Define.INFO_CAR car){
+	public void alterCar(Define.INFO_CAR car) {
 		String id = getUserId();
-		if(id == null){
+		if (id == null) {
 			return;
 		}
 		car.terminaluserid = id;
 		Gson mGson = new Gson();
 		String params = mGson.toJson(car);
-		LogHelper.i("tag", "params:"+params);
+		LogHelper.i("tag", "params:" + params);
 		get(mContext.getString(R.string.method_saveTerminalCar), params,
 				Define.INFO_CAR.class);
 	}
-	
-	public void getCarInfo(String id){
+
+	public void getCarInfo(String id) {
 		String params = String.format("{\"id\":\"%s\"}", id);
-		get(mContext.getString(R.string.method_getTerminalCarInfo), params, Define.INFO_CAR.class);
+		get(mContext.getString(R.string.method_getTerminalCarInfo), params,
+				Define.INFO_CAR.class);
 	}
-	
+
 	/**
 	 * 获取提问回复列表
+	 * 
 	 * @param page
 	 * @param type
 	 */
-	public void getSeekReplyList(int page, String type){
+	public void getSeekReplyList(int page, String type) {
 		String id = getUserId();
-		if(id == null){
+		if (id == null) {
 			return;
 		}
-		String params = 
-				String.format(
-						"{\"userid\":\"%s\",\"page\":\"%s\",\"type\":\"%s\"}",
-						id, page+"", type);
-		LogHelper.i("tag", "params:"+params);
-		get(getString(R.string.method_seekReplyList), params, Define.SEEK_REPLY_LIST.class);
+		String params = String.format(
+				"{\"userid\":\"%s\",\"page\":\"%s\",\"type\":\"%s\"}", id, page
+						+ "", type);
+		LogHelper.i("tag", "params:" + params);
+		get(getString(R.string.method_seekReplyList), params,
+				Define.SEEK_REPLY_LIST.class);
 	}
-	
+
 	/**
 	 * 获取回复详情
+	 * 
 	 * @param replyId
 	 * @param type
 	 */
-	public void getReplyDetail(String replyId, String type){
+	public void getReplyDetail(String replyId, String type) {
 		String params = String.format("{\"%s\":\"%s\"}", type, replyId);
-		get(getString(R.string.method_replyDetail), params, Define.REPLY_DETAIL.class);
+		get(getString(R.string.method_replyDetail), params,
+				Define.REPLY_DETAIL.class);
 	}
-	
+
 	/**
 	 * 获取年份类别
-	 * @param carid 车辆ID
-	 * @param type （0：保养信息 1：维修信息 2：保险信息 3：年检信息）
+	 * 
+	 * @param carid
+	 *            车辆ID
+	 * @param type
+	 *            （0：保养信息 1：维修信息 2：保险信息 3：年检信息）
 	 */
-	public void getConditionYear(String carid, int type){
+	public void getConditionYear(String carid, int type) {
 		String method;
 		switch (type) {
 		case 0:
@@ -219,76 +232,98 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 		default:
 			return;
 		}
-		
-		LogHelper.i("tag", "method:"+method+" type:"+type);
-		
+
+		LogHelper.i("tag", "method:" + method + " type:" + type);
+
 		String params = String.format("{\"carid\":\"%s\"}", carid);
 		get(method, params, Define.INFO_YEAR.class);
 	}
-	
+
 	/**
 	 * 获取保养信息
-	 * @param carid  车辆主键ID
-	 * @param year   所选年份
-	 * @param page   页码
+	 * 
+	 * @param carid
+	 *            车辆主键ID
+	 * @param year
+	 *            所选年份
+	 * @param page
+	 *            页码
 	 */
-	public void getMaintenanceInfo(String carid, String year, int page){
-		String params = 
-				String.format("{\"carid\":\"%s\","
-						+ "\"year\":\"%s\",\"page\":\"%s\"}",
-						carid, year, page+"");
-		get(getString(R.string.method_maintenance_for_year), params, Define.INFO_MAINTENANCE_LIST.class);
+	public void getMaintenanceInfo(String carid, String year, int page) {
+		String params = String.format("{\"carid\":\"%s\","
+				+ "\"year\":\"%s\",\"page\":\"%s\"}", carid, year, page + "");
+		get(getString(R.string.method_maintenance_for_year), params,
+				Define.INFO_MAINTENANCE_LIST.class);
 	}
-	
+
 	/**
 	 * 获取维修信息
-	 * @param carid  车辆主键ID
-	 * @param year   所选年份
-	 * @param page   页码
+	 * 
+	 * @param carid
+	 *            车辆主键ID
+	 * @param year
+	 *            所选年份
+	 * @param page
+	 *            页码
 	 */
-	public void getRepairInfo(String carid, String year, int page){
-		String params = 
-				String.format("{\"carid\":\"%s\","
-						+ "\"year\":\"%s\",\"page\":\"%s\"}",
-						carid, year, page+"");
-		get(getString(R.string.method_repair_for_year), params, Define.INFO_REPAIR_LIST.class);
+	public void getRepairInfo(String carid, String year, int page) {
+		String params = String.format("{\"carid\":\"%s\","
+				+ "\"year\":\"%s\",\"page\":\"%s\"}", carid, year, page + "");
+		get(getString(R.string.method_repair_for_year), params,
+				Define.INFO_REPAIR_LIST.class);
 	}
-	
+
 	/**
 	 * 获取保险信息
-	 * @param carid  车辆主键ID
-	 * @param year   所选年份
-	 * @param page   页码
+	 * 
+	 * @param carid
+	 *            车辆主键ID
+	 * @param year
+	 *            所选年份
+	 * @param page
+	 *            页码
 	 */
-	public void getInsuranceInfo(String carid, String year, int page){
-		String params = 
-				String.format("{\"carid\":\"%s\","
-						+ "\"year\":\"%s\",\"page\":\"%s\"}",
-						carid, year, page+"");
-		get(getString(R.string.method_insurance_for_year), params, Define.INFO_INSURANCE_LIST.class);
+	public void getInsuranceInfo(String carid, String year, int page) {
+		String params = String.format("{\"carid\":\"%s\","
+				+ "\"year\":\"%s\",\"page\":\"%s\"}", carid, year, page + "");
+		get(getString(R.string.method_insurance_for_year), params,
+				Define.INFO_INSURANCE_LIST.class);
 	}
-	
+
 	/**
 	 * 获取年检信息
-	 * @param carid  车辆主键ID
-	 * @param year   所选年份
-	 * @param page   页码
+	 * 
+	 * @param carid
+	 *            车辆主键ID
+	 * @param year
+	 *            所选年份
+	 * @param page
+	 *            页码
 	 */
-	public void getYearCheckInfo(String carid, String year, int page){
-		String params = 
-				String.format("{\"carid\":\"%s\","
-						+ "\"year\":\"%s\",\"page\":\"%s\"}",
-						carid, year, page+"");
-		get(getString(R.string.method_yearcheck_for_year), params, Define.INFO_YEARCHECK_LIST.class);
+	public void getYearCheckInfo(String carid, String year, int page) {
+		String params = String.format("{\"carid\":\"%s\","
+				+ "\"year\":\"%s\",\"page\":\"%s\"}", carid, year, page + "");
+		get(getString(R.string.method_yearcheck_for_year), params,
+				Define.INFO_YEARCHECK_LIST.class);
 	}
-	
+
 	/**
 	 * 获取 保险理陪 列表
 	 */
-	public void getInsuranceClaim(){
-		get(getString(R.string.method_insuranceClaim), null, Define.INSURANCE_CLAIM_LIST.class);
+	public void getInsuranceClaim() {
+		get(getString(R.string.method_insuranceClaim), null,
+				Define.INSURANCE_CLAIM_LIST.class);
 	}
-	
+
+	/**
+	 * 获取维修保养分类
+	 */
+	public void getMaintainFL(){
+		String params = 
+				String.format("{\"flid\":\"%s\"}",getString(R.string.id_question_maintainfl));
+		get(getString(R.string.method_question_maintainfl), params, Define.QUESTION_CLASSIFICATION.class);
+	}
+
 	/**
 	 * 新增&修改 维修信息
 	 * id如果有值,代表修改某个车辆的维修信息,如果没值,则新增
@@ -355,20 +390,21 @@ public class WebServiceHelper extends BaseWebServiceHelper{
 	
 	/**
 	 * 获取用户ID
+	 * 
 	 * @return
 	 */
-	private String getUserId(){
-		if(CarServerApplication.loginInfo == null){
-			CarServerApplication.loginInfo = StorageHelper.getInstance(mContext).getLoginInfo();
+	private String getUserId() {
+		if (CarServerApplication.loginInfo == null) {
+			CarServerApplication.loginInfo = StorageHelper
+					.getInstance(mContext).getLoginInfo();
 		}
 		return CarServerApplication.loginInfo.id;
 	}
-	
-	private String getString(int resId){
-		if(mContext == null){
+
+	private String getString(int resId) {
+		if (mContext == null) {
 			return null;
 		}
 		return mContext.getString(resId);
 	}
 }
-
