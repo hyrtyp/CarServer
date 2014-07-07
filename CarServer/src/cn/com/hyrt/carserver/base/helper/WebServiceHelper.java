@@ -341,8 +341,24 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	 * 获取维修自查分类
 	 */
 	public void getMaintainCheck(){
-		String params = String.format("{\"flid\":\"%s\",\"depath\":\"2\"}", getString(R.string.id_question_maintainfl));
-		get(getString(R.string.method_question_maintainfl), params, Define.BASE.class);
+		String params = String.format(
+				"{\"flid\":\"%s\",\"depath\":\"3\"}",
+				getString(R.string.id_question_maintainfl2));
+		get(
+				getString(R.string.method_question_maintainfl),
+				params, Define.BASE.class);
+	}
+	
+	/**
+	 * 获取车辆装饰分类
+	 */
+	public void getCarDecoration(){
+		String params = String.format(
+				"{\"flid\":\"%s\"}",
+				getString(R.string.id_knowledge_decoration));
+		get(
+				getString(R.string.method_question_maintainfl),
+				params, Define.BASE.class);
 	}
 	
 	/**

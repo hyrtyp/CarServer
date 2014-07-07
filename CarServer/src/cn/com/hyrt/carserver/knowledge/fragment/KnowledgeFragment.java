@@ -98,10 +98,12 @@ public class KnowledgeFragment extends Fragment{
 				switch(position){
 				//维修自查
 				case 0:
+					gvRelatedQuestionIntent.putExtra("type", RelatedQuestionActivity.TYPE_REPAIR);
 					gvRelatedQuestionIntent.setClass(getActivity(), RelatedQuestionActivity.class);
 				    break;
 				//配件改装
 				case 1:
+					gvRelatedQuestionIntent.putExtra("type", RelatedQuestionActivity.TYPE_DECORATION);
 					gvRelatedQuestionIntent.setClass(getActivity(), RelatedQuestionActivity.class);
 				    break;
 				default:

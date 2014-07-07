@@ -52,7 +52,6 @@ public class CorrelationActivity extends BaseActivity {
 		name = getIntent().getExtras().getString("name");
 		AlertHelper.getInstance(this).showLoading(null);
 		setListener();
-		ptrv.disableScroolUp();
 		loadData();
 	}
 	
