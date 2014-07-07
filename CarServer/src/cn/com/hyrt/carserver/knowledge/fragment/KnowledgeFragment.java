@@ -8,7 +8,6 @@ import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.info.activity.QuestionActivity;
 import cn.com.hyrt.carserver.knowledge.activity.KnowledgeSearchResultActivity;
 import cn.com.hyrt.carserver.knowledge.activity.RelatedQuestionActivity;
-import cn.com.hyrt.carserver.knowledge.activity.RepairSelfActivity;
 import cn.com.hyrt.carserver.question.activity.BySpecialityActivity;
 import android.content.Intent;
 import android.os.Bundle;

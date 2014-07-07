@@ -362,6 +362,18 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	}
 	
 	/**
+	 * 获取品牌列表
+	 */
+	public void getBrands(){
+		String params = String.format(
+				"{\"flid\":\"%s\"}",
+				getString(R.string.id_knowledge_brand));
+		get(
+				getString(R.string.method_question_maintainfl),
+				params, Define.BASE.class);
+	}
+	
+	/**
 	 * 获取新闻图片
 	 */
 	public void getNewsImg(){
