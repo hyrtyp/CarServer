@@ -96,7 +96,7 @@
                     android:orientation="horizontal" >
 
                     <TextView
-                        android:id="@+id/tv_name"
+                        android:id="@+id/tv_name1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -106,7 +106,7 @@
                         android:textSize="18px" />
 
                     <TextView
-                        android:id="@+id/tv_point"
+                        android:id="@+id/tv_point1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"

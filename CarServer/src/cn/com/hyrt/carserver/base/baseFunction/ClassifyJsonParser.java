@@ -28,7 +28,6 @@ public class ClassifyJsonParser {
 	public List<List<List<Map<String, String>>>> threeList = new ArrayList<List<List<Map<String,String>>>>();
 	
 	
-	
 	public List<Map<String, String>> getOneList() {
 		return oneList;
 	}

@@ -1,9 +1,12 @@
 package cn.com.hyrt.carserver.question.fragment;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -16,9 +19,14 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
+import cn.com.hyrt.carserver.base.baseFunction.Define;
+import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_GETNEWSIMG;
+import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.GetWebImageHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
-import cn.com.hyrt.carserver.question.activity.ClassificationActivity;
+import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.question.activity.BySpecialityActivity;
+import cn.com.hyrt.carserver.question.activity.ClassificationActivity;
 import cn.com.hyrt.carserver.question.activity.QuestionActivity;
 import cn.com.hyrt.carserver.question.adapter.QuestionBannerAdapter;
 
@@ -35,12 +43,15 @@ public class QuestionFragment extends Fragment {
 	private ViewPager bannerPager;
 	private Button questionBtn;
 
+	private WebServiceHelper mWebServiceHelper;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_question, null);
 		findView();
 		initGrid();
+//		loadData();
 		initBanner();
 		setListener();
 		return rootView;
@@ -52,6 +63,67 @@ public class QuestionFragment extends Fragment {
 		bannerPager = (ViewPager) rootView.findViewById(R.id.bannerPager);
 
 		questionBtn = (Button) rootView.findViewById(R.id.btn_question);
+	}
+
+	private void loadData() {
+
+		final List<View> views = new ArrayList<View>();
+		final LayoutInflater mInflater = LayoutInflater.from(getActivity());
+
+		AlertHelper.getInstance(getActivity()).showLoading(
+				getString(R.string.loading_msg));
+
+		if (mWebServiceHelper == null) {
+			mWebServiceHelper = new WebServiceHelper(
+					new WebServiceHelper.RequestCallback<Define.QUESTION_GETNEWSIMG>() {
+
+						@Override
+						public void onSuccess(QUESTION_GETNEWSIMG result) {
+							LogHelper.i("tag", "result:" + result.data.size());
+							AlertHelper.getInstance(getActivity()).hideLoading();
+							AlertHelper.getInstance(getActivity())
+									.hideLoading();
+
+							if (result == null || result.data.size() <= 0) {
+
+							} else {
+								
+								String[] image = new String[result.data.size()];
+								for (int i = 0; i < result.data.size(); i++) {
+
+									image[i] = result.data.get(i).attacpath;
+
+									byte[] data;
+									try {
+										data = new GetWebImageHelper().getImage(image[i].toString());
+										Bitmap bitmap = BitmapFactory
+												.decodeByteArray(data, 0,
+														data.length); // 生成位图
+
+										View view = mInflater.inflate(
+												R.layout.layout_banner, null);
+										((ImageView) view.findViewById(R.id.iv_banner)).setImageBitmap(bitmap);
+
+										views.add(view);
+										bannerPager.setAdapter(new QuestionBannerAdapter(
+														views));
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+
+								}
+
+							}
+						}
+
+						@Override
+						public void onFailure(int errorNo, String errorMsg) {
+							
+						}
+					}, getActivity());
+		}
+		mWebServiceHelper.getNewsImg();
 	}
 
 	private void initBanner() {
@@ -124,24 +196,28 @@ public class QuestionFragment extends Fragment {
 			case 0:
 				// 维修自查
 				intent.putExtra("title", "维修自查");
+				intent.putExtra("type", "1");
 				break;
 			case 1:
 				// 配件改装
 				intent.putExtra("title", "配件改装");
+				intent.putExtra("type", "2");
 				break;
 			case 2:
 				// 保险直通
 				intent.putExtra("title", "保险直通");
+				intent.putExtra("type", "3");
 				break;
 			case 3:
 				// 美容装潢
 				intent.putExtra("title", "美容装潢");
+				intent.putExtra("type", "4");
 				break;
 
 			default:
 				return;
 			}
-			
+
 			startActivity(intent);
 		}
 	};
@@ -157,6 +233,7 @@ public class QuestionFragment extends Fragment {
 			case 0:
 				// 按专长找
 				intent.setClass(getActivity(), BySpecialityActivity.class);
+				intent.putExtra("title", "按专长找");
 				break;
 			case 1:
 				// 按品牌找

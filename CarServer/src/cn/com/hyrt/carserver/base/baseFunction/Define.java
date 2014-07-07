@@ -349,29 +349,56 @@ public class Define {
 	}
 
 	/**
-	 * 维修保养分类
+	 * 获取相关问题
 	 * 
 	 * @author 
 	 * 
 	 */
-	public static class QUESTION_CLASSIFICATION extends BASE {
+	public static class QUESTION_CORRELATION extends BASE
+	{
 		public ArrayList<CDATA> data;
-
-		public class CDATA {
+		public class CDATA
+		{
+			public String content;
 			public String id;
-			public String name;
-
-			// public List<B> list;
-
-			// public String attacpath;
+			public String zyname ;
+			public String username;
+			public String seekdate;
+			public String userid;
+			public String seektype;
+			public String attacpathname;
+			public String terminalid;
+			public String attacpath;
 
 			@Override
 			public String toString() {
 
-				return "CDATA [ id=" + id + ",name=" + name + "]";
+				return "CDATA [ content=" + content + ",id=" + id + ",zyname=" + zyname + ",username=" + username + "" +
+						",seekdate=" + seekdate + ",userid=" + userid + ",seektype=" + seektype + 
+						",attacpathname=" + attacpathname + ",terminalid=" + terminalid + ",attacpath=" + attacpath + "]";
 			}
 		}
 	}
+	
+	/**
+	 * 获取新闻图片
+	 * @author gsl
+	 *
+	 */
+	public static class QUESTION_GETNEWSIMG extends BASE {
+
+		public ArrayList<CDATA> data;
+
+		public class CDATA {
+			public String id;// 新闻ID
+			public String title;//标题
+			public String attacpathname;//图片名称
+			public String attacpath;// 图片路径
+			public String newslink;//连接路径
+			
+		}
+	}
+
 
 	public static class QUESTION_SEARCH_RESULT extends BASE {
 
@@ -389,13 +416,6 @@ public class Define {
 			public String terminalid;// 终端用户ID
 			public String attacpath;// 图片路径
 		}
-	}
-
-	public static class CLASSIFY {
-
-		public String[][][][] data;
-
-		public int size;
 	}
 
 }

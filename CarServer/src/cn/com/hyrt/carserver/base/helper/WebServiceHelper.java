@@ -323,10 +323,18 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	/**
 	 * 获取维修保养分类
 	 */
-	public void getMaintainFL(){
+	public void getMaintainFL(String id){
 		String params = 
-				String.format("{\"flid\":\"%s\"}",getString(R.string.id_question_maintainfl));
+				String.format("{\"flid\":\"%s\"}",id);
 		get(getString(R.string.method_question_maintainfl), params, Define.BASE.class);
+	}
+	
+	/**
+	 * 获取相关问题
+	 */
+	public void getCorrelation(String id,int pageNo) {
+		String params = String.format("{\"id\":\"%s\",\"pageNo\":\"%s\"}", id,pageNo);
+		get(getString(R.string.method_question_correlation), params,Define.QUESTION_CORRELATION.class);
 	}
 	
 	/**
@@ -335,6 +343,13 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	public void getMaintainCheck(){
 		String params = String.format("{\"flid\":\"%s\",\"depath\":\"2\"}", getString(R.string.id_question_maintainfl));
 		get(getString(R.string.method_question_maintainfl), params, Define.BASE.class);
+	}
+	
+	/**
+	 * 获取新闻图片
+	 */
+	public void getNewsImg(){
+		get(getString(R.string.method_question_getnewsimg), null, Define.QUESTION_GETNEWSIMG.class);
 	}
 
 	/**
