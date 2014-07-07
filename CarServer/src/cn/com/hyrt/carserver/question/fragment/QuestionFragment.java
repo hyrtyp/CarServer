@@ -27,6 +27,7 @@ import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.question.activity.BySpecialityActivity;
 import cn.com.hyrt.carserver.question.activity.ClassificationActivity;
+import cn.com.hyrt.carserver.question.activity.FindByBrandActivity;
 import cn.com.hyrt.carserver.question.activity.QuestionActivity;
 import cn.com.hyrt.carserver.question.adapter.QuestionBannerAdapter;
 
@@ -237,7 +238,7 @@ public class QuestionFragment extends Fragment {
 				break;
 			case 1:
 				// 按品牌找
-				intent.setClass(getActivity(), null);
+				intent.setClass(getActivity(), FindByBrandActivity.class);
 				break;
 
 			default:

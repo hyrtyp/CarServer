@@ -84,6 +84,7 @@ public class ClassifyJsonParser {
 					Map<String, String> map = new HashMap<String, String>();
 					map.put("id", cJsonObject.getString("id"));
 					map.put("name", cJsonObject.getString("name"));
+					map.put("attacpath", cJsonObject.getString("attacpath"));
 					cList.add(map);
 				}
 				

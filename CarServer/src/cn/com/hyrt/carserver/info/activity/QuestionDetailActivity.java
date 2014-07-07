@@ -3,6 +3,8 @@ package cn.com.hyrt.carserver.info.activity;
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
@@ -18,6 +20,8 @@ public class QuestionDetailActivity extends BaseActivity{
 
 	@ViewInject(id=R.id.lv_replys) FullListView lv_replys;
 	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
+	@ViewInject(id=R.id.tv_prompt_one) TextView tvPromptOne;
+	@ViewInject(id=R.id.tv_prompt_two) TextView tvPromptTwo;
 	
 	private int type;
 	private String replyId;
@@ -33,6 +37,14 @@ public class QuestionDetailActivity extends BaseActivity{
 		ptrv.disableScroolUp();
 		setListener();
 		AlertHelper.getInstance(this).showLoading(null);
+		
+		if(type == QuestionActivity.TYPE_HISTORY){
+			tvPromptOne.setVisibility(View.GONE);
+			tvPromptTwo.setVisibility(View.GONE);
+		}else{
+			tvPromptOne.setVisibility(View.VISIBLE);
+			tvPromptTwo.setVisibility(View.VISIBLE);
+		}
 		loadData();
 	}
 	
