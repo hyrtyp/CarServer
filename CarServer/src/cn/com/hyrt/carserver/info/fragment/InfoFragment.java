@@ -154,7 +154,8 @@ public class InfoFragment extends Fragment{
 				break;
 			case 6:
 				//积分兑换
-				break;
+				AlertHelper.getInstance(getActivity()).showCenterToast("等待开发中");
+				return;
 			default:
 				return;
 			}
