@@ -213,6 +213,8 @@
 	<string name="info_njefftime_label">年检有效期</string>
 	<string name="info_njcost_label">年检费用</string>
 	<string name="search_result">搜索结果</string>
+	<string name="info_question_detail_prompt">专家是利用休息时间为您解答问题，如未及时回复请谅解。\n专家的回复仅为参考，具体车辆问题请前往修理厂。</string>
+	<string name="info_question_detail_prompt_one">如专家已解决您的问题，请点击回复》</string>
 	
 	
 	

@@ -20,6 +20,7 @@ public class StringHelper {
 	 * 字符串时间 To 友好 (字符串时间格式：yyyy-MM-dd HH:mm:ss.SSS)
 	 */
 	public static String getFriendlydate(String strTime){
+		LogHelper.i("tag", "strTime:"+strTime);
 		Date time = string2Date(strTime);
 		if(time == null) {
 			return "Unknown";

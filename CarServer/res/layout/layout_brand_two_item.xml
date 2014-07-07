@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:orientation="horizontal" 
+    android:background="#fff">
+    
+    <cn.com.hyrt.carserver.base.view.ImageLoaderView 
+        android:id="@+id/iv_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/img_car_default"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/view_margin"
+        android:visibility="gone"/>
+    
+    <TextView 
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="奥迪"
+        android:textSize="@dimen/text_size"
+        android:textColor="#494949"
+        android:layout_gravity="center_vertical"
+        android:layout_margin="@dimen/view_margin"/>
+    
+</LinearLayout>

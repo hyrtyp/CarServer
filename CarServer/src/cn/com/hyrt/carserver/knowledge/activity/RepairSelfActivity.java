@@ -22,7 +22,7 @@ public class RepairSelfActivity extends BaseActivity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.layout_question_insurance);
-		lst = (ListView) findViewById(R.id.list_left);
+		lst = (ListView) findViewById(R.id.list_right);
 		ma = new myAdapter(text1);
 		lst.setAdapter(ma);
 

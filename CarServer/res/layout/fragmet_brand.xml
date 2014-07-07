@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <!-- <ImageView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_slid_left"
+        android:layout_gravity="center_vertical"/>
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ListView 
+            android:id="@+id/iv_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/btn_right"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/ic_slid_right"
+	        android:layout_centerVertical="true"/>
+    </RelativeLayout> -->
+    
+    <ListView 
+        android:id="@+id/lv_brand"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

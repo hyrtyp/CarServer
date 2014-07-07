@@ -119,6 +119,8 @@
 		<activity android:name=".knowledge.activity.RelatedQuestionActivity"
 		    android:label="@string/question_mend"/>
 
+		<activity android:name=".question.activity.FindByBrandActivity"
+		    android:label="@string/question_find_brand"/>
 		
     </application>
 

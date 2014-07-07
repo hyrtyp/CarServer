@@ -449,11 +449,4 @@ public class Define {
 		}
 	}
 
-	public static class CLASSIFY {
-
-		public String[][][][] data;
-
-		public int size;
-	}
-
 }

@@ -58,16 +58,20 @@ public class QuestionDetailAdapter extends BaseAdapter{
 			needCreateView = true;
 		}
 		
+		if("zxr".equals(data.replytype)){
+			isMe = true;
+		}else{
+			isMe = false;
+		}
+		
 		if(needCreateView){
-			if("zxr".equals(data.replytype)){
-				isMe = true;
+			if(isMe){
 //				if(chatMeView == null){
 //					chatMeView = LayoutInflater.from(mContext).inflate(R.layout.layout_question_chat_me, null);
 //				}
 //				convertView = chatMeView;
 				convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_question_chat_me, null);
 			}else{
-				isMe = false;
 //				if(chatView == null){
 //					chatView = LayoutInflater.from(mContext).inflate(R.layout.layout_question_chat, null);
 //				}
@@ -89,6 +93,7 @@ public class QuestionDetailAdapter extends BaseAdapter{
 		if(!isMe){
 			TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
 			TextView tv_replytype = (TextView) convertView.findViewById(R.id.tv_replytype);
+			LogHelper.i("tag", "tv_name:"+tv_name);
 			tv_name.setText(data.username);
 			tv_replytype.setText(data.replytype);
 		}

@@ -21,6 +21,22 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:divider="#00000000"/>
+                
+                
+                <TextView 
+                    android:id="@+id/tv_prompt_one"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/main_top_margin"
+                    android:text="@string/info_question_detail_prompt_one"/>
+                <TextView 
+                    android:id="@+id/tv_prompt_two"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/main_top_margin"
+                    android:text="@string/info_question_detail_prompt"
+                    android:padding="@dimen/main_top_margin"
+                    android:background="#fff"/>
             </LinearLayout>
         </ScrollView>
     </cn.com.hyrt.carserver.base.view.PullToRefreshView>

@@ -19,13 +19,15 @@ import cn.com.hyrt.carserver.base.helper.LogHelper;
 public class ClassifyJsonParser {
 
 	//一级分类
-	public List<Map<String, String>> oneList = new ArrayList<Map<String,String>>();
+	private List<Map<String, String>> oneList = new ArrayList<Map<String,String>>();
 	
 	//二级分类
-	public List<List<Map<String, String>>> twoList = new ArrayList<List<Map<String,String>>>();
+	private List<List<Map<String, String>>> twoList = new ArrayList<List<Map<String,String>>>();
 	
 	//三级分类
-	public List<List<List<Map<String, String>>>> threeList = new ArrayList<List<List<Map<String,String>>>>();
+	private List<List<List<Map<String, String>>>> threeList = new ArrayList<List<List<Map<String,String>>>>();
+	
+	private int size;
 	
 	
 	public List<Map<String, String>> getOneList() {
@@ -43,6 +45,10 @@ public class ClassifyJsonParser {
 	public List<List<List<Map<String, String>>>> getThreeList() {
 		return threeList;
 	}
+	
+	public int getSize() {
+		return size;
+	}
 
 
 
@@ -55,7 +61,7 @@ public class ClassifyJsonParser {
 		try {
 			JSONObject mJsonObject = new JSONObject(json);
 			JSONArray mJsonArray = mJsonObject.getJSONArray("data");
-			int size = mJsonObject.getInt("size");
+			this.size = mJsonObject.getInt("size");
 			
 			JSONArray oneArray = mJsonArray.getJSONArray(0);
 			JSONArray twoArray = mJsonArray.getJSONArray(1);
@@ -78,6 +84,7 @@ public class ClassifyJsonParser {
 					Map<String, String> map = new HashMap<String, String>();
 					map.put("id", cJsonObject.getString("id"));
 					map.put("name", cJsonObject.getString("name"));
+					map.put("attacpath", cJsonObject.getString("attacpath"));
 					cList.add(map);
 				}
 				

@@ -36,6 +36,12 @@
     <!-- 分类id -->
     <!-- 维修保养 -->
     <string name="id_question_maintainfl">000011</string>
+    <!-- 维修ID -->
+    <string name="id_question_maintainfl2">000111</string>
+    <!-- 汽车装饰 -->
+    <string name="id_knowledge_decoration">000002</string>
+    <!-- 品牌 -->
+    <string name="id_knowledge_brand">000021</string>
 	
     <!-- 汽车服务HTML地址 -->
     <string name="method_weburl">http://192.168.10.238:8083</string>
