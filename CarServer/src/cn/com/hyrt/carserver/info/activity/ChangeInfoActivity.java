@@ -97,7 +97,6 @@ public class ChangeInfoActivity extends BaseActivity{
 						public void onSuccess(INFO_CAR_LIST result) {
 							AlertHelper.getInstance(ChangeInfoActivity.this).hideLoading();
 							data.clear();
-//							System.out.println("info_result======"+result);
 							for(int i=0,j=result.data.size(); i<j; i++){
 								Map<String, Object> map = new HashMap<String, Object>();
 								map.put("model", result.data.get(i).model);
