@@ -27,6 +27,9 @@ public class QuestionDetailActivity extends BaseActivity{
 	private String replyId;
 	private QuestionDetailAdapter mQuestionAdapter;
 	
+	public static final int TYPE_NEW = 0;
+	public static final int TYPE_HISTORY = 1;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
