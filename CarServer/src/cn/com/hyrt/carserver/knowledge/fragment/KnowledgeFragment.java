@@ -7,6 +7,7 @@ import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.info.activity.QuestionActivity;
 import cn.com.hyrt.carserver.knowledge.activity.KnowledgeSearchResultActivity;
+import cn.com.hyrt.carserver.knowledge.activity.RelatedQuestionActivity;
 import cn.com.hyrt.carserver.knowledge.activity.RepairSelfActivity;
 import cn.com.hyrt.carserver.question.activity.BySpecialityActivity;
 import android.content.Intent;
@@ -97,13 +98,11 @@ public class KnowledgeFragment extends Fragment{
 				switch(position){
 				//维修自查
 				case 0:
-					gvRelatedQuestionIntent.setClass(getActivity(), RepairSelfActivity.class);
-					gvRelatedQuestionIntent.putExtra("type", QuestionActivity.TYPE_HISTORY);
+					gvRelatedQuestionIntent.setClass(getActivity(), RelatedQuestionActivity.class);
 				    break;
 				//配件改装
 				case 1:
-					gvRelatedQuestionIntent.setClass(getActivity(), RepairSelfActivity.class);
-					gvRelatedQuestionIntent.putExtra("type", QuestionActivity.TYPE_HISTORY);
+					gvRelatedQuestionIntent.setClass(getActivity(), RelatedQuestionActivity.class);
 				    break;
 				default:
 					return;  
