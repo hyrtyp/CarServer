@@ -338,6 +338,24 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	}
 	
 	/**
+	 * 获取部件位置
+	 */
+	public void getPoisition(){
+		get(getString(R.string.method_question_position), null, Define.QUESTION_POISTION.class);
+	}
+	
+	
+	/**
+	 * 保存问题信息
+	 */
+	public void saveQuestionInfo(Define.QUESTION_SAVE info) {
+		Gson mGson = new Gson();
+		String params = mGson.toJson(info);
+		LogHelper.i("tag", "params:" + params);
+		get(mContext.getString(R.string.method_question_save), params,Define.BASE.class);
+	}
+	
+	/**
 	 * 获取维修自查分类
 	 */
 	public void getMaintainCheck(){

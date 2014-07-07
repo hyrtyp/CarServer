@@ -22,7 +22,7 @@ public class RepairSelfActivity extends BaseActivity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.layout_question_insurance);
-		lst = (ListView) findViewById(R.id.lv_Strategy);
+		lst = (ListView) findViewById(R.id.list_left);
 		ma = new myAdapter(text1);
 		lst.setAdapter(ma);
 
@@ -35,32 +35,32 @@ public class RepairSelfActivity extends BaseActivity {
 
 	public void onAction(View v) {
 		switch (v.getId()) {
-		case R.id.btn1:
-			ma = new myAdapter(text1);
-			lst.setAdapter(ma);
-			findViewById(R.id.btn1).setBackgroundColor(
-					this.getResources().getColor(R.color.white));
-			findViewById(R.id.btn2).setBackgroundColor(
-					this.getResources().getColor(R.color.blue));
-			((TextView) findViewById(R.id.text1)).setTextColor(this
-					.getResources().getColor(R.color.black));
-			((TextView) findViewById(R.id.text2)).setTextColor(this
-					.getResources().getColor(R.color.white));
-
-			break;
-
-		case R.id.btn2:
-			ma1 = new myAdapter(text2);
-			lst.setAdapter(ma1);
-			findViewById(R.id.btn2).setBackgroundColor(
-					this.getResources().getColor(R.color.white));
-			findViewById(R.id.btn1).setBackgroundColor(
-					this.getResources().getColor(R.color.blue));
-			((TextView) findViewById(R.id.text1)).setTextColor(this
-					.getResources().getColor(R.color.white));
-			((TextView) findViewById(R.id.text2)).setTextColor(this
-					.getResources().getColor(R.color.black));
-			break;
+//		case R.id.btn1:
+//			ma = new myAdapter(text1);
+//			lst.setAdapter(ma);
+//			findViewById(R.id.btn1).setBackgroundColor(
+//					this.getResources().getColor(R.color.white));
+//			findViewById(R.id.btn2).setBackgroundColor(
+//					this.getResources().getColor(R.color.blue));
+//			((TextView) findViewById(R.id.text1)).setTextColor(this
+//					.getResources().getColor(R.color.black));
+//			((TextView) findViewById(R.id.text2)).setTextColor(this
+//					.getResources().getColor(R.color.white));
+//
+//			break;
+//
+//		case R.id.btn2:
+//			ma1 = new myAdapter(text2);
+//			lst.setAdapter(ma1);
+//			findViewById(R.id.btn2).setBackgroundColor(
+//					this.getResources().getColor(R.color.white));
+//			findViewById(R.id.btn1).setBackgroundColor(
+//					this.getResources().getColor(R.color.blue));
+//			((TextView) findViewById(R.id.text1)).setTextColor(this
+//					.getResources().getColor(R.color.white));
+//			((TextView) findViewById(R.id.text2)).setTextColor(this
+//					.getResources().getColor(R.color.black));
+//			break;
 
 		}
 	}

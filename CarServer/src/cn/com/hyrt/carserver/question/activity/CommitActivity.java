@@ -18,10 +18,5 @@ public class CommitActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_question_commit);
 
-		initView();
-	}
-
-	private void initView() {
-		
 	}
 }

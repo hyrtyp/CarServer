@@ -31,6 +31,8 @@
     <string name="method_question_maintainfl">getCLWDfl</string>
     <string name="method_question_correlation">getCLWDwdlb</string>
     <string name="method_question_getnewsimg">getCLWDxwhdt</string>
+    <string name="method_question_position">getAllTwoList</string>
+    <string name="method_question_save">saveTerminalSeekHistory</string>
     <!-- 分类id -->
     <!-- 维修保养 -->
     <string name="id_question_maintainfl">000011</string>

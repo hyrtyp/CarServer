@@ -133,8 +133,12 @@
 	<string name="question_up_photo">上传照片</string>
 	<string name="question_commit">问题提交</string>
 	<string name="question_correlation">相关问题</string>
+	<string name="question_sava_success">问题保存成功</string>
+	<string name="question_sava_fail">问题保存失败</string>
+	<string name="question_sava_text">请输入问题</string>
+	<string name="question_sava_position">请选择部件</string>
 	
-	<string name="question_select_position">选择部位</string>
+	<string name="question_select_position">选择部件</string>
 	<string name="question_engine">发动机</string>
 	<string name="question_crankcase">曲轴箱</string>
 	<string name="question_cylinder_heat">汽缸盖</string>
