@@ -87,16 +87,6 @@ public class InsuranceClaimActivity extends BaseActivity{
 
 			@Override
 			public void onClick(int position) {
-				LogHelper.i("tag", "Position = "+position);
-				    
-					AlertHelper.getInstance(getApplicationContext()).showCenterToast(""+icm.data.get(position).sjtel);
-				}
-		});
-		lvclaim.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
 				Uri uri = Uri.parse("tel:" + icm.data.get(position).sjtel);
 				Intent call = new Intent(Intent.ACTION_CALL, uri); 
 				startActivity(call);

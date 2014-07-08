@@ -1,9 +1,8 @@
 package cn.com.hyrt.carserver.base.application;
 
-import cn.com.hyrt.carserver.base.baseFunction.Define;
-import cn.com.hyrt.carserver.base.helper.StorageHelper;
-import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import android.app.Application;
+import cn.com.hyrt.carserver.base.baseFunction.CrashHandler;
+import cn.com.hyrt.carserver.base.baseFunction.Define;
 
 public class CarServerApplication extends Application{
 	
@@ -13,5 +12,8 @@ public class CarServerApplication extends Application{
 	@Override
 	public void onCreate() {
 		super.onCreate();
+		//全局捕获异常
+		CrashHandler mCrashHandler = CrashHandler.getInstance();
+		mCrashHandler.init(getApplicationContext());
 	}
 }

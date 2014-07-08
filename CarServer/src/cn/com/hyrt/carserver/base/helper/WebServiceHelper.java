@@ -329,7 +329,7 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	 * 获取相关问题
 	 */
 	public void getCorrelation(String id,int pageNo) {
-		String params = String.format("{\"id\":\"%s\",\"pageNo\":\"%s\"}", id,pageNo);
+		String params = String.format("{\"classid\":\"%s\",\"pageNo\":\"%s\"}", id,pageNo);
 		get(getString(R.string.method_question_correlation), params,Define.QUESTION_CORRELATION.class);
 	}
 	

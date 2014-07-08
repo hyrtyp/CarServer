@@ -43,7 +43,7 @@ public class InsuranceClaimAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup arg2) {
+	public View getView(final int position, View convertView, ViewGroup arg2) {
 		if(convertView == null){
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_claim_item, null);
 		}
@@ -57,14 +57,7 @@ public class InsuranceClaimAdapter extends BaseAdapter{
 				@Override
 				public void onClick(View view) {
 					if(mListener != null){
-						int id = view.getId();
-						if(id == bxcall.getId()){
-							mListener.onClick(1);
-						}else if(id == bxcall.getId()){
-							mListener.onClick(2);
-						}else{
-							mListener.onClick(3);
-						}
+						mListener.onClick(position);
 					}
 					
 				}

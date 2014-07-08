@@ -20,6 +20,7 @@ import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.question.activity.CorrelationActivity;
 
 public class RelatedQuestionActivity extends BaseActivity{
 
@@ -27,6 +28,7 @@ public class RelatedQuestionActivity extends BaseActivity{
 	@ViewInject(id=R.id.lv_right) ListView lvRight;
 	private List<String> leftText = new ArrayList<String>();
 	private List<String> rightText = new ArrayList<String>();
+	private List<String> rightId = new ArrayList<String>();
 	
 	private List<Map<String, String>> oneList;
 	private List<List<Map<String, String>>> twoList;
@@ -108,8 +110,10 @@ public class RelatedQuestionActivity extends BaseActivity{
 	private void setRight(int index){
 		List<Map<String, String>> rightList = twoList.get(index);
 		rightText.clear();
+		rightId.clear();
 		for(int i=0,j=rightList.size(); i<j; i++){
 			rightText.add(rightList.get(i).get("name"));
+			rightId.add(rightList.get(i).get("id"));
 		}
 		
 		if(mRightAdapter == null){
@@ -158,6 +162,18 @@ public class RelatedQuestionActivity extends BaseActivity{
 				.setTextColor(getResources().getColor(R.color.no_select_btn_color));
 				curIndex = position;
 				setRight(curIndex);
+			}
+		});
+		
+		lvRight.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long arg3) {
+				Intent intent = new Intent();
+				intent.setClass(RelatedQuestionActivity.this, CorrelationActivity.class);
+				intent.putExtra("id", rightId.get(position));
+				startActivity(intent);
 			}
 		});
 	}
