@@ -115,7 +115,7 @@
                 android:background="@drawable/face_img_border_not_click"
                 android:padding="1dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/emergency_pa"
+                android:src="@drawable/emergency_bxlp"
                 android:visibility="gone" />
         </RelativeLayout>
 
