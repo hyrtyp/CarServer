@@ -46,7 +46,6 @@ public class InfoFragment extends Fragment{
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_info, null);
-		
 		findView();
 		initView();
 		setListener();

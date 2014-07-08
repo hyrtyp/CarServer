@@ -49,7 +49,7 @@ public class QuestionActivity extends BaseActivity{
 	private int STATUS_LOAD_MORE = 3;
 	
 	private int type;
-	private int page = 0;
+	private int page = 1;
 	private List<Map<String, Object>> datas = new ArrayList<Map<String,Object>>();
 	private SimpleAdapter mAdapter;
 	
@@ -77,7 +77,7 @@ public class QuestionActivity extends BaseActivity{
 			page++;
 			loadStatus = STATUS_LOAD_MORE;
 		}else{
-			page = 0;
+			page = 1;
 			loadStatus = STATUS_REFRESH;
 		}
 		

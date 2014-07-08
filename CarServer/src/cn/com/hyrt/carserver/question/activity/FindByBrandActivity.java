@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,6 +24,7 @@ import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.knowledge.activity.RelatedQuestionActivity;
 import cn.com.hyrt.carserver.question.adapter.BrandAdapter;
 import cn.com.hyrt.carserver.question.fragment.BrandFragment;
 
@@ -78,6 +80,10 @@ public class FindByBrandActivity extends BaseActivity{
 					long arg3) {
 				List<Map<String, String>> mList = modeMap.get(curBrandId);
 				String id = mList.get(position).get("id");
+				Intent intent = new Intent();
+				intent.setClass(FindByBrandActivity.this, CorrelationActivity.class);
+				intent.putExtra("id", id);
+				startActivity(intent);
 			}
 		});
 	}

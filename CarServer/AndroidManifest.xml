@@ -29,7 +29,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".base.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+		    android:windowSoftInputMode="stateHidden">
 
             <!--
             <intent-filter>
@@ -92,7 +93,8 @@
             android:label="@string/info_new_question" />
         <activity
             android:name=".info.activity.QuestionDetailActivity"
-            android:label="@string/info_question_detial" />
+            android:label="@string/info_question_detial" 
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
         <activity
             android:name=".info.activity.CarDetailActivity"
             android:label="@string/info_car_detial" />

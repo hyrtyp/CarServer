@@ -216,7 +216,7 @@ public class Define {
 
 		public ArrayList<CDATA> data;
 
-		public class CDATA {
+		public static class CDATA {
 			public String userterminalid;// 发言人ID
 			public String id;// 回复ID
 			public String username;// 发言人姓名
@@ -225,6 +225,11 @@ public class Define {
 			public String attacpathname;// 头像图片名称
 			public String attacpath;// 图片路径
 			public String replycontent;// 发言内容
+			public String zcname;//专长名称
+			public String merchantid;//专家所属商家ID
+			public String sjname;//专家所属商家名称
+			public String answersimage;//问题回复图片二维码
+			public String answersname;//问题回复图片名称
 		}
 	}
 
@@ -424,9 +429,10 @@ public class Define {
 	 * 
 	 */
 	public static class QUESTION_SAVE extends BASE {
+		public String consultationid;//提问问题ID（回复时需要填写）
 		public String content;// 问题内容
 		public String terminalid;//终端用户ID
-		public String classid;//选择分类ID
+		public String classid;//选择分类ID （提问时需要填写）
 		public String image;// 图片二维码
 		public String imagename;// 图片的名称
 	}
