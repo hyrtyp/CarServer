@@ -109,7 +109,6 @@ public class QuestionDetailActivity extends BaseActivity{
 	private void setData(Define.REPLY_DETAIL result){
 		datas.clear();
 		datas.addAll(result.data);
-		LogHelper.i("tag", "datas:"+datas);
 		if(mQuestionAdapter == null){
 			mQuestionAdapter = new QuestionDetailAdapter(datas, this);
 			lv_replys.setAdapter(mQuestionAdapter);

@@ -94,11 +94,9 @@ public class QuestionDetailAdapter extends BaseAdapter{
 		if(!isMe){
 			TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
 			TextView tv_replytype = (TextView) convertView.findViewById(R.id.tv_replytype);
-			LogHelper.i("tag", "tv_name:"+tv_name);
 			tv_name.setText(data.username);
 			tv_replytype.setText(data.replytype);
 		}
-		
 		return convertView;
 	}
 
