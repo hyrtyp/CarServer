@@ -1,35 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-
-    <LinearLayout
-        android:id="@+id/llayout"
-        android:layout_width="fill_parent"
+    android:layout_height="36dp"
+    android:textColor="#fff">
+    
+    <TextView 
+        android:layout_height="32dp"
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="5dp"
+        android:singleLine="true"
+        android:layout_marginLeft="@dimen/view_margin"
+        android:textSize="@dimen/input_text_size"
+        android:textColor="@color/no_select_btn_color"/>
+    
+    <TextView
+        android:id="@+id/tv_id"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="#fff"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="10dp"
-            android:text="汽缸体"
-            android:textColor="#3a3a3a"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/itemid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="汽缸体"
-            android:visibility="invisible" />
-
-        <include layout="@layout/layout_line" />
-    </LinearLayout>
+        android:text="itemid"
+        android:visibility="gone" />
 
 </LinearLayout>
