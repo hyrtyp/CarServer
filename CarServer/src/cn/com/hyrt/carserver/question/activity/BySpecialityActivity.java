@@ -49,7 +49,7 @@ public class BySpecialityActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.layout_question_classification);
+		setContentView(R.layout.layout_question_insurance);
 		
 		
 		Intent intent = getIntent();
@@ -58,8 +58,6 @@ public class BySpecialityActivity extends BaseActivity {
 		
 		leftls = (ListView) findViewById(R.id.list_left);
 		rightls = (ListView) findViewById(R.id.list_right);
-		layout = (LinearLayout) findViewById(R.id.top_ll);
-		layout.setVisibility(View.GONE);
 
 		context=BySpecialityActivity.this;
 		leftLoadData();
@@ -163,8 +161,8 @@ public class BySpecialityActivity extends BaseActivity {
 		public View getView(final int position, View convertView, ViewGroup parent) 
 		{
 			convertView = View.inflate(BySpecialityActivity.this,
-					R.layout.question_maintain_left_item, null);
-			TextView text = (TextView) convertView.findViewById(R.id.text);
+					R.layout.question_insurance_item_left, null);
+			TextView text = (TextView) convertView.findViewById(R.id.text2);
 			text.setText(str[position]);
 			
 			final LinearLayout llayout = (LinearLayout) convertView.findViewById(R.id.llayout);

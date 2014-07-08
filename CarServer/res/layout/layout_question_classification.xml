@@ -11,11 +11,7 @@
         android:background="#fff"
         android:orientation="vertical" >
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/bg_line" />
+        
 
         <LinearLayout
             android:id="@+id/top_ll"
@@ -23,14 +19,14 @@
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:background="#D3D3D3"
+            android:gravity="center"
             android:orientation="horizontal" >
 
             <LinearLayout
-                
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|center_horizontal"
-                android:layout_marginLeft="28dip"
+                
                 android:orientation="horizontal" >
 
                 <Button
@@ -65,9 +61,10 @@
             android:orientation="horizontal" >
 
             <LinearLayout
-                android:layout_width="180dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_width="150dp"
+                android:layout_height="fill_parent"
+                android:layout_marginTop="2dp"
+                android:background="@color/blue"
                 android:orientation="vertical" >
 
                 <ListView
@@ -80,7 +77,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="2dp"
                 android:orientation="vertical" >
 
                <ListView

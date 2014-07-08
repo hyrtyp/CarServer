@@ -25,7 +25,8 @@
                         android:id="@+id/lv_replys"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:divider="#00000000" />
+                        android:divider="#00000000" 
+                        android:transcriptMode="alwaysScroll"/>
 
                     <TextView
                         android:id="@+id/tv_prompt_one"
@@ -51,7 +52,7 @@
             android:layout_height="64dp"
             android:orientation="horizontal"
             android:background="#fff">
-            <ImageView 
+            <cn.com.hyrt.carserver.base.view.ImageLoaderView 
                 android:id="@+id/iv_photo"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -66,10 +67,11 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/view_margin"
                 android:layout_marginRight="@dimen/main_top_margin">
-                <EditText 
+                <EditText
+                    android:id="@+id/et_content"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:background="@drawable/bg_edittext"
+                    android:background="@drawable/bg_edittext2"
                     android:singleLine="true"
                     android:gravity="center_vertical"
                     android:textSize="@dimen/text_size"
@@ -77,9 +79,10 @@
                     android:paddingRight="65dp"
                     android:hint="@string/reply_hint"/>
                 <Button 
+                    android:id="@+id/btn_reply"
                     android:layout_width="48dp"
                     android:layout_height="26dp"
-                    android:background="@drawable/bg_search_btn"
+                    android:background="@color/search_btn_bg_color"
                     android:text="@string/reply_label"
                     android:textColor="#fff"
                     android:layout_centerVertical="true"

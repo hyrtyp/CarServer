@@ -1,12 +1,10 @@
 package cn.com.hyrt.carserver.question.fragment;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -22,9 +20,10 @@ import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_GETNEWSIMG;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
-import cn.com.hyrt.carserver.base.helper.GetWebImageHelper;
+import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import cn.com.hyrt.carserver.question.activity.BySpecialityActivity;
 import cn.com.hyrt.carserver.question.activity.ClassificationActivity;
 import cn.com.hyrt.carserver.question.activity.FindByBrandActivity;
@@ -43,8 +42,13 @@ public class QuestionFragment extends Fragment {
 	private GridView gvQuestion, gvExperts;
 	private ViewPager bannerPager;
 	private Button questionBtn;
+	private ImageView mImageView;
 
+	private BaseWebServiceHelper mBaseWebServiceHelper;
 	private WebServiceHelper mWebServiceHelper;
+//	private ImageLoaderView mImageLoaderView;
+	
+	private String imgUrl ;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,6 +68,7 @@ public class QuestionFragment extends Fragment {
 		bannerPager = (ViewPager) rootView.findViewById(R.id.bannerPager);
 
 		questionBtn = (Button) rootView.findViewById(R.id.btn_question);
+		// mImageView = (ImageView) rootView.findViewById(R.id.bannerPager);
 	}
 
 	private void loadData() {
@@ -81,46 +86,41 @@ public class QuestionFragment extends Fragment {
 						@Override
 						public void onSuccess(QUESTION_GETNEWSIMG result) {
 							LogHelper.i("tag", "result:" + result.data.size());
-							AlertHelper.getInstance(getActivity()).hideLoading();
+							AlertHelper.getInstance(getActivity())
+									.hideLoading();
 							AlertHelper.getInstance(getActivity())
 									.hideLoading();
 
 							if (result == null || result.data.size() <= 0) {
 
 							} else {
-								
+
 								String[] image = new String[result.data.size()];
+//								mImageLoaderView = new ImageLoaderView(getActivity());
+								
 								for (int i = 0; i < result.data.size(); i++) {
 
 									image[i] = result.data.get(i).attacpath;
-
-									byte[] data;
-									try {
-										data = new GetWebImageHelper().getImage(image[i].toString());
-										Bitmap bitmap = BitmapFactory
-												.decodeByteArray(data, 0,
-														data.length); // 生成位图
-
-										View view = mInflater.inflate(
-												R.layout.layout_banner, null);
-										((ImageView) view.findViewById(R.id.iv_banner)).setImageBitmap(bitmap);
-
-										views.add(view);
-										bannerPager.setAdapter(new QuestionBannerAdapter(
-														views));
-									} catch (IOException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}
+										
+									ImageLoaderView view = (ImageLoaderView) mInflater.inflate(R.layout.layout_news_banner, null);
+									
+									imgUrl = mBaseWebServiceHelper.NAME_SPACE.toString() + image[i].toString();
+									
+									((ImageLoaderView) view).setImageUrl(imgUrl);
+									
+									System.out.println("image==============="+imgUrl);
+									
+									views.add(view);
 
 								}
+								bannerPager.setAdapter(new QuestionBannerAdapter(views));
 
 							}
 						}
 
 						@Override
 						public void onFailure(int errorNo, String errorMsg) {
-							
+
 						}
 					}, getActivity());
 		}

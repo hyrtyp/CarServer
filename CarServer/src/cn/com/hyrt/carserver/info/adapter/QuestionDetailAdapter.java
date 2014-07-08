@@ -1,5 +1,7 @@
 package cn.com.hyrt.carserver.info.adapter;
 
+import java.util.List;
+
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
@@ -17,26 +19,26 @@ import android.widget.TextView;
 
 public class QuestionDetailAdapter extends BaseAdapter{
 
-	private Define.REPLY_DETAIL replys;
+	private List<Define.REPLY_DETAIL.CDATA> datas;
 	private Context mContext;
 	
 //	private View chatView;
 //	private View chatMeView;
 	
-	public QuestionDetailAdapter(REPLY_DETAIL replys, Context mContext) {
+	public QuestionDetailAdapter(List<Define.REPLY_DETAIL.CDATA> datas, Context mContext) {
 		super();
-		this.replys = replys;
+		this.datas = datas;
 		this.mContext = mContext;
 	}
 
 	@Override
 	public int getCount() {
-		return replys.data.size();
+		return datas.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
-		return replys.data.get(arg0);
+		return datas.get(arg0);
 	}
 
 	@Override
@@ -47,8 +49,7 @@ public class QuestionDetailAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		
-		LogHelper.i("tag", "adapter:"+position);
-		Define.REPLY_DETAIL.CDATA data = replys.data.get(position);
+		Define.REPLY_DETAIL.CDATA data = datas.get(position);
 		
 		boolean needCreateView = false;
 		boolean isMe = false;

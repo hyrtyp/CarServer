@@ -216,7 +216,7 @@ public class Define {
 
 		public ArrayList<CDATA> data;
 
-		public class CDATA {
+		public static class CDATA {
 			public String userterminalid;// 发言人ID
 			public String id;// 回复ID
 			public String username;// 发言人姓名
@@ -400,6 +400,38 @@ public class Define {
 	}
 
 
+	/**
+	 * 获取部件信息列表
+	 * @author gsl
+	 *
+	 */
+	public static class QUESTION_POISTION extends BASE {
+
+		public ArrayList<CDATA> data;
+
+		public class CDATA {
+			public String id;// 部件ID
+			public String name;//部件name
+			
+		}
+	}
+	
+	
+	/**
+	 * 保存问题
+	 * 
+	 * @author zoe
+	 * 
+	 */
+	public static class QUESTION_SAVE extends BASE {
+		public String consultationid;//提问问题ID（回复时需要填写）
+		public String content;// 问题内容
+		public String terminalid;//终端用户ID
+		public String classid;//选择分类ID （提问时需要填写）
+		public String image;// 图片二维码
+		public String imagename;// 图片的名称
+	}
+	
 	public static class QUESTION_SEARCH_RESULT extends BASE {
 
 		public ArrayList<CDATA> data;

@@ -2,13 +2,17 @@ package cn.com.hyrt.carserver.question.adapter;
 
 import java.util.List;
 
+import cn.com.hyrt.carserver.base.view.ImageLoaderView;
+
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 public class QuestionBannerAdapter extends PagerAdapter{
 
 	private List<View> views;
+	
 	
 	public QuestionBannerAdapter(List<View> views) {
 		super();
@@ -33,7 +37,16 @@ public class QuestionBannerAdapter extends PagerAdapter{
 	
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
+		
 		container.addView(views.get(position), 0);
+		container.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		return views.get(position);
 	}
 

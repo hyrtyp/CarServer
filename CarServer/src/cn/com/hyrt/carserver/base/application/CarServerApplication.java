@@ -9,7 +9,7 @@ public class CarServerApplication extends Application{
 	
 	public static Define.INFO_LOGIN loginInfo;
 	public static Define.INFO info;
-
+	public static Define.QUESTION_SAVE save;
 	@Override
 	public void onCreate() {
 		super.onCreate();
