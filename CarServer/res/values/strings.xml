@@ -76,6 +76,8 @@
 	<string name="info_question_detial">问题详情</string>
 	<string name="info_car_detial">车辆详情</string>
 	<string name="info_detail">详情信息</string>
+	<string name="reply_label">回复</string>
+	<string name="reply_hint">请输入回复信息&#8230;</string>
 	
 	<string-array name="info_repair_labels">
 	    <item>维修里程数</item>
