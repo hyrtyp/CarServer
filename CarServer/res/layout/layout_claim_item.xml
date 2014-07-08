@@ -13,7 +13,6 @@
         android:layout_width="@dimen/face_img_size"
         android:layout_height="@dimen/face_img_size"
         android:background="@drawable/face_img_border_not_click"
-        android:src="@drawable/emergency_pa"
         android:padding="1dp"
         android:layout_marginLeft="@dimen/view_margin"
         android:layout_centerVertical="true"
