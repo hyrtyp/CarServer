@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 
 /**
@@ -114,5 +115,11 @@ public class BaseActivity extends ActionBarActivity {
 	 */
 	protected void showBackButton(boolean isShow) {
 		actionBar.setDisplayShowHomeEnabled(isShow);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		AlertHelper.getInstance(this).dismissLoading();
 	}
 }

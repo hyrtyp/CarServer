@@ -139,7 +139,6 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	public void saveUserInfo(Define.INFO_SAVE info) {
 		Gson mGson = new Gson();
 		String params = mGson.toJson(info);
-		LogHelper.i("tag", "params:" + params);
 		get(mContext.getString(R.string.method_saveUserinfo), params,
 				Define.BASE.class);
 	}
@@ -168,7 +167,6 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		car.terminaluserid = id;
 		Gson mGson = new Gson();
 		String params = mGson.toJson(car);
-		LogHelper.i("tag", "params:" + params);
 		get(mContext.getString(R.string.method_saveTerminalCar), params,
 				Define.INFO_CAR.class);
 	}
@@ -193,7 +191,6 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		String params = String.format(
 				"{\"userid\":\"%s\",\"page\":\"%s\",\"type\":\"%s\"}", id, page
 						+ "", type);
-		LogHelper.i("tag", "params:" + params);
 		get(getString(R.string.method_seekReplyList), params,
 				Define.SEEK_REPLY_LIST.class);
 	}
@@ -238,7 +235,6 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 			return;
 		}
 
-		LogHelper.i("tag", "method:" + method + " type:" + type);
 
 		String params = String.format("{\"carid\":\"%s\"}", carid);
 		get(method, params, Define.INFO_YEAR.class);
@@ -352,7 +348,6 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		info.terminalid = getUserId();
 		Gson mGson = new Gson();
 		String params = mGson.toJson(info);
-		LogHelper.i("tag", "params:" + params);
 		get(mContext.getString(R.string.method_question_save), params,Define.BASE.class);
 	}
 	
@@ -360,7 +355,6 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		info.terminalid = getUserId();
 		Gson mGson = new Gson();
 		String params = mGson.toJson(info);
-		LogHelper.i("tag", "params:" + params);
 		get(mContext.getString(R.string.method_question_reply), params,Define.BASE.class);
 	}
 	

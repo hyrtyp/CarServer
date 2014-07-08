@@ -99,7 +99,7 @@ public class ClassifyFragment extends Fragment{
 			//找服务
 			case 0:
 				gvFoundintent.setClass(getActivity(), WebActivity.class);
-				gvFoundintent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				gvFoundintent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/goods/search?areaname=");
 			    break;
 			//找商家
 			case 1:
