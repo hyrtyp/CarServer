@@ -113,7 +113,6 @@ public class QuestionFragment extends Fragment {
 								public void onClick(View v)
 								{
 									Intent intent = new Intent();
-									AlertHelper.getInstance(getActivity()).showCenterToast(""+url.toString());
 									intent.setClass(getActivity(), WebActivity.class);
 									intent.putExtra("url", url.toString());
 									startActivity(intent);
