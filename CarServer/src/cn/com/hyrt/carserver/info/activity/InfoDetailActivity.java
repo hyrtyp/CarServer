@@ -114,9 +114,10 @@ public class InfoDetailActivity extends BaseActivity{
 
 						@Override
 						public void onFailure(int errorNo, String errorMsg) {
-							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.info_load_fail);
-							setResult(Define.RESULT_FROM_CHANGE_INFO);
-							finish();
+							AlertHelper.getInstance(InfoDetailActivity.this).hideLoading();
+//							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.info_load_fail);
+//							setResult(Define.RESULT_FROM_CHANGE_INFO);
+//							finish();
 						}
 					}, this);
 		}

@@ -114,7 +114,7 @@ public class ChangeInfoActivity extends BaseActivity{
 
 						@Override
 						public void onFailure(int errorNo, String errorMsg) {
-
+							AlertHelper.getInstance(ChangeInfoActivity.this).hideLoading();
 						}
 					}, this);
 		}
