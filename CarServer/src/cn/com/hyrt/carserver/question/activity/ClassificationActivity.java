@@ -225,7 +225,7 @@ public class ClassificationActivity extends BaseActivity {
 				{
 					names = new String[1];
 					ids = new String[1];
-					names[0]=R.string.question_noimg+"";
+					names[0]="暂无数据";
 					ids[0]="1";
 				}
 			}

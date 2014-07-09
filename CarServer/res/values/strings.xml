@@ -142,6 +142,7 @@
 	<string name="question_select_position">选择部件</string>
 	<string name="question_noimg">暂时没有图片</string>
 	<string name="question_imgload_failed">图片加载失败</string>
+	<string name="question_nomeg">暂无数据</string>
 	
 	<!-- emergency -->
 	<string name="emergency_bxlp">保险理赔</string>
