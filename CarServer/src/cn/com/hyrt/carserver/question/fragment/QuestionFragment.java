@@ -73,6 +73,7 @@ public class QuestionFragment extends Fragment {
 
 	private void loadData() {
 
+		
 		final List<View> views = new ArrayList<View>();
 		final LayoutInflater mInflater = LayoutInflater.from(getActivity());
 
@@ -90,11 +91,12 @@ public class QuestionFragment extends Fragment {
 				
 					if (result == null || result.data.size() <= 0) 
 					{
-						AlertHelper.getInstance(getActivity()).showCenterToast("图片加载失败");
+						AlertHelper.getInstance(getActivity()).showCenterToast(R.string.question_imgload_failed);
 					} 
 					else
 					{
 
+						
 						String[] image = new String[result.data.size()];
 						for (int i = 0; i < result.data.size(); i++) 
 						{
@@ -177,22 +179,22 @@ public class QuestionFragment extends Fragment {
 			{
 			case 0:
 				// 维修自查
-				intent.putExtra("title", "维修自查");
+				intent.putExtra("title", R.string.question_mend);
 				intent.putExtra("type", "1");
 				break;
 			case 1:
 				// 配件改装
-				intent.putExtra("title", "配件改装");
+				intent.putExtra("title", R.string.question_custmon);
 				intent.putExtra("type", "2");
 				break;
 			case 2:
 				// 保险直通
-				intent.putExtra("title", "保险直通");
+				intent.putExtra("title", R.string.question_insurance);
 				intent.putExtra("type", "3");
 				break;
 			case 3:
 				// 美容装潢
-				intent.putExtra("title", "美容装潢");
+				intent.putExtra("title", R.string.question_cosmetology);
 				intent.putExtra("type", "4");
 				break;
 
@@ -215,7 +217,7 @@ public class QuestionFragment extends Fragment {
 			case 0:
 				// 按专长找
 				intent.setClass(getActivity(), BySpecialityActivity.class);
-				intent.putExtra("title", "按专长找");
+				intent.putExtra("title", R.string.question_find_specialty);
 				break;
 			case 1:
 				// 按品牌找

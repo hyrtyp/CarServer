@@ -34,7 +34,6 @@ public class CorrelationActivity extends BaseActivity {
 	
 	ListView ls_correlation;
 	private CorrelationAdapter  correlationAdapter;
-	private WebServiceHelper mWebServiceHelper;
 	private List<Map<String, Object>> data = new ArrayList<Map<String,Object>>();
 	
 	private int pageNo = 1;
@@ -50,6 +49,7 @@ public class CorrelationActivity extends BaseActivity {
 		ls_correlation = (ListView) findViewById(R.id.ls_correlation);
 		id = getIntent().getExtras().getString("id");
 		name = getIntent().getExtras().getString("name");
+		System.out.println("name================"+name);
 		AlertHelper.getInstance(this).showLoading(null);
 		setListener();
 		loadData();
@@ -127,7 +127,7 @@ public class CorrelationActivity extends BaseActivity {
 						}
 
 						if(correlationAdapter == null){
-							correlationAdapter = new CorrelationAdapter(context,data);
+							correlationAdapter = new CorrelationAdapter(context,data,name);
 							ls_correlation.setAdapter(correlationAdapter);;
 						}else{
 							correlationAdapter.notifyDataSetChanged();

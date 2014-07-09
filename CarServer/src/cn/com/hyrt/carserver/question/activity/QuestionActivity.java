@@ -38,8 +38,6 @@ import cn.com.hyrt.carserver.question.adapter.PositionAdapter;
 
 public class QuestionActivity extends BaseActivity {
 	private EditText contentText;
-	// private RelativeLayout rl_teamNotifi;
-	// private RelativeLayout ll_teamNotifi;
 	private Button mButton;
 	ImageLoaderView ivFaceImg;
 	private PhotoHelper mPhotoHelper;
@@ -69,7 +67,6 @@ public class QuestionActivity extends BaseActivity {
 		DisplayMetrics metric = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metric);
 
-		// ivFaceImg.setImageUrl(CarServerApplication.save.);
 		initView();
 
 		loadData();
@@ -102,7 +99,7 @@ public class QuestionActivity extends BaseActivity {
 				camer.setVisibility(View.GONE);
 				ivFaceImg.setImageBitmap(bitmap);
 				flag1 = 1;
-				sysimage.setBackgroundResource(R.drawable.ic_position_close);
+				sysimage.setBackgroundResource(R.drawable.position_close);
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 				imgBuffer = new String(Base64.encode(baos.toByteArray()));
@@ -125,8 +122,6 @@ public class QuestionActivity extends BaseActivity {
 
 	private void initView() {
 		contentText = (EditText) findViewById(R.id.content);
-		// rl_teamNotifi = (RelativeLayout) findViewById(R.id.rl_teamNotifi);
-		// ll_teamNotifi = (RelativeLayout) findViewById(R.id.rl_sysNotifi);
 		ivFaceImg = (ImageLoaderView) findViewById(R.id.iv_ic_img);
 		mButton = (Button) findViewById(R.id.btn_commit);
 		positionText = (TextView) findViewById(R.id.tuan);
@@ -223,7 +218,7 @@ public class QuestionActivity extends BaseActivity {
 						positionId = data.get(position).id;
 						positionText.setText(data.get(position).name);
 						teamimage
-								.setBackgroundResource(R.drawable.ic_position_close);
+								.setBackgroundResource(R.drawable.position_close);
 						flag = 1;
 						mDialog.dismiss();
 					}
