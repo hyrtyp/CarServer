@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" 
-    android:background="@drawable/full_bg">
+    android:background="@drawable/full_bg"
+    android:orientation="vertical" >
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -14,36 +14,37 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <RelativeLayout 
+            <RelativeLayout
                 android:layout_width="247dp"
                 android:layout_height="103dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/main_top_margin">
-                <cn.com.hyrt.carserver.base.view.ImageLoaderView 
+                android:layout_marginTop="@dimen/main_top_margin" >
+
+                <cn.com.hyrt.carserver.base.view.ImageLoaderView
                     android:id="@+id/iv_car_img"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/bg_car_default"
+                    android:background="@drawable/face_img_border_not_click"
                     android:padding="2dp"
-                    android:background="@drawable/face_img_border_not_click"/>
-                 <TextView
-                android:id="@+id/btn_add_photo"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="@string/upload_photo"
-                android:textSize="27sp"
-                android:gravity="center"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_car_default" />
+
+                <TextView
+                    android:id="@+id/btn_add_photo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="center"
+                    android:text="@string/upload_photo"
+                    android:textSize="27sp" />
             </RelativeLayout>
-           
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/main_top_margin"
                 android:background="@drawable/bg_input_block"
-                android:orientation="vertical" 
-                android:paddingLeft="@dimen/main_top_margin">
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/main_top_margin" >
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -95,7 +96,8 @@
                         android:textColor="@color/input_laber_color"
                         android:textSize="@dimen/input_text_size" />
 
-                    <EditText
+                    <!--
+                         <EditText
                         android:id="@+id/et_brand"
                         android:layout_width="193dp"
                         android:layout_height="wrap_content"
@@ -105,6 +107,17 @@
                         android:paddingBottom="@dimen/view_margin_small"
                         android:paddingLeft="5dp"
                         android:paddingTop="@dimen/view_margin_small"
+                        android:singleLine="true"
+                        android:textColor="#000"
+                        android:textSize="@dimen/input_text_size" />
+                    -->
+
+                    <Spinner
+                        android:id="@+id/spinner_brand"
+                        android:layout_width="193dp"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="2dp"
+                        android:gravity="center_vertical"
                         android:singleLine="true"
                         android:textColor="#000"
                         android:textSize="@dimen/input_text_size" />
@@ -130,7 +143,8 @@
                         android:textColor="@color/input_laber_color"
                         android:textSize="@dimen/input_text_size" />
 
-                    <EditText
+                    <!--
+                         <EditText
                         android:id="@+id/et_model"
                         android:layout_width="193dp"
                         android:layout_height="wrap_content"
@@ -143,38 +157,14 @@
                         android:singleLine="true"
                         android:textColor="#000"
                         android:textSize="@dimen/input_text_size" />
-                </LinearLayout>
+                    -->
 
-                <View
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/small_line_size"
-                    android:background="#a8a7a8" />
-
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingRight="@dimen/main_top_margin" >
-
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:text="@string/info_submodel_label"
-                        android:textColor="@color/input_laber_color"
-                        android:textSize="@dimen/input_text_size" />
-
-                    <EditText
-                        android:id="@+id/et_submodel"
+                    <Spinner
+                        android:id="@+id/spinner_model"
                         android:layout_width="193dp"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
-                        android:background="@drawable/face_img_border_not_click"
                         android:gravity="center_vertical"
-                        android:paddingBottom="@dimen/view_margin_small"
-                        android:paddingLeft="5dp"
-                        android:paddingTop="@dimen/view_margin_small"
                         android:singleLine="true"
                         android:textColor="#000"
                         android:textSize="@dimen/input_text_size" />
@@ -317,7 +307,7 @@
                         android:paddingTop="@dimen/view_margin_small"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size"/>
+                        android:textSize="@dimen/input_text_size" />
                 </LinearLayout>
 
                 <View
@@ -328,10 +318,10 @@
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingRight="@dimen/main_top_margin"
                     android:focusable="true"
-                       android:focusableInTouchMode="true" >
+                    android:focusableInTouchMode="true"
+                    android:orientation="horizontal"
+                    android:paddingRight="@dimen/main_top_margin" >
 
                     <TextView
                         android:layout_width="0dp"
@@ -355,7 +345,6 @@
                         android:singleLine="true"
                         android:textColor="#000"
                         android:textSize="@dimen/input_text_size" />
-           
                 </LinearLayout>
 
                 <View
@@ -463,6 +452,7 @@
                         android:textSize="@dimen/input_text_size" />
                 </LinearLayout>
             </LinearLayout>
+
             <Button
                 android:id="@+id/btn_confirm_add"
                 android:layout_width="wrap_content"
