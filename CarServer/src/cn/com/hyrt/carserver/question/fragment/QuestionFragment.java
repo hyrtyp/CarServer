@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
@@ -21,6 +22,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_GETNEWSIMG;
@@ -96,14 +98,31 @@ public class QuestionFragment extends Fragment {
 					{
 
 						String[] image = new String[result.data.size()];
+						
 						for (int i = 0; i < result.data.size(); i++) 
 						{
 							image[i] = result.data.get(i).attacpath;
-							String url = result.data.get(i).newslink;
+							final String url = result.data.get(i).newslink;
 							LinearLayout view = (LinearLayout) mInflater.inflate(R.layout.layout_news_banner, null);
 							((ImageLoaderView) view.findViewById(R.id.iv_banner)).setImageUrl(image[i].toString());
+							ImageLoaderView  imageListner = ((ImageLoaderView) view.findViewById(R.id.iv_banner));
+							
+							imageListner.setOnClickListener(new OnClickListener()
+							{
+								@Override
+								public void onClick(View v)
+								{
+									Intent intent = new Intent();
+									AlertHelper.getInstance(getActivity()).showCenterToast(""+url.toString());
+									intent.setClass(getActivity(), WebActivity.class);
+									intent.putExtra("url", url.toString());
+									startActivity(intent);
+								}
+							});
+							
 							((TextView) view.findViewById(R.id.tv_url)).setText(url);
 							views.add(view);
+							
 						}
 						bannerPager.setAdapter(new QuestionBannerAdapter(views));
 					}
