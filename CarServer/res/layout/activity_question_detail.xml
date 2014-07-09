@@ -5,90 +5,94 @@
     android:background="@drawable/full_bg"
     android:orientation="vertical" >
 
+    <cn.com.hyrt.carserver.base.view.PullToRefreshView
+        android:id="@+id/ptrv"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
 
-        <cn.com.hyrt.carserver.base.view.PullToRefreshView
-            android:id="@+id/ptrv"
+        <ScrollView
             android:layout_width="fill_parent"
-            android:layout_height="0dp"
+            android:layout_height="fill_parent" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <cn.com.hyrt.carserver.base.view.FullListView
+                    android:id="@+id/lv_replys"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:divider="#00000000"
+                    android:transcriptMode="alwaysScroll" />
+
+                <TextView
+                    android:id="@+id/tv_prompt_one"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/main_top_margin"
+                    android:text="@string/info_question_detail_prompt_one" />
+
+                <TextView
+                    android:id="@+id/tv_prompt_two"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/main_top_margin"
+                    android:background="#fff"
+                    android:padding="@dimen/main_top_margin"
+                    android:text="@string/info_question_detail_prompt" />
+            </LinearLayout>
+        </ScrollView>
+    </cn.com.hyrt.carserver.base.view.PullToRefreshView>
+
+    <LinearLayout
+        android:id="@+id/layout_reply"
+        android:layout_width="fill_parent"
+        android:layout_height="64dp"
+        android:background="#fff"
+        android:orientation="horizontal" >
+
+        <cn.com.hyrt.carserver.base.view.ImageLoaderView
+            android:id="@+id/iv_photo"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/view_margin"
+            android:src="@drawable/ic_question_camera" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/view_margin"
+            android:layout_marginRight="@dimen/main_top_margin"
             android:layout_weight="1" >
 
-            <ScrollView
+            <EditText
+                android:id="@+id/et_content"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent" >
+                android:layout_height="fill_parent"
+                android:background="@drawable/bg_edittext2"
+                android:gravity="center_vertical"
+                android:hint="@string/reply_hint"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="65dp"
+                android:singleLine="true"
+                android:textSize="@dimen/text_size" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+            <Button
+                android:id="@+id/btn_reply"
+                android:layout_width="48dp"
+                android:layout_height="26dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/main_top_margin"
+                android:background="@color/search_btn_bg_color"
+                android:text="@string/reply_label"
+                android:textColor="#fff"
+                android:textSize="@dimen/text_size" />
+        </RelativeLayout>
+    </LinearLayout>
 
-                    <cn.com.hyrt.carserver.base.view.FullListView
-                        android:id="@+id/lv_replys"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:divider="#00000000" 
-                        android:transcriptMode="alwaysScroll"/>
-
-                    <TextView
-                        android:id="@+id/tv_prompt_one"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/main_top_margin"
-                        android:text="@string/info_question_detail_prompt_one" />
-
-                    <TextView
-                        android:id="@+id/tv_prompt_two"
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/main_top_margin"
-                        android:background="#fff"
-                        android:padding="@dimen/main_top_margin"
-                        android:text="@string/info_question_detail_prompt" />
-                </LinearLayout>
-            </ScrollView>
-        </cn.com.hyrt.carserver.base.view.PullToRefreshView>
-        
-        <LinearLayout 
-            android:layout_width="fill_parent"
-            android:layout_height="64dp"
-            android:orientation="horizontal"
-            android:background="#fff">
-            <cn.com.hyrt.carserver.base.view.ImageLoaderView 
-                android:id="@+id/iv_photo"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/ic_question_camera"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/view_margin"/>
-            
-            <RelativeLayout 
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_weight="1"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/view_margin"
-                android:layout_marginRight="@dimen/main_top_margin">
-                <EditText
-                    android:id="@+id/et_content"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:background="@drawable/bg_edittext2"
-                    android:singleLine="true"
-                    android:gravity="center_vertical"
-                    android:textSize="@dimen/text_size"
-                    android:paddingLeft="@dimen/main_top_margin"
-                    android:paddingRight="65dp"
-                    android:hint="@string/reply_hint"/>
-                <Button 
-                    android:id="@+id/btn_reply"
-                    android:layout_width="48dp"
-                    android:layout_height="26dp"
-                    android:background="@color/search_btn_bg_color"
-                    android:text="@string/reply_label"
-                    android:textColor="#fff"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/main_top_margin"
-                    android:textSize="@dimen/text_size"/>
-            </RelativeLayout>
-        </LinearLayout>
 </LinearLayout>

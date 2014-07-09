@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
@@ -43,6 +44,7 @@ public class QuestionDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.iv_photo,click="uploadPhoto") ImageLoaderView ivPhoto;
 	@ViewInject(id=R.id.et_content) EditText etContent;
 	@ViewInject(id=R.id.btn_reply,click="reply") Button btnReply;
+	@ViewInject(id=R.id.layout_reply) LinearLayout layoutReply;
 	
 	private List<Define.REPLY_DETAIL.CDATA> datas 
 	= new ArrayList<Define.REPLY_DETAIL.CDATA>();
@@ -73,19 +75,21 @@ public class QuestionDetailActivity extends BaseActivity{
 		if(type == QuestionActivity.TYPE_HISTORY){
 			tvPromptOne.setVisibility(View.GONE);
 			tvPromptTwo.setVisibility(View.GONE);
+			layoutReply.setVisibility(View.GONE);
 		}else{
 			tvPromptOne.setVisibility(View.VISIBLE);
 			tvPromptTwo.setVisibility(View.VISIBLE);
+			layoutReply.setVisibility(View.VISIBLE);
 		}
 		loadData();
 	}
 	
 	private void loadData(){
-		if(type == QuestionActivity.TYPE_HISTORY){
+//		if(type == QuestionActivity.TYPE_HISTORY){
+//			mWebServiceHelper.getReplyDetail(replyId, WebServiceHelper.REPLY_DETAIL_HISTORY);
+//		}else{
 			mWebServiceHelper.getReplyDetail(replyId, WebServiceHelper.REPLY_DETAIL_HISTORY);
-		}else{
-			mWebServiceHelper.getReplyDetail(replyId, WebServiceHelper.REPLY_DETAIL_QUESTION);
-		}
+//		}
 		
 	}
 	
