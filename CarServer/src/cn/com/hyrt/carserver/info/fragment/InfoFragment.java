@@ -81,8 +81,13 @@ public class InfoFragment extends Fragment{
 							String strCars = "";
 							for(int i=0,j=result.data.size(); i<j; i++){
 								cars.add(result.data.get(i).model);
+								if("".equals(result.data.get(i).model)){
+									continue;
+								}
 								if(i < j-1){
 									strCars += result.data.get(i).model+"、";
+								}else{
+									strCars += result.data.get(i).model;
 								}
 								
 							}
