@@ -14,7 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-public class StarActivity extends Activity{
+public class StartActivity extends Activity{
 	
 	private static final int JUMP = 0;
 	
@@ -24,9 +24,9 @@ public class StarActivity extends Activity{
 			case JUMP:
 				Intent intent = new Intent();
 				CarServerApplication.loginInfo = StorageHelper
-						.getInstance(StarActivity.this).getLoginInfo();
+						.getInstance(StartActivity.this).getLoginInfo();
 				if(CarServerApplication.loginInfo == null){
-					intent.setClass(StarActivity.this, LoginActivity.class);
+					intent.setClass(StartActivity.this, LoginActivity.class);
 					startActivity(intent);
 					finish();
 				}else{
