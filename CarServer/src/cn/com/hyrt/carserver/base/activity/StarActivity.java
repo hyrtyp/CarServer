@@ -1,5 +1,6 @@
 package cn.com.hyrt.carserver.base.activity;
 
+import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
@@ -10,22 +11,43 @@ import cn.com.hyrt.carserver.info.activity.LoginActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
 public class StarActivity extends Activity{
+	
+	private static final int JUMP = 0;
+	
+	Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case JUMP:
+				Intent intent = new Intent();
+				CarServerApplication.loginInfo = StorageHelper
+						.getInstance(StarActivity.this).getLoginInfo();
+				if(CarServerApplication.loginInfo == null){
+					intent.setClass(StarActivity.this, LoginActivity.class);
+					startActivity(intent);
+					finish();
+				}else{
+					loadData();
+				}
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		Intent intent = new Intent();
-		CarServerApplication.loginInfo = StorageHelper.getInstance(this).getLoginInfo();
-		if(CarServerApplication.loginInfo == null){
-			intent.setClass(this, LoginActivity.class);
-			startActivity(intent);
-			finish();
-		}else{
-			loadData();
-		}
+		setContentView(R.layout.activity_start);
+		
+		Message msg = new Message();
+		msg.what = JUMP;
+		mHandler.sendMessageDelayed(msg, 500);
 		
 		
 		

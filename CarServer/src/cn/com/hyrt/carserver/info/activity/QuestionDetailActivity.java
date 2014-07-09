@@ -25,6 +25,7 @@ import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.FileHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
+import cn.com.hyrt.carserver.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.FullListView;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
@@ -34,7 +35,8 @@ import cn.com.hyrt.carserver.info.adapter.QuestionDetailAdapter;
 
 public class QuestionDetailActivity extends BaseActivity{
 
-	@ViewInject(id=R.id.lv_replys) FullListView lv_replys;
+	@ViewInject(id=R.id.lv_replys)
+	public FullListView lv_replys;
 	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
 	@ViewInject(id=R.id.tv_prompt_one) TextView tvPromptOne;
 	@ViewInject(id=R.id.tv_prompt_two) TextView tvPromptTwo;
@@ -160,6 +162,11 @@ public class QuestionDetailActivity extends BaseActivity{
 	
 	//上传照片
 	public void uploadPhoto(View view){
+		if(imgBuffer != null && !"".equals(imgBuffer)){
+			imgBuffer = null;
+			ivPhoto.setImageResource(R.drawable.ic_question_camera);
+			return;
+		}
 		if(faceUri == null){
 			faceUri = Uri.fromFile(FileHelper.createFile(imageName));
 		}
@@ -217,4 +224,10 @@ public class QuestionDetailActivity extends BaseActivity{
 		mReplyWebServiceHelper.replyQuestion(questionSave);
 	}
 	
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		PhotoPopupHelper.hidePop();
+	}
 }
