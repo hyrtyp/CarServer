@@ -13,6 +13,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -34,8 +36,6 @@ import cn.com.hyrt.carserver.base.view.PullToRefreshView;
  * 
  */
 public class ClassificationActivity extends BaseActivity {
-
-	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
 	
 	private Button leftBtn, rightBtn;
 	private ListView leftls, rightls;
@@ -46,6 +46,10 @@ public class ClassificationActivity extends BaseActivity {
 	private String [] b = null;//二级数组
 	private  String [] c = null;//二级数组
 	 
+	private int curIndex = 0;
+	private int falg = 0;
+	private LeftAdapter leftAdapter;
+	private RightAdapter rightAdapter;
 	private List<Map<String, String>> oneList = null;
 	private List<List<Map<String, String>>> twoList = null;
 	private List<List<List<Map<String, String>>>> threeList = null;
@@ -64,6 +68,7 @@ public class ClassificationActivity extends BaseActivity {
 		setContentView(R.layout.layout_question_classification);
 		context=ClassificationActivity.this;
 		initView();
+		setlistener();
 		leftLoadData(type);
 	}
 
@@ -71,19 +76,22 @@ public class ClassificationActivity extends BaseActivity {
 	{
 		leftBtn = (Button) findViewById(R.id.btn_left);
 		rightBtn = (Button) findViewById(R.id.btn_right);
-		leftls = (ListView) findViewById(R.id.list_left);
-		rightls = (ListView) findViewById(R.id.list_right);
+		leftls = (ListView) findViewById(R.id.lv_left);
+		rightls = (ListView) findViewById(R.id.lv_right);
 
 		leftBtn.setOnClickListener(new OnClickListener() 
 		{
 			@Override
 			public void onClick(View v)
 			{
+				falg = 0;
+				curIndex =0;
 				leftBtn.setTextColor(getResources().getColor(color.select_btn_color));
 				leftBtn.setBackgroundResource(drawable.title_select_left);
 				rightBtn.setTextColor(getResources().getColor(color.no_select_btn_color));
 				rightBtn.setBackgroundResource(drawable.title_right);
-				leftls.setAdapter(new leftAdapter(b,0,context));
+				leftls.setAdapter(new LeftAdapter(b));
+				setRight(curIndex,falg);
 			}
 		});
 
@@ -92,11 +100,14 @@ public class ClassificationActivity extends BaseActivity {
 			@Override
 			public void onClick(View v) 
 			{
+				falg = 1;
+				curIndex =0;
 				leftBtn.setTextColor(getResources().getColor(color.no_select_btn_color));
 				leftBtn.setBackgroundResource(drawable.title_left);
 				rightBtn.setTextColor(getResources().getColor(color.select_btn_color));
 				rightBtn.setBackgroundResource(drawable.title_select_right);
-				leftls.setAdapter(new leftAdapter(c,1,context));
+				leftls.setAdapter(new LeftAdapter(c));
+				setRight(curIndex,falg);
 			}
 		});
 	}
@@ -158,10 +169,16 @@ public class ClassificationActivity extends BaseActivity {
 						 c[j2++] = map.get("name");
 					 }
 					 
-					 leftls.setAdapter(new leftAdapter(b,0,context));
+					 if(leftAdapter == null){
+						 leftls.setAdapter(new LeftAdapter(b));
+					 }else{
+						 leftAdapter.notifyDataSetChanged();
+					 }
 					 
 					//三级分类
 					threeList = classifyJsonParser.getThreeList();
+						
+					setRight(curIndex,falg);
 				}
 			} , this);
 		}
@@ -181,18 +198,53 @@ public class ClassificationActivity extends BaseActivity {
 		
 		mWebServiceHelper.getMaintainFL(id);
 	}
+
+	private void setRight(int index,int flag)
+	{
+
+		String[] names = null;
+		String[] ids = null;
+		int j = 0;
+		if(threeList.get(flag) != null && !threeList.get(flag).equals("[]") && threeList.get(flag).size()>0)
+		{
+			if(!threeList.get(flag).get(index).equals("[]"))
+			{
+				List<Map<String, String>> list = threeList.get(flag).get(index);
+				if(!list.equals("[]") && list.size()>0)
+				{
+					names = new String[list.size()];
+					ids = new String[list.size()];
+					for(Map<String, String> map :list)
+					{
+						names[j] = map.get("name");
+						ids[j]  = map.get("id");
+						j++;
+					}
+				}
+				else
+				{
+					names = new String[1];
+					ids = new String[1];
+					names[0]="暂时没有数据";
+					ids[0]="1";
+				}
+			}
+		}
+		if(rightAdapter == null){
+			rightls.setAdapter(new RightAdapter(names,ids));
+		}else{
+			rightAdapter.notifyDataSetChanged();
+		}
+	}
 	
-	private class leftAdapter extends BaseAdapter 
+	
+	private class LeftAdapter extends BaseAdapter 
 	{
 		public String[] str;
-		public int flag;
 		
-		public Context context;
-		private leftAdapter(String[] str,int flag,Context context) 
+		private LeftAdapter(String[] str) 
 		{
 			this.str = str;
-			this.flag = flag;
-			this.context = context;
 		}
 
 		@Override
@@ -213,58 +265,28 @@ public class ClassificationActivity extends BaseActivity {
 		@Override
 		public View getView(final int position, View convertView, ViewGroup parent) 
 		{
-			convertView = View.inflate(ClassificationActivity.this,
-					R.layout.question_maintain_left_item, null);
-			TextView text = (TextView) convertView.findViewById(R.id.text);
-			text.setText(str[position]);
+			convertView = View.inflate(ClassificationActivity.this,R.layout.question_maintain_left_item, null);
+			TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
+			tv_name.setText(str[position]);
 			
-			final LinearLayout llayout = (LinearLayout) convertView.findViewById(R.id.llayout);
-			llayout.setOnClickListener(new OnClickListener() 
-			{
-				@Override
-				public void onClick(View v)
-				{
-					
-					
-					String[] names = null;
-					String[] ids = null;
-					int j = 0;
-					if(threeList.get(0) != null && !threeList.get(0).equals("[]") && threeList.get(0).size()>0)
-					{
-						if(!threeList.get(flag).get(position).equals("[]"))
-						{
-							List<Map<String, String>> list = threeList.get(flag).get(position);
-							if(!list.equals("[]") && list.size()>0)
-							{
-								names = new String[list.size()];
-								ids = new String[list.size()];
-								for(Map<String, String> map :list)
-								{
-									names[j] = map.get("name");
-									ids[j]  = map.get("id");
-									j++;
-								}
-								rightls.setAdapter(new rightAdapter(names,ids,context));
-							}
-						}
-					}
-					
-				}
-			});
+			if(position == curIndex){
+				convertView.setBackgroundResource(android.R.color.white);
+				((TextView)convertView.findViewById(R.id.tv_name))
+				.setTextColor(getResources().getColor(R.color.no_select_btn_color));
+			}
+			
 			return convertView;
 		}
 	}
 
-	private class rightAdapter extends BaseAdapter
+	private class RightAdapter extends BaseAdapter
 	{
 		public String[] str;
 		public String[] ids;
-		public Context context;
 		
-		private rightAdapter(String[] names,String[] ids,Context context) {
+		private RightAdapter(String[] names,String[] ids) {
 			this.str = names;
 			this.ids = ids;
-			this.context = context;
 		}
 
 		@Override
@@ -286,25 +308,47 @@ public class ClassificationActivity extends BaseActivity {
 		public View getView(final int position, View convertView, ViewGroup parent) {
 			convertView = View.inflate(ClassificationActivity.this,
 					R.layout.question_maintain_right_item, null);
-			final TextView text = (TextView) convertView.findViewById(R.id.text);
-			final TextView id = (TextView) convertView.findViewById(R.id.itemid);
+			final TextView text = (TextView) convertView.findViewById(R.id.tv_name);
+			final TextView id = (TextView) convertView.findViewById(R.id.tv_id);
 			
 			text.setText(str[position]);
 			id.setText(ids[position]);
 			id.setVisibility(View.GONE);
-			LinearLayout llayout = (LinearLayout) convertView.findViewById(R.id.llayout);
-			llayout.setOnClickListener(new OnClickListener() 
-			{
-				@Override
-				public void onClick(View v)
-				{
-					Intent ie=new Intent(context,CorrelationActivity.class);
-					ie.putExtra("name", str[position]);
-					ie.putExtra("id", ids[position]);
-					context.startActivity(ie);
-				}
-			});
 			return convertView;
 		}
+	}
+	
+	private void setlistener()
+	{
+		leftls.setOnItemClickListener(new AdapterView.OnItemClickListener() 
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
+				View curView = parent.getChildAt(curIndex);
+				curView.setBackgroundResource(R.color.blue);
+				((TextView)curView.findViewById(R.id.tv_name))
+				.setTextColor(getResources().getColor(android.R.color.white));
+				
+				view.setBackgroundResource(android.R.color.white);
+				((TextView)view.findViewById(R.id.tv_name))
+				.setTextColor(getResources().getColor(R.color.no_select_btn_color));
+				curIndex = position;
+				setRight(curIndex,falg);
+			}
+		});
+		
+		rightls.setOnItemClickListener(new AdapterView.OnItemClickListener() 
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,long arg3)
+			{
+				TextView tv_id =((TextView)view.findViewById(R.id.tv_id));
+				curIndex = position;
+				Intent ie=new Intent(context,CorrelationActivity.class);
+				ie.putExtra("name","");
+				ie.putExtra("id", tv_id.getText());
+				context.startActivity(ie);
+			}
+		});
 	}
 }

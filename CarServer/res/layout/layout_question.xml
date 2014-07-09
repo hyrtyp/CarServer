@@ -49,27 +49,42 @@
         android:layout_below="@+id/line1" >
 
         <RelativeLayout
-            android:id="@+id/rl_sysNotifi"
+            android:id="@+id/rl_teamNotifi"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:background="#ffffff"
             android:gravity="center_horizontal|center_vertical" >
 
-            <RelativeLayout
-                android:layout_width="fill_parent"
+            <TextView
+                android:id="@+id/linew"
+                android:layout_width="1dp"
                 android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:background="#E0E0E0" />
+
+            <RelativeLayout
+                android:id="@+id/leftlay"
+                android:layout_width="40dp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentRight="true"
                 android:gravity="center_vertical|center_horizontal" >
 
                 <ImageView
-                    android:id="@+id/camer"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_question_camera" />
+                    android:id="@+id/sysimage"
+                    android:layout_width="22dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ic_question_arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_toLeftOf="@id/leftlay"
+                android:gravity="center_vertical|center_horizontal" >
 
                 <TextView
                     android:id="@+id/xi"
@@ -77,19 +92,31 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
                     android:text="@string/question_up_photo"
                     android:textColor="#5B5B5B"
                     android:textSize="15sp" />
 
                 <ImageView
-                    android:id="@+id/sysimage"
-                    android:layout_width="22dp"
-                    android:layout_height="15dp"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/camer"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ic_question_arrow" />
+                    android:layout_toLeftOf="@+id/xi"
+                    android:src="@drawable/ic_question_camera" />
             </RelativeLayout>
+
+            <cn.com.hyrt.carserver.base.view.ImageLoaderView
+                android:id="@+id/iv_ic_img"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:background="@drawable/face_img_border_not_click"
+                android:padding="1dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/emergency_bxlp"
+                android:visibility="gone" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -108,20 +135,27 @@
                 android:background="#E0E0E0" />
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:id="@+id/imglayout"
+                android:layout_width="40dp"
                 android:layout_height="fill_parent"
-                android:layout_toRightOf="@id/linew"
+                android:layout_alignParentRight="true"
                 android:gravity="center_vertical|center_horizontal" >
 
                 <ImageView
-                    android:id="@+id/buwei"
-                    android:layout_width="40dip"
-                    android:layout_height="40dip"
-                    android:layout_alignParentLeft="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_question_position" />
+                    android:id="@+id/teamimage"
+                    android:layout_width="22dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ic_question_arrow" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_toLeftOf="@id/imglayout"
+                android:gravity="center_vertical|center_horizontal" >
 
                 <TextView
                     android:id="@+id/tuan"
@@ -129,18 +163,18 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
                     android:text="@string/question_select_position"
                     android:textColor="#5B5B5B"
                     android:textSize="15sp" />
 
                 <ImageView
-                    android:id="@+id/teamimage"
-                    android:layout_width="22dp"
-                    android:layout_height="15dp"
-                    android:layout_alignParentRight="true"
+                    android:id="@+id/buwei"
+                    android:layout_width="40dip"
+                    android:layout_height="40dip"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="10dp"
-                    android:background="@drawable/ic_question_arrow" />
+                    android:layout_toLeftOf="@+id/tuan"
+                    android:src="@drawable/ic_question_position" />
             </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>

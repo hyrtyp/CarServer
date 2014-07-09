@@ -3,11 +3,16 @@ package cn.com.hyrt.carserver.question.adapter;
 import java.util.List;
 import java.util.Map;
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.view.ImageLoaderView;
+import cn.com.hyrt.carserver.info.activity.QuestionDetailActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class CorrelationAdapter extends BaseAdapter{
@@ -44,45 +49,28 @@ public class CorrelationAdapter extends BaseAdapter{
 		if(convertView==null){
 			convertView=LayoutInflater.from(context).inflate(R.layout.layout_question_search_result_item, null);
 		}
-//		layout_question_search_result_item ，question_correlation_item
 		
-//		TextView tv_linchpin=(TextView)convertView.findViewById(R.id.tv_linchpin);
-//		TextView tv_other=(TextView)convertView.findViewById(R.id.tv_other);
-//		ImageView img_head=(ImageView)convertView.findViewById(R.id.img_head);
+		ImageLoaderView iv_face_img=(ImageLoaderView)convertView.findViewById(R.id.iv_face_img);
 		
 		TextView tv_content=(TextView)convertView.findViewById(R.id.tv_content);
 		TextView tv_name=(TextView)convertView.findViewById(R.id.tv_name);
 		TextView tv_work=(TextView)convertView.findViewById(R.id.tv_work);
-		
-//		TextView tv_point=(TextView)convertView.findViewById(R.id.tv_point);
-//		TextView tv_name1=(TextView)convertView.findViewById(R.id.tv_name1);
-//		TextView tv_point1=(TextView)convertView.findViewById(R.id.tv_point1);
-		
+		LinearLayout llyout  = (LinearLayout)convertView.findViewById(R.id.llyout);
 		tv_content.setText(data.get(position).get("content")+"");
 		tv_name.setText(data.get(position).get("username")+"");
 		tv_work.setText(data.get(position).get("zyname")+"");
-//		tv_name.setOnClickListener(new OnClickListener()
-//		{
-//			@Override
-//			public void onClick(View v)
-//			{
-//				Intent ie;
-//				if(edit)
-//				{
-//					ie=new Intent(context,OfftenBridgeEditActivity.class);
-//				}
-//				else
-//				{
-//					ie=new Intent(context,BridgeDetailActivity.class);
-//				}
-//				ie.putExtra("objectid", data.get(position).getCol1());
-//				ie.putExtra("objectname", data.get(position).getCol2());
-//				ie.putExtra("edit", edit);
-//				ie.putExtra("file", file);
-//				ie.putExtra("segName", segName);
-//				context.startActivity(ie);
-//			}
-//		});
+		iv_face_img.setImageUrl(data.get(position).get("attacpath")+"");
+		llyout.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				Intent ie=new Intent(context,QuestionDetailActivity.class);
+				ie.putExtra("replyId", data.get(position).get("id").toString());
+				ie.putExtra("type", QuestionDetailActivity.TYPE_HISTORY);
+				context.startActivity(ie);
+			}
+		});
 		
 		return convertView;
 	}

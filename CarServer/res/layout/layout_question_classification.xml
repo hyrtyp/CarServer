@@ -4,14 +4,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentBottom="true"
-        android:background="#fff"
-        android:orientation="vertical" >
-
-        
 
         <LinearLayout
             android:id="@+id/top_ll"
@@ -48,46 +40,29 @@
             </LinearLayout>
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="fitXY"
-            android:src="@drawable/bg_line" />
-
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
-            android:background="#fff"
-            android:orientation="horizontal" >
-
-            <LinearLayout
-                android:layout_width="150dp"
-                android:layout_height="fill_parent"
-                android:layout_marginTop="2dp"
-                android:background="@color/blue"
-                android:orientation="vertical" >
-
-                <ListView
-                    android:id="@+id/list_left"
-                    android:layout_width="150dp"
-                    android:layout_height="match_parent" >
-                </ListView>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="2dp"
-                android:orientation="vertical" >
-
-               <ListView
-                    android:id="@+id/list_right"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-                </ListView>
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:orientation="horizontal" 
+		    android:baselineAligned="false"
+		    android:background="@drawable/full_bg">
+		    
+		    <ListView 
+		        android:id="@+id/lv_left"
+		        android:layout_width="127dp"
+		        android:layout_height="fill_parent"
+		        android:background="@color/blue"
+		        android:divider="#fff"
+		        android:dividerHeight="2dp"/>
+		    <ListView 
+		        android:id="@+id/lv_right"
+		        android:layout_width="0dp"
+		        android:layout_weight="1"
+		        android:layout_height="fill_parent"
+		        android:paddingLeft="@dimen/view_margin_big"
+		        android:background="#fff"
+		        android:divider="#ff9b9b9b"
+		        android:dividerHeight="1dp"/>
+		</LinearLayout>
 
 </LinearLayout>

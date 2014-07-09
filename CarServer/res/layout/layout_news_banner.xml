@@ -3,13 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="152dp"
     android:orientation="vertical" >
-    
+
     <cn.com.hyrt.carserver.base.view.ImageLoaderView
         android:id="@+id/iv_banner"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="centerCrop">
-        
+        android:scaleType="centerCrop" >
     </cn.com.hyrt.carserver.base.view.ImageLoaderView>
+
+    <TextView
+        android:id="@+id/tv_url"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="itemid"
+        android:visibility="gone" />
 
 </LinearLayout>

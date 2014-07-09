@@ -3,19 +3,26 @@ package cn.com.hyrt.carserver.question.fragment;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.tsz.afinal.annotation.view.ViewInject;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_GETNEWSIMG;
@@ -24,6 +31,7 @@ import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
+import cn.com.hyrt.carserver.base.view.PullToRefreshView;
 import cn.com.hyrt.carserver.question.activity.BySpecialityActivity;
 import cn.com.hyrt.carserver.question.activity.ClassificationActivity;
 import cn.com.hyrt.carserver.question.activity.FindByBrandActivity;
@@ -38,26 +46,21 @@ import cn.com.hyrt.carserver.question.adapter.QuestionBannerAdapter;
  */
 public class QuestionFragment extends Fragment {
 
+	@ViewInject(id=R.id.iv_banner) ImageLoaderView iv_banner;
 	private View rootView;
 	private GridView gvQuestion, gvExperts;
 	private ViewPager bannerPager;
 	private Button questionBtn;
-	private ImageView mImageView;
-
 	private BaseWebServiceHelper mBaseWebServiceHelper;
 	private WebServiceHelper mWebServiceHelper;
-//	private ImageLoaderView mImageLoaderView;
-	
-	private String imgUrl ;
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
+	{
 		rootView = inflater.inflate(R.layout.fragment_question, null);
 		findView();
 		initGrid();
-//		loadData();
-		initBanner();
+		loadData();
 		setListener();
 		return rootView;
 	}
@@ -66,89 +69,70 @@ public class QuestionFragment extends Fragment {
 		gvQuestion = (GridView) rootView.findViewById(R.id.gvQuestion);
 		gvExperts = (GridView) rootView.findViewById(R.id.gvExperts);
 		bannerPager = (ViewPager) rootView.findViewById(R.id.bannerPager);
-
 		questionBtn = (Button) rootView.findViewById(R.id.btn_question);
-		// mImageView = (ImageView) rootView.findViewById(R.id.bannerPager);
 	}
+
 
 	private void loadData() {
 
 		final List<View> views = new ArrayList<View>();
 		final LayoutInflater mInflater = LayoutInflater.from(getActivity());
 
-		AlertHelper.getInstance(getActivity()).showLoading(
-				getString(R.string.loading_msg));
-
-		if (mWebServiceHelper == null) {
+		AlertHelper.getInstance(getActivity()).showLoading(getString(R.string.loading_msg));
+		if (mWebServiceHelper == null) 
+		{
 			mWebServiceHelper = new WebServiceHelper(
-					new WebServiceHelper.RequestCallback<Define.QUESTION_GETNEWSIMG>() {
+			new WebServiceHelper.RequestCallback<Define.QUESTION_GETNEWSIMG>() 
+			{
+				@Override
+				public void onSuccess(QUESTION_GETNEWSIMG result) 
+				{
+					LogHelper.i("tag", "result:" + result.data.size());
+					AlertHelper.getInstance(getActivity()).hideLoading();
+				
+					if (result == null || result.data.size() <= 0) 
+					{
+						AlertHelper.getInstance(getActivity()).showCenterToast("图片加载失败");
+					} 
+					else
+					{
 
-						@Override
-						public void onSuccess(QUESTION_GETNEWSIMG result) {
-							LogHelper.i("tag", "result:" + result.data.size());
-							AlertHelper.getInstance(getActivity())
-									.hideLoading();
-							AlertHelper.getInstance(getActivity())
-									.hideLoading();
-
-							if (result == null || result.data.size() <= 0) {
-
-							} else {
-
-								String[] image = new String[result.data.size()];
-//								mImageLoaderView = new ImageLoaderView(getActivity());
-								
-								for (int i = 0; i < result.data.size(); i++) {
-
-									image[i] = result.data.get(i).attacpath;
-										
-									ImageLoaderView view = (ImageLoaderView) mInflater.inflate(R.layout.layout_news_banner, null);
-									
-									imgUrl = mBaseWebServiceHelper.NAME_SPACE.toString() + image[i].toString();
-									
-									((ImageLoaderView) view).setImageUrl(imgUrl);
-									
-									System.out.println("image==============="+imgUrl);
-									
-									views.add(view);
-
+						String[] image = new String[result.data.size()];
+						
+						for (int i = 0; i < result.data.size(); i++) 
+						{
+							image[i] = result.data.get(i).attacpath;
+							final String url = result.data.get(i).newslink;
+							LinearLayout view = (LinearLayout) mInflater.inflate(R.layout.layout_news_banner, null);
+							((ImageLoaderView) view.findViewById(R.id.iv_banner)).setImageUrl(image[i].toString());
+							ImageLoaderView  imageListner = ((ImageLoaderView) view.findViewById(R.id.iv_banner));
+							
+							imageListner.setOnClickListener(new OnClickListener()
+							{
+								@Override
+								public void onClick(View v)
+								{
+									Intent intent = new Intent();
+									intent.setClass(getActivity(), WebActivity.class);
+									intent.putExtra("url", url.toString());
+									startActivity(intent);
 								}
-								bannerPager.setAdapter(new QuestionBannerAdapter(views));
-
-							}
+							});
+							
+							((TextView) view.findViewById(R.id.tv_url)).setText(url);
+							views.add(view);
+							
 						}
+						bannerPager.setAdapter(new QuestionBannerAdapter(views));
+					}
+				}
 
-						@Override
-						public void onFailure(int errorNo, String errorMsg) {
-
-						}
-					}, getActivity());
+				@Override
+				public void onFailure(int errorNo, String errorMsg) {
+				}
+			}, getActivity());
 		}
 		mWebServiceHelper.getNewsImg();
-	}
-
-	private void initBanner() {
-		LayoutInflater mInflater = LayoutInflater.from(getActivity());
-		View view1 = mInflater.inflate(R.layout.layout_banner, null);
-		((ImageView) view1.findViewById(R.id.iv_banner))
-				.setImageResource(R.drawable.img_question_banner);
-		View view2 = mInflater.inflate(R.layout.layout_banner, null);
-		((ImageView) view2.findViewById(R.id.iv_banner))
-				.setImageResource(R.drawable.classify_banner);
-		View view3 = mInflater.inflate(R.layout.layout_banner, null);
-		((ImageView) view3.findViewById(R.id.iv_banner))
-				.setImageResource(R.drawable.img_car_default);
-
-		List<View> views = new ArrayList<View>();
-		// ImageView imageview1 = new ImageView(getActivity());
-		// imageview1.setImageResource(R.drawable.img_question_banner);
-		// ImageView imageview2 = new ImageView(getActivity());
-		// imageview2.setImageResource(R.drawable.classify_banner);
-		views.add(view1);
-		views.add(view2);
-		views.add(view3);
-		bannerPager.setAdapter(new QuestionBannerAdapter(views));
-
 	}
 
 	private void initGrid() {
@@ -174,26 +158,41 @@ public class QuestionFragment extends Fragment {
 		gvExperts.setOnItemClickListener(ExpertItemClickListener);
 	}
 
-	private void setListener() {
-		questionBtn.setOnClickListener(new View.OnClickListener() {
-
+	private void setListener() 
+	{
+		questionBtn.setOnClickListener(new View.OnClickListener()
+		{
 			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				Intent intent = new Intent();
 				intent.setClass(getActivity(), QuestionActivity.class);
 				startActivity(intent);
 			}
 		});
+		
+		bannerPager.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v) 
+			{
+				int index = bannerPager.getCurrentItem();
+				Log.i("index=========================", index+"");
+//				intent.setClass(getActivity(), QuestionActivity.class);
+//				startActivity(intent);
+			}
+		});
 	}
 
-	private AdapterView.OnItemClickListener questionItemClickListener = new AdapterView.OnItemClickListener() {
-
+	private AdapterView.OnItemClickListener questionItemClickListener = new AdapterView.OnItemClickListener()
+	{
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-				long arg3) {
+		public void onItemClick(AdapterView<?> arg0, View arg1, int position,long arg3)
+		{
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), ClassificationActivity.class);
-			switch (position) {
+			switch (position)
+			{
 			case 0:
 				// 维修自查
 				intent.putExtra("title", "维修自查");

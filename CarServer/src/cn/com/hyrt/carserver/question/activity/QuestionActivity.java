@@ -16,8 +16,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
@@ -31,18 +33,26 @@ import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import cn.com.hyrt.carserver.question.adapter.PositionAdapter;
 
 public class QuestionActivity extends BaseActivity {
 	private EditText contentText;
-	private RelativeLayout rl_teamNotifi;
-	private RelativeLayout ll_teamNotifi;
+//	private RelativeLayout rl_teamNotifi;
+//	private RelativeLayout ll_teamNotifi;
 	private Button mButton;
-
+	ImageLoaderView ivFaceImg;
 	private PhotoHelper mPhotoHelper;
 	private Dialog mDialog;
-
+	private int flag=0,flag1=0;
 	private String positionId = "";
+	private TextView positionText;
+	private TextView imageTxt;
+	private ImageView teamimage;
+	private ImageView sysimage;
+	private ImageView camer;
+	private RelativeLayout leftLayout;
+	private RelativeLayout rightLayout;
 	private String imgBuffer;
 	private Uri questionUri;
 	private Boolean isSuccess;
@@ -87,7 +97,12 @@ public class QuestionActivity extends BaseActivity {
 
 			if (data.getParcelableExtra("data") != null) {
 				Bitmap bitmap = data.getParcelableExtra("data");
-				// ivFaceImg.setImageBitmap(bitmap);
+				ivFaceImg.setVisibility(View.VISIBLE);
+				imageTxt.setVisibility(View.GONE);
+				camer.setVisibility(View.GONE);
+				ivFaceImg.setImageBitmap(bitmap);
+				flag1=1;
+				sysimage.setBackgroundResource(R.drawable.position_close);
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 				imgBuffer = new String(Base64.encode(baos.toByteArray()));
@@ -99,35 +114,67 @@ public class QuestionActivity extends BaseActivity {
 					questionUri = Uri.fromFile(FileHelper
 							.createFile("question.jpg"));
 				}
-				mPhotoHelper = new PhotoHelper(QuestionActivity.this,
-						questionUri, 50);
+				mPhotoHelper = new PhotoHelper(QuestionActivity.this,questionUri, 50);
 			}
 			mPhotoHelper.startPhotoZoom(questionUri, 50);
 		} else if (resultCode == Define.RESULT_FROM_ALTER_CAR) {
 			AlertHelper.getInstance(this).showLoading(null);
-
 		}
 	}
 
 	private void initView() {
 		contentText = (EditText) findViewById(R.id.content);
-		rl_teamNotifi = (RelativeLayout) findViewById(R.id.rl_teamNotifi);
-		ll_teamNotifi = (RelativeLayout) findViewById(R.id.rl_sysNotifi);
+//		rl_teamNotifi = (RelativeLayout) findViewById(R.id.rl_teamNotifi);
+//		ll_teamNotifi = (RelativeLayout) findViewById(R.id.rl_sysNotifi);
+		ivFaceImg = (ImageLoaderView)findViewById(R.id.iv_ic_img);
 		mButton = (Button) findViewById(R.id.btn_commit);
-
+		positionText = (TextView) findViewById(R.id.tuan); 
+		imageTxt = (TextView) findViewById(R.id.xi); 
+		teamimage = (ImageView) findViewById(R.id.teamimage); 
+		sysimage = (ImageView) findViewById(R.id.sysimage);
+		camer = (ImageView) findViewById(R.id.camer);
+		rightLayout = (RelativeLayout) findViewById(R.id.imglayout);
+		leftLayout = (RelativeLayout) findViewById(R.id.leftlay);
 		final Intent intent = new Intent();
-
-		rl_teamNotifi.setOnClickListener(new OnClickListener() {
+		rightLayout.setOnClickListener(new OnClickListener() 
+		{
 			@Override
-			public void onClick(View v) {
-				getPosition();
+			public void onClick(View v) 
+			{
+				if(flag==1)
+				{
+					positionId = "";
+					positionText.setText("选择部件");
+					teamimage.setBackgroundResource(R.drawable.ic_question_arrow);
+					flag=0;
+				}
+				else
+				{
+					getPosition();
+				}
 			}
 		});
-
-		ll_teamNotifi.setOnClickListener(new OnClickListener() {
+		
+		leftLayout.setOnClickListener(new OnClickListener() 
+		{
 			@Override
-			public void onClick(View v) {
-				updataImg();
+			public void onClick(View v) 
+			{
+				if(flag1==1)
+				{
+					imgBuffer = "";
+					ivFaceImg.setVisibility(View.GONE);
+					imageTxt.setVisibility(View.VISIBLE);
+					camer.setVisibility(View.VISIBLE);
+					ivFaceImg.setImageBitmap(null);
+					imageTxt.setText("上传图片");
+					sysimage.setBackgroundResource(R.drawable.ic_question_arrow);
+					flag1=0;
+				}
+				else
+				{
+					updataImg();
+				}
 			}
 		});
 
@@ -141,8 +188,6 @@ public class QuestionActivity extends BaseActivity {
 					intent.setClass(QuestionActivity.this, CommitActivity.class);
 					startActivity(intent);
 				}
-				
-				
 			}
 		});
 	}
@@ -169,7 +214,6 @@ public class QuestionActivity extends BaseActivity {
 			public void onClick(View view) {
 
 				int id = view.getId();
-
 				if (id == layout_cancle.getId()) {
 
 					mDialog.dismiss();
@@ -178,17 +222,20 @@ public class QuestionActivity extends BaseActivity {
 		};
 
 		layout_cancle.setOnClickListener(mClickListener);
-		((ListView) ls_correlation)
-				.setOnItemClickListener(new OnItemClickListener() {
-
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-
-						positionId = data.get(position).id;
-						mDialog.dismiss();
-					}
-				});
+		
+		
+		((ListView) ls_correlation).setOnItemClickListener(new OnItemClickListener()
+		{
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,int position, long id)
+			{
+				positionId = data.get(position).id;
+				positionText.setText(data.get(position).name);
+				teamimage.setBackgroundResource(R.drawable.position_close);
+				flag=1;
+				mDialog.dismiss();
+			}
+		});
 
 		mDialog.show();
 	}
