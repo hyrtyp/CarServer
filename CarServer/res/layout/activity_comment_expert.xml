@@ -8,6 +8,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:numStars="5"
-        />
+        android:progressDrawable="@drawable/bg_comment_star"/>
 
 </LinearLayout>

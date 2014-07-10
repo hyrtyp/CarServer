@@ -217,6 +217,7 @@
 	<string name="login_registlogin">已注册请登录</string>
 	<string name="login_loginsuccess">登录成功</string>
 	<string name="login_loginfailure">登录失败</string>
+	<string name="question_comment_expert">评论专家</string>
 	
 	
 </resources>

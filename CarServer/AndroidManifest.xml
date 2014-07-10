@@ -144,6 +144,9 @@
 		<activity android:name=".info.activity.RegistActivity"
 		    android:label="@string/login_regist"
 		    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+		<activity 
+		    android:name=".question.activity.CommentExpertActivity"
+		    android:label="@string/question_comment_expert"/>
 		
     </application>
 
