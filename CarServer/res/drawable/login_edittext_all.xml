@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<shape xmlns:android="http://schemas.android.com/apk/res/android">   
+    <solid android:color="#00000000" /> 
+    <span style="font-size: 2em; line-height: 3.0;"><!--</span><span style="font-size: 1em; line-height: 1.5;"> 因为的登录背景颜色为白色，所以设置成了白色，如果如其他颜色，根据自己的要求来设定--></span>  
+</shape>
