@@ -139,26 +139,10 @@
 	<string name="question_sava_fail">问题保存失败</string>
 	<string name="question_sava_text">请输入问题</string>
 	<string name="question_sava_position">请选择部件</string>
-	
 	<string name="question_select_position">选择部件</string>
-	<string name="question_engine">发动机</string>
-	<string name="question_crankcase">曲轴箱</string>
-	<string name="question_cylinder_heat">汽缸盖</string>
-	<string name="question_cylinder_liner">汽缸垫</string>
-	<string name="question_ohv">O H V</string>
-	<string name="question_knock_sensor">爆震传感器</string>
-	<string name="question_sparking_plug">铂金火花塞</string>
-	<string name="question_camshaft">顶置凸轮轴</string>
-	<string name="question_distributor">分电器</string>
-	
-	<string name="question_waxing">洗车打蜡</string>
-	<string name="question_coating_film">封釉镀膜</string>
-	<string name="question_pad_pasting">玻璃贴膜</string>
-	<string name="question_there_filter">更换三滤</string>
-	<string name="question_engineoil">更换机油/机滤</string>
-	<string name="question_tyre_server">轮胎服务</string>
-	<string name="question_paint">钣金油漆</string>
-	<string name="question_car_light">车灯安装</string>
+	<string name="question_noimg">暂时没有图片</string>
+	<string name="question_imgload_failed">图片加载失败</string>
+	<string name="question_nomeg">暂无数据</string>
 	
 	<!-- emergency -->
 	<string name="emergency_bxlp">保险理赔</string>

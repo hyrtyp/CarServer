@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:text="@string/question_engine"
+            android:text="发动机"
             android:textColor="#5B5B5B"
             android:textSize="16sp" />
 

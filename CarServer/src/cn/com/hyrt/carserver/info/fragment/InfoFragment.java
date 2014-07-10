@@ -50,7 +50,10 @@ public class InfoFragment extends Fragment{
 		rootView = inflater.inflate(R.layout.fragment_info, null);
 
 		String[] location = StorageHelper.getInstance(getActivity()).getLocation();
-		LogHelper.i("tag", "location:"+location[2]);
+		if(location != null){
+			LogHelper.i("tag", "location:"+location[2]);
+		}
+		
 		
 		findView();
 		initView();

@@ -46,16 +46,16 @@ public class StartActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 		
-		LocationHelper mLocationHelper = new LocationHelper(this);
-		mLocationHelper.setLocationCallback(new LocationHelper.LocationCallback() {
-			
-			@Override
-			public void onLocation(double lon, double lat, String city) {
-				StorageHelper.getInstance(StartActivity.this)
-				.saveLocation(lon+"", lat+"", city);
-			}
-		});
-		mLocationHelper.start();
+//		LocationHelper mLocationHelper = new LocationHelper(this);
+//		mLocationHelper.setLocationCallback(new LocationHelper.LocationCallback() {
+//			
+//			@Override
+//			public void onLocation(double lon, double lat, String city) {
+//				StorageHelper.getInstance(StartActivity.this)
+//				.saveLocation(lon+"", lat+"", city);
+//			}
+//		});
+//		mLocationHelper.start();
 		
 		Message msg = new Message();
 		msg.what = JUMP;
