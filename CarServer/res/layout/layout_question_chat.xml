@@ -61,14 +61,27 @@
             android:layout_gravity="center_horizontal"/>
     </LinearLayout>	
     
-        	<TextView
+    <LinearLayout 
+           android:layout_width="239dp"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_marginRight="@dimen/view_margin_small"
+           android:layout_toLeftOf="@id/layout_face">
+        <TextView
             android:id="@+id/tv_content"
             android:layout_width="239dp"
             android:layout_height="wrap_content"
-            android:text="飒飒啊" 
             android:background="@drawable/bg_chat" 
-            android:layout_marginRight="@dimen/view_margin_small"
-            android:layout_toLeftOf="@id/layout_face"/>
+            />
+        <cn.com.hyrt.carserver.base.view.ImageLoaderView 
+                android:id="@+id/iv_photo"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="@dimen/view_margin_small"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="@dimen/view_margin"/>
+        </LinearLayout>
+        	
     
 
 

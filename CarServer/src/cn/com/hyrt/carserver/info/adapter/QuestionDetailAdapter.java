@@ -7,8 +7,11 @@ import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.REPLY_DETAIL;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserver.base.helper.StringHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
+import cn.com.hyrt.carserver.base.view.PhotoPopupView;
+import cn.com.hyrt.carserver.info.activity.QuestionDetailActivity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +52,7 @@ public class QuestionDetailAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup arg2) {
 		
-		Define.REPLY_DETAIL.CDATA data = datas.get(position);
+		final Define.REPLY_DETAIL.CDATA data = datas.get(position);
 		
 		boolean needCreateView = false;
 		boolean isMe = false;
@@ -86,10 +89,32 @@ public class QuestionDetailAdapter extends BaseAdapter{
 		TextView tv_time = (TextView) convertView.findViewById(R.id.tv_time);
 		ImageLoaderView iv_face = (ImageLoaderView) convertView.findViewById(R.id.iv_face);
 		TextView tv_content = (TextView) convertView.findViewById(R.id.tv_content);
+		ImageLoaderView ivPhoto = (ImageLoaderView) convertView.findViewById(R.id.iv_photo);
+		if(data.replycontent == null || "".equals(data.replycontent)){
+			tv_content.setVisibility(View.GONE);
+		}else{
+			tv_content.setVisibility(View.VISIBLE);
+			tv_content.setText(data.replycontent);
+		}
+		
+		if(data.answersimage == null || "".equals(data.answersimage)){
+			ivPhoto.setVisibility(View.GONE);
+		}else{
+			ivPhoto.setVisibility(View.VISIBLE);
+			ivPhoto.setImageUrl(data.answersimage);
+		}
+		
+		ivPhoto.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				PhotoPopupHelper.showPop(data.answersimage, mContext);
+			}
+		});
 		
 		tv_time.setText(StringHelper.getFriendlydate(data.contenttime));
 		iv_face.setImageUrl(data.attacpath);
-		tv_content.setText(data.replycontent);
+		
 		
 		if(!isMe){
 			TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);

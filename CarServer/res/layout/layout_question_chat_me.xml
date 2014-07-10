@@ -37,13 +37,26 @@
         android:scaleType="centerCrop"/>
 
 
-        <TextView
+       <LinearLayout 
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical"
+           android:layout_marginLeft="@dimen/view_margin_small">
+            <TextView
             android:id="@+id/tv_content"
             android:layout_width="239dp"
             android:layout_height="wrap_content"
-            android:text="飒飒啊" 
             android:background="@drawable/bg_chat_me" 
-            android:layout_marginLeft="@dimen/view_margin_small"/>
+            />
+            
+            <cn.com.hyrt.carserver.base.view.ImageLoaderView 
+                android:id="@+id/iv_photo"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_marginTop="@dimen/view_margin_small"
+                android:scaleType="centerCrop"
+                android:layout_marginLeft="@dimen/view_margin"/>
+       </LinearLayout>
 
 </LinearLayout>
 </LinearLayout>

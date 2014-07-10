@@ -1,8 +1,12 @@
 package cn.com.hyrt.carserver.info.activity;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import org.kobjects.base64.Base64;
 
@@ -17,12 +21,16 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
+import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR;
@@ -37,9 +45,11 @@ import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 public class AlterCarActivity extends BaseActivity{
 	@ViewInject(id=R.id.btn_add_photo,click="addPhoto") TextView btnAddPhoto;
 	@ViewInject(id=R.id.et_carnumber) EditText etCarNumber;
-	@ViewInject(id=R.id.et_brand) EditText etBrand;
-	@ViewInject(id=R.id.et_model) EditText etModel;
-	@ViewInject(id=R.id.et_submodel) EditText etSubModel;
+//	@ViewInject(id=R.id.et_brand) EditText etBrand;
+	@ViewInject(id=R.id.spinner_brand) Spinner spinnerBrand;
+//	@ViewInject(id=R.id.et_model) EditText etModel;
+	@ViewInject(id=R.id.spinner_model) Spinner spinnerModel;
+//	@ViewInject(id=R.id.et_submodel) EditText etSubModel;
 	@ViewInject(id=R.id.et_cartype) EditText etCarType;
 	@ViewInject(id=R.id.et_mileage) EditText etMileage;
 	@ViewInject(id=R.id.et_yearcheckdate) EditText etYearCheckDate;
@@ -68,6 +78,26 @@ public class AlterCarActivity extends BaseActivity{
 	private String yearcheckDate;
 	private WebServiceHelper mWebServiceHelper;
 	
+	private List<List<Map<String, String>>> twoList 
+	= new ArrayList<List<Map<String,String>>>();
+	
+	private List<List<List<Map<String, String>>>> threeList
+	= new ArrayList<List<List<Map<String,String>>>>();
+	private WebServiceHelper mCarModelServiceHelper;
+	
+	private Map<String, List<Map<String, String>>> modeMap 
+	= new HashMap<String, List<Map<String,String>>>();
+	private List<String> brandName = new ArrayList<String>();
+	private List<String> brandId = new ArrayList<String>();
+	private List<String> modelName = new ArrayList<String>();
+	private List<String> modelId = new ArrayList<String>();
+	private ArrayAdapter<String> modelAdapter;
+	
+	private String curBrand = "";
+	private String curModel = "";
+	
+	private boolean firstSeleted = true;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -85,12 +115,14 @@ public class AlterCarActivity extends BaseActivity{
 		if(isAdd){
 			setTitle(getString(R.string.info_add_car));
 			btn_confirm_add.setText(R.string.info_confirm_add);
+			loadBrand();
 		}else{
 			setTitle(getString(R.string.info_change_car));
 			btn_confirm_add.setText(R.string.info_save_change);
 			AlertHelper.getInstance(AlterCarActivity.this).showLoading(null);
 			loadData();
 		}
+		
 		
 	}
 	
@@ -111,9 +143,11 @@ public class AlterCarActivity extends BaseActivity{
 								btnAddPhoto.setText("");
 							}
 							etCarNumber.setText(result.carnumber);
-							etBrand.setText(result.brand);
-							etModel.setText(result.model);
-							etSubModel.setText(result.submodel);
+//							etBrand.setText(result.brand);
+//							etModel.setText(result.model);
+//							etSubModel.setText(result.submodel);
+							curBrand = result.brand;
+							curModel = result.model;
 							etCarType.setText(result.cartype);
 							etMileage.setText(result.mileage);
 							etYearCheckDate.setText(StringHelper.formatDate(result.yearcheckdate));
@@ -122,6 +156,7 @@ public class AlterCarActivity extends BaseActivity{
 							etInsuranceType.setText(result.insurancetype);
 							etInsuranceNum.setText(result.insurancenum);
 							etInsuranceCompany.setText(result.insurancecompany);
+							loadBrand();
 						}
 					}
 
@@ -134,6 +169,118 @@ public class AlterCarActivity extends BaseActivity{
 					}
 		}, this);
 		mCarInfoServiceHelper.getCarInfo(carId);
+		
+	}
+	
+	private void loadBrand(){
+		if(mCarModelServiceHelper == null){
+			mCarModelServiceHelper = new WebServiceHelper(
+					new WebServiceHelper.OnSuccessListener() {
+				
+				@Override
+				public void onSuccess(String result) {
+					ClassifyJsonParser classifyJsonParser = new ClassifyJsonParser();
+					classifyJsonParser.parse(result);
+					twoList.clear();
+					threeList.clear();
+					twoList.addAll(classifyJsonParser.getTwoList());
+					threeList.addAll(classifyJsonParser.getThreeList());
+					
+					brandName.clear();
+					brandName.add(getString(R.string.spinner_default_label));
+					brandId.clear();
+					brandId.add("");
+					int brandIndex = 0;
+					for(int i=0,j=twoList.size(); i<j; i++){
+						List<Map<String, String>> cList = twoList.get(i);
+						for(int a=0,b=cList.size(); a<b; a++){
+							brandId.add(cList.get(a).get("id"));
+							String name = cList.get(a).get("name");
+							brandName.add(name);
+							if(curBrand != null && curBrand.equals(name)){
+								brandIndex = a+1;
+							}
+						}
+					}
+					
+					
+					ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String>(
+							AlterCarActivity.this,
+							android.R.layout.simple_spinner_item, brandName);
+					mArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+					spinnerBrand.setAdapter(mArrayAdapter);
+					spinnerBrand.setSelection(brandIndex);
+					spinnerBrand.setOnItemSelectedListener(mBrandItemSelectedListener);
+					
+					
+					modeMap.clear();
+					for(int i=0,j=threeList.size(); i<j; i++){
+						List<List<Map<String, String>>> cList = threeList.get(i);
+						for(int a=0,b=cList.size(); a<b; a++){
+							List<Map<String, String>> ccList = cList.get(a);
+							modeMap.put(twoList.get(i).get(a).get("id"), ccList);
+						}
+					}
+					setModel(brandId.get(brandIndex), curModel);
+				}
+			}, this);
+		}
+		mCarModelServiceHelper.getBrands();
+	}
+	
+	private AdapterView.OnItemSelectedListener mBrandItemSelectedListener 
+	= new AdapterView.OnItemSelectedListener() {
+
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int position,
+				long arg3) {
+			if(firstSeleted){
+				firstSeleted = false;
+				return;
+			}
+			setModel(brandId.get(position), null);
+		}
+
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		
+	};
+	
+	private void setModel(String id, String model){
+		LogHelper.i("tag", "modeMap:"+modeMap);
+		List<Map<String, String>> mList = modeMap.get(id);
+		modelId.clear();
+		modelName.clear();
+		modelId.add("");
+		modelName.add(getString(R.string.spinner_default_label));
+		
+		int modelIndex = 0;
+		LogHelper.i("tag", "model:"+model +" id:"+id+" mList:"+mList);
+		if(mList != null && mList.size() > 0){
+			for(int i=0,j=mList.size(); i<j; i++){
+				modelId.add(mList.get(i).get("id"));
+				String name = mList.get(i).get("name");
+				modelName.add(name);
+				if(model != null && model.equals(name)){
+					modelIndex = i+1;
+				}
+			}
+		}
+		
+		LogHelper.i("tag", "modelIndex:"+modelIndex);
+		
+		if(modelAdapter == null){
+			modelAdapter = new ArrayAdapter<String>(AlterCarActivity.this, android.R.layout.simple_spinner_item, modelName);
+			modelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+			spinnerModel.setAdapter(modelAdapter);
+		}else{
+			modelAdapter.notifyDataSetChanged();
+		}
+		spinnerModel.setSelection(modelIndex);
 	}
 	
 	public void addPhoto(View view){
@@ -152,9 +299,20 @@ public class AlterCarActivity extends BaseActivity{
 			car.carid = carId;
 		}
 		car.carnumber = etCarNumber.getText().toString();
-		car.brand = etBrand.getText().toString();
-		car.model = etModel.getText().toString();
-		car.submodel = etSubModel.getText().toString();
+//		car.brand = etBrand.getText().toString();
+//		car.model = etModel.getText().toString();
+//		car.submodel = etSubModel.getText().toString();
+		if(spinnerBrand.getSelectedItemPosition() <= 0){
+			AlertHelper.getInstance(this).showCenterToast(R.string.info_brand_not_selected);
+			return;
+		}else if(spinnerModel.getSelectedItemPosition() <= 0){
+			AlertHelper.getInstance(this).showCenterToast(R.string.info_model_not_selected);
+			return;
+		}else{
+			car.brand = brandName.get(spinnerBrand.getSelectedItemPosition());
+			car.model = modelName.get(spinnerModel.getSelectedItemPosition());
+		}
+		
 		car.cartype = etCarType.getText().toString();
 		car.mileage = etMileage.getText().toString();
 		car.yearcheckdate = yearcheckDate;

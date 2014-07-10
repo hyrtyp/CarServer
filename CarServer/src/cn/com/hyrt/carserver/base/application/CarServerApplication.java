@@ -13,7 +13,7 @@ public class CarServerApplication extends Application{
 	public void onCreate() {
 		super.onCreate();
 		//全局捕获异常
-		CrashHandler mCrashHandler = CrashHandler.getInstance();
-		mCrashHandler.init(getApplicationContext());
+//		CrashHandler mCrashHandler = CrashHandler.getInstance();
+//		mCrashHandler.init(getApplicationContext());
 	}
 }

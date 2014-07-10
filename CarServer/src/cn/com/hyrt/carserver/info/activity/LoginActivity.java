@@ -1,5 +1,6 @@
 package cn.com.hyrt.carserver.info.activity;
 
+import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -20,7 +21,7 @@ import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 
-public class LoginActivity extends BaseActivity{
+public class LoginActivity extends FinalActivity{
 	
 	@ViewInject(id=R.id.et_username) EditText etUserName;
 	@ViewInject(id=R.id.et_pwd) EditText etPwd;
@@ -30,7 +31,7 @@ public class LoginActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-		showBackButton(false);
+//		showBackButton(false);
 	}
 	
 	public void login(View view){

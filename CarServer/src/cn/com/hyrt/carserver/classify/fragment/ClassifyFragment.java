@@ -96,15 +96,15 @@ public class ClassifyFragment extends Fragment{
 			LogHelper.i("tag", ""+position); 
 			Intent gvFoundintent = new Intent();
 			switch(position){
-			//找服务
+			//找服务http://192.168.10.238:8083/cspportal/goods/search?areaname=城市名称（北京 需要经行编码UTF-8）&coorx=经度坐标&coory=纬度坐标
 			case 0:
 				gvFoundintent.setClass(getActivity(), WebActivity.class);
 				gvFoundintent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/goods/search?areaname=");
 			    break;
-			//找商家
+			//找商家http://192.168.10.238:8083/cspportal/merchant/typelist?areaname=城市名称（北京 需要经行编码UTF-8）&coorx=经度坐标&coory=纬度坐标&userid=用户ID
 			case 1:
 				gvFoundintent.setClass(getActivity(), WebActivity.class);
-				gvFoundintent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				gvFoundintent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/merchant/typelist?areaname=");
 			    break;
 			default:
 				return;  
