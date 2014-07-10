@@ -2,12 +2,15 @@ package cn.com.hyrt.carserver.question.activity;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 
 import org.kobjects.base64.Base64;
 
+import android.R.array;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -27,6 +31,7 @@ import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
+import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_POISTION;
@@ -49,7 +54,7 @@ public class QuestionActivity extends BaseActivity {
 	private Button mButton;
 	ImageLoaderView ivFaceImg;
 	private PhotoHelper mPhotoHelper;
-	private Dialog mDialog;
+	private Dialog mSpotDialogOne;
 	private int flag = 0, flag1 = 0;
 	private String positionId = "";
 	private TextView positionText;
@@ -64,10 +69,17 @@ public class QuestionActivity extends BaseActivity {
 	private Boolean isSuccess;
 	@ViewInject(id=R.id.leftlay) RelativeLayout leftlay;
 	@ViewInject(id=R.id.imglayout) RelativeLayout imglayout;
+	
+	private List<String> spotIdOne = new ArrayList<String>();
+	private List<String> spotNameOne = new ArrayList<String>();
+	private Map<String, List<String>> spotIdTwo = new HashMap<String, List<String>>();
+	private Map<String, List<String>> spotNameTwo = new HashMap<String, List<String>>();
 
 	private List<Define.QUESTION_POISTION.CDATA> data = new ArrayList<Define.QUESTION_POISTION.CDATA>();
 	public static final int FROM_CAMERA = 2;
 	public static final int PHOTO_ZOOM = 3;
+	private ListView ls_correlation;
+	private ArrayAdapter<String> correAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -153,7 +165,7 @@ public class QuestionActivity extends BaseActivity {
 							.setBackgroundResource(R.drawable.ic_question_arrow);
 					flag = 0;
 				} else {
-					getPosition();
+					loadSpot();
 				}
 			}
 		});
@@ -167,7 +179,7 @@ public class QuestionActivity extends BaseActivity {
 //							.setBackgroundResource(R.drawable.ic_question_arrow);
 //					flag = 0;
 				} else {
-					getPosition();
+					loadSpot();
 				}
 			}
 		});
@@ -222,53 +234,106 @@ public class QuestionActivity extends BaseActivity {
 			}
 		});
 	}
+	
+	private void loadSpot(){
+		if(spotIdOne.size() > 0){
+			getPosition(null);
+			return;
+		}
+		WebServiceHelper mSpotServiceHelper
+		= new WebServiceHelper(new WebServiceHelper.OnSuccessListener() {
+			
+			@Override
+			public void onSuccess(String result) {
+				ClassifyJsonParser mClassifyJsonParser = new ClassifyJsonParser();
+				mClassifyJsonParser.parse(result);
+				List<Map<String, String>> oneList = mClassifyJsonParser.getOneList();
+				List<List<Map<String, String>>> twoList
+				= mClassifyJsonParser.getTwoList();
+				
+				
+				for(int i=0,j=oneList.size(); i<j; i++){
+					spotIdOne.add(oneList.get(i).get("id"));
+					spotNameOne.add(oneList.get(i).get("name"));
+					List<String> ids = new ArrayList<String>();
+					List<String> names = new ArrayList<String>();
+					List<Map<String, String>> cList = twoList.get(i);
+					for(int a=0,b=cList.size(); a<b; a++){
+						ids.add(cList.get(a).get("id"));
+						names.add(cList.get(a).get("name"));
+					}
+					spotIdTwo.put(oneList.get(i).get("id"), ids);
+					spotNameTwo.put(oneList.get(i).get("id"), names);
+				}
+				getPosition(null);
+			}
+		}, QuestionActivity.this);
+		mSpotServiceHelper.getSpot();
+	}
 
 	/**
 	 * 选择部位
 	 */
-	public void getPosition() {
-		mDialog = new Dialog(this, R.style.MyDialog);
-		mDialog.setContentView(R.layout.layout_question_position);
-		mDialog.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT,
-				RelativeLayout.LayoutParams.MATCH_PARENT);
-
-		final View ls_correlation = mDialog.findViewById(R.id.ls_correlation);
-
-		((ListView) ls_correlation).setAdapter(new PositionAdapter(
-				QuestionActivity.this, data));
-
-		final View layout_cancle = mDialog.findViewById(R.id.rl10);
-
+	public void getPosition(final String spotId) {
+		if(mSpotDialogOne == null){
+			mSpotDialogOne = new Dialog(this, R.style.MyDialog);
+			mSpotDialogOne.setContentView(R.layout.layout_question_position);
+			mSpotDialogOne.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT,
+					RelativeLayout.LayoutParams.MATCH_PARENT);
+			ls_correlation = (ListView) mSpotDialogOne.findViewById(R.id.ls_correlation);
+			
+		}
+		if(spotId != null){
+			correAdapter = new ArrayAdapter<String>(
+					QuestionActivity.this,
+					R.layout.layout_question_position_item,
+					R.id.tv_name, spotNameTwo.get(spotId));
+			ls_correlation.setAdapter(correAdapter);
+			((TextView)mSpotDialogOne.findViewById(R.id.text1)).setText(R.string.back);
+		}else{
+			correAdapter = new ArrayAdapter<String>(
+					QuestionActivity.this,
+					R.layout.layout_question_position_item,
+					R.id.tv_name, spotNameOne);
+			ls_correlation.setAdapter(correAdapter);
+			((TextView)mSpotDialogOne.findViewById(R.id.text1)).setText(R.string.cancle);
+		}
+		
 		View.OnClickListener mClickListener = new View.OnClickListener() {
 
 			@Override
 			public void onClick(View view) {
-
-				int id = view.getId();
-				if (id == layout_cancle.getId()) {
-
-					mDialog.dismiss();
+				if(spotId != null){
+					getPosition(null);
+					return;
 				}
+				mSpotDialogOne.dismiss();
 			}
 		};
-
-		layout_cancle.setOnClickListener(mClickListener);
-
+		mSpotDialogOne.findViewById(R.id.rl10).setOnClickListener(mClickListener);
+		
 		((ListView) ls_correlation)
 				.setOnItemClickListener(new OnItemClickListener() {
 					@Override
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
-						positionId = data.get(position).id;
-						positionText.setText(data.get(position).name);
+						if(spotId == null){
+							getPosition(spotIdOne.get(position));
+							return;
+						}
+						positionId = spotIdTwo.get(spotId).get(position);
+//						positionId = data.get(position).id;
+//						positionText.setText(data.get(position).name);
+						positionText.setText(spotNameTwo.get(spotId).get(position));
 						teamimage
 								.setBackgroundResource(R.drawable.position_close);
 						flag = 1;
-						mDialog.dismiss();
+						mSpotDialogOne.dismiss();
 					}
 				});
-
-		mDialog.show();
+		if(!mSpotDialogOne.isShowing()){
+			mSpotDialogOne.show();
+		}
 	}
 
 	private void loadData() {

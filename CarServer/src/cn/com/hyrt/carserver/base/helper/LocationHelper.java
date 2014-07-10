@@ -28,16 +28,25 @@ public class LocationHelper {
 	private LocationMode locMode = LocationMode.Hight_Accuracy;//定位模式
 	private String tempcoor = "gcj02";//坐标系
 	private int scanSpan = 1000;//扫描间隔
+	
+	private static LocationHelper mLocationHelper;
+	private Context mContext;
 
-	public LocationHelper(Context context){
+	private LocationHelper(Context context){
+		this.mContext = context;
 		mCallback = null;
 		mLocationClient = new LocationClient(context);
 		mMyLocationListener = new MyLocationListener();
 		mLocationClient.registerLocationListener(mMyLocationListener);
 		mGeofenceClient = new GeofenceClient(context);
-		
-		
 		mVibrator =(Vibrator)context.getSystemService(Service.VIBRATOR_SERVICE);
+	}
+	
+	public static LocationHelper getInstance(Context context){
+		if(mLocationHelper == null){
+			mLocationHelper = new LocationHelper(context);
+		}
+		return mLocationHelper;
 	}
 	
 	private void InitLocation(){
@@ -60,7 +69,7 @@ public class LocationHelper {
 	/**
 	 * 停止定位
 	 */
-	private void stop(){
+	public void stop(){
 		mLocationClient.stop();
 	}
 	
@@ -106,6 +115,7 @@ public class LocationHelper {
 //					+" lon:"+location.getLongitude()
 //					+" error code:"+location.getLocType()+" city:"+location.getCity());
 			if(mCallback != null && location.getLocType() == BDLocation.TypeNetWorkLocation){
+				StorageHelper.getInstance(mContext).saveLocation(location.getLongitude()+"", location.getLatitude()+"", location.getCity());
 				mCallback.onLocation(location.getLongitude(), location.getLatitude(), location.getCity());
 				stop();
 			}
