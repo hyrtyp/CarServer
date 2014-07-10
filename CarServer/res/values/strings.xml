@@ -208,6 +208,15 @@
 	<string name="back">返回</string>
 	<string name="location_label">定位中...</string>
 	
+	<!--登录注册 -->
+	<string name="login_loginin">登    录</string>
+	<string name="login_regist">注    册</string>
+	<string name="login_rem">忘记密码？</string>
+	<string name="login_find">请点击这里找回...</string>
+	<string name="login_goregist">立即注册</string>
+	<string name="login_registlogin">已注册请登录</string>
+	<string name="login_loginsuccess">登录成功</string>
+	<string name="login_loginfailure">登录失败</string>
 	
 	
 </resources>

@@ -21,38 +21,39 @@ import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 
-public class LoginActivity extends FinalActivity{
+public class RegistActivity extends FinalActivity{
 	
 	@ViewInject(id=R.id.et_username) EditText etUserName;
+	@ViewInject(id=R.id.et_email) EditText etEmail;
 	@ViewInject(id=R.id.et_pwd) EditText etPwd;
-	@ViewInject(id=R.id.btn_login,click="login") Button btnLogin;
-	@ViewInject(id=R.id.btn_regist,click="regist") Button regLogin;
+	@ViewInject(id=R.id.btn_regist,click="regist") Button btnLogin;
+	@ViewInject(id=R.id.btn_loginback,click="back") Button backLogin;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
+		setContentView(R.layout.activity_regist);
 //		showBackButton(false);
 	}
 	
-	public void login(View view){
+	public void regist(View view){
 		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
 				new WebServiceHelper.RequestCallback<Define.INFO_LOGIN>() {
 
 					@Override
 					public void onSuccess(INFO_LOGIN result) {
 						if(result != null){
-							AlertHelper.getInstance(LoginActivity.this).showCenterToast(getString(R.string.login_loginsuccess));
+							AlertHelper.getInstance(RegistActivity.this).showCenterToast(getString(R.string.login_loginsuccess));
 							CarServerApplication.loginInfo = result;
-							StorageHelper.getInstance(LoginActivity.this).saveLoginInfo(result);
+							StorageHelper.getInstance(RegistActivity.this).saveLoginInfo(result);
 							getUserInfo();
 						}else{
-							AlertHelper.getInstance(LoginActivity.this).showCenterToast(getString(R.string.login_loginfailure));
+							AlertHelper.getInstance(RegistActivity.this).showCenterToast(getString(R.string.login_loginfailure));
 						}
 					}
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
-						AlertHelper.getInstance(LoginActivity.this).showCenterToast(errorMsg);
+						AlertHelper.getInstance(RegistActivity.this).showCenterToast(errorMsg);
 					}
 					
 		}, this);
@@ -67,7 +68,7 @@ public class LoginActivity extends FinalActivity{
 					public void onSuccess(INFO result) {
 						CarServerApplication.info = result;
 						Intent intent = new Intent();
-						intent.setClass(LoginActivity.this, MainActivity.class);
+						intent.setClass(RegistActivity.this, MainActivity.class);
 						startActivity(intent);
 						finish();
 						
@@ -81,10 +82,9 @@ public class LoginActivity extends FinalActivity{
 		}, this);
 		mWebServiceHelper.getUserInfo();
 	}
-	public void regist(View view){
+	public void back(View view){
 		Intent intent = new Intent();
-		intent.setClass(this, RegistActivity.class);
+		intent.setClass(this, LoginActivity.class);
 		startActivity(intent);
 	}
-	
 }

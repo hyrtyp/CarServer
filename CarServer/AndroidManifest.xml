@@ -141,6 +141,9 @@
 
 		<activity android:name=".question.activity.FindByBrandActivity"
 		    android:label="@string/question_find_brand"/>
+		<activity android:name=".info.activity.RegistActivity"
+		    android:label="@string/login_regist"
+		    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
 		
     </application>
 
