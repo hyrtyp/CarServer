@@ -4,6 +4,7 @@ import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
+import cn.com.hyrt.carserver.base.helper.LocationHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
@@ -44,6 +45,17 @@ public class StartActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
+		
+		LocationHelper mLocationHelper = new LocationHelper(this);
+		mLocationHelper.setLocationCallback(new LocationHelper.LocationCallback() {
+			
+			@Override
+			public void onLocation(double lon, double lat, String city) {
+				StorageHelper.getInstance(StartActivity.this)
+				.saveLocation(lon+"", lat+"", city);
+			}
+		});
+		mLocationHelper.start();
 		
 		Message msg = new Message();
 		msg.what = JUMP;
