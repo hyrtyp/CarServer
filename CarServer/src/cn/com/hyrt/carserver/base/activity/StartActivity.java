@@ -46,7 +46,7 @@ public class StartActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 		
-//		LocationHelper mLocationHelper = new LocationHelper(this);
+//		LocationHelper mLocationHelper = LocationHelper.getInstance(this);
 //		mLocationHelper.setLocationCallback(new LocationHelper.LocationCallback() {
 //			
 //			@Override

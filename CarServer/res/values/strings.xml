@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">CarServer</string>
+    <string name="app_name">汽车服务</string>
 	<string name="pull_to_refresh_release_label">下拉刷新&#8230;</string>
 	<string name="pull_to_refresh_footer_release_label">松开以加载&#8230;</string>
 	<string name="pull_to_refresh_footer_pull_label">上拉加载更多&#8230;</string>
@@ -205,6 +205,8 @@
 	<string name="spinner_default_label">请选择</string>
 	<string name="info_brand_not_selected">请选择品牌</string>
 	<string name="info_model_not_selected">请选择型号</string>
+	<string name="back">返回</string>
+	<string name="location_label">定位中...</string>
 	
 	<!--登录注册 -->
 	<string name="login_loginin">登    录</string>

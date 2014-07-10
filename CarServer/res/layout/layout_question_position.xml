@@ -16,7 +16,7 @@
             android:id="@+id/rl"
             android:layout_width="200dp"
             android:layout_height="38dp"
-            android:background="#000000"
+            android:background="#06c5e9"
             android:gravity="center_vertical|center_horizontal" >
 
             <ImageView
@@ -24,7 +24,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_centerVertical="true"
-                android:background="@drawable/ic_question_position" />
+                android:background="@drawable/ic_question_position2" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@id/image"
                 android:text="@string/question_select_position"
-                android:textColor="#ffffff"
+                android:textColor="#fff"
                 android:textSize="16sp" />
         </RelativeLayout>
 
@@ -48,7 +48,9 @@
             android:id="@+id/ls_correlation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/main_top_margin"/>
+            android:layout_margin="@dimen/main_top_margin"
+            android:divider="@color/line_color"
+            android:dividerHeight="1dp"/>
             
         </RelativeLayout>
          
@@ -58,7 +60,7 @@
             android:layout_height="38dp"
             android:layout_below="@id/rl9"
             android:layout_marginTop="-5dp"
-            android:background="#E0E0E0" >
+            android:background="#cbcaca" >
             <TextView
                 android:id="@+id/text1"
                 android:layout_width="wrap_content"

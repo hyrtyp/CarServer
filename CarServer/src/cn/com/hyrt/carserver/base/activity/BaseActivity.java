@@ -13,6 +13,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.LocationHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 
 /**
@@ -121,5 +122,11 @@ public class BaseActivity extends ActionBarActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		AlertHelper.getInstance(this).dismissLoading();
+	}
+	
+	@Override
+	protected void onStop() {
+		super.onStop();
+		LocationHelper.getInstance(this).stop();
 	}
 }

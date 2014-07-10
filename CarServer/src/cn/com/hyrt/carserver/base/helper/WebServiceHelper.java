@@ -466,6 +466,13 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	}
 	
 	/**
+	 * 获取部位分类
+	 */
+	public void getSpot(){
+		get("getCLWDfl3tb", null, Define.QUESTION_SEARCH_RESULT.class);
+	}
+	
+	/**
 	 * 获取用户ID
 	 * 
 	 * @return

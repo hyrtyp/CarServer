@@ -61,7 +61,7 @@ public class ClassifyJsonParser {
 		try {
 			JSONObject mJsonObject = new JSONObject(json);
 			JSONArray mJsonArray = mJsonObject.getJSONArray("data");
-			this.size = mJsonObject.getInt("size");
+			this.size = mJsonObject.optInt("size");
 			
 			JSONArray oneArray = mJsonArray.getJSONArray(0);
 			JSONArray twoArray = mJsonArray.getJSONArray(1);
@@ -84,7 +84,7 @@ public class ClassifyJsonParser {
 					Map<String, String> map = new HashMap<String, String>();
 					map.put("id", cJsonObject.getString("id"));
 					map.put("name", cJsonObject.getString("name"));
-					map.put("attacpath", cJsonObject.getString("attacpath"));
+					map.put("attacpath", cJsonObject.optString("attacpath"));
 					cList.add(map);
 				}
 				
