@@ -225,7 +225,7 @@ public class ClassificationActivity extends BaseActivity {
 				{
 					names = new String[1];
 					ids = new String[1];
-					names[0]="暂时没有数据";
+					names[0]=getResources().getString(R.string.question_nomeg);
 					ids[0]="1";
 				}
 			}
@@ -343,10 +343,12 @@ public class ClassificationActivity extends BaseActivity {
 			public void onItemClick(AdapterView<?> parent, View view, int position,long arg3)
 			{
 				TextView tv_id =((TextView)view.findViewById(R.id.tv_id));
+				TextView tv_name =((TextView)view.findViewById(R.id.tv_name));
 				curIndex = position;
 				Intent ie=new Intent(context,CorrelationActivity.class);
-				ie.putExtra("name","");
+				ie.putExtra("name",tv_name.getText());
 				ie.putExtra("id", tv_id.getText());
+				ie.putExtra("title", title);
 				context.startActivity(ie);
 			}
 		});

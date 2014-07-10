@@ -21,6 +21,7 @@ public class StorageHelper {
 	private static final String PREFS_NAME = "appInfo";
 	private static final String TAB_INDEX_NAME = "tabIndex";//首页TAB下标
 	private static final String INFO_LOGIN_NAME = "loginInfo";//登录信息
+	private static final String LOCATION_NAME = "location";
 	
 	private Gson gson;
 	
@@ -96,10 +97,28 @@ public class StorageHelper {
 		mSharedPreferences.edit().remove(INFO_LOGIN_NAME);
 	}
 	
-	public void saveTest(String test){
+	/**
+	 * 保存定位信息
+	 * @param lon
+	 * @param lat
+	 * @param city
+	 */
+	public void saveLocation(String lon, String lat, String city){
 		Editor mEditor = mSharedPreferences.edit();
-		mEditor.putString("test", test);
+		mEditor.putString(LOCATION_NAME, String.format("%s;%s;%s", lon, lat, city));
 		mEditor.commit();
+	}
+	
+	/**
+	 * 获取定位信息
+	 * @return
+	 */
+	public String[] getLocation(){
+		String location = mSharedPreferences.getString(LOCATION_NAME, null);
+		if(location == null){
+			return null;
+		}
+		return location.split(";");
 	}
 	
 	

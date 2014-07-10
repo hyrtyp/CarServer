@@ -116,6 +116,7 @@ public class StringHelper {
 			return Html.fromHtml("");
 		}
 		String newStr = str.replace(keyword, "<u ><font color='#00c4e9'>"+keyword+"</font></u>");
+		
 		return Html.fromHtml(newStr);
 	}
 }
