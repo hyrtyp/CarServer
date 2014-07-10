@@ -217,8 +217,12 @@
 	<string name="login_registlogin">已注册请登录</string>
 	<string name="login_loginsuccess">登录成功</string>
 	<string name="login_loginfailure">登录失败</string>
-	<string name="question_comment_expert">评论专家</string>
 	
+	<string name="question_comment_expert">评论专家</string>
+	<string name="login_registsuccess">注册成功</string>
+	<string name="login_registfailure">注册失败</string>
+	<string name="login_loginuserisnull">登录帐号不能为空</string>
+	<string name="login_loginpasswordisnull">登录密码不能为空</string>
 	
 </resources>
 
