@@ -16,6 +16,7 @@ import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_LOGIN;
+import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_SAVE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
@@ -35,6 +36,25 @@ public class LoginActivity extends FinalActivity{
 	}
 	
 	public void login(View view){
+		
+		INFO_SAVE info  = new INFO_SAVE();
+		String user = etUserName.getText().toString();
+		String password = etPwd.getText().toString();
+		
+		if("".equals(user)){
+				AlertHelper.getInstance(this).showCenterToast(R.string.login_loginuserisnull);
+				return;
+		}else{
+			info.unitname = user;
+		} 
+		if("".equals(password)){
+				AlertHelper.getInstance(this).showCenterToast(R.string.login_loginpasswordisnull);
+				return;
+		}else{
+			info.password = password;
+			
+		}
+		
 		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
 				new WebServiceHelper.RequestCallback<Define.INFO_LOGIN>() {
 
@@ -56,7 +76,7 @@ public class LoginActivity extends FinalActivity{
 					}
 					
 		}, this);
-		mWebServiceHelper.login(etUserName.getText().toString(), etPwd.getText().toString());
+		mWebServiceHelper.login(info.unitname.toString(), info.password.toString());
 	}
 	
 	private void getUserInfo(){
