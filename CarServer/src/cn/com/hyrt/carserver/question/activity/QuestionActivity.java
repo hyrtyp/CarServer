@@ -137,7 +137,7 @@ public class QuestionActivity extends BaseActivity {
 			public void onClick(View v) {
 				if (flag == 1) {
 					positionId = "";
-					positionText.setText("选择部件");
+					positionText.setText(R.string.question_select_position);
 					teamimage
 							.setBackgroundResource(R.drawable.ic_question_arrow);
 					flag = 0;
@@ -156,7 +156,7 @@ public class QuestionActivity extends BaseActivity {
 					imageTxt.setVisibility(View.VISIBLE);
 					camer.setVisibility(View.VISIBLE);
 					ivFaceImg.setImageBitmap(null);
-					imageTxt.setText("上传图片");
+					imageTxt.setText(R.string.question_up_photo);
 					sysimage.setBackgroundResource(R.drawable.ic_question_arrow);
 					flag1 = 0;
 				} else {

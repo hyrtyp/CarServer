@@ -49,8 +49,8 @@ public class QuestionFragment extends Fragment {
 	private GridView gvQuestion, gvExperts;
 	private ViewPager bannerPager;
 	private Button questionBtn;
-	private BaseWebServiceHelper mBaseWebServiceHelper;
 	private WebServiceHelper mWebServiceHelper;
+	private List<View> views = new ArrayList<View>(); 
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
@@ -73,8 +73,7 @@ public class QuestionFragment extends Fragment {
 
 	private void loadData() {
 
-		
-		final List<View> views = new ArrayList<View>();
+		views.clear();
 		final LayoutInflater mInflater = LayoutInflater.from(getActivity());
 
 		AlertHelper.getInstance(getActivity()).showLoading(getString(R.string.loading_msg));
@@ -179,22 +178,22 @@ public class QuestionFragment extends Fragment {
 			{
 			case 0:
 				// 维修自查
-				intent.putExtra("title", R.string.question_mend);
+				intent.putExtra("title", getResources().getString(R.string.question_mend));
 				intent.putExtra("type", "1");
 				break;
 			case 1:
 				// 配件改装
-				intent.putExtra("title", R.string.question_custmon);
+				intent.putExtra("title", getResources().getString(R.string.question_custmon));
 				intent.putExtra("type", "2");
 				break;
 			case 2:
 				// 保险直通
-				intent.putExtra("title", R.string.question_insurance);
+				intent.putExtra("title", getResources().getString(R.string.question_insurance));
 				intent.putExtra("type", "3");
 				break;
 			case 3:
 				// 美容装潢
-				intent.putExtra("title", R.string.question_cosmetology);
+				intent.putExtra("title", getResources().getString(R.string.question_cosmetology));
 				intent.putExtra("type", "4");
 				break;
 
@@ -217,7 +216,7 @@ public class QuestionFragment extends Fragment {
 			case 0:
 				// 按专长找
 				intent.setClass(getActivity(), BySpecialityActivity.class);
-				intent.putExtra("title", R.string.question_find_specialty);
+				intent.putExtra("title", getResources().getString(R.string.question_find_specialty));
 				break;
 			case 1:
 				// 按品牌找

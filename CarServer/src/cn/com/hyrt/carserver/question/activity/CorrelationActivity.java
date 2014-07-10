@@ -7,6 +7,7 @@ import java.util.Map;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ListView;
 import cn.com.hyrt.carserver.R;
@@ -28,9 +29,10 @@ public class CorrelationActivity extends BaseActivity {
 
 	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
 	
-	String id;
-	String name;
-	Context context;
+	private String id;
+	private String name;
+	private String title;
+	private Context context;
 	
 	ListView ls_correlation;
 	private CorrelationAdapter  correlationAdapter;
@@ -45,6 +47,11 @@ public class CorrelationActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_question_correlation);
 		context = CorrelationActivity.this;
+		
+		Intent intent = getIntent();
+		title = intent.getStringExtra("title");
+		
+		setTitle(title);
 
 		ls_correlation = (ListView) findViewById(R.id.ls_correlation);
 		id = getIntent().getExtras().getString("id");

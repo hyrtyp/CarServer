@@ -225,7 +225,7 @@ public class ClassificationActivity extends BaseActivity {
 				{
 					names = new String[1];
 					ids = new String[1];
-					names[0]="暂无数据";
+					names[0]=getResources().getString(R.string.question_nomeg);
 					ids[0]="1";
 				}
 			}
@@ -348,6 +348,7 @@ public class ClassificationActivity extends BaseActivity {
 				Intent ie=new Intent(context,CorrelationActivity.class);
 				ie.putExtra("name",tv_name.getText());
 				ie.putExtra("id", tv_id.getText());
+				ie.putExtra("title", title);
 				context.startActivity(ie);
 			}
 		});

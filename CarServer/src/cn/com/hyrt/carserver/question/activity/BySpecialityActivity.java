@@ -189,6 +189,7 @@ public class BySpecialityActivity extends BaseActivity {
 				}
 				ie.putExtra("name", name.getText().toString());
 				ie.putExtra("id", id);
+				ie.putExtra("title", title);
 				context.startActivity(ie);
 			}
 		});
