@@ -3,7 +3,11 @@ package cn.com.hyrt.carserver.question.activity;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import net.tsz.afinal.annotation.view.ViewInject;
+
 import org.kobjects.base64.Base64;
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -36,6 +40,10 @@ import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import cn.com.hyrt.carserver.question.adapter.PositionAdapter;
 
+/**
+ * 车辆问答
+ *
+ */
 public class QuestionActivity extends BaseActivity {
 	private EditText contentText;
 	private Button mButton;
@@ -54,6 +62,8 @@ public class QuestionActivity extends BaseActivity {
 	private String imgBuffer;
 	private Uri questionUri;
 	private Boolean isSuccess;
+	@ViewInject(id=R.id.leftlay) RelativeLayout leftlay;
+	@ViewInject(id=R.id.imglayout) RelativeLayout imglayout;
 
 	private List<Define.QUESTION_POISTION.CDATA> data = new ArrayList<Define.QUESTION_POISTION.CDATA>();
 	public static final int FROM_CAMERA = 2;
@@ -129,12 +139,13 @@ public class QuestionActivity extends BaseActivity {
 		teamimage = (ImageView) findViewById(R.id.teamimage);
 		sysimage = (ImageView) findViewById(R.id.sysimage);
 		camer = (ImageView) findViewById(R.id.camer);
-		rightLayout = (RelativeLayout) findViewById(R.id.imglayout);
-		leftLayout = (RelativeLayout) findViewById(R.id.leftlay);
+		rightLayout = (RelativeLayout) findViewById(R.id.rl_teamNotifi2);
+		leftLayout = (RelativeLayout) findViewById(R.id.rl_teamNotifi);
 		final Intent intent = new Intent();
-		rightLayout.setOnClickListener(new OnClickListener() {
+		imglayout.setOnClickListener(new OnClickListener() {
+			
 			@Override
-			public void onClick(View v) {
+			public void onClick(View arg0) {
 				if (flag == 1) {
 					positionId = "";
 					positionText.setText(R.string.question_select_position);
@@ -146,10 +157,25 @@ public class QuestionActivity extends BaseActivity {
 				}
 			}
 		});
-
-		leftLayout.setOnClickListener(new OnClickListener() {
+		rightLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if (flag == 1) {
+//					positionId = "";
+//					positionText.setText(R.string.question_select_position);
+//					teamimage
+//							.setBackgroundResource(R.drawable.ic_question_arrow);
+//					flag = 0;
+				} else {
+					getPosition();
+				}
+			}
+		});
+
+		leftlay.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
 				if (flag1 == 1) {
 					imgBuffer = "";
 					ivFaceImg.setVisibility(View.GONE);
@@ -159,6 +185,24 @@ public class QuestionActivity extends BaseActivity {
 					imageTxt.setText(R.string.question_up_photo);
 					sysimage.setBackgroundResource(R.drawable.ic_question_arrow);
 					flag1 = 0;
+				}else {
+					updataImg();
+				}
+			}
+		});
+		
+		leftLayout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (flag1 == 1) {
+//					imgBuffer = "";
+//					ivFaceImg.setVisibility(View.GONE);
+//					imageTxt.setVisibility(View.VISIBLE);
+//					camer.setVisibility(View.VISIBLE);
+//					ivFaceImg.setImageBitmap(null);
+//					imageTxt.setText(R.string.question_up_photo);
+//					sysimage.setBackgroundResource(R.drawable.ic_question_arrow);
+//					flag1 = 0;
 				} else {
 					updataImg();
 				}
