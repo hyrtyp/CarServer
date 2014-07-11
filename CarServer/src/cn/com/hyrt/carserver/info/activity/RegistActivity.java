@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
@@ -19,8 +20,10 @@ import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_LOGIN;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_SAVE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.BPUtil;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
+import cn.com.hyrt.carserver.base.helper.StringHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 
 public class RegistActivity extends FinalActivity{
@@ -32,6 +35,7 @@ public class RegistActivity extends FinalActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_regist);
 	}
 	
@@ -46,7 +50,14 @@ public class RegistActivity extends FinalActivity{
 				AlertHelper.getInstance(this).showCenterToast(R.string.info_username_is_null);
 				return;
 		}else{
-			info.unitname = user;
+			StringHelper isphone = new StringHelper();
+		    if(!isphone.isMobileNum(user)){
+		    	AlertHelper.getInstance(this).showCenterToast(R.string.regist_phone);
+		    	return;
+		    }else{
+		    	info.loginname = user;
+		    }
+			
 		} 
 		if("".equals(password)){
 				AlertHelper.getInstance(this).showCenterToast(R.string.info_confirmpwd_is_null);
@@ -72,8 +83,6 @@ public class RegistActivity extends FinalActivity{
 					}
 					
 		}, this);
-		AlertHelper.getInstance(this).showCenterToast(info.unitname.toString());
-		AlertHelper.getInstance(this).showCenterToast(info.password.toString());
 		mWebServiceHelper.saveUserInfo(info);
 	}
 	public void back(View view){

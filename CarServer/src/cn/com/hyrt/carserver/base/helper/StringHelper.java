@@ -4,6 +4,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.text.Html;
 import android.text.Spanned;
@@ -119,4 +121,15 @@ public class StringHelper {
 		
 		return Html.fromHtml(newStr);
 	}
+	/**
+	 * 判断是否是手机号码
+	 * @param mobiles
+	 */
+	public static boolean isMobileNum(String mobiles) {
+        Pattern p = Pattern
+                .compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+        Matcher m = p.matcher(mobiles);
+        return m.matches();
+
+    }
 }

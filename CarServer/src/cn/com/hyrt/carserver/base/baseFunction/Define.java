@@ -101,6 +101,7 @@ public class Define {
 		public String unitname;// 单位名称
 		public String image;// 用户头像
 		public String imagename;// 图像名称
+		public String loginname; //登录账号
 	}
 
 	/**
