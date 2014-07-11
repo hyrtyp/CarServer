@@ -40,6 +40,7 @@ public class LoginActivity extends FinalActivity{
 	}
 	
 	public void login(View view){
+		AlertHelper.getInstance(this).showLoading(null);
 		long failTime = StorageHelper.getInstance(this).getLoginFailTime();
 		if(failTime != -1 && System.currentTimeMillis()-failTime <= LimitTime){
 			AlertHelper.getInstance(LoginActivity.this).showCenterToast(R.string.login_fail2);
@@ -74,6 +75,7 @@ public class LoginActivity extends FinalActivity{
 
 					@Override
 					public void onSuccess(INFO_LOGIN result) {
+						AlertHelper.getInstance(LoginActivity.this).hideLoading();
 						if(result != null){
 							StorageHelper.getInstance(LoginActivity.this).saveLoginFailTime(-1);
 							loginFailCount = 0;
@@ -85,10 +87,12 @@ public class LoginActivity extends FinalActivity{
 							loginFailCount++;
 							AlertHelper.getInstance(LoginActivity.this).showCenterToast(getString(R.string.login_loginfailure));
 						}
+						
 					}
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
+						AlertHelper.getInstance(LoginActivity.this).hideLoading();
 						loginFailCount++;
 						AlertHelper.getInstance(LoginActivity.this).showCenterToast(errorMsg);
 					}
