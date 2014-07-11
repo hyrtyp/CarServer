@@ -121,25 +121,27 @@ public class KnowledgeFragment extends Fragment{
 				long arg3) {
 			LogHelper.i("tag", ""+position); 
 			Intent gvRelatedKnowledgeIntent = new Intent();
+			String path = getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid=";
 			switch(position){
 			//维保详情
 			case 0:
 				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
-				gvRelatedKnowledgeIntent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				path += "000003";
 			    break;
 			//保险知识
 			case 1:
 				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
-				gvRelatedKnowledgeIntent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				path += "000004";
 			    break;
 			//经验心得
 			case 2:
 				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
-				gvRelatedKnowledgeIntent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				path += "000005";
 				break;
 			default:
 				return;  
 			}
+			gvRelatedKnowledgeIntent.putExtra("url", path);
 			startActivity(gvRelatedKnowledgeIntent);
 		}
 		

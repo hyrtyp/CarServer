@@ -142,12 +142,20 @@ public class InfoFragment extends Fragment{
 			case 2:
 				//我的预约
 				intent.setClass(getActivity(), WebActivity.class);
-				intent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				intent.putExtra(
+						"url",
+						getString(R.string.method_weburl)
+						+"/cspportal/appoint/list?userId="
+								+CarServerApplication.loginInfo.id);
 				break;
 			case 3:
 				//我的专家
 				intent.setClass(getActivity(), WebActivity.class);
-				intent.putExtra("url", "http://www.baidu.com/");
+				intent.putExtra(
+						"url",
+						getString(R.string.method_weburl)
+						+"/cspportal/expert/list?userId="
+								+CarServerApplication.loginInfo.id);
 				break;
 			case 4:
 				//车辆状况

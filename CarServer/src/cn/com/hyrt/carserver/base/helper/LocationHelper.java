@@ -111,9 +111,9 @@ public class LocationHelper {
 			logMsg(sb.toString());
 			
 //			Log.i("BaiduLocationApiDem", sb.toString());
-//			LogHelper.i("tag", "lat:"+location.getLatitude()
-//					+" lon:"+location.getLongitude()
-//					+" error code:"+location.getLocType()+" city:"+location.getCity());
+			LogHelper.i("tag", "lat:"+location.getLatitude()
+					+" lon:"+location.getLongitude()
+					+" error code:"+location.getLocType()+" city:"+location.getCity());
 			if(mCallback != null && location.getLocType() == BDLocation.TypeNetWorkLocation){
 				StorageHelper.getInstance(mContext).saveLocation(location.getLongitude()+"", location.getLatitude()+"", location.getCity());
 				mCallback.onLocation(location.getLongitude(), location.getLatitude(), location.getCity());
