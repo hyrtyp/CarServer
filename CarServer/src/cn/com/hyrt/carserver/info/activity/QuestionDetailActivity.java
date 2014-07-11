@@ -33,6 +33,7 @@ import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import cn.com.hyrt.carserver.base.view.PullToRefreshView;
 import cn.com.hyrt.carserver.base.view.PullToRefreshView.OnHeaderRefreshListener;
 import cn.com.hyrt.carserver.info.adapter.QuestionDetailAdapter;
+import cn.com.hyrt.carserver.question.activity.CommentExpertActivity;
 
 public class QuestionDetailActivity extends BaseActivity{
 
@@ -80,6 +81,15 @@ public class QuestionDetailActivity extends BaseActivity{
 			tvPromptOne.setVisibility(View.VISIBLE);
 			tvPromptTwo.setVisibility(View.VISIBLE);
 			layoutReply.setVisibility(View.VISIBLE);
+			tvPromptOne.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					Intent intent = new Intent();
+					intent.setClass(QuestionDetailActivity.this, CommentExpertActivity.class);
+					startActivity(intent);
+				}
+			});
 		}
 		loadData();
 	}

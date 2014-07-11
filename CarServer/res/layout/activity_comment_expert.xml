@@ -2,12 +2,65 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <RatingBar 
+    android:background="@drawable/full_bg"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/main_top_margin" >
+
+    <include layout="@layout/layout_line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="160dp"
+        android:background="#fff"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/question_comment_expert_title"
+            android:textColor="#505050"
+            android:textSize="@dimen/search_btn_text_size"/>
+
+        <RatingBar
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginTop="@dimen/view_margin"
+            android:numStars="5"
+            android:progressDrawable="@drawable/bg_comment_star"
+            android:stepSize="1" />
+    </LinearLayout>
+
+    <include layout="@layout/layout_line" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="161dp"
+        android:layout_margin="@dimen/main_top_margin"
+        android:background="#fff" >
+
+        <EditText
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/face_img_border_not_click"
+            android:gravity="left"
+            android:hint="@string/question_comment_expert_hint"
+            android:padding="@dimen/view_margin"
+            android:textColor="#505050"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_commit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:numStars="5"
-        android:progressDrawable="@drawable/bg_comment_star"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/view_margin"
+        android:layout_marginTop="@dimen/view_margin"
+        android:background="@drawable/bg_question_btn"
+        android:gravity="center"
+        android:text="@string/question_comment_expert_commit"
+        android:textColor="#fff"
+        android:textSize="24sp" />
 
 </LinearLayout>

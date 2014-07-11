@@ -223,6 +223,9 @@
 	<string name="login_registfailure">注册失败</string>
 	<string name="login_loginuserisnull">登录帐号不能为空</string>
 	<string name="login_loginpasswordisnull">登录密码不能为空</string>
+	<string name="question_comment_expert_title">总体评论</string>
+	<string name="question_comment_expert_hint">请输入您的评论内容...</string>
+	<string name="question_comment_expert_commit">提交评论</string>
 	
 </resources>
 
