@@ -59,7 +59,7 @@ public class StorageHelper {
 	 * @return
 	 */
 	public int getTabIndex(){
-		return mSharedPreferences.getInt(TAB_INDEX_NAME, 0);
+		return mSharedPreferences.getInt(TAB_INDEX_NAME, 2);
 	}
 	
 	/**

@@ -75,6 +75,7 @@ public class LoginActivity extends FinalActivity{
 					@Override
 					public void onSuccess(INFO_LOGIN result) {
 						if(result != null){
+							StorageHelper.getInstance(LoginActivity.this).saveLoginFailTime(-1);
 							loginFailCount = 0;
 							AlertHelper.getInstance(LoginActivity.this).showCenterToast(getString(R.string.login_loginsuccess));
 							CarServerApplication.loginInfo = result;
