@@ -28,6 +28,10 @@ public class LoginActivity extends FinalActivity{
 	@ViewInject(id=R.id.et_pwd) EditText etPwd;
 	@ViewInject(id=R.id.btn_login,click="login") Button btnLogin;
 	@ViewInject(id=R.id.btn_regist,click="regist") Button regLogin;
+	
+	private int loginFailCount = 0;
+	private long LimitTime = 1000*60*3;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,6 +40,16 @@ public class LoginActivity extends FinalActivity{
 	}
 	
 	public void login(View view){
+		long failTime = StorageHelper.getInstance(this).getLoginFailTime();
+		if(failTime != -1 && System.currentTimeMillis()-failTime <= LimitTime){
+			AlertHelper.getInstance(LoginActivity.this).showCenterToast(R.string.login_fail2);
+			return;
+		}else if(loginFailCount >= 3){
+			StorageHelper.getInstance(this).saveLoginFailTime(System.currentTimeMillis());
+			loginFailCount = 0;
+			AlertHelper.getInstance(LoginActivity.this).showCenterToast(R.string.login_fail2);
+			return;
+		}
 		
 		INFO_SAVE info  = new INFO_SAVE();
 		String user = etUserName.getText().toString();
@@ -61,17 +75,20 @@ public class LoginActivity extends FinalActivity{
 					@Override
 					public void onSuccess(INFO_LOGIN result) {
 						if(result != null){
+							loginFailCount = 0;
 							AlertHelper.getInstance(LoginActivity.this).showCenterToast(getString(R.string.login_loginsuccess));
 							CarServerApplication.loginInfo = result;
 							StorageHelper.getInstance(LoginActivity.this).saveLoginInfo(result);
 							getUserInfo();
 						}else{
+							loginFailCount++;
 							AlertHelper.getInstance(LoginActivity.this).showCenterToast(getString(R.string.login_loginfailure));
 						}
 					}
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
+						loginFailCount++;
 						AlertHelper.getInstance(LoginActivity.this).showCenterToast(errorMsg);
 					}
 					

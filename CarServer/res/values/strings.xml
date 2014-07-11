@@ -227,6 +227,7 @@
 	<string name="question_comment_expert_hint">请输入您的评论内容...</string>
 	<string name="question_comment_expert_commit">提交评论</string>
 	<string name="regist_phone">请输入手机号码！</string>
+	<string name="login_fail2">登录频繁，请稍后再试！</string>
 	
 </resources>
 

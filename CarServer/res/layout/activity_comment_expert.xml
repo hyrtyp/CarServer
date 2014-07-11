@@ -23,6 +23,7 @@
             android:textSize="@dimen/search_btn_text_size"/>
 
         <RatingBar
+            android:id="@+id/rb_score"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:layout_marginTop="@dimen/view_margin"
@@ -40,6 +41,7 @@
         android:background="#fff" >
 
         <EditText
+            android:id="@+id/et_content"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@drawable/face_img_border_not_click"
