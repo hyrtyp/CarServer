@@ -455,5 +455,12 @@ public class Define {
 			public String attacpath;// 图片路径
 		}
 	}
+	
+	public static class COMMENT_EXPERT extends BASE {
+		public String terminalid;//手机终端用户主键ID(评论人)
+		public String seekid;//评论问题ID
+		public String level;//评论级别
+		public String content;//评论内容
+	}
 
 }

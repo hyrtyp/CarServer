@@ -87,7 +87,8 @@ public class QuestionDetailActivity extends BaseActivity{
 				public void onClick(View arg0) {
 					Intent intent = new Intent();
 					intent.setClass(QuestionDetailActivity.this, CommentExpertActivity.class);
-					startActivity(intent);
+					intent.putExtra("replyId", replyId);
+					startActivityForResult(intent, 101);
 				}
 			});
 		}
@@ -171,6 +172,9 @@ public class QuestionDetailActivity extends BaseActivity{
                 mPhotoHelper = new PhotoHelper(QuestionDetailActivity.this, faceUri, 50);
             }
             mPhotoHelper.startPhotoZoom(faceUri, 50);
+        }else if(resultCode == 101){
+        	setResult(0);
+        	finish();
         }
 	}
 	
@@ -244,4 +248,5 @@ public class QuestionDetailActivity extends BaseActivity{
 		super.onDestroy();
 		PhotoPopupHelper.hidePop();
 	}
+	
 }

@@ -20,7 +20,6 @@ import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_LOGIN;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_SAVE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
-import cn.com.hyrt.carserver.base.helper.BPUtil;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.StringHelper;

@@ -472,6 +472,15 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get("getCLWDfl3tb", null, Define.QUESTION_SEARCH_RESULT.class);
 	}
 	
+	public void commentExpert(Define.COMMENT_EXPERT comment){
+		comment.terminalid = getUserId();
+		Gson gson = new Gson();
+		String params = gson.toJson(comment);
+		get(
+			getString(R.string.method_comment_expert),
+			params, Define.BASE.class);
+	}
+	
 	/**
 	 * 获取用户ID
 	 * 

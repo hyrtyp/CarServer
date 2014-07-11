@@ -8,7 +8,8 @@
         android:id="@+id/iv_banner"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:scaleType="centerCrop" >
+        android:scaleType="fitCenter"
+        android:background="#fff" >
     </cn.com.hyrt.carserver.base.view.ImageLoaderView>
 
     <TextView

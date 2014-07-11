@@ -200,9 +200,18 @@ public class QuestionActivity extends BaseActivity{
 				intent.putExtra("type", type);
 				String replyId = (String) datas.get(position).get("consultationid");
 				intent.putExtra("replyId", replyId);
-				startActivity(intent);
+				startActivityForResult(intent, 0);
 			}
 			
 		});
+	}
+	
+	@Override
+	protected void onActivityResult(int arg0, int resultCode, Intent arg2) {
+		super.onActivityResult(arg0, resultCode, arg2);
+		if(resultCode == 0){
+			AlertHelper.getInstance(QuestionActivity.this).showLoading(null);
+			loadData(false);
+		}
 	}
 }

@@ -29,8 +29,11 @@ public class ImageLoaderView extends ImageView{
 //		if(url != null){
 			if(mFinalBitmap == null){
 				mFinalBitmap = FinalBitmap.create(getContext());
-				mFinalBitmap.configLoadingImage(R.drawable.ic_launcher);
-				mFinalBitmap.configLoadfailImage(R.drawable.ic_launcher);
+				mFinalBitmap.configLoadingImage(R.drawable.bg_img_default);
+				mFinalBitmap.configLoadfailImage(R.drawable.bg_img_default);
+			}
+			if(url == null || "".equals(url)){
+				url = "http://a";
 			}
 			mFinalBitmap.display(this, url);
 //		}
