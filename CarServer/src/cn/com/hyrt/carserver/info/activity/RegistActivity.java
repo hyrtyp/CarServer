@@ -67,12 +67,15 @@ public class RegistActivity extends FinalActivity{
 			
 		}
 		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
-				new WebServiceHelper.RequestCallback<Define.BASE>() {
+				new WebServiceHelper.RequestCallback<Define.INFO_LOGIN>() {
 
 					@Override
-					public void onSuccess(BASE result) {
+					public void onSuccess(INFO_LOGIN result) {
 						if(result != null){
 							AlertHelper.getInstance(RegistActivity.this).showCenterToast(getString(R.string.login_registsuccess));
+							CarServerApplication.loginInfo = result;
+							StorageHelper.getInstance(RegistActivity.this).saveLoginInfo(result);
+							getUserInfo();
 						}else{
 							AlertHelper.getInstance(RegistActivity.this).showCenterToast(getString(R.string.login_registfailure));
 						}
@@ -85,6 +88,30 @@ public class RegistActivity extends FinalActivity{
 		}, this);
 		mWebServiceHelper.saveUserInfo(info);
 	}
+	
+	private void getUserInfo(){
+		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
+				new WebServiceHelper.RequestCallback<Define.INFO>() {
+
+					@Override
+					public void onSuccess(INFO result) {
+						CarServerApplication.info = result;
+						Intent intent = new Intent();
+						intent.setClass(RegistActivity.this, MainActivity.class);
+						startActivity(intent);
+						finish();
+						
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						// TODO Auto-generated method stub
+						
+					}
+		}, this);
+		mWebServiceHelper.getUserInfo();
+	}
+	
 	public void back(View view){
 		Intent intent = new Intent();
 		intent.setClass(this, LoginActivity.class);
