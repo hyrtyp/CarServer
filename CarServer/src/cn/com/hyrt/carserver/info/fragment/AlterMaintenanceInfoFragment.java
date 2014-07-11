@@ -97,6 +97,10 @@ public class AlterMaintenanceInfoFragment extends Fragment{
 			
 			@Override
 			public void onClick(View arg0) {
+				if(byTime == null || "".equals(byTime)){
+					AlertHelper.getInstance(getActivity()).showCenterToast(R.string.info_bytime_nodata);
+					return;
+				}
 				Define.INFO_MAINTENANCE_LIST.CDATA info
 				= new Define.INFO_MAINTENANCE_LIST.CDATA();
 				info.carid = carid;

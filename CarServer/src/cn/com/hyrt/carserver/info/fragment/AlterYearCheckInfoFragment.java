@@ -137,6 +137,10 @@ public class AlterYearCheckInfoFragment extends Fragment{
 			
 			@Override
 			public void onClick(View arg0) {
+				if(njTime == null || "".equals(njTime)){
+					AlertHelper.getInstance(getActivity()).showCenterToast(R.string.info_njtime_nodata);
+					return;
+				}
 				Define.INFO_YEARCHECK_LIST.CDATA info
 				= new Define.INFO_YEARCHECK_LIST.CDATA();
 				info.carid = carid;

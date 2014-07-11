@@ -91,6 +91,10 @@ public class AlterRepairInfoFragment extends Fragment{
 
 			@Override
 			public void onClick(View arg0) {
+				if(wxTime == null || "".equals(wxTime)){
+					AlertHelper.getInstance(getActivity()).showCenterToast(R.string.info_wxtime_nodata);
+					return;
+				}
 				Define.INFO_REPAIR_LIST.CDATA repairInfo
 				= new Define.INFO_REPAIR_LIST.CDATA();
 				repairInfo.carid = carid;

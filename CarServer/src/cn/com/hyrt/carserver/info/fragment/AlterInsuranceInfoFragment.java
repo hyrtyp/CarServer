@@ -93,6 +93,10 @@ public class AlterInsuranceInfoFragment extends Fragment{
 			
 			@Override
 			public void onClick(View arg0) {
+				if(bxTime == null || "".equals(bxTime)){
+					AlertHelper.getInstance(getActivity()).showCenterToast(R.string.info_bxtime_nodata);
+					return;
+				}
 				Define.INFO_INSURANCE_LIST.CDATA info
 				= new Define.INFO_INSURANCE_LIST.CDATA();
 				info.carid = carid;
