@@ -22,6 +22,7 @@ public class StorageHelper {
 	private static final String TAB_INDEX_NAME = "tabIndex";//首页TAB下标
 	private static final String INFO_LOGIN_NAME = "loginInfo";//登录信息
 	private static final String LOCATION_NAME = "location";
+	private static final String LOGIN_FAIL = "loginFail";
 	
 	private Gson gson;
 	
@@ -119,6 +120,17 @@ public class StorageHelper {
 			return null;
 		}
 		return location.split(";");
+	}
+	
+	public void saveLoginFailTime(long now){
+		Editor mEditor = mSharedPreferences.edit();
+		mEditor.putLong(LOGIN_FAIL, now);
+		mEditor.commit();
+	}
+	
+	public long getLoginFailTime(){
+		long failTime = mSharedPreferences.getLong(LOGIN_FAIL, -1);
+		return failTime;
 	}
 	
 	
