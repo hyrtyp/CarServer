@@ -131,6 +131,8 @@ public class CorrelationActivity extends BaseActivity {
 								map.put("attacpath",
 										result.data.get(i).attacpath);
 								map.put("id", result.data.get(i).id);
+								map.put("levelname", result.data.get(i).levelname);
+								map.put("sjname", result.data.get(i).sjname);
 								data.add(map);
 							}
 

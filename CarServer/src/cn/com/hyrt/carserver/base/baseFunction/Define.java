@@ -375,6 +375,8 @@ public class Define {
 			public String attacpathname;
 			public String terminalid;
 			public String attacpath;
+			public String levelname;//专家级别名称
+			public String sjname;//专家所属商家名称
 
 			@Override
 			public String toString() {
