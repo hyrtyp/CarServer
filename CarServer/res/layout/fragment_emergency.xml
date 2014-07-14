@@ -46,6 +46,18 @@
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_line" />
+            
+            <Button 
+                android:id="@+id/btn_sos"
+                android:layout_width="265dp"
+                android:layout_height="46dp"
+                android:background="@drawable/bg_sos_btn"
+                android:layout_marginTop="@dimen/view_margin_big"
+                android:layout_marginBottom="@dimen/view_margin_big"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#fff"
+                android:textSize="25sp"
+                android:text="快速求助"/>
         </LinearLayout>
     </ScrollView>
 

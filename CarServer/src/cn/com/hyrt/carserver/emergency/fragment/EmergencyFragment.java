@@ -5,6 +5,7 @@ import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.emergency.activity.InsuranceClaimActivity;
+import cn.com.hyrt.carserver.emergency.activity.SOSActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.Toast;
 
@@ -67,9 +69,20 @@ public class EmergencyFragment extends Fragment{
 			}
 		}
 	};
+	private Button btn_sos;
 	
 	private void findView(){
 		gvMyInfo = (GridView) rootView.findViewById(R.id.gv_emergency);
+		btn_sos = (Button) rootView.findViewById(R.id.btn_sos);
+		btn_sos.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), SOSActivity.class);
+				startActivity(intent);
+			}
+		});
 	}
 
 }

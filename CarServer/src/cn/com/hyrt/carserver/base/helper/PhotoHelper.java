@@ -67,7 +67,7 @@ public class PhotoHelper {
 			public void onClick(View view) {
 				int id = view.getId();
 				if(id == layout_camera.getId()){
-					getFromCamera(uri);
+					getFromCamera();
 					mDialog.dismiss();
 				}else if(id == layout_album.getId()){
 					getFromLocal(cropWidth, cropHeight);
@@ -125,8 +125,7 @@ public class PhotoHelper {
      * 获取照相的图片 需要在activity中监听onActivityResult方法
      * @param uri 照片保存路径
      */
-    public void getFromCamera(Uri uri){
-    	
+    public void getFromCamera(){
         Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
         intent.putExtra(MediaStore.EXTRA_OUTPUT,uri);
         ((Activity) context).startActivityForResult(intent, FROM_CAMERA);
