@@ -12,11 +12,11 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="发现故障"
-        android:textSize="@dimen/text_size"
+        android:textSize="18sp"
         android:textColor="#505050"
         android:singleLine="true"
         android:ellipsize="end"
-        android:layout_marginTop="@dimen/view_margin_big"/>
+        android:layout_marginTop="@dimen/view_margin"/>
 
     <LinearLayout 
         android:layout_width="fill_parent"
@@ -26,8 +26,8 @@
         android:layout_marginBottom="@dimen/view_margin">
         <cn.com.hyrt.carserver.base.view.ImageLoaderView 
             android:id="@+id/iv_face_img"
-            android:layout_width="@dimen/face_img_size_least"
-            android:layout_height="@dimen/face_img_size_least"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
             android:src="@drawable/img_car_default"
             android:background="@drawable/face_img_border_not_click"
             android:padding="1dp"
@@ -38,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text="高级技工"
                 android:textColor="#000"
-                android:textSize="@dimen/text_size"
+                android:textSize="16sp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/main_top_margin"/>
                 <TextView 
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="高级技工"
                 android:textColor="#7a7a7a"
-                android:textSize="@dimen/tab_text"
+                android:textSize="14sp"
                 android:layout_marginLeft="@dimen/view_margin"
                 android:layout_gravity="center_vertical"/>
     </LinearLayout>

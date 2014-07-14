@@ -8,6 +8,7 @@ import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.base.helper.StringHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -141,20 +142,23 @@ public class AlterInsuranceInfoFragment extends Fragment{
 		     
 		     mDatePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
 					
-
 					@Override
 					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
 							String time = String.format("%s-%s-%s", year,
 									monthOfYear + 1 >= 10 ? monthOfYear + 1 : "0" + (monthOfYear + 1),
 									dayOfMonth >= 10 ? dayOfMonth : "0" + (dayOfMonth));
 							et_bxtime.setText(time);
-							bxTime = time+" 00:00:00.000";
-						
+							bxTime = time+" 12:00:00.000";
+						long millis = StringHelper.string2Millis(time);
+						if(millis > System.currentTimeMillis()){
+							AlertHelper.getInstance(getActivity()).showCenterToast(R.string.time_beyond);
+							et_bxtime.setText(StringHelper.getNowTime());
+							bxTime = StringHelper.getNowTime();
+						}
 					}
 				}, year, month, day);
 		 }
 		 mDatePickerDialog.setTitle(R.string.info_bxtime_label);
-		 
 		 mDatePickerDialog.show();
 		 
 		

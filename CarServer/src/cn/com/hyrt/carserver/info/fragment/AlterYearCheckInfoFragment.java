@@ -8,6 +8,7 @@ import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.base.helper.StringHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -199,11 +200,16 @@ public class AlterYearCheckInfoFragment extends Fragment{
 											: "0" + (monthOfYear + 1),
 									dayOfMonth >= 10 ? dayOfMonth : "0"
 											+ (dayOfMonth));
-
+							long millis = StringHelper.string2Millis(time);
 							switch (timeType) {
 							case 0:
 								et_njtime.setText(time);
-								njTime = time + " 00:00:00.000";
+								njTime = time + " 12:00:00.000";
+								if(millis > System.currentTimeMillis()){
+									AlertHelper.getInstance(getActivity()).showCenterToast(R.string.time_beyond);
+									et_njtime.setText(StringHelper.getNowTime());
+									njTime = StringHelper.getNowTime();
+								}
 								break;
 							case 1:
 								et_shouldtime.setText(time);

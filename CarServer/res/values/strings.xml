@@ -200,7 +200,7 @@
 	<string name="info_njcost_label">年检费用</string>
 	<string name="search_result">搜索结果</string>
 	<string name="info_question_detail_prompt">专家是利用休息时间为您解答问题，如未及时回复请谅解。\n专家的回复仅为参考，具体车辆问题请前往修理厂。</string>
-	<string name="info_question_detail_prompt_one">如专家已解决您的问题，请点击评论》</string>
+	<string name="info_question_detail_prompt_one">如专家已解决您的问题，请点击评论>></string>
 	<string name="info_question_detail_nodata">暂无聊天记录</string>
 	<string name="spinner_default_label">请选择</string>
 	<string name="info_brand_not_selected">请选择品牌</string>
@@ -244,6 +244,7 @@
 	<string name="send_success">发送成功</string>
 	<string name="eme_recording">正在录音</string>
 	<string name="eme_record_video_start">已经开始录制视频</string>
+	<string name="time_beyond">时间超出</string>
 	
 </resources>
 

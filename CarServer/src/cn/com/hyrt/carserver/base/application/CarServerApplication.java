@@ -1,5 +1,6 @@
 package cn.com.hyrt.carserver.base.application;
 
+import cn.com.hyrt.carserver.base.baseFunction.CrashHandler;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import android.app.Application;
 
@@ -13,7 +14,7 @@ public class CarServerApplication extends Application{
 	public void onCreate() {
 		super.onCreate();
 		//全局捕获异常
-//		CrashHandler mCrashHandler = CrashHandler.getInstance();
-//		mCrashHandler.init(getApplicationContext());
+		CrashHandler mCrashHandler = CrashHandler.getInstance();
+		mCrashHandler.init(getApplicationContext());
 	}
 }

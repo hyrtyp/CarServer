@@ -9,6 +9,7 @@ import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_REPAIR_LIST.CDATA;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.base.helper.StringHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.info.activity.AlterCarActivity;
 import android.app.DatePickerDialog;
@@ -128,7 +129,13 @@ public class AlterRepairInfoFragment extends Fragment{
 									monthOfYear + 1 >= 10 ? monthOfYear + 1 : "0" + (monthOfYear + 1),
 									dayOfMonth >= 10 ? dayOfMonth : "0" + (dayOfMonth));
 							et_wxtime.setText(time);
-							wxTime = time+" 00:00:00.000";
+							wxTime = time+" 12:00:00.000";
+							long millis = StringHelper.string2Millis(time);
+							if(millis > System.currentTimeMillis()){
+								AlertHelper.getInstance(getActivity()).showCenterToast(R.string.time_beyond);
+								et_wxtime.setText(StringHelper.getNowTime());
+								wxTime = StringHelper.getNowTime();
+							}
 						
 					}
 				}, year, month, day);

@@ -18,4 +18,5 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="blue_1">#82e2f4</color>
+    <color name="classification_normal_color">#454545</color>
 </resources>

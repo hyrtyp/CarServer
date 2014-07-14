@@ -357,7 +357,6 @@ public class QuestionActivity extends BaseActivity {
 
 							data.clear();
 							data.addAll(result.data);
-							System.out.println("load data==========" + data);
 
 						}
 					}

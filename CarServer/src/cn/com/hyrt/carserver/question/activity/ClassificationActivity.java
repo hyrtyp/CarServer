@@ -26,6 +26,7 @@ import cn.com.hyrt.carserver.R.drawable;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.PullToRefreshView;
 
@@ -272,7 +273,7 @@ public class ClassificationActivity extends BaseActivity {
 			if(position == curIndex){
 				convertView.setBackgroundResource(android.R.color.white);
 				((TextView)convertView.findViewById(R.id.tv_name))
-				.setTextColor(getResources().getColor(R.color.no_select_btn_color));
+				.setTextColor(getResources().getColor(R.color.classification_normal_color));
 			}
 			
 			return convertView;
@@ -324,14 +325,17 @@ public class ClassificationActivity extends BaseActivity {
 		{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position,long arg3) {
+				LogHelper.i("tag", "curIndex:"+curIndex);
 				View curView = parent.getChildAt(curIndex);
-				curView.setBackgroundResource(R.color.blue);
-				((TextView)curView.findViewById(R.id.tv_name))
-				.setTextColor(getResources().getColor(android.R.color.white));
+				if(curView != null){
+					curView.setBackgroundResource(R.color.blue);
+					((TextView)curView.findViewById(R.id.tv_name))
+					.setTextColor(getResources().getColor(android.R.color.white));
+				}
 				
 				view.setBackgroundResource(android.R.color.white);
 				((TextView)view.findViewById(R.id.tv_name))
-				.setTextColor(getResources().getColor(R.color.no_select_btn_color));
+				.setTextColor(getResources().getColor(R.color.classification_normal_color));
 				curIndex = position;
 				setRight(curIndex,falg);
 			}
@@ -344,7 +348,6 @@ public class ClassificationActivity extends BaseActivity {
 			{
 				TextView tv_id =((TextView)view.findViewById(R.id.tv_id));
 				TextView tv_name =((TextView)view.findViewById(R.id.tv_name));
-				curIndex = position;
 				Intent ie=new Intent(context,CorrelationActivity.class);
 				ie.putExtra("name",tv_name.getText());
 				ie.putExtra("id", tv_id.getText());

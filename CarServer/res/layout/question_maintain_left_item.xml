@@ -10,8 +10,8 @@
         android:layout_height="39dp"
         android:layout_marginTop="15dp"
         android:singleLine="true"
-        android:layout_marginLeft="@dimen/view_margin"
-        android:textSize="@dimen/input_text_size"
-        android:textColor="#fff"/>
+        android:textSize="22sp"
+        android:textColor="#fff"
+        android:layout_gravity="center"/>
 
 </LinearLayout>

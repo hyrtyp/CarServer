@@ -58,7 +58,12 @@
                     android:id="@+id/ls_correlation"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/main_top_margin" />
+                    android:layout_marginLeft="@dimen/main_top_margin"
+                    android:layout_marginRight="@dimen/main_top_margin"
+                    android:layout_marginBottom="@dimen/main_top_margin" 
+                    android:dividerHeight="@dimen/small_line_size"
+                    android:divider="@color/line_color"/>
+                <include layout="@layout/layout_line_small"/>
             </cn.com.hyrt.carserver.base.view.PullToRefreshView>
         </LinearLayout>
     </LinearLayout>

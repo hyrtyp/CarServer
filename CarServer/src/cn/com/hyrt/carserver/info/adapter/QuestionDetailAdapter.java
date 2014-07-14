@@ -3,6 +3,8 @@ package cn.com.hyrt.carserver.info.adapter;
 import java.util.List;
 
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.activity.StartActivity;
+import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.REPLY_DETAIL;
@@ -13,6 +15,7 @@ import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import cn.com.hyrt.carserver.base.view.PhotoPopupView;
 import cn.com.hyrt.carserver.info.activity.QuestionDetailActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +117,24 @@ public class QuestionDetailAdapter extends BaseAdapter{
 		
 		tv_time.setText(StringHelper.getFriendlydate(data.contenttime));
 		iv_face.setImageUrl(data.attacpath);
+		
+		if(!isMe){
+			iv_face.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+					Intent intent = new Intent();
+					intent.setClass(mContext, WebActivity.class);
+					String url = mContext.getString(R.string.method_weburl)
+							+"/cspportal/expert/view?id="
+							+data.userterminalid
+							+"&userid="+CarServerApplication.loginInfo.id;
+					intent.putExtra("url", url);
+					mContext.startActivity(intent);
+				}
+			});
+		}
+		
 		
 		
 		if(!isMe){

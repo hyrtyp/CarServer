@@ -62,7 +62,6 @@ public class CorrelationActivity extends BaseActivity {
 		ls_correlation = (ListView) findViewById(R.id.ls_correlation);
 		id = getIntent().getExtras().getString("id");
 		name = getIntent().getExtras().getString("name");
-		System.out.println("name================" + name);
 		AlertHelper.getInstance(this).showLoading(null);
 		setListener();
 		loadData();

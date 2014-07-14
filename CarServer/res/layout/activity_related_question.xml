@@ -22,6 +22,7 @@
         android:paddingLeft="@dimen/view_margin_big"
         android:background="#fff"
         android:divider="#ff9b9b9b"
-        android:dividerHeight="1dp"/>
+        android:dividerHeight="1dp"
+        android:paddingTop="@dimen/main_top_margin"/>
 
 </LinearLayout>

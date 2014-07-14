@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.StringHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import cn.com.hyrt.carserver.info.activity.QuestionDetailActivity;
@@ -30,7 +31,6 @@ public class CorrelationAdapter extends BaseAdapter {
 		this.context = context;
 		this.name = name;
 
-		System.out.println("name+++++++++++++++++++++" + name);
 	}
 
 	@Override
@@ -67,7 +67,6 @@ public class CorrelationAdapter extends BaseAdapter {
 
 		String content = data.get(position).get("content") + "";
 		Spanned contenttext = StringHelper.KeywordHighlight(content, name);
-
 		tv_content.setText(contenttext);
 		tv_name.setText(data.get(position).get("username") + "");
 		tv_work.setText(data.get(position).get("zyname") + "");

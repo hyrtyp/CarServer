@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="36dp"
+    android:layout_height="40dp"
     android:textColor="#fff">
     
     <TextView 
@@ -11,8 +11,8 @@
         android:layout_marginTop="5dp"
         android:singleLine="true"
         android:layout_marginLeft="@dimen/view_margin"
-        android:textSize="@dimen/input_text_size"
-        android:textColor="@color/no_select_btn_color"/>
+        android:textSize="18sp"
+        android:textColor="#3a3a3a"/>
     
     <TextView
         android:id="@+id/tv_id"

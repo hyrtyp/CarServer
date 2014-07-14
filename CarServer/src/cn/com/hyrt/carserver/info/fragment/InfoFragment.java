@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.WebActivity;
@@ -39,6 +40,7 @@ public class InfoFragment extends Fragment{
 	private ImageLoaderView ivFaceImg;
 	private TextView tv_username;
 	private TextView tv_cars;
+	private LinearLayout layout_info;
 	private WebServiceHelper mCalWebServiceHelper;
 	private List<String> cars = new ArrayList<String>();
 	
@@ -186,10 +188,11 @@ public class InfoFragment extends Fragment{
 		tv_username = (TextView) rootView.findViewById(R.id.tv_username);
 		tv_cars = (TextView) rootView.findViewById(R.id.tv_cars);
 		tv_username.setText("用户名："+CarServerApplication.info.unitname);
+		layout_info = (LinearLayout) rootView.findViewById(R.id.layout_info);
 	}
 	
 	private void setListener(){
-		ivFaceImg.setOnClickListener(new View.OnClickListener() {
+		layout_info.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {

@@ -57,7 +57,8 @@
 		        android:layout_height="fill_parent"
 		        android:background="@color/blue"
 		        android:divider="#fff"
-		        android:dividerHeight="2dp"/>
+		        android:dividerHeight="2dp"
+		        android:layout_gravity="center_horizontal"/>
 		    <ListView 
 		        android:id="@+id/lv_right"
 		        android:layout_width="0dp"
@@ -66,7 +67,8 @@
 		        android:paddingLeft="@dimen/view_margin_big"
 		        android:background="#fff"
 		        android:divider="#ff9b9b9b"
-		        android:dividerHeight="1dp"/>
+		        android:dividerHeight="1dp"
+		        android:paddingTop="12sp"/>
 		</LinearLayout>
 
 </LinearLayout>

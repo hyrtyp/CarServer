@@ -88,6 +88,20 @@ public class StringHelper {
 		return date;
 	}
 	
+	public static long string2Millis(String time){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		try {
+			date = sdf.parse(time);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		if(date == null){
+			return -1;
+		}
+		return date.getTime();
+	}
+	
 	/**
 	 * 格式化时间
 	 * @param time

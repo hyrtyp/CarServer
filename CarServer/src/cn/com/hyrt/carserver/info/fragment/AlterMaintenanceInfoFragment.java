@@ -8,6 +8,7 @@ import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.base.helper.StringHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -154,7 +155,14 @@ public class AlterMaintenanceInfoFragment extends Fragment{
 									monthOfYear + 1 >= 10 ? monthOfYear + 1 : "0" + (monthOfYear + 1),
 									dayOfMonth >= 10 ? dayOfMonth : "0" + (dayOfMonth));
 							et_bytime.setText(time);
-							byTime = time+" 00:00:00.000";
+							byTime = time+" 12:00:00.000";
+							long millis = StringHelper.string2Millis(time);
+							if(millis > System.currentTimeMillis()){
+								AlertHelper.getInstance(getActivity()).showCenterToast(R.string.time_beyond);
+								et_bytime.setText(StringHelper.getNowTime());
+								byTime = StringHelper.getNowTime();
+							}
+							
 						
 					}
 				}, year, month, day);

@@ -140,7 +140,7 @@ public class RelatedQuestionActivity extends BaseActivity{
 			if(position == curIndex){
 				view.setBackgroundResource(android.R.color.white);
 				((TextView)view.findViewById(R.id.tv_name))
-				.setTextColor(getResources().getColor(R.color.no_select_btn_color));
+				.setTextColor(getResources().getColor(R.color.classification_normal_color));
 			}
 			return view;
 		}
@@ -159,7 +159,7 @@ public class RelatedQuestionActivity extends BaseActivity{
 				
 				view.setBackgroundResource(android.R.color.white);
 				((TextView)view.findViewById(R.id.tv_name))
-				.setTextColor(getResources().getColor(R.color.no_select_btn_color));
+				.setTextColor(getResources().getColor(R.color.classification_normal_color));
 				curIndex = position;
 				setRight(curIndex);
 			}
