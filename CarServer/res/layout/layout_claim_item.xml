@@ -32,7 +32,8 @@
         android:layout_width="80dp"
         android:layout_height="fill_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/view_margin">
         <TextView 
             android:id="@+id/tv_bx_content"
             android:layout_width="wrap_content"
