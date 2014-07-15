@@ -22,6 +22,7 @@ import cn.com.hyrt.carserver.base.baseFunction.Define.INFO;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR_LIST;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import cn.com.hyrt.carserver.info.activity.InfoDetailActivity;

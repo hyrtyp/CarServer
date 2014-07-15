@@ -16,6 +16,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -43,6 +45,7 @@ import cn.com.hyrt.carserver.base.helper.PhotoHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
+import cn.com.hyrt.carserver.info.activity.QuestionDetailActivity;
 import cn.com.hyrt.carserver.question.adapter.PositionAdapter;
 
 /**
@@ -80,6 +83,7 @@ public class QuestionActivity extends BaseActivity {
 	public static final int PHOTO_ZOOM = 3;
 	private ListView ls_correlation;
 	private ArrayAdapter<String> correAdapter;
+	private String beforeText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -231,6 +235,36 @@ public class QuestionActivity extends BaseActivity {
 					intent.setClass(QuestionActivity.this, CommitActivity.class);
 					startActivity(intent);
 				}
+			}
+		});
+		
+		contentText.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence text, int start,
+			        int lengthBefore, int lengthAfter) {
+				String content = contentText.getText().toString();
+				if(content.length() > 200){
+					AlertHelper.getInstance(QuestionActivity.this).showCenterToast(R.string.text_count_beyond);
+					if(beforeText != null){
+						contentText.setText(beforeText);
+						contentText.setSelection(start);
+					}
+				}
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence text, int start,
+			        int lengthBefore, int lengthAfter) {
+				if(beforeText == null){
+					beforeText = text.toString();
+				}
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				beforeText = null;
 			}
 		});
 	}

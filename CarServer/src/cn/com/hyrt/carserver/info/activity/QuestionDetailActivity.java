@@ -12,6 +12,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -135,12 +137,44 @@ public class QuestionDetailActivity extends BaseActivity{
 //		lv_replys.smoothScrollToPosition(lv_replys.getCount() - 1);
 	}
 	
+	
+	private String beforeText;
 	private void setListener(){
 		ptrv.setOnHeaderRefreshListener(new OnHeaderRefreshListener() {
 			
 			@Override
 			public void onHeaderRefresh(PullToRefreshView view) {
 				loadData();
+			}
+		});
+		
+		etContent.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence text, int start,
+			        int lengthBefore, int lengthAfter) {
+				String content = etContent.getText().toString();
+				if(content.length() > 200){
+					AlertHelper.getInstance(QuestionDetailActivity.this).showCenterToast(R.string.text_count_beyond);
+					if(beforeText != null){
+						etContent.setText(beforeText);
+						etContent.setSelection(start);
+					}
+				}
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence text, int start,
+			        int lengthBefore, int lengthAfter) {
+				if(beforeText == null){
+					beforeText = text.toString();
+				}
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				beforeText = null;
 			}
 		});
 	}

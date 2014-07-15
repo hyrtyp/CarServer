@@ -23,7 +23,7 @@
 	<string name="cancle">取消</string>
 	<string name="photo_from_album">从相册选择</string>
 	<string name="load_done">已加载全部数据</string>
-	<string name="info_load_fail">信息加载失败</string>
+	<string name="info_load_fail">暂无数据</string>
 	<string name="userpwd_label">用户密码</string>
 	<string name="phonenum_label">手机号码</string>
 	<string name="viplevel_label">会员等级</string>
@@ -245,6 +245,7 @@
 	<string name="eme_recording">正在录音</string>
 	<string name="eme_record_video_start">已经开始录制视频</string>
 	<string name="time_beyond">时间超出</string>
+	<string name="text_count_beyond">字数超出</string>
 	
 </resources>
 
