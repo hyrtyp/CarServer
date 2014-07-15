@@ -72,36 +72,35 @@ public class ClassifyFragment extends Fragment{
 				long arg3) {
 			Intent gvMyInfointent = new Intent();
 			switch(position){
-			//维修保养
+			//维修保养http://192.168.10.238:8083/cspportal/knowledge/list?typeid=分类iD
 			case 0:
 				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
-				AlertHelper.getInstance(getActivity()).showCenterToast(getString(R.string.method_weburl)+"/cspportal/");
+				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000011);
 			    break;
 			//配件改装
 			case 1:
 				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000012);
 			    break;
 			//内外装饰
 			case 2:
 				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000013);
 			    break;
 			//代驾服务
 			case 3:
 				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				AlertHelper.getInstance(getActivity()).showCenterToast("正在开发中");
 			    break;    
 			//保险优惠
 			case 4:
 				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000011);
 			    break;    
 			//洗车美容
 			case 5:
 				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/");
+				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000014);
 			    break;    
 			default:
 				return;
