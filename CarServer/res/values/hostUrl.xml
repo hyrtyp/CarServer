@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="emergencyjtbj">110</string>
-    <string name="emergencyyjjy">112</string>
+    <string name="emergencyjtbj">122</string>
+    <string name="emergencyyjjy">122</string>
     
     <!-- 接口方法 -->
     <string name="method_getcode">getCode</string>
