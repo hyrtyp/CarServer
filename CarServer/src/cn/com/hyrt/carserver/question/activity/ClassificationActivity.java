@@ -55,6 +55,8 @@ public class ClassificationActivity extends BaseActivity {
 	private List<List<Map<String, String>>> twoList = null;
 	private List<List<List<Map<String, String>>>> threeList = null;
 	
+	@ViewInject(id=R.id.tv_nodata) TextView tvNodata;
+	
 	private WebServiceHelper mWebServiceHelper;
 
 	@Override
@@ -213,6 +215,8 @@ public class ClassificationActivity extends BaseActivity {
 				List<Map<String, String>> list = threeList.get(flag).get(index);
 				if(!list.equals("[]") && list.size()>0)
 				{
+					tvNodata.setVisibility(View.GONE);
+					rightls.setVisibility(View.VISIBLE);
 					names = new String[list.size()];
 					ids = new String[list.size()];
 					for(Map<String, String> map :list)
@@ -221,21 +225,21 @@ public class ClassificationActivity extends BaseActivity {
 						ids[j]  = map.get("id");
 						j++;
 					}
+					
+					if(rightAdapter == null){
+						rightls.setAdapter(new RightAdapter(names,ids));
+					}else{
+						rightAdapter.notifyDataSetChanged();
+					}
 				}
 				else
 				{
-					names = new String[1];
-					ids = new String[1];
-					names[0]=getResources().getString(R.string.question_nomeg);
-					ids[0]="1";
+					tvNodata.setVisibility(View.VISIBLE);
+					rightls.setVisibility(View.GONE);
 				}
 			}
 		}
-		if(rightAdapter == null){
-			rightls.setAdapter(new RightAdapter(names,ids));
-		}else{
-			rightAdapter.notifyDataSetChanged();
-		}
+		
 	}
 	
 	

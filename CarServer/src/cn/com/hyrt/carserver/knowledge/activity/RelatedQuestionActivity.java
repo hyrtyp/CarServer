@@ -26,6 +26,7 @@ public class RelatedQuestionActivity extends BaseActivity{
 
 	@ViewInject(id=R.id.lv_left) ListView lvLeft;
 	@ViewInject(id=R.id.lv_right) ListView lvRight;
+	@ViewInject(id=R.id.tv_nodata) TextView tvNodata;
 	private List<String> leftText = new ArrayList<String>();
 	private List<String> rightText = new ArrayList<String>();
 	private List<String> rightId = new ArrayList<String>();
@@ -114,6 +115,14 @@ public class RelatedQuestionActivity extends BaseActivity{
 		for(int i=0,j=rightList.size(); i<j; i++){
 			rightText.add(rightList.get(i).get("name"));
 			rightId.add(rightList.get(i).get("id"));
+		}
+		
+		if(rightText.size() <= 0){
+			tvNodata.setVisibility(View.VISIBLE);
+			lvRight.setVisibility(View.GONE);
+		}else{
+			tvNodata.setVisibility(View.GONE);
+			lvRight.setVisibility(View.VISIBLE);
 		}
 		
 		if(mRightAdapter == null){

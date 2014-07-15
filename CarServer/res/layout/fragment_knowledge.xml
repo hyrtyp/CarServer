@@ -26,8 +26,7 @@
                     android:layout_height="44dp"
                     android:background="@drawable/bg_edittext"
                     android:hint="@string/knowledge_search_hint"
-                    android:paddingLeft="@dimen/view_margin" 
-                    android:text="1档"/>
+                    android:paddingLeft="@dimen/view_margin"/>
 
                 <LinearLayout
                     android:id="@+id/layout_search"

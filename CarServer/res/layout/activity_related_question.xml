@@ -24,5 +24,16 @@
         android:divider="#ff9b9b9b"
         android:dividerHeight="1dp"
         android:paddingTop="@dimen/main_top_margin"/>
+    <TextView
+        android:id="@+id/tv_nodata"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="fill_parent"
+        android:background="#fff"
+        android:textColor="#9c904b"
+        android:textSize="@dimen/search_btn_text_size"
+        android:text="@string/no_data"
+        android:gravity="center"
+        android:visibility="gone"/>
 
 </LinearLayout>

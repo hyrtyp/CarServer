@@ -155,7 +155,8 @@ public class QuestionDetailActivity extends BaseActivity{
 			        int lengthBefore, int lengthAfter) {
 				String content = etContent.getText().toString();
 				if(content.length() > 200){
-					AlertHelper.getInstance(QuestionDetailActivity.this).showCenterToast(R.string.text_count_beyond);
+					AlertHelper.getInstance(QuestionDetailActivity.this)
+					.showCenterToast(R.string.text_count_beyond);
 					if(beforeText != null){
 						etContent.setText(beforeText);
 						etContent.setSelection(start);
