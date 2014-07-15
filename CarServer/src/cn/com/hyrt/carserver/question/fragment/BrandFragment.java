@@ -47,9 +47,10 @@ public class BrandFragment extends Fragment{
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int arg2,
 					long arg3) {
-				String id = (String) view.findViewById(R.id.tv_name).getTag();
+				String[] data = (String[]) view.findViewById(R.id.tv_name).getTag();
+				String id = data[0];
 				if(id != null){
-					((FindByBrandActivity)getActivity()).open(id);
+					((FindByBrandActivity)getActivity()).open(id, data[1]);
 				}
 			}
 		});

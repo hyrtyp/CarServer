@@ -15,6 +15,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -37,6 +39,7 @@ import cn.com.hyrt.carserver.base.helper.PhotoHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
+import cn.com.hyrt.carserver.question.activity.QuestionActivity;
 
 public class ChangeInfoActivity extends BaseActivity{
 	
@@ -73,16 +76,142 @@ public class ChangeInfoActivity extends BaseActivity{
 		setListener();
 	}
 	
-	private void setListener(){
+	private String beforeText;
+
+	private void setListener() {
 		lvCar.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-					long arg3) {
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
 				Intent intent = new Intent();
 				intent.setClass(ChangeInfoActivity.this, AlterCarActivity.class);
-				intent.putExtra("id", (String)data.get(position).get("id"));
+				intent.putExtra("id", (String) data.get(position).get("id"));
 				startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
+			}
+		});
+		
+		etUserName.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				String content = etUserName.getText().toString();
+				if (content.length() > 25) {
+					AlertHelper.getInstance(ChangeInfoActivity.this)
+							.showCenterToast(R.string.text_count_beyond);
+					if (beforeText != null) {
+						etUserName.setText(beforeText);
+						etUserName.setSelection(start);
+					}
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				if (beforeText == null) {
+					beforeText = text.toString();
+				}
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				beforeText = null;
+			}
+		});
+
+		etOldPwd.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				String content = etOldPwd.getText().toString();
+				if (content.length() > 32) {
+					AlertHelper.getInstance(ChangeInfoActivity.this)
+							.showCenterToast(R.string.text_count_beyond);
+					if (beforeText != null) {
+						etOldPwd.setText(beforeText);
+						etOldPwd.setSelection(start);
+					}
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				if (beforeText == null) {
+					beforeText = text.toString();
+				}
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				beforeText = null;
+			}
+		});
+
+		etNewPwd.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				String content = etNewPwd.getText().toString();
+				if (content.length() > 32) {
+					AlertHelper.getInstance(ChangeInfoActivity.this)
+							.showCenterToast(R.string.text_count_beyond);
+					if (beforeText != null) {
+						etNewPwd.setText(beforeText);
+						etNewPwd.setSelection(start);
+					}
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				if (beforeText == null) {
+					beforeText = text.toString();
+				}
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				beforeText = null;
+			}
+		});
+
+		etConfirmPwd.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				String content = etConfirmPwd.getText().toString();
+				if (content.length() > 32) {
+					AlertHelper.getInstance(ChangeInfoActivity.this)
+							.showCenterToast(R.string.text_count_beyond);
+					if (beforeText != null) {
+						etConfirmPwd.setText(beforeText);
+						etConfirmPwd.setSelection(start);
+					}
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				if (beforeText == null) {
+					beforeText = text.toString();
+				}
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				beforeText = null;
 			}
 		});
 	}

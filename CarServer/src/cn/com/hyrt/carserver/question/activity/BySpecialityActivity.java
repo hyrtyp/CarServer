@@ -103,6 +103,9 @@ public class BySpecialityActivity extends BaseActivity {
 	}
 	
 	private void setRight(int index){
+		if(twoList.size() <= 0){
+			return;
+		}
 		List<Map<String, String>> rightList = twoList.get(index);
 		rightText.clear();
 		for(int i=0,j=rightList.size(); i<j; i++){
@@ -190,6 +193,7 @@ public class BySpecialityActivity extends BaseActivity {
 				ie.putExtra("name", name.getText().toString());
 				ie.putExtra("id", id);
 				ie.putExtra("title", title);
+				ie.putExtra("isBySpeciality", true);
 				context.startActivity(ie);
 			}
 		});

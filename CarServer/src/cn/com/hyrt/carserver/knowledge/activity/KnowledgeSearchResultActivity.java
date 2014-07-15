@@ -15,6 +15,7 @@ import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
+import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_CORRELATION;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_SEARCH_RESULT;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
@@ -30,7 +31,7 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 	
 	private String searchStr;
 	
-	private List<Define.QUESTION_SEARCH_RESULT.CDATA> datas = new ArrayList<Define.QUESTION_SEARCH_RESULT.CDATA>();
+	private List<Define.QUESTION_CORRELATION.CDATA> datas = new ArrayList<Define.QUESTION_CORRELATION.CDATA>();
 	
 	private int pageNo = 1;
 	private boolean isLoadMore = false;
@@ -84,10 +85,10 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 	
 	private void loadData(){
 		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
-				new WebServiceHelper.RequestCallback<Define.QUESTION_SEARCH_RESULT>() {
+				new WebServiceHelper.RequestCallback<Define.QUESTION_CORRELATION>() {
 
 					@Override
-					public void onSuccess(QUESTION_SEARCH_RESULT result) {
+					public void onSuccess(QUESTION_CORRELATION result) {
 						setData(result);
 						AlertHelper.getInstance(KnowledgeSearchResultActivity.this).hideLoading();
 						LogHelper.i("tag", "result:"+result.data.size());
@@ -129,7 +130,7 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 		mWebServiceHelper.searchQuestion(searchStr, pageNo);
 	}
 	
-	private void setData(QUESTION_SEARCH_RESULT result){
+	private void setData(QUESTION_CORRELATION result){
 		
 		if(result == null && datas.size()>0){
 			AlertHelper.getInstance(this).showCenterToast(R.string.load_done);

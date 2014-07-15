@@ -116,7 +116,7 @@ public class BrandAdapter extends BaseAdapter{
 		if(!isPinyin){
 			ImageLoaderView ivImg = (ImageLoaderView) convertView.findViewById(R.id.iv_img);
 			ivImg.setImageUrl(data.get("attacpath"));
-			tvName.setTag(data.get("id"));
+			tvName.setTag(new String[]{data.get("id"), data.get("name")});
 			ivImg.setVisibility(View.VISIBLE);
 		}else{
 			tvName.setTag(null);

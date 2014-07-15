@@ -41,6 +41,9 @@ public class CorrelationActivity extends BaseActivity {
 
 	private int pageNo = 1;
 	private boolean isLoadMore = false;
+	private boolean isBySpeciality = false;
+	private boolean isByBrand = false;
+	private String searchKey;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,11 @@ public class CorrelationActivity extends BaseActivity {
 		context = CorrelationActivity.this;
 
 		Intent intent = getIntent();
+		isByBrand = intent.getBooleanExtra("isByBrand", false);
+		isBySpeciality = intent.getBooleanExtra("isBySpeciality", false);
+		searchKey = intent.getStringExtra("searchKey");
 		title = intent.getStringExtra("title");
+		
 
 		if (title == null) {
 
@@ -164,6 +171,12 @@ public class CorrelationActivity extends BaseActivity {
 		} else {
 			pageNo = 1;
 		}
-		mCarInfoServiceHelper.getCorrelation(id, pageNo);
+		if(isBySpeciality){
+			mCarInfoServiceHelper.getBySpeciality(id, pageNo);
+		}else if(isByBrand){
+			mCarInfoServiceHelper.searchQuestion(searchKey, pageNo);
+		}else{
+			mCarInfoServiceHelper.getCorrelation(id, pageNo);
+		}
 	}
 }

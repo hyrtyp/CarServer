@@ -75,7 +75,8 @@
                         android:paddingLeft="49dp"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
+                        android:textSize="@dimen/input_text_size" 
+                        android:paddingRight="@dimen/main_top_margin"/>
                 </LinearLayout>
 
                 <View
@@ -108,7 +109,8 @@
                         android:paddingLeft="49dp"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
+                        android:textSize="@dimen/input_text_size" 
+                        android:paddingRight="@dimen/main_top_margin"/>
                 </LinearLayout>
 
                 <View
@@ -141,7 +143,8 @@
                         android:paddingLeft="49dp"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
+                        android:textSize="@dimen/input_text_size" 
+                        android:paddingRight="@dimen/main_top_margin"/>
                 </LinearLayout>
 
                 <View
@@ -174,7 +177,8 @@
                         android:paddingLeft="49dp"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
+                        android:textSize="@dimen/input_text_size" 
+                        android:paddingRight="@dimen/main_top_margin"/>
                 </LinearLayout>
             </LinearLayout>
 

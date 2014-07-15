@@ -29,6 +29,7 @@
 	<string name="method_search_question">getCLWDwdlb</string>
     
     <string name="method_question_maintainfl">getCLWDfl</string>
+    <string name="method_question_by_speciality">getZjCLWDwdlb</string>
     <string name="method_question_correlation">getCLWDwdlb</string>
     <string name="method_question_getnewsimg">getCLWDxwhdt</string>
     <string name="method_question_position">getAllTwoList</string>

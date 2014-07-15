@@ -17,13 +17,13 @@ import android.widget.TextView;
 
 public class QuestionResultAdapter extends BaseAdapter{
 
-	private List<Define.QUESTION_SEARCH_RESULT.CDATA> result;
+	private List<Define.QUESTION_CORRELATION.CDATA> result;
 	private Context mContext;
 	private String keyword;
 	
 	
 	
-	public QuestionResultAdapter(List<Define.QUESTION_SEARCH_RESULT.CDATA> result, String keyword, Context mContext) {
+	public QuestionResultAdapter(List<Define.QUESTION_CORRELATION.CDATA> result, String keyword, Context mContext) {
 		super();
 		this.result = result;
 		this.keyword = keyword;
@@ -62,7 +62,7 @@ public class QuestionResultAdapter extends BaseAdapter{
 			mHolder = (ViewHolder) convertview.getTag();
 		}
 		
-		Define.QUESTION_SEARCH_RESULT.CDATA data = result.get(position);
+		Define.QUESTION_CORRELATION.CDATA data = result.get(position);
 		
 		mHolder.iv_face_img.setImageUrl(data.attacpath);
 		mHolder.tv_content.setText(StringHelper.KeywordHighlight(data.content, keyword));

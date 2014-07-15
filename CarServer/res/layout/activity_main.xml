@@ -6,7 +6,7 @@
     android:background="@drawable/full_bg"
     android:orientation="vertical"
     tools:context="cn.com.hyrt.carserver.base.activity.MainActivity" >
-
+    
     <LinearLayout
         android:id="@+id/layout_main_top"
         android:layout_width="fill_parent"

@@ -57,6 +57,7 @@ public class FindByBrandActivity extends BaseActivity{
 	private List<String> data = new ArrayList<String>();
 	
 	private String curBrandId;
+	private String curBrandName;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,6 +84,10 @@ public class FindByBrandActivity extends BaseActivity{
 				Intent intent = new Intent();
 				intent.setClass(FindByBrandActivity.this, CorrelationActivity.class);
 				intent.putExtra("id", id);
+//				intent.putExtra("searchKey", mList.get(position).get("name"));
+				intent.putExtra("searchKey", curBrandName);
+				
+				intent.putExtra("isByBrand", true);
 				startActivity(intent);
 			}
 		});
@@ -105,7 +110,8 @@ public class FindByBrandActivity extends BaseActivity{
 		}
 	}
 	
-	public void open(String id){
+	public void open(String id, String brandName){
+		this.curBrandName = brandName;
 		if (drawerLayout.isDrawerOpen(leftDrawer)) {
 			drawerLayout.closeDrawer(leftDrawer);
 		} else {

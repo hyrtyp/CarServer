@@ -2,6 +2,8 @@ package cn.com.hyrt.carserver.base.activity;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
+import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.ScreenHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
@@ -51,6 +54,24 @@ public class MainActivity extends BaseActivity {
 	private int mImgArray[] = { R.drawable.bg_classify_tab,
 			R.drawable.bg_knowledge_tab, R.drawable.bg_question_tab,
 			R.drawable.bg_info_tab, R.drawable.bg_emergency_tab };
+	
+	private static final int EXIT = 0;
+	
+	private boolean needExit = false;
+	
+	Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case EXIT:
+				needExit = false;
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +131,20 @@ public class MainActivity extends BaseActivity {
 			layoutMainTop.setVisibility(View.VISIBLE);
 		}
 		mainTitle.setText(mTextArray[index]);
+	}
+	
+	@Override
+	public void finish() {
+		if(!needExit){
+			needExit = true;
+			AlertHelper.getInstance(MainActivity.this).showCenterToast(R.string.exit_prompt);
+			Message msg = new Message();
+			msg.what = EXIT;
+			mHandler.sendMessageDelayed(msg, 1000);
+			return;
+		}
+		mHandler.removeMessages(EXIT);
+		super.finish();
 	}
 
 }

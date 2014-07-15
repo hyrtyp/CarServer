@@ -334,6 +334,16 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	}
 	
 	/**
+	 * 按专长找
+	 * @param id
+	 * @param pageNo
+	 */
+	public void getBySpeciality(String id, int pageNo){
+		String params = String.format("{\"classid\":\"%s\",\"pageNo\":\"%s\"}", id,pageNo);
+		get(getString(R.string.method_question_by_speciality), params,Define.QUESTION_CORRELATION.class);
+	}
+	
+	/**
 	 * 获取部件位置
 	 */
 	public void getPoisition(){
@@ -462,7 +472,7 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		
 		get(
 				getString(R.string.method_search_question),
-				params, Define.QUESTION_SEARCH_RESULT.class);
+				params, Define.QUESTION_CORRELATION.class);
 	}
 	
 	/**

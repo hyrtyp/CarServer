@@ -9,6 +9,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +21,7 @@ import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.FileHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
+import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
 
 public class SOSActivity extends BaseActivity{
 	
@@ -61,6 +64,7 @@ public class SOSActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_sos);
+		setListener();
 	}
 	
 	public void camera(View view){
@@ -149,5 +153,39 @@ public class SOSActivity extends BaseActivity{
         	AlertHelper.getInstance(this).showCenterToast(R.string.send_success);
     		finish();
         }
+	}
+	
+	private String beforeText;
+	private void setListener(){
+		etContent.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				String content = etContent.getText().toString();
+				if (content.length() > 200) {
+					AlertHelper.getInstance(SOSActivity.this)
+							.showCenterToast(R.string.text_count_beyond);
+					if (beforeText != null) {
+						etContent.setText(beforeText);
+						etContent.setSelection(start);
+					}
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence text, int start,
+					int lengthBefore, int lengthAfter) {
+				if (beforeText == null) {
+					beforeText = text.toString();
+				}
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable arg0) {
+				beforeText = null;
+			}
+		});
 	}
 }

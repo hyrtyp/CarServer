@@ -48,6 +48,7 @@ public class QuestionDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.et_content) EditText etContent;
 	@ViewInject(id=R.id.btn_reply,click="reply") Button btnReply;
 	@ViewInject(id=R.id.layout_reply) LinearLayout layoutReply;
+	@ViewInject(id=R.id.tv_prompt_three) TextView tvPromptThree;
 	
 	private List<Define.REPLY_DETAIL.CDATA> datas 
 	= new ArrayList<Define.REPLY_DETAIL.CDATA>();
@@ -79,7 +80,9 @@ public class QuestionDetailActivity extends BaseActivity{
 			tvPromptOne.setVisibility(View.GONE);
 			tvPromptTwo.setVisibility(View.GONE);
 			layoutReply.setVisibility(View.GONE);
+			tvPromptThree.setVisibility(View.VISIBLE);
 		}else{
+			tvPromptThree.setVisibility(View.GONE);
 			tvPromptOne.setVisibility(View.VISIBLE);
 			tvPromptTwo.setVisibility(View.VISIBLE);
 			layoutReply.setVisibility(View.VISIBLE);
