@@ -3,10 +3,13 @@ package cn.com.hyrt.carserver.base.activity;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.emergency.fragment.EmergencyFragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
@@ -49,6 +52,22 @@ public class WebActivity extends BaseActivity{
 		return super.onKeyDown(keyCode, event);
 	}
 	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			if(mWebView.canGoBack()){
+				loadError = false;
+				mWebView.goBack();
+				return true;
+			}
+			break;
+		default:
+			break;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
 	private void initWebView(){
 		mWebView = (WebView) findViewById(R.id.webview);
 		mWebView.getSettings().setJavaScriptEnabled(true);
@@ -70,6 +89,17 @@ public class WebActivity extends BaseActivity{
 				super.onReceivedError(view, errorCode, description, failingUrl);
 				loadError = true;
 				mWebView.setVisibility(View.INVISIBLE);
+			}
+			
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				LogHelper.i("tag", "url:"+url);
+				if(url.startsWith("tel:")){
+					Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse(url));  
+					startActivity(intent);
+					return true;
+				}
+				return super.shouldOverrideUrlLoading(view, url);
 			}
 		});
 		
