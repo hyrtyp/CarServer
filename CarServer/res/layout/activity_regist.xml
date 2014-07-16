@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/login_bg" >
+    android:background="@drawable/login_bg" 
+    xmlns:limit="http://schemas.android.com/apk/res/cn.com.hyrt.carserver">
         
         <ImageView
         android:layout_width="fill_parent"
@@ -91,7 +92,7 @@
 	        android:layout_marginTop="2dp"
 	        android:src="@drawable/login_password" />
 
-        <EditText
+        <cn.com.hyrt.carserver.base.view.LimitLengthEditText
             android:id="@+id/login_pwd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -100,7 +101,8 @@
             android:textColor="#00c4e9"
             android:textCursorDrawable="@null"
             android:background="@drawable/login_edittext"
-            android:password="true"/>
+            android:password="true"
+            limit:textLength="16"/>
     </LinearLayout>
    	<View  
 	    android:layout_height="1dp" 
