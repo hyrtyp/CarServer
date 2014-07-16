@@ -35,7 +35,14 @@ public class ClassifyFragment extends Fragment{
 			case STOP_LOCATION:
 				mLocationHelper.stop();
 				AlertHelper.getInstance(getActivity()).hideLoading();
-				jump((Integer) msg.obj, null, null, null);
+				String[] location = StorageHelper.getInstance(getActivity()).getLocation();
+				if(location == null || location.length <=0){
+//					AlertHelper.getInstance(getActivity()).showCenterToast(R.string.no_baidumap);
+					jump((Integer) msg.obj, null, null, null);
+				}else{
+					jump((Integer) msg.obj, location[0], location[1], location[2]);
+				}
+				
 				break;
 
 			default:
@@ -115,11 +122,8 @@ public class ClassifyFragment extends Fragment{
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, final int position,
 				long arg3) {
-			// TODO Auto-generated method stub
-			LogHelper.i("tag", ""+position); 
-			
-			String[] location = StorageHelper.getInstance(getActivity()).getLocation();
-			if(location == null || location.length <=0){
+//			String[] location = StorageHelper.getInstance(getActivity()).getLocation();
+//			if(location == null || location.length <=0){
 				AlertHelper.getInstance(getActivity()).showLoading(getActivity().getString(R.string.location_label));
 				mLocationHelper = LocationHelper.getInstance(getActivity());
 				Message msg = new Message();
@@ -136,9 +140,9 @@ public class ClassifyFragment extends Fragment{
 					}
 				});
 				mLocationHelper.start();
-			}else{
-				jump(position, location[0], location[1], location[2]);
-			}
+//			}else{
+//				jump(position, location[0], location[1], location[2]);
+//			}
 			
 			
 		}

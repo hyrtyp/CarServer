@@ -1,9 +1,11 @@
 package cn.com.hyrt.carserver.emergency.activity;
 
+import java.net.URISyntaxException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +13,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,8 +22,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
+import cn.com.hyrt.carserver.base.activity.MainActivity;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.FileHelper;
+import cn.com.hyrt.carserver.base.helper.LocationHelper;
+import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
 import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
 
@@ -188,4 +195,23 @@ public class SOSActivity extends BaseActivity{
 			}
 		});
 	}
+	
+	@SuppressLint("NewApi")
+	public boolean onCreateOptionsMenu(Menu menu) {
+		menu.add("map").setIcon(R.drawable.ic_map)
+				.setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		String title = item.getTitle().toString();
+		if("map".equals(title)){
+			LocationHelper.jumpBaiduMap(this);
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
+	
 }
