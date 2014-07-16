@@ -244,7 +244,7 @@ private AdapterView.OnItemClickListener gvMyInfoOnItemClickListener1 = new Adapt
 		//内外装饰
 		case 4:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid="+000012);
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid="+00001);
 		    break;
 		//代驾服务
 		case 5:
