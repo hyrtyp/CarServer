@@ -75,51 +75,6 @@ public class ClassifyFragment extends Fragment{
 	private AdapterView.OnItemClickListener gvMyInfoOnItemClickListener = new AdapterView.OnItemClickListener() {
 		
 		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-				long arg3) {
-			Intent gvMyInfointent = new Intent();
-			switch(position){
-			//维修保养http://192.168.10.238:8083/cspportal/knowledge/list?typeid=分类iD
-			case 0:
-				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000011);
-			    break;
-			//配件改装
-			case 1:
-				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000012);
-			    break;
-			//内外装饰
-			case 2:
-				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000013);
-			    break;
-			//代驾服务
-			case 3:
-				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				AlertHelper.getInstance(getActivity()).showCenterToast("正在开发中");
-			    return;    
-			//保险优惠
-			case 4:
-				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000011);
-			    break;    
-			//洗车美容
-			case 5:
-				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000014);
-			    break;    
-			default:
-				return;
-			}
-			startActivity(gvMyInfointent);
-		}
-		
-	};
-	
-private AdapterView.OnItemClickListener gvMyInfoOnItemClickListener1 = new AdapterView.OnItemClickListener() {
-		
-		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, final int position,
 				long arg3) {
 			
@@ -128,7 +83,7 @@ private AdapterView.OnItemClickListener gvMyInfoOnItemClickListener1 = new Adapt
 			mLocationHelper = LocationHelper.getInstance(getActivity());
 			Message msg = new Message();
 			msg.what = STOP_LOCATION;
-			msg.obj = position;
+			msg.obj = position+2;
 			mHandler.sendMessageDelayed(msg, 5000);
 			mLocationHelper.setLocationCallback(new LocationHelper.LocationCallback() {
 				
@@ -140,43 +95,6 @@ private AdapterView.OnItemClickListener gvMyInfoOnItemClickListener1 = new Adapt
 				}
 			});
 			mLocationHelper.start();
-			
-//			Intent gvMyInfointent = new Intent();
-//			switch(position){
-//			//维修保养http://192.168.10.238:8083/cspportal/knowledge/list?typeid=分类iD
-//			case 0:
-//				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-//				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000011);
-//			    break;
-//			//配件改装
-//			case 1:
-//				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-//				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000012);
-//			    break;
-//			//内外装饰
-//			case 2:
-//				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-//				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000013);
-//			    break;
-//			//代驾服务
-//			case 3:
-//				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-//				AlertHelper.getInstance(getActivity()).showCenterToast("正在开发中");
-//			    return;    
-//			//保险优惠
-//			case 4:
-//				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-//				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000011);
-//			    break;    
-//			//洗车美容
-//			case 5:
-//				gvMyInfointent.setClass(getActivity(), WebActivity.class);
-//				gvMyInfointent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid="+000014);
-//			    break;    
-//			default:
-//				return;
-//			}
-//			startActivity(gvMyInfointent);
 		}
 		
 	};
@@ -233,18 +151,18 @@ private AdapterView.OnItemClickListener gvMyInfoOnItemClickListener1 = new Adapt
 		  //维修保养
 		case 2:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid="+000011);
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000011");
 		    break;
 		//配件改装
 		case 3:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid="+000012);
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000012");
 			//TODO 
 		    break;
 		//内外装饰
 		case 4:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid="+00001);
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000012");
 		    break;
 		//代驾服务
 		case 5:
@@ -254,12 +172,12 @@ private AdapterView.OnItemClickListener gvMyInfoOnItemClickListener1 = new Adapt
 		//保险优惠
 		case 6:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid="+000012);
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000012");
 		    break;    
 		//洗车美容
 		case 7:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid="+000012);
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000012");
 		    break;  
 		default:
 			return;
