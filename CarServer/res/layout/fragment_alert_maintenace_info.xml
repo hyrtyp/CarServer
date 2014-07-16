@@ -120,7 +120,7 @@
                             android:singleLine="true"
                             android:textColor="#000"
                             android:textSize="@dimen/text_size" 
-                            android:inputType="number"
+                            android:inputType="numberDecimal"
                             limit:textLength="10"/>
                     </LinearLayout>
                 </TableRow>
@@ -225,6 +225,7 @@
                             android:singleLine="true"
                             android:textColor="#000"
                             android:textSize="@dimen/text_size" 
+                            android:inputType="numberDecimal"
                             limit:textLength="10"/>
                     </LinearLayout>
                 </TableRow>
@@ -260,7 +261,7 @@
                             android:singleLine="true"
                             android:textColor="#000"
                             android:textSize="@dimen/text_size" 
-                            android:inputType="number"
+                            android:inputType="numberDecimal"
                             limit:textLength="10"/>
                     </LinearLayout>
                 </TableRow>
