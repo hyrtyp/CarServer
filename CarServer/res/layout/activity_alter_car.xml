@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/full_bg"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    xmlns:limit="http://schemas.android.com/apk/res/cn.com.hyrt.carserver">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -61,7 +62,7 @@
                         android:textColor="@color/input_laber_color"
                         android:textSize="@dimen/input_text_size" />
 
-                    <EditText
+                    <cn.com.hyrt.carserver.base.view.LimitLengthEditText
                         android:id="@+id/et_carnumber"
                         android:layout_width="193dp"
                         android:layout_height="wrap_content"
@@ -73,7 +74,8 @@
                         android:paddingTop="@dimen/view_margin_small"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
+                        android:textSize="@dimen/input_text_size"
+                        limit:textLength="100"/>
                 </LinearLayout>
 
                 <View
@@ -225,7 +227,7 @@
                         android:textColor="@color/input_laber_color"
                         android:textSize="@dimen/input_text_size" />
 
-                    <EditText
+                    <cn.com.hyrt.carserver.base.view.LimitLengthEditText
                         android:id="@+id/et_mileage"
                         android:layout_width="193dp"
                         android:layout_height="wrap_content"
@@ -237,7 +239,9 @@
                         android:paddingTop="@dimen/view_margin_small"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
+                        android:textSize="@dimen/input_text_size" 
+                        limit:textLength="50"
+                        android:inputType="numberDecimal"/>
                 </LinearLayout>
 
                 <View
@@ -295,7 +299,7 @@
                         android:textColor="@color/input_laber_color"
                         android:textSize="@dimen/input_text_size" />
 
-                    <EditText
+                    <cn.com.hyrt.carserver.base.view.LimitLengthEditText
                         android:id="@+id/et_manufacturer"
                         android:layout_width="193dp"
                         android:layout_height="wrap_content"
@@ -307,7 +311,8 @@
                         android:paddingTop="@dimen/view_margin_small"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
+                        android:textSize="@dimen/input_text_size" 
+                        limit:textLength="100"/>
                 </LinearLayout>
 
                 <View
@@ -402,7 +407,7 @@
                         android:textColor="@color/input_laber_color"
                         android:textSize="@dimen/input_text_size" />
 
-                    <EditText
+                    <cn.com.hyrt.carserver.base.view.LimitLengthEditText
                         android:id="@+id/et_insurancenum"
                         android:layout_width="193dp"
                         android:layout_height="wrap_content"
@@ -414,7 +419,8 @@
                         android:paddingTop="@dimen/view_margin_small"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
+                        android:textSize="@dimen/input_text_size" 
+                        limit:textLength="50"/>
                 </LinearLayout>
 
                 <View
@@ -437,7 +443,7 @@
                         android:textColor="@color/input_laber_color"
                         android:textSize="@dimen/input_text_size" />
 
-                    <EditText
+                    <cn.com.hyrt.carserver.base.view.LimitLengthEditText
                         android:id="@+id/et_insurancecompany"
                         android:layout_width="193dp"
                         android:layout_height="wrap_content"
@@ -449,7 +455,8 @@
                         android:paddingTop="@dimen/view_margin_small"
                         android:singleLine="true"
                         android:textColor="#000"
-                        android:textSize="@dimen/input_text_size" />
+                        android:textSize="@dimen/input_text_size" 
+                        limit:textLength="100"/>
                 </LinearLayout>
             </LinearLayout>
 

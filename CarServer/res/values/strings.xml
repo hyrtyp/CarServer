@@ -248,6 +248,8 @@
 	<string name="time_beyond">时间超出</string>
 	<string name="text_count_beyond">字数超出</string>
 	<string name="exit_prompt">再按一次退出</string>
+	<string name="no_baidumap">未安装百度地图</string>
+	<string name="unable_to_locate">无法定位</string>
 	
 </resources>
 
