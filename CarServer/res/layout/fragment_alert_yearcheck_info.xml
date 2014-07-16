@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-
+    android:orientation="vertical" 
+    xmlns:limit="http://schemas.android.com/apk/res/cn.com.hyrt.carserver">
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
@@ -75,7 +75,7 @@
 
                         <include layout="@layout/layout_vertical_line_small" />
 
-                        <EditText
+                        <cn.com.hyrt.carserver.base.view.LimitLengthEditText
                             android:id="@+id/et_njpeople"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
@@ -83,7 +83,8 @@
                             android:background="#fff"
                             android:singleLine="true"
                             android:textColor="#000"
-                            android:textSize="@dimen/text_size" />
+                            android:textSize="@dimen/text_size" 
+                            limit:textLength="50"/>
                     </LinearLayout>
                 </TableRow>
 
@@ -177,7 +178,7 @@
 
                         <include layout="@layout/layout_vertical_line_small" />
 
-                        <EditText
+                        <cn.com.hyrt.carserver.base.view.LimitLengthEditText
                             android:id="@+id/et_njcost"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
@@ -185,7 +186,9 @@
                             android:background="#fff"
                             android:singleLine="true"
                             android:textColor="#000"
-                            android:textSize="@dimen/text_size" />
+                            android:textSize="@dimen/text_size" 
+                            android:inputType="numberDecimal"
+                            limit:textLength="10"/>
                     </LinearLayout>
                 </TableRow>
 
@@ -211,7 +214,7 @@
 
                         <include layout="@layout/layout_vertical_line_small" />
 
-                        <EditText
+                        <cn.com.hyrt.carserver.base.view.LimitLengthEditText
                             android:id="@+id/et_remarks"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
@@ -219,7 +222,8 @@
                             android:background="#fff"
                             android:singleLine="true"
                             android:textColor="#000"
-                            android:textSize="@dimen/text_size" />
+                            android:textSize="@dimen/text_size" 
+                            limit:textLength="100"/>
                     </LinearLayout>
                 </TableRow>
 
