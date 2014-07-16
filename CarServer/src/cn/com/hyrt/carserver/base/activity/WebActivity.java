@@ -3,8 +3,10 @@ package cn.com.hyrt.carserver.base.activity;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
+import cn.com.hyrt.carserver.emergency.fragment.EmergencyFragment;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -87,6 +89,17 @@ public class WebActivity extends BaseActivity{
 				super.onReceivedError(view, errorCode, description, failingUrl);
 				loadError = true;
 				mWebView.setVisibility(View.INVISIBLE);
+			}
+			
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				LogHelper.i("tag", "url:"+url);
+				if(url.startsWith("tel:")){
+					Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse(url));  
+					startActivity(intent);
+					return true;
+				}
+				return super.shouldOverrideUrlLoading(view, url);
 			}
 		});
 		
