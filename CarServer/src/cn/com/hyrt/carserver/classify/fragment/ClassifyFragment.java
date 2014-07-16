@@ -91,7 +91,7 @@ public class ClassifyFragment extends Fragment{
 			case 3:
 				gvMyInfointent.setClass(getActivity(), WebActivity.class);
 				AlertHelper.getInstance(getActivity()).showCenterToast("正在开发中");
-			    break;    
+			    return;    
 			//保险优惠
 			case 4:
 				gvMyInfointent.setClass(getActivity(), WebActivity.class);
