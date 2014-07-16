@@ -237,7 +237,7 @@ public class QuestionDetailActivity extends BaseActivity{
 	public void reply(View view){
 		if(replyId == null){
 			return;
-		}else if("".equals(etContent.getText().toString()) && imgBuffer == null){
+		}else if("".equals(etContent.getText().toString().trim()) && imgBuffer == null){
 			AlertHelper.getInstance(this).showCenterToast(R.string.reply_hint);
 			return;
 		}

@@ -420,9 +420,9 @@ public class QuestionActivity extends BaseActivity {
 		String content = contentText.getText().toString();
 		question.content = content;
 
-		if ("".equals(content) || "".equals(positionId)) {
+		if ("".equals(content.trim()) || "".equals(positionId)) {
 			isSuccess = false;
-			if ("".equals(content)) {
+			if ("".equals(content.trim())) {
 				AlertHelper.getInstance(this).showCenterToast(
 						R.string.question_sava_text);
 				return;
