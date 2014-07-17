@@ -108,7 +108,7 @@ public class QuestionFragment extends Fragment {
 							}
 							final String url = result.data.get(i).newslink;
 							LinearLayout view = (LinearLayout) mInflater.inflate(R.layout.layout_news_banner, null);
-							((ImageLoaderView) view.findViewById(R.id.iv_banner)).setImageUrl(image[i].toString());
+							((ImageLoaderView) view.findViewById(R.id.iv_banner)).setImageUrl(image[i]);
 							ImageLoaderView  imageListner = ((ImageLoaderView) view.findViewById(R.id.iv_banner));
 							
 							imageListner.setOnClickListener(new OnClickListener()

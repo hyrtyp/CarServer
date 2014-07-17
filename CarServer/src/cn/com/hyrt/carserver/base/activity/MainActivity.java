@@ -123,7 +123,7 @@ public class MainActivity extends BaseActivity {
 	private void changeActionBar(int index) {
 		if (index == 2) {
 			layoutMainTop.setVisibility(View.GONE);
-		} else if (index == 4) {
+		} else if (index == 4 || index == 0) {
 			layout_line.setVisibility(View.GONE);
 			layoutMainTop.setVisibility(View.VISIBLE);
 		} else {

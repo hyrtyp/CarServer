@@ -19,18 +19,6 @@ public class Define {
 	public static int RESULT_FROM_ALTER_CAR = 101;
 	public static int RESULT_FROM_CHANGE_INFO = 102;
 
-	public static class TEST {
-		public int code;
-		public String msg;
-		public DATA data;
-		public String aa;
-
-		public class DATA {
-			public String version;
-			public String download;
-		}
-	}
-
 	public static class BASE {
 		public String code;
 		public String message;

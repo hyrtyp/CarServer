@@ -35,10 +35,10 @@
         android:scaleType="fitXY"
         android:layout_marginBottom="@dimen/main_top_margin"/>
 
-        <include layout="@layout/layout_line"/>
+        
         </LinearLayout>
     </LinearLayout>
-
+<include layout="@layout/layout_line"/>
     <FrameLayout
         android:id="@+id/layout_contain"
         android:layout_width="fill_parent"
