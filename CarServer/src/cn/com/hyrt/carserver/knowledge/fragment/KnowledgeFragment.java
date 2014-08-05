@@ -56,7 +56,7 @@ public class KnowledgeFragment extends Fragment{
 		et_search = (EditText) rootView.findViewById(R.id.et_search);
 		layout_search = (LinearLayout) rootView.findViewById(R.id.layout_search);
 		gvRelatedQuestion = (GridView) rootView.findViewById(R.id.gvRelatedQuestion);
-		gvRelatedKnowledge = (GridView) rootView.findViewById(R.id.gvRelatedKnowledge);
+		//gvRelatedKnowledge = (GridView) rootView.findViewById(R.id.gvRelatedKnowledge);
 	}
 	
 	private void initGrid(){
@@ -69,21 +69,21 @@ public class KnowledgeFragment extends Fragment{
 						getActivity());
 		gvRelatedQuestion.setAdapter(mRelatedQuestionAdapter);
 		gvRelatedQuestion.setOnItemClickListener(gvRelatedQuestionListener);
-		int[] relatedKnowledgeImgArray = 
-				new int[]{
-				R.drawable.ic_knowledge_detail, R.drawable.ic_knowledge_insurance,
-				R.drawable.ic_knowledge_experience, R.drawable.bg_blank};
-		int[] relatedKnowledgeTextSourceArray = 
-				new int[]{
-				R.string.knowledge_detail, R.string.knowledge_insurance,
-				R.string.knowledge_experience, R.string.blank_text};
-		PortalGridAdapter mRelatedKnowledgeAdapter = 
-				new PortalGridAdapter(
-						relatedKnowledgeImgArray,
-						relatedKnowledgeTextSourceArray,
-						getActivity());
-		gvRelatedKnowledge.setAdapter(mRelatedKnowledgeAdapter);
-		gvRelatedKnowledge.setOnItemClickListener(gvRelatedKnowledgeListener);
+//		int[] relatedKnowledgeImgArray = 
+//				new int[]{
+//				R.drawable.ic_knowledge_detail, R.drawable.ic_knowledge_insurance,
+//				R.drawable.ic_knowledge_experience, R.drawable.bg_blank};
+//		int[] relatedKnowledgeTextSourceArray = 
+//				new int[]{
+//				R.string.knowledge_detail, R.string.knowledge_insurance,
+//				R.string.knowledge_experience, R.string.blank_text};
+//		PortalGridAdapter mRelatedKnowledgeAdapter = 
+//				new PortalGridAdapter(
+//						relatedKnowledgeImgArray,
+//						relatedKnowledgeTextSourceArray,
+//						getActivity());
+//		gvRelatedKnowledge.setAdapter(mRelatedKnowledgeAdapter);
+//		gvRelatedKnowledge.setOnItemClickListener(gvRelatedKnowledgeListener);
 	}
 	
 	//相关问答
@@ -113,39 +113,39 @@ public class KnowledgeFragment extends Fragment{
 			
 		};
 	
-	//相关知识
-	private AdapterView.OnItemClickListener gvRelatedKnowledgeListener = new AdapterView.OnItemClickListener() {
-		
-		@Override
-		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
-				long arg3) {
-			LogHelper.i("tag", ""+position); 
-			Intent gvRelatedKnowledgeIntent = new Intent();
-			String path = getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid=";
-			switch(position){
-			//维保详情
-			case 0:
-				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
-				path += "000003";
-			    break;
-			//保险知识
-			case 1:
-				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
-				path += "000004";
-			    break;
-			//经验心得
-			case 2:
-				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
-				path += "000005";
-				break;
-			default:
-				return;  
-			}
-			gvRelatedKnowledgeIntent.putExtra("url", path);
-			startActivity(gvRelatedKnowledgeIntent);
-		}
-		
-	};
+//	//相关知识
+//	private AdapterView.OnItemClickListener gvRelatedKnowledgeListener = new AdapterView.OnItemClickListener() {
+//		
+//		@Override
+//		public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+//				long arg3) {
+//			LogHelper.i("tag", ""+position); 
+//			Intent gvRelatedKnowledgeIntent = new Intent();
+//			String path = getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid=";
+//			switch(position){
+//			//维保详情
+//			case 0:
+//				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
+//				path += "000003";
+//			    break;
+//			//保险知识
+//			case 1:
+//				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
+//				path += "000004";
+//			    break;
+//			//经验心得
+//			case 2:
+//				gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
+//				path += "000005";
+//				break;
+//			default:
+//				return;  
+//			}
+//			gvRelatedKnowledgeIntent.putExtra("url", path);
+//			startActivity(gvRelatedKnowledgeIntent);
+//		}
+//		
+//	};
 	private EditText et_search;
 	private LinearLayout layout_search;
 	

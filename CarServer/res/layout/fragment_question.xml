@@ -108,6 +108,38 @@
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/main_top_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_line" />
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:text="@string/knowledge_related_knowledge"
+                android:textColor="@color/tab_text"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+            
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/line_size"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:background="@color/line_color" />
+
+            <cn.com.hyrt.carserver.base.view.FullGridView
+                android:id="@+id/gvRelatedKnowledge1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="1dp"
+                android:numColumns="2"
+                android:verticalSpacing="1dp" />
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/main_top_margin"
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_line" />
         </LinearLayout>

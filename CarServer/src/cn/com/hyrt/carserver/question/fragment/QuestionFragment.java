@@ -48,7 +48,7 @@ public class QuestionFragment extends Fragment {
 
 	@ViewInject(id=R.id.iv_banner) ImageLoaderView iv_banner;
 	private View rootView;
-	private GridView gvQuestion, gvExperts;
+	private GridView gvQuestion, gvExperts,gvRelatedKnowledge;
 	private ViewPager bannerPager;
 	private Button questionBtn;
 	private WebServiceHelper mWebServiceHelper;
@@ -70,6 +70,8 @@ public class QuestionFragment extends Fragment {
 		gvExperts = (GridView) rootView.findViewById(R.id.gvExperts);
 		bannerPager = (ViewPager) rootView.findViewById(R.id.bannerPager);
 		questionBtn = (Button) rootView.findViewById(R.id.btn_question);
+		
+		gvRelatedKnowledge = (GridView) rootView.findViewById(R.id.gvRelatedKnowledge1);
 	}
 
 
@@ -160,6 +162,23 @@ public class QuestionFragment extends Fragment {
 				expertsImgArray, expertsTextSourceArray, getActivity());
 		gvExperts.setAdapter(mExpertsAdapter);
 		gvExperts.setOnItemClickListener(ExpertItemClickListener);
+		
+		//相关知识
+		int[] relatedKnowledgeImgArray = 
+				new int[]{
+				R.drawable.ic_knowledge_detail, R.drawable.ic_knowledge_insurance,
+				R.drawable.ic_knowledge_experience, R.drawable.bg_blank};
+		int[] relatedKnowledgeTextSourceArray = 
+				new int[]{
+				R.string.knowledge_detail, R.string.knowledge_insurance,
+				R.string.knowledge_experience, R.string.blank_text};
+		PortalGridAdapter mRelatedKnowledgeAdapter = 
+				new PortalGridAdapter(
+						relatedKnowledgeImgArray,
+						relatedKnowledgeTextSourceArray,
+						getActivity());
+		gvRelatedKnowledge.setAdapter(mRelatedKnowledgeAdapter);
+		gvRelatedKnowledge.setOnItemClickListener(gvRelatedKnowledgeListener);
 	}
 
 	private void setListener() 
@@ -254,4 +273,39 @@ public class QuestionFragment extends Fragment {
 			startActivity(intent);
 		}
 	};
+	
+	
+	//相关知识
+	private AdapterView.OnItemClickListener gvRelatedKnowledgeListener = new AdapterView.OnItemClickListener() {
+			
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				LogHelper.i("tag", ""+position); 
+				Intent gvRelatedKnowledgeIntent = new Intent();
+				String path = getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid=";
+				switch(position){
+				//维保详情
+				case 0:
+					gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
+					path += "000003";
+				    break;
+				//保险知识
+				case 1:
+					gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
+					path += "000004";
+				    break;
+				//经验心得
+				case 2:
+					gvRelatedKnowledgeIntent.setClass(getActivity(), WebActivity.class);
+					path += "000005";
+					break;
+				default:
+					return;  
+				}
+				gvRelatedKnowledgeIntent.putExtra("url", path);
+				startActivity(gvRelatedKnowledgeIntent);
+			}
+			
+		};
 }
