@@ -116,10 +116,10 @@
 	<!-- question -->
 	<string name="question_note">知名维修专家，实时车辆问题排查</string>
 	<string name="question_find_experts">找专家</string>
-	<string name="question_mend">维修自查</string>
-	<string name="question_custmon">配件改装</string>
+	<string name="question_mend">故障速查</string>
+	<string name="question_custmon">装饰改装</string>
 	<string name="question_insurance">保险直通</string>
-	<string name="question_cosmetology">美容装潢</string>
+	<string name="question_cosmetology">洗车美容</string>
 	<string name="question_find_specialty">按专长找</string>
 	<string name="question_find_brand">按品牌找</string>
 	
