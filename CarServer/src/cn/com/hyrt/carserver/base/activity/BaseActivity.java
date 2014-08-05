@@ -121,12 +121,12 @@ public class BaseActivity extends ActionBarActivity {
 	@Override
 	protected void onDestroy() {
 		super.onDestroy();
-		AlertHelper.getInstance(this).dismissLoading();
 	}
 	
 	@Override
 	protected void onStop() {
 		super.onStop();
 		LocationHelper.getInstance(this).stop();
+		AlertHelper.getInstance(this).dismissLoading();
 	}
 }

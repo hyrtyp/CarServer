@@ -6,10 +6,13 @@ import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+import org.ksoap2.transport.ServiceConnection;
+import org.ksoap2.transport.ServiceConnectionSE;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Handler;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
@@ -26,11 +29,15 @@ public class BaseWebServiceHelper {
 	public static String NAME_SPACE = "http://webservice.csp.hyrt.com";
 	private static final String END_POINT = "http://192.168.10.238:8080/CSPInterface/services/CspInterface?wsdl";
 //	private static final String END_POINT = "http://61.233.18.68:8080/CSPInterface/services/CspInterface?wsdl";
+	
+	private static final int TIMEOUT = 10*1000;
 
 	private RequestCallback mCallback;
 	private Gson mGson;
 	protected Context mContext;
 	private OnSuccessListener mListener;
+	
+	private static final int MESSAGE_TIMEOUT = 101;
 	
 	private BaseWebServiceHelper(){};
 	
@@ -47,6 +54,20 @@ public class BaseWebServiceHelper {
 		this.mGson = new Gson();
 		this.mContext = context;
 	}
+	
+	private Handler mHandler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case MESSAGE_TIMEOUT:
+				AlertHelper.getInstance(mContext).showCenterToast(R.string.timeout);
+				AlertHelper.getInstance(mContext).hideLoading();
+				break;
+
+			default:
+				break;
+			}
+		};
+	};
 
 
 	protected void get(final String method, final String params, final Class<?> clazz){
@@ -62,8 +83,8 @@ public class BaseWebServiceHelper {
 		        envelope.bodyOut = soapObject;
 		        envelope.dotNet = true;
 		        envelope.setOutputSoapObject(soapObject);
-
-		        HttpTransportSE ht = new HttpTransportSE(END_POINT);
+		        
+		        HttpTransportSE ht = new HttpTransportSE(END_POINT, TIMEOUT);
 		        ht.debug = true;
 		        
 				try {
@@ -104,6 +125,16 @@ public class BaseWebServiceHelper {
 							});
 							
 						}
+					}else if(e.getMessage().contains("BufferedInputStream is closed")){
+						((Activity)mContext).runOnUiThread(new Runnable() {
+							
+							@Override
+							public void run() {
+								mHandler.sendEmptyMessage(MESSAGE_TIMEOUT);
+							}
+						});
+					}else{
+						mHandler.sendEmptyMessage(MESSAGE_TIMEOUT);
 					}
 					e.printStackTrace();
 				} catch (XmlPullParserException e) {
