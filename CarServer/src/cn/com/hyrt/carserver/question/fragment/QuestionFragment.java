@@ -108,7 +108,7 @@ public class QuestionFragment extends Fragment {
 							}
 							final String url = result.data.get(i).newslink;
 							LinearLayout view = (LinearLayout) mInflater.inflate(R.layout.layout_news_banner, null);
-							((ImageLoaderView) view.findViewById(R.id.iv_banner)).setImageUrl(image[i].toString());
+							((ImageLoaderView) view.findViewById(R.id.iv_banner)).setImageUrl(image[i]);
 							ImageLoaderView  imageListner = ((ImageLoaderView) view.findViewById(R.id.iv_banner));
 							
 							imageListner.setOnClickListener(new OnClickListener()
@@ -194,28 +194,32 @@ public class QuestionFragment extends Fragment {
 		public void onItemClick(AdapterView<?> arg0, View arg1, int position,long arg3)
 		{
 			Intent intent = new Intent();
-			intent.setClass(getActivity(), ClassificationActivity.class);
+			intent.setClass(getActivity(), BySpecialityActivity.class);
 			switch (position)
 			{
 			case 0:
 				// 维修自查
 				intent.putExtra("title", getResources().getString(R.string.question_mend));
-				intent.putExtra("type", "1");
+//				intent.putExtra("type", "1");
+				intent.putExtra("flId", "000020");
 				break;
 			case 1:
 				// 配件改装
 				intent.putExtra("title", getResources().getString(R.string.question_custmon));
-				intent.putExtra("type", "2");
+//				intent.putExtra("type", "2");
+				intent.putExtra("flId", "000020");
 				break;
 			case 2:
 				// 保险直通
 				intent.putExtra("title", getResources().getString(R.string.question_insurance));
-				intent.putExtra("type", "3");
+//				intent.putExtra("type", "3");
+				intent.putExtra("flId", "000020");
 				break;
 			case 3:
 				// 美容装潢
 				intent.putExtra("title", getResources().getString(R.string.question_cosmetology));
-				intent.putExtra("type", "4");
+//				intent.putExtra("type", "4");
+				intent.putExtra("flId", "000020");
 				break;
 
 			default:

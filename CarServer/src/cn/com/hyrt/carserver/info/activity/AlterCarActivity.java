@@ -20,6 +20,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -242,12 +244,7 @@ public class AlterCarActivity extends BaseActivity{
 		}
 
 		@Override
-		public void onNothingSelected(AdapterView<?> arg0) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		
+		public void onNothingSelected(AdapterView<?> arg0) {}
 	};
 	
 	private void setModel(String id, String model){

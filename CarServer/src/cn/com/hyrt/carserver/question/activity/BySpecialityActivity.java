@@ -43,6 +43,7 @@ public class BySpecialityActivity extends BaseActivity {
 	private int curIndex = 0;
 	private ArrayAdapter<String> mRightAdapter;
 	private Context context;
+	private String flId;
 	
 	private WebServiceHelper mWebServiceHelper;
 	
@@ -56,6 +57,7 @@ public class BySpecialityActivity extends BaseActivity {
 		context = BySpecialityActivity.this;
 		Intent intent = getIntent();
 		title = intent.getStringExtra("title");
+		flId = intent.getStringExtra("flId");
 		setTitle(title);
 		
 		setlistener();
@@ -99,7 +101,11 @@ public class BySpecialityActivity extends BaseActivity {
 				}
 			}, this);
 		}
-		mWebServiceHelper.getMaintainFL("000020");
+		if(flId == null || "".equals(flId)){
+			mWebServiceHelper.getMaintainFL("000020");
+		}else{
+			mWebServiceHelper.getMaintainFL(flId);
+		}
 	}
 	
 	private void setRight(int index){

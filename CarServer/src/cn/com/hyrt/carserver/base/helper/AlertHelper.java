@@ -79,7 +79,6 @@ public class AlertHelper {
 		mProgressDialog.setCancelable(false);
 		mProgressDialog.setCanceledOnTouchOutside(false);
 		mProgressDialog.show();
-		
 	}
 	
 	public void hideLoading(){

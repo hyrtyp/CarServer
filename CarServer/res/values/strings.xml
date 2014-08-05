@@ -250,6 +250,7 @@
 	<string name="exit_prompt">再按一次退出</string>
 	<string name="no_baidumap">未安装百度地图</string>
 	<string name="unable_to_locate">无法定位</string>
+	<string name="timeout">请求超时，请稍后再试！</string>
 	
 </resources>
 
