@@ -23,6 +23,7 @@ import cn.com.hyrt.carserver.emergency.fragment.EmergencyFragment;
 import cn.com.hyrt.carserver.info.fragment.InfoFragment;
 import cn.com.hyrt.carserver.knowledge.fragment.KnowledgeFragment;
 import cn.com.hyrt.carserver.question.fragment.QuestionFragment;
+import cn.com.hyrt.carserver.welfare.fragment.WelfareCenterFragment;
 
 /**
  * 主界面
@@ -44,11 +45,11 @@ public class MainActivity extends BaseActivity {
 	LinearLayout layout_line;
 
 	private Class<?> fragmentArray[] = { ClassifyFragment.class,
-			KnowledgeFragment.class, QuestionFragment.class,
+			WelfareCenterFragment.class, QuestionFragment.class,
 			InfoFragment.class, EmergencyFragment.class };
 
 	private int mTextArray[] = { R.string.classify_label,
-			R.string.knowledge_label, R.string.question_label,
+			R.string.welfare_label, R.string.question_label,
 			R.string.info_label, R.string.emergency_label };
 
 	private int mImgArray[] = { R.drawable.bg_classify_tab,

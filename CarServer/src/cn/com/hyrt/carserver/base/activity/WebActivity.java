@@ -79,6 +79,8 @@ public class WebActivity extends BaseActivity{
 					setTitle(mWebView.getTitle());
 					mWebView.setVisibility(View.VISIBLE);
 				}else{
+					findViewById(R.id.errortext).setVisibility(View.VISIBLE);
+					mWebView.setVisibility(View.GONE);
 					setTitle("网络异常");
 				}
 			}
@@ -97,6 +99,10 @@ public class WebActivity extends BaseActivity{
 				if(url.startsWith("tel:")){
 					Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse(url));  
 					startActivity(intent);
+					return true;
+				}else if(url.contains("211.98.71.195:8080")){
+					findViewById(R.id.errortext).setVisibility(View.VISIBLE);
+					mWebView.setVisibility(View.GONE);
 					return true;
 				}
 				return super.shouldOverrideUrlLoading(view, url);

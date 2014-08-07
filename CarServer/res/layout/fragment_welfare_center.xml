@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <cn.com.hyrt.carserver.base.view.HorizontalScrollTitleView
+        android:id="@+id/lv_top"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:layout_marginBottom="@dimen/main_top_margin"
+        android:paddingLeft="@dimen/main_top_margin"
+        android:paddingRight="@dimen/main_top_margin"
+        android:background="#fff"
+        android:scrollbars="none"/>
+
+    <FrameLayout
+        android:id="@+id/layout_contain"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>

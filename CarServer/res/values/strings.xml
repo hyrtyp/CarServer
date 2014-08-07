@@ -10,6 +10,7 @@
 	<string name="pull_to_refresh_refreshing_label">正在刷新&#8230;</string>
 	<string name="classify_label">分类服务</string>
 	<string name="knowledge_label">车辆知识</string>
+	<string name="welfare_label">福利中心</string>
 	<string name="question_label">车辆问答</string>
 	<string name="info_label">我的信息</string>
 	<string name="emergency_label">在线帮助</string>
@@ -251,6 +252,8 @@
 	<string name="no_baidumap">未安装百度地图</string>
 	<string name="unable_to_locate">无法定位</string>
 	<string name="timeout">请求超时，请稍后再试！</string>
+	<string name="welfare_signup_title">点击签到领取%d个金币！可以换取免费服务哦！</string>
+	<string name="login_loadmsg">登录中...</string>
 	
 </resources>
 

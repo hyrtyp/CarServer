@@ -28,8 +28,7 @@ public class BaseWebServiceHelper {
 
 	public static String NAME_SPACE = "http://webservice.csp.hyrt.com";
 	private static final String END_POINT = "http://192.168.10.238:8080/CSPInterface/services/CspInterface?wsdl";
-
-	//private static final String END_POINT = "http://61.233.18.68:8080/CSPInterface/services/CspInterface?wsdl";
+//	private static final String END_POINT = "http://61.233.18.68:8080/CSPInterface/services/CspInterface?wsdl";
 	private static final int TIMEOUT = 10*1000;
 
 	private RequestCallback mCallback;

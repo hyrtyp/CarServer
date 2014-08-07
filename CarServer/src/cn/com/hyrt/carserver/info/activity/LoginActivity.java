@@ -40,7 +40,7 @@ public class LoginActivity extends FinalActivity{
 	}
 	
 	public void login(View view){
-		AlertHelper.getInstance(this).showLoading(null);
+		AlertHelper.getInstance(this).showLoading(getString(R.string.login_loadmsg));
 		long failTime = StorageHelper.getInstance(this).getLoginFailTime();
 		if(failTime != -1 && System.currentTimeMillis()-failTime <= LimitTime){
 			AlertHelper.getInstance(LoginActivity.this).showCenterToast(R.string.login_fail2);
@@ -75,11 +75,11 @@ public class LoginActivity extends FinalActivity{
 
 					@Override
 					public void onSuccess(INFO_LOGIN result) {
-						AlertHelper.getInstance(LoginActivity.this).hideLoading();
+						
 						if(result != null){
 							StorageHelper.getInstance(LoginActivity.this).saveLoginFailTime(-1);
 							loginFailCount = 0;
-							AlertHelper.getInstance(LoginActivity.this).showCenterToast(getString(R.string.login_loginsuccess));
+							
 							CarServerApplication.loginInfo = result;
 							StorageHelper.getInstance(LoginActivity.this).saveLoginInfo(result);
 							getUserInfo();
@@ -108,6 +108,8 @@ public class LoginActivity extends FinalActivity{
 					@Override
 					public void onSuccess(INFO result) {
 						CarServerApplication.info = result;
+						AlertHelper.getInstance(LoginActivity.this).hideLoading();
+						AlertHelper.getInstance(LoginActivity.this).showCenterToast(getString(R.string.login_loginsuccess));
 						Intent intent = new Intent();
 						intent.setClass(LoginActivity.this, MainActivity.class);
 						startActivity(intent);
@@ -117,8 +119,8 @@ public class LoginActivity extends FinalActivity{
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
-						// TODO Auto-generated method stub
-						
+						AlertHelper.getInstance(LoginActivity.this).hideLoading();
+						AlertHelper.getInstance(LoginActivity.this).showCenterToast(errorMsg);
 					}
 		}, this);
 		mWebServiceHelper.getUserInfo();

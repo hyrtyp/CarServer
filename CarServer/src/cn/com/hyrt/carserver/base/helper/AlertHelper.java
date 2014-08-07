@@ -65,6 +65,9 @@ public class AlertHelper {
 	 * 显示加载框
 	 */
 	public void showLoading(String msg){
+		if(mContext == null){
+			return;
+		}
 		if(msg == null){
 			msg = mContext.getString(R.string.loading_msg);
 		}
