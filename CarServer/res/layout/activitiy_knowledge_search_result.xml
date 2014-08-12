@@ -5,11 +5,49 @@
     android:orientation="vertical" 
     android:background="@drawable/full_bg">
     
+   	 <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="75dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:orientation="horizontal" 
+                android:layout_marginTop="@dimen/main_top_margin">
 
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="252dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_edittext"
+                    android:hint="@string/knowledge_search_hint"
+                    android:paddingLeft="@dimen/view_margin"/>
+
+                <LinearLayout
+                    android:id="@+id/layout_search"
+                    android:layout_width="87dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_search_btn"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_search" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/serarch_btn_label"
+                        android:textColor="#fff"
+                        android:textSize="@dimen/search_btn_text_size" />
+                </LinearLayout>
+            </LinearLayout>
+    
     <cn.com.hyrt.carserver.base.view.PullToRefreshView 
         android:id="@+id/ptrv"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <ListView 
             android:id="@+id/lv_content"
             android:layout_width="fill_parent"

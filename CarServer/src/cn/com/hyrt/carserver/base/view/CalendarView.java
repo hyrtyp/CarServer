@@ -1,5 +1,6 @@
 package cn.com.hyrt.carserver.base.view;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,6 +45,9 @@ public class CalendarView extends View implements View.OnTouchListener {
     //private boolean completed = false; // 为false表示只选择了开始日期，true表示结束日期也选择了  
     private int todayNum;
     private List<String> checkDate = new ArrayList<String>();
+    private String minDate;
+    private boolean firstDraw = true;
+    public List<String> requestFailDate = new ArrayList<String>();//请求失败的时间（下次再请求）
     
     //给控件设置监听事件  
     private OnItemClickListener onItemClickListener;  
@@ -102,6 +106,22 @@ public class CalendarView extends View implements View.OnTouchListener {
   
     @Override  
     protected void onDraw(Canvas canvas) {
+    	if(firstDraw){
+    		if(onItemClickListener != null){
+    			SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM");
+    			
+    			Calendar tempCalendar = Calendar.getInstance();
+    			tempCalendar.setTime(curDate);
+    			String beforeTime = mDateFormat.format(tempCalendar.getTime());
+    			tempCalendar.add(Calendar.MONTH, -4);
+    			String afterTime = mDateFormat.format(tempCalendar.getTime());
+    			LogHelper.i("tag", "time---:"+beforeTime+":"+afterTime);
+    			minDate = afterTime;
+    			onItemClickListener.getSignUp(beforeTime, afterTime);;
+    		}
+    		firstDraw = false;
+//    		return;
+    	}
 //        LogHelper.i(TAG, "onDraw");  
         // 画框  
 //        canvas.drawPath(surface.boxPath, surface.borderPaint);  
@@ -416,6 +436,22 @@ public class CalendarView extends View implements View.OnTouchListener {
         if(onItemClickListener != null){
         	onItemClickListener.onMonthChange(curDate);
         }
+        SimpleDateFormat mDateFormat = new SimpleDateFormat("yyyy-MM");
+        if(minDate != null){
+        	if(minDate.equals(mDateFormat.format(curDate)) 
+        			|| requestFailDate.contains(minDate)){
+        		Calendar tempCalendar = Calendar.getInstance();
+            	tempCalendar.setTime(curDate);
+            	tempCalendar.add(Calendar.MONTH, -1);
+            	String beforeTime = mDateFormat.format(tempCalendar.getTime());
+    			tempCalendar.add(Calendar.MONTH, -4);
+    			String afterTime = mDateFormat.format(tempCalendar.getTime());
+    			minDate = afterTime;
+    			onItemClickListener.getSignUp(beforeTime, afterTime);
+        	}
+        	
+        }
+        
         invalidate();  
         return getYearAndmonth();  
     }  
@@ -528,14 +564,16 @@ public class CalendarView extends View implements View.OnTouchListener {
     public void notifyDataSetChanged(){
     	invalidate();
     }
-      
+   
     //给控件设置监听事件  
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){  
         this.onItemClickListener =  onItemClickListener;  
     }  
+    
     //监听接口  
     public interface OnItemClickListener {  
         public void onMonthChange(Date date);
+        public void getSignUp(String startTime, String endTime);
     }  
   
     /** 

@@ -22,7 +22,8 @@
             android:text="aas啊"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/main_top_margin"/>
-        <ImageButton 
+        <ImageButton
+            android:id="@+id/ib_signup" 
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/ic_sign_up"

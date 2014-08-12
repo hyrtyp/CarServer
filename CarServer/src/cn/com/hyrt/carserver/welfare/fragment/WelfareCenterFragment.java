@@ -54,12 +54,11 @@ public class WelfareCenterFragment extends Fragment{
 	}
 	
 	private void findView(){
-		strTopItem.add("item1");
-		strTopItem.add("item2");
-		strTopItem.add("item3");
-		strTopItem.add("item4");
-		strTopItem.add("item5");
-		strTopItem.add("item6");
+		strTopItem.clear();
+		strTopItem.add("签到");
+		strTopItem.add("洗车");
+		strTopItem.add("保险");
+		strTopItem.add("服务");
 		lv_top = (HorizontalScrollTitleView) rootView.findViewById(R.id.lv_top);
 		lv_top.setTitles(strTopItem);
 		lv_top.moveTo(curSelected);
@@ -98,15 +97,23 @@ public class WelfareCenterFragment extends Fragment{
 				}
 			}
 			LogHelper.i("tag", "position:"+position);
-			switch (position) {
-			case 1:
-				mWebFragment.setUrl("http://www.baidu.com");
-				break;
-			case 2:
-				mWebFragment.setUrl("http://www.sina.cn");
-				break;
-			default:
-				break;
+			if(position != 0){
+				String url = getString(R.string.method_weburl)+"/cspportal/knowledge/fulilist?id=%s";
+				String id = "";
+				switch (position) {
+				case 1:
+					id = "1";
+					break;
+				case 2:
+					id = "1";
+					break;
+				case 3:
+					id = "1";
+					break;
+				default:
+					break;
+				}
+				mWebFragment.setUrl(String.format(url, id));
 			}
 			
 			

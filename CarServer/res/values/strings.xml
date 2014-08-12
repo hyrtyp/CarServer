@@ -254,6 +254,8 @@
 	<string name="timeout">请求超时，请稍后再试！</string>
 	<string name="welfare_signup_title">点击签到领取%d个金币！可以换取免费服务哦！</string>
 	<string name="login_loadmsg">登录中...</string>
+	<string name="signup_fail">签到失败...</string>
+	<string name="signup_load_msg">签到中...</string>
 	
 </resources>
 
