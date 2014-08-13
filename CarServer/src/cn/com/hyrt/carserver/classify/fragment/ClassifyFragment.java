@@ -186,6 +186,9 @@ public class ClassifyFragment extends Fragment{
 			path.append(String.format("coorx=%s&coory=%s&areaname=%s", lon, lat, city));
 		}
 		LogHelper.i("tag", "path:"+path);
+		if(position == 3){
+			path = new StringBuffer("http://www.sina.cn");
+		}
 		gvFoundintent.putExtra("url", path.toString());
 		
 		startActivity(gvFoundintent);

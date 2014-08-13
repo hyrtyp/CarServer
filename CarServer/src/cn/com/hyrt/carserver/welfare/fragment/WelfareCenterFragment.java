@@ -58,7 +58,7 @@ public class WelfareCenterFragment extends Fragment{
 		strTopItem.add("签到");
 		strTopItem.add("洗车");
 		strTopItem.add("保险");
-		strTopItem.add("服务");
+		strTopItem.add("商城");
 		lv_top = (HorizontalScrollTitleView) rootView.findViewById(R.id.lv_top);
 		lv_top.setTitles(strTopItem);
 		lv_top.moveTo(curSelected);
@@ -102,13 +102,13 @@ public class WelfareCenterFragment extends Fragment{
 				String id = "";
 				switch (position) {
 				case 1:
-					id = "1";
+					id = "1cfd3d9d6a0d4791ae5a8b08a1487cb0";
 					break;
 				case 2:
-					id = "1";
+					id = "f360e6c9696445c8ba0c98face38c428";
 					break;
 				case 3:
-					id = "1";
+					id = "7a0a56a8c34e438f9f566816504d6e9a";
 					break;
 				default:
 					break;

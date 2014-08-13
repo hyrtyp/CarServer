@@ -5,6 +5,7 @@ import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.emergency.fragment.EmergencyFragment;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.webkit.URLUtil;
 import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -70,19 +72,28 @@ public class WebActivity extends BaseActivity{
 	
 	private void initWebView(){
 		mWebView = (WebView) findViewById(R.id.webview);
-		mWebView.getSettings().setJavaScriptEnabled(true);
+		WebSettings webseting = mWebView.getSettings();
+		webseting.setJavaScriptEnabled(true);
+//		webseting.setDomStorageEnabled(true);             
+//        webseting.setAppCacheMaxSize(1024*1024*8);
+//        String appCacheDir = this.getApplicationContext()
+//        		.getDir("cache", Context.MODE_PRIVATE).getPath();
+//        webseting.setAppCachePath(appCacheDir);  
+//        webseting.setAllowFileAccess(true);  
+//        webseting.setAppCacheEnabled(true);  
+//        webseting.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
 		mWebView.setWebViewClient(new WebViewClient(){
 			@Override
 			public void onPageFinished(WebView view, String url) {
 				super.onPageFinished(view, url);
-				if(!loadError){
+//				if(!loadError){
 					setTitle(mWebView.getTitle());
 					mWebView.setVisibility(View.VISIBLE);
-				}else{
-					findViewById(R.id.errortext).setVisibility(View.VISIBLE);
-					mWebView.setVisibility(View.GONE);
-					setTitle("网络异常");
-				}
+//				}else{
+//					findViewById(R.id.errortext).setVisibility(View.VISIBLE);
+//					mWebView.setVisibility(View.GONE);
+//					setTitle("网络异常");
+//				}
 			}
 
 			@Override
@@ -100,11 +111,11 @@ public class WebActivity extends BaseActivity{
 					Intent intent = new Intent(Intent.ACTION_CALL,Uri.parse(url));  
 					startActivity(intent);
 					return true;
-				}else if(url.contains("211.98.71.195:8080")){
+				}/*else if(url.contains("211.98.71.195:8080")){
 					findViewById(R.id.errortext).setVisibility(View.VISIBLE);
 					mWebView.setVisibility(View.GONE);
 					return true;
-				}
+				}*/
 				return super.shouldOverrideUrlLoading(view, url);
 			}
 		});

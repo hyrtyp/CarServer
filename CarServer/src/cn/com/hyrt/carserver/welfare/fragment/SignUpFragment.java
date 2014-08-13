@@ -197,7 +197,6 @@ public class SignUpFragment extends Fragment{
 			List<Define.INFO_SIGN_UP.CDATA> mList = result.data;
 			for(int i=0,j=mList.size(); i<j; i++){
 				String strTime = StringHelper.formatDate(mList.get(i).datetime);
-				LogHelper.i("tag", "strTime:"+strTime);
 				signUpDays.add(strTime);
 			}
 			cv.notifyDataSetChanged();

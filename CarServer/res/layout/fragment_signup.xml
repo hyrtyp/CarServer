@@ -19,7 +19,6 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="#000"
-            android:text="aas啊"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/main_top_margin"/>
         <ImageButton
@@ -51,7 +50,6 @@
         	        android:layout_centerVertical="true"
         	        android:textColor="#000"
         	        android:textSize="18sp"
-        	        android:text="2014年8月"
         	        android:layout_marginLeft="@dimen/view_margin_big"/>
         	    <TextView 
         	        android:id="@+id/tv_day"
@@ -60,7 +58,6 @@
         	        android:layout_centerVertical="true"
         	        android:textColor="#7b7b7b"
         	        android:textSize="15sp"
-        	        android:text="8月06号\t星期三"
         	        android:layout_alignParentRight="true"
         	        android:layout_marginRight="@dimen/view_margin"/>
         	</RelativeLayout>
