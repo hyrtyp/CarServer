@@ -217,28 +217,28 @@ public class QuestionFragment extends Fragment {
 			switch (position)
 			{
 			case 0:
-				// 维修自查
+				// 故障速查
 				intent.putExtra("title", getResources().getString(R.string.question_mend));
 //				intent.putExtra("type", "1");
-				intent.putExtra("flId", "000020");
+				intent.putExtra("flId", "000011");
 				break;
 			case 1:
-				// 配件改装
+				// 装饰改装
 				intent.putExtra("title", getResources().getString(R.string.question_custmon));
 //				intent.putExtra("type", "2");
-				intent.putExtra("flId", "000020");
+				intent.putExtra("flId", "000012");
 				break;
 			case 2:
 				// 保险直通
 				intent.putExtra("title", getResources().getString(R.string.question_insurance));
 //				intent.putExtra("type", "3");
-				intent.putExtra("flId", "000020");
+				intent.putExtra("flId", "000013");
 				break;
 			case 3:
-				// 美容装潢
+				// 洗车美容
 				intent.putExtra("title", getResources().getString(R.string.question_cosmetology));
 //				intent.putExtra("type", "4");
-				intent.putExtra("flId", "000020");
+				intent.putExtra("flId", "000014");
 				break;
 
 			default:

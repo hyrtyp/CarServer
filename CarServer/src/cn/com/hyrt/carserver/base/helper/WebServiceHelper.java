@@ -492,6 +492,42 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	}
 	
 	/**
+	 * 获取签到日期
+	 * @param startTime 起始时间
+	 * @param endTime   结束时间
+	 */
+	public void getSignUpDays(String startTime, String endTime){
+		String params = 
+				String.format(
+						"{\"terminalid\":\"%s\",\"starttime\":\"%s\",\"endtime\":\"%s\"}",
+						getUserId(), startTime, endTime);
+		
+		get(
+			getString(R.string.method_get_cap_sys_user_search),
+			params, Define.INFO_SIGN_UP.class);
+	}
+	
+	/**
+	 * 获取当天签到状态（y:已签到 n:未签到）
+	 */
+	public void getSignUpStatus(){
+		String params = String.format("{\"terminalid\":\"%s\"}", getUserId());
+		get(
+				getString(R.string.method_get_user_search),
+				params, Define.INFO_SIGN_UP.class);
+	}
+	
+	/**
+	 * 签到
+	 */
+	public void setSignUp(){
+		String params = String.format("{\"terminalid\":\"%s\"}", getUserId());
+		get(
+				getString(R.string.method_save_cap_sys_user_search),
+				params, Define.INFO_SIGN_UP.class);
+	}
+	
+	/**
 	 * 获取用户ID
 	 * 
 	 * @return

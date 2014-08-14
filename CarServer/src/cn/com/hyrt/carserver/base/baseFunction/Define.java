@@ -3,6 +3,8 @@ package cn.com.hyrt.carserver.base.baseFunction;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.map.deser.ValueInstantiators.Base;
+
 /**
  * 全局定义
  * 
@@ -451,6 +453,23 @@ public class Define {
 		public String seekid;//评论问题ID
 		public String level;//评论级别
 		public String content;//评论内容
+	}
+	
+	/**
+	 * 签到、获取签到时间、获取是否签到公用实体
+	 * @author zoe
+	 *
+	 */
+	public static class INFO_SIGN_UP extends BASE {
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String sumnum;//当前用户累计积分总数
+			public String searchnum;//本次签到所得积分数
+			public String datetime;//已签到时间，格式2014-08-07 14:48:49.0
+			public String issearch;//是否签到
+		}
 	}
 
 }

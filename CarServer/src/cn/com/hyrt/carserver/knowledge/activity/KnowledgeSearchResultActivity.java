@@ -5,10 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 import cn.com.hyrt.carserver.R;
@@ -28,6 +33,8 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 
 	@ViewInject(id=R.id.lv_content)ListView lv_content;
 	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
+	@ViewInject(id=R.id.layout_search,click="search") LinearLayout layoutSearch;
+	@ViewInject(id=R.id.et_search) EditText etSearch;
 	
 	private String searchStr;
 	
@@ -42,12 +49,25 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activitiy_knowledge_search_result);
-		Intent intent = getIntent();
-		searchStr = intent.getStringExtra("str");
-		AlertHelper.getInstance(this).showLoading(null);
+//		Intent intent = getIntent();
+//		searchStr = intent.getStringExtra("str");
+//		
 		setListener();
-		loadData();
+//		loadData();
 	}
+	
+	public void search(View view){
+		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
+		imm.hideSoftInputFromWindow(etSearch.getWindowToken(), 0);
+		searchStr = etSearch.getText().toString();
+		if(searchStr != null && !"".equals(searchStr)){
+			AlertHelper.getInstance(this).showLoading(null);
+			isLoadMore = false;
+			loadData();
+		}
+	}
+	
+	
 	
 	private void setListener(){
 		ptrv.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
@@ -89,6 +109,7 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 
 					@Override
 					public void onSuccess(QUESTION_CORRELATION result) {
+						ptrv.onFooterRefreshComplete();
 						setData(result);
 						AlertHelper.getInstance(KnowledgeSearchResultActivity.this).hideLoading();
 						LogHelper.i("tag", "result:"+result.data.size());
@@ -97,12 +118,13 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
 						AlertHelper.getInstance(KnowledgeSearchResultActivity.this).hideLoading();
-						if(datas.size()>0){
+						ptrv.onFooterRefreshComplete();
+						if(datas.size()>0 && isLoadMore){
 							AlertHelper.getInstance(KnowledgeSearchResultActivity.this).showCenterToast(R.string.load_done);
-							ptrv.onFooterRefreshComplete();
-							return;
+						}else{
+							setData(null);
+							AlertHelper.getInstance(KnowledgeSearchResultActivity.this).showCenterToast(R.string.info_load_fail);
 						}
-						AlertHelper.getInstance(KnowledgeSearchResultActivity.this).showCenterToast(R.string.info_load_fail);
 						
 					}
 		}, this);
@@ -131,22 +153,20 @@ public class KnowledgeSearchResultActivity extends BaseActivity{
 	}
 	
 	private void setData(QUESTION_CORRELATION result){
-		
-		if(result == null && datas.size()>0){
-			AlertHelper.getInstance(this).showCenterToast(R.string.load_done);
-		}
-		
+		ptrv.onHeaderRefreshComplete();
 		if(!isLoadMore){
 			datas.clear();
-			ptrv.onHeaderRefreshComplete();
 		}else{
-			ptrv.onFooterRefreshComplete();
-			
-		}
-		
+			if(result == null && datas.size()>0){
+				AlertHelper.getInstance(this).showCenterToast(R.string.load_done);
+				return;
+			}
+		}	
 		
 		isLoadMore = false;
-		datas.addAll(result.data);
+		if(result != null){
+			datas.addAll(result.data);
+		}
 		if(mAdapter == null){
 			mAdapter = new QuestionResultAdapter(datas, searchStr, this);
 			lv_content.setAdapter(mAdapter);;

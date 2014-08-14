@@ -37,6 +37,11 @@
      <string name="method_question_reply">saveMwpmSysTerminalSeekReply</string>
      <string name="method_comment_expert">saveMwpmSysTerminalReview</string>
      
+     <!-- 福利中心 -->
+     <string name="method_get_cap_sys_user_search">getCapSysUserSearch</string>
+     <string name="method_get_user_search">getUserSearch</string>
+     <string name="method_save_cap_sys_user_search">saveCapSysUserSearch</string>
+     
      
     <!-- 分类id -->
     <!-- 维修保养 -->

@@ -1,6 +1,7 @@
 package cn.com.hyrt.carserver.base.activity;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -21,8 +22,10 @@ import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.classify.fragment.ClassifyFragment;
 import cn.com.hyrt.carserver.emergency.fragment.EmergencyFragment;
 import cn.com.hyrt.carserver.info.fragment.InfoFragment;
+import cn.com.hyrt.carserver.knowledge.activity.KnowledgeSearchResultActivity;
 import cn.com.hyrt.carserver.knowledge.fragment.KnowledgeFragment;
 import cn.com.hyrt.carserver.question.fragment.QuestionFragment;
+import cn.com.hyrt.carserver.welfare.fragment.WelfareCenterFragment;
 
 /**
  * 主界面
@@ -42,13 +45,15 @@ public class MainActivity extends BaseActivity {
 	LinearLayout layoutMainTop;
 	@ViewInject(id = R.id.layout_line)
 	LinearLayout layout_line;
+	@ViewInject(id = R.id.iv_topright)
+	ImageView ivTopRight;
 
 	private Class<?> fragmentArray[] = { ClassifyFragment.class,
-			KnowledgeFragment.class, QuestionFragment.class,
+			WelfareCenterFragment.class, QuestionFragment.class,
 			InfoFragment.class, EmergencyFragment.class };
 
 	private int mTextArray[] = { R.string.classify_label,
-			R.string.knowledge_label, R.string.question_label,
+			R.string.welfare_label, R.string.question_label,
 			R.string.info_label, R.string.emergency_label };
 
 	private int mImgArray[] = { R.drawable.bg_classify_tab,
@@ -58,6 +63,7 @@ public class MainActivity extends BaseActivity {
 	private static final int EXIT = 0;
 	
 	private boolean needExit = false;
+	private int curIndex = 0;
 	
 	Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
@@ -82,6 +88,7 @@ public class MainActivity extends BaseActivity {
 		initView();
 		LogHelper.i("tag", "sp:" + ScreenHelper.px2sp(this, 24) + " dp:"
 				+ ScreenHelper.px2dip(this, 24));
+		setListener();
 	}
 
 	private void initView() {
@@ -121,9 +128,14 @@ public class MainActivity extends BaseActivity {
 	}
 
 	private void changeActionBar(int index) {
-		if (index == 2) {
-			layoutMainTop.setVisibility(View.GONE);
-		} else if (index == 4 || index == 0) {
+		curIndex = index;
+		if(index == 2){
+			ivTopRight.setVisibility(View.VISIBLE);
+			ivTopRight.setImageResource(R.drawable.ic_search2);
+		}else{
+			ivTopRight.setVisibility(View.GONE);
+		}
+		if (index == 4 || index == 0) {
 			layout_line.setVisibility(View.GONE);
 			layoutMainTop.setVisibility(View.VISIBLE);
 		} else {
@@ -131,6 +143,21 @@ public class MainActivity extends BaseActivity {
 			layoutMainTop.setVisibility(View.VISIBLE);
 		}
 		mainTitle.setText(mTextArray[index]);
+	}
+	
+	private void setListener(){
+		ivTopRight.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				if(curIndex == 2){
+					Intent intent = new Intent();
+					intent.setClass(MainActivity.this, KnowledgeSearchResultActivity.class);
+					intent.putExtra("str", "发动机");
+					startActivity(intent);
+				}
+			}
+		});
 	}
 	
 	@Override
