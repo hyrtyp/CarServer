@@ -70,6 +70,7 @@ public class LoginActivity extends FinalActivity{
 			
 		}
 		
+		//登录
 		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
 				new WebServiceHelper.RequestCallback<Define.INFO_LOGIN>() {
 
@@ -108,12 +109,12 @@ public class LoginActivity extends FinalActivity{
 					@Override
 					public void onSuccess(INFO result) {
 						CarServerApplication.info = result;
-						AlertHelper.getInstance(LoginActivity.this).hideLoading();
 						AlertHelper.getInstance(LoginActivity.this).showCenterToast(getString(R.string.login_loginsuccess));
 						Intent intent = new Intent();
 						intent.setClass(LoginActivity.this, MainActivity.class);
 						startActivity(intent);
 						finish();
+						AlertHelper.getInstance(LoginActivity.this).hideLoading();
 						
 					}
 

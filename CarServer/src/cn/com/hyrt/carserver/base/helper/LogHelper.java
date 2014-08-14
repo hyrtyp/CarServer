@@ -9,7 +9,7 @@ import android.util.Log;
  */
 public class LogHelper {
 	
-	private static final boolean LogEnabled = true;
+	private static final boolean LogEnabled = true;//日志输出开关
 	
 	public static void i(String tag, String msg){
 		if(LogEnabled){

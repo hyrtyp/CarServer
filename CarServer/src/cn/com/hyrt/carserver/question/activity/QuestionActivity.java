@@ -95,7 +95,7 @@ public class QuestionActivity extends BaseActivity {
 
 		initView();
 
-		loadData();
+//		loadData();
 	}
 
 	public void updataImg() {
@@ -370,7 +370,7 @@ public class QuestionActivity extends BaseActivity {
 		}
 	}
 
-	private void loadData() {
+	/*private void loadData() {
 		WebServiceHelper mCarInfoServiceHelper = new WebServiceHelper(
 				new WebServiceHelper.RequestCallback<Define.QUESTION_POISTION>() {
 					@SuppressWarnings("unused")
@@ -407,7 +407,7 @@ public class QuestionActivity extends BaseActivity {
 				}, this);
 
 		mCarInfoServiceHelper.getPoisition();
-	}
+	}*/
 
 	public void saveQuestionInfo() {
 		if (CarServerApplication.loginInfo == null) {

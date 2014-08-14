@@ -1,5 +1,8 @@
 package cn.com.hyrt.carserver.classify.fragment;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
@@ -151,18 +154,17 @@ public class ClassifyFragment extends Fragment{
 		  //维修保养
 		case 2:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000011");
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000016&");
 		    break;
 		//配件改装
 		case 3:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000012");
-			//TODO 
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000017&");
 		    break;
 		//内外装饰
 		case 4:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000012");
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000015&");
 		    break;
 		//代驾服务
 		case 5:
@@ -172,18 +174,22 @@ public class ClassifyFragment extends Fragment{
 		//保险优惠
 		case 6:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000012");
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000019&");
 		    break;    
 		//洗车美容
 		case 7:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000012");
+			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000018&");
 		    break;  
 		default:
 			return;
 		}
 		if(lon != null && !"".equals(lon)){
-			path.append(String.format("coorx=%s&coory=%s&areaname=%s", lon, lat, city));
+			try {
+				path.append(String.format("&coorx=%s&coory=%s&areaname=%s", lon, lat, URLEncoder.encode(city, "utf-8")));
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		}
 		LogHelper.i("tag", "path:"+path);
 		gvFoundintent.putExtra("url", path.toString());

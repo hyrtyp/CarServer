@@ -5,7 +5,6 @@ import java.util.List;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,7 +17,6 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import cn.com.hyrt.carserver.R;
@@ -27,13 +25,10 @@ import cn.com.hyrt.carserver.base.adapter.PortalGridAdapter;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_GETNEWSIMG;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
-import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
-import cn.com.hyrt.carserver.base.view.PullToRefreshView;
 import cn.com.hyrt.carserver.question.activity.BySpecialityActivity;
-import cn.com.hyrt.carserver.question.activity.ClassificationActivity;
 import cn.com.hyrt.carserver.question.activity.FindByBrandActivity;
 import cn.com.hyrt.carserver.question.activity.QuestionActivity;
 import cn.com.hyrt.carserver.question.adapter.QuestionBannerAdapter;
@@ -53,6 +48,8 @@ public class QuestionFragment extends Fragment {
 	private Button questionBtn;
 	private WebServiceHelper mWebServiceHelper;
 	private List<View> views = new ArrayList<View>(); 
+	
+	private static final String TAG = "QuestionFragment";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState)
@@ -281,7 +278,6 @@ public class QuestionFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				LogHelper.i("tag", ""+position); 
 				Intent gvRelatedKnowledgeIntent = new Intent();
 				String path = getString(R.string.method_weburl)+"/cspportal/knowledge/list?typeid=";
 				switch(position){
@@ -303,6 +299,7 @@ public class QuestionFragment extends Fragment {
 				default:
 					return;  
 				}
+				LogHelper.i(TAG, "path:"+path);
 				gvRelatedKnowledgeIntent.putExtra("url", path);
 				startActivity(gvRelatedKnowledgeIntent);
 			}

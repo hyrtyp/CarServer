@@ -205,7 +205,7 @@ public class SignUpFragment extends Fragment{
 
 		@Override
 		public void onFailure(int errorNo, String errorMsg) {
-			if(mEndTime != null){
+			if(mEndTime != null && errorNo != 204){
 				cv.requestFailDate.add(mEndTime);
 			}
 			AlertHelper.getInstance(getActivity()).hideLoading();

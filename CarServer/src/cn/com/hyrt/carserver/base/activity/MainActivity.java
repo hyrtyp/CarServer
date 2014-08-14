@@ -1,10 +1,13 @@
 package cn.com.hyrt.carserver.base.activity;
 
+import java.util.List;
+
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -135,7 +138,7 @@ public class MainActivity extends BaseActivity {
 		}else{
 			ivTopRight.setVisibility(View.GONE);
 		}
-		if (index == 4 || index == 0) {
+		if (index == 4 || index == 0 || index == 2) {
 			layout_line.setVisibility(View.GONE);
 			layoutMainTop.setVisibility(View.VISIBLE);
 		} else {
@@ -158,6 +161,22 @@ public class MainActivity extends BaseActivity {
 				}
 			}
 		});
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(curIndex == 3){
+			List<Fragment> mFragments = getSupportFragmentManager().getFragments();
+			if(mFragments == null){
+				return;
+			}
+			for(int i=0,j=mFragments.size(); i<j; i++){
+				if(mFragments.get(i) instanceof InfoFragment){
+					((InfoFragment)mFragments.get(i)).loadData();
+				}
+			}
+		}
 	}
 	
 	@Override
