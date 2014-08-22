@@ -142,6 +142,13 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(mContext.getString(R.string.method_saveUserinfo), params,
 				Define.BASE.class);
 	}
+	
+	public void registUser(Define.INFO_SAVE info){
+		Gson mGson = new Gson();
+		String params = mGson.toJson(info);
+		get(mContext.getString(R.string.method_saveUserinfo), params,
+				Define.INFO_LOGIN.class);
+	}
 
 	/**
 	 * 获取车辆列表

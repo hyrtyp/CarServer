@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="输入全称"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_blue"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:textColor="#000"
+                android:textSize="18sp" 
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="输入简称"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_blue"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:textColor="#000"
+                android:textSize="18sp" 
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="注册账户"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_blue"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:textColor="#000"
+                android:textSize="18sp" 
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="商户照片"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <cn.com.hyrt.carserversurvey.base.view.FullGridView
+                android:id="@+id/gv_merchant_photo"
+                android:layout_width="164dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:numColumns="2"
+                android:verticalSpacing="10dp" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="营业执照"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <cn.com.hyrt.carserversurvey.base.view.FullGridView
+                android:id="@+id/gv_license_photo"
+                android:layout_width="164dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:numColumns="2"
+                android:verticalSpacing="10dp" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="服务类型"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <cn.com.hyrt.carserversurvey.base.view.FullGridView
+                android:id="@+id/gv_services"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:numColumns="2"
+                android:verticalSpacing="10dp" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="服务品牌"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <TextView 
+                android:layout_width="159dp"
+                android:layout_height="32dp"
+                android:textColor="@android:color/white"
+                android:background="@color/login_blue"
+                android:text="全部品牌"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/main_top_margin"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="所属地区"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <Spinner 
+                android:id="@+id/sp_province"
+                android:layout_width="72dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                style="@style/spinner_style"/>
+            
+            <Spinner 
+                android:id="@+id/sp_city"
+                android:layout_width="72dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                style="@style/spinner_style"/>
+            
+            <Spinner 
+                android:id="@+id/sp_county"
+                android:layout_width="72dp"
+                android:layout_height="32dp"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                style="@style/spinner_style"/>
+            
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="具体地址"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_blue"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:textColor="#000"
+                android:textSize="18sp" 
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="联系人员"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_blue"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:textColor="#000"
+                android:textSize="18sp" 
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="手机号码"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_blue"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:textColor="#000"
+                android:textSize="18sp" 
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="固定电话"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_blue"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:textColor="#000"
+                android:textSize="18sp" 
+                android:singleLine="true"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="商家简介"
+                android:textColor="#302f2f"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="119dp"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_blue"
+                android:padding="@dimen/main_top_margin"
+                android:textColor="#000"
+                android:textSize="18sp" 
+                android:hint="输入商家相关信息..."
+                android:gravity="left"/>
+        </LinearLayout>
+
+        <Button 
+            android:layout_width="242dp"
+            android:layout_height="47dp"
+            android:background="@drawable/bg_button"
+            android:text="提交信息"
+            android:textColor="#fff"
+            android:gravity="center"
+            android:layout_margin="@dimen/view_margin"
+            android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+
+</ScrollView>

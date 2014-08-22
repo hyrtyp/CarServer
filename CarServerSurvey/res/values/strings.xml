@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">户外调查</string>
+    
+    <string name="loading_msg">正在加载&#8230;</string>
+    <string name="timeout">请求超时，请稍后再试！</string>
+    <string name="net_error_msg">网络发生异常</string>
+    <string name="unable_to_locate">无法定位</string>
+    <string name="exit_prompt">再按一次退出</string>
+	<string name="no_baidumap">未安装百度地图</string>
+	<string name="location_label">定位中&#8230;</string>
+	<string name="upload_photo">上传照片</string>
+	<string name="no_data">暂无数据</string>
+	<string name="photo_from_camera">拍照</string>
+	<string name="cancle">取消</string>
+	<string name="photo_from_album">从相册选择</string>
+	<string name="load_done">已加载全部数据</string>
+	
+	<string name="regist_label">商户注册</string>
+	<string name="product_label">上架商品</string>
+	<string name="shop_label">店铺首页</string>
+	<string name="info_label">个人信息</string>
+	
+	<!-- info -->
+	<string name="username_hint">用户名</string>
+	<string name="pwd_hint">密码</string>
+	<string name="login_succuss">登录成功</string>
+	<string name="login_fail">用户名或密码有误</string>
+	<string name="login_msg">登录中...</string>
+	<string name="no_username">用户名不能为空</string>
+	<string name="no_pwd">密码不能为空</string>
+	<string name="login_fail2">登录频繁，请稍后再试！</string>
+	<string name="label_merchant_info">商户信息</string>
+	
+</resources>

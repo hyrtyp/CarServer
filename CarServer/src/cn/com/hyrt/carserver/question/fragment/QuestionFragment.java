@@ -241,7 +241,7 @@ public class QuestionFragment extends Fragment {
 			default:
 				return;
 			}
-
+			intent.putExtra("isByQuestion", true);
 			startActivity(intent);
 		}
 	};

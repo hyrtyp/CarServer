@@ -1,0 +1,73 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context="cn.com.hyrt.carserver.base.activity.MainActivity" >
+    
+    <LinearLayout
+        android:id="@+id/layout_main_top"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+       <RelativeLayout 
+           android:layout_width="fill_parent"
+           android:layout_height="65dp"
+           android:orientation="horizontal"
+           android:background="@color/login_blue">
+            <TextView
+            android:id="@+id/mainTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="#fff"
+            android:textSize="30sp" />
+            <ImageView 
+                android:id="@+id/iv_topright"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/view_margin"
+                android:visibility="gone"/>
+           </RelativeLayout>
+
+       <!--  <LinearLayout 
+            android:id="@+id/layout_line"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"> -->
+            
+       <!--  <ImageView 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bg_line"
+        android:scaleType="fitXY"
+        android:layout_marginBottom="@dimen/main_top_margin"/> -->
+
+        
+        <!-- </LinearLayout> -->
+    </LinearLayout>
+<!-- <include layout="@layout/layout_line"/> -->
+    <FrameLayout
+        android:id="@+id/layout_contain"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" 
+        android:layout_marginTop="@dimen/main_top_margin">
+    </FrameLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="@dimen/small_line_size"
+        android:background="@color/line_color" />
+
+    <android.support.v4.app.FragmentTabHost
+        android:id="@android:id/tabhost"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
