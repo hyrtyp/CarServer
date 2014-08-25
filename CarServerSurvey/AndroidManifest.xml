@@ -56,6 +56,8 @@
         <activity 
             android:name=".info.activity.LoginActivity"
             android:theme="@style/NoTitleAppTheme"/>
+         <activity 
+            android:name=".info.activity.EditPasswordActivity"/>
         <!-- <activity 
             android:name=".info.activity.RegistMerchantInfoActivity"
             android:label="@string/label_merchant_info">
