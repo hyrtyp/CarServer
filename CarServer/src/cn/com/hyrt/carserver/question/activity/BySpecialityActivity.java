@@ -44,6 +44,7 @@ public class BySpecialityActivity extends BaseActivity {
 	private ArrayAdapter<String> mRightAdapter;
 	private Context context;
 	private String flId;
+	private boolean isByQuestion;
 	
 	private WebServiceHelper mWebServiceHelper;
 	
@@ -56,6 +57,7 @@ public class BySpecialityActivity extends BaseActivity {
 		Intent intent = getIntent();
 		title = intent.getStringExtra("title");
 		flId = intent.getStringExtra("flId");
+		isByQuestion = intent.getBooleanExtra("isByQuestion", false);
 		setTitle(title);
 		
 		setlistener();
@@ -197,7 +199,10 @@ public class BySpecialityActivity extends BaseActivity {
 				ie.putExtra("name", name.getText().toString());
 				ie.putExtra("id", id);
 				ie.putExtra("title", title);
-				ie.putExtra("isBySpeciality", true);
+				if(!isByQuestion){
+					ie.putExtra("isBySpeciality", true);
+				}else{
+				}
 				context.startActivity(ie);
 			}
 		});

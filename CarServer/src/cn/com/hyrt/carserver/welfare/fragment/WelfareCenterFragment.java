@@ -25,6 +25,7 @@ public class WelfareCenterFragment extends Fragment{
 
 	private View rootView;
 	private List<String> strTopItem = new ArrayList<String>();
+	private List<String> topItemId = new ArrayList();
 	
 	FragmentTabHost mTabHost;
 	
@@ -59,6 +60,12 @@ public class WelfareCenterFragment extends Fragment{
 		strTopItem.add("洗车");
 		strTopItem.add("保险");
 		strTopItem.add("商城");
+		
+		topItemId.clear();
+		topItemId.add("1cfd3d9d6a0d4791ae5a8b08a1487cb0");
+		topItemId.add("f360e6c9696445c8ba0c98face38c428");
+		topItemId.add("7a0a56a8c34e438f9f566816504d6e9a");
+		
 		lv_top = (HorizontalScrollTitleView) rootView.findViewById(R.id.lv_top);
 		lv_top.setTitles(strTopItem);
 		lv_top.moveTo(curSelected);
@@ -97,22 +104,10 @@ public class WelfareCenterFragment extends Fragment{
 				}
 			}
 			LogHelper.i("tag", "position:"+position);
-			if(position != 0){
+			if(position > 0){
 				String url = getString(R.string.method_weburl)+"/cspportal/knowledge/fulilist?id=%s";
-				String id = "";
-				switch (position) {
-				case 1:
-					id = "1cfd3d9d6a0d4791ae5a8b08a1487cb0";
-					break;
-				case 2:
-					id = "f360e6c9696445c8ba0c98face38c428";
-					break;
-				case 3:
-					id = "7a0a56a8c34e438f9f566816504d6e9a";
-					break;
-				default:
-					break;
-				}
+				String id = topItemId.get(position-1);
+				LogHelper.i("tag", "id:"+id);
 				mWebFragment.setUrl(String.format(url, id));
 			}
 			

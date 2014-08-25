@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="dialog_bg">#45000000</color>
+    <color name="transparent">#09000000</color>
+    <color name="line_color">#e7e7e7</color>
+    <color name="tab_bg">#f9f9f9</color>
+    <color name="tab_text">#949494</color>
+    <color name="login_blue">#289fff</color>
+</resources>

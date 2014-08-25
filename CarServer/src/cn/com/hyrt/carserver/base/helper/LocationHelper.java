@@ -1,17 +1,11 @@
 package cn.com.hyrt.carserver.base.helper;
 
-import java.net.URISyntaxException;
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.util.Log;
 import cn.com.hyrt.carserver.R;
 
 import com.baidu.location.BDLocation;

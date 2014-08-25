@@ -85,7 +85,7 @@ public class RegistActivity extends FinalActivity{
 					}
 					
 		}, this);
-		mWebServiceHelper.saveUserInfo(info);
+		mWebServiceHelper.registUser(info);
 	}
 	
 	private void getUserInfo(){

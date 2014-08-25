@@ -79,7 +79,6 @@
             -->
         </activity>
         <activity android:name=".base.activity.WebActivity" />
-        <activity android:name=".base.activity.STabActivity" />
         <activity
             android:name=".info.activity.ChangeInfoActivity"
             android:label="@string/info_change_label" />

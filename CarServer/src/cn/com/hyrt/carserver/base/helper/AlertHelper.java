@@ -2,7 +2,6 @@ package cn.com.hyrt.carserver.base.helper;
 
 import cn.com.hyrt.carserver.R;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Gravity;

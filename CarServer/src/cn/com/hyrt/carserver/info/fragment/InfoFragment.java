@@ -58,7 +58,8 @@ public class InfoFragment extends Fragment{
 		return rootView;
 	}
 	
-	private void loadData(){
+	public void loadData(){
+		tv_username.setText("用户名："+CarServerApplication.info.unitname);
 		AlertHelper.getInstance(getActivity()).showLoading(null);
 		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
 				new WebServiceHelper.RequestCallback<Define.INFO>() {
@@ -188,7 +189,6 @@ public class InfoFragment extends Fragment{
 		ivFaceImg.setImageUrl(CarServerApplication.info.imagepath);
 		tv_username = (TextView) rootView.findViewById(R.id.tv_username);
 		tv_cars = (TextView) rootView.findViewById(R.id.tv_cars);
-		tv_username.setText("用户名："+CarServerApplication.info.unitname);
 		layout_info = (LinearLayout) rootView.findViewById(R.id.layout_info);
 	}
 	
