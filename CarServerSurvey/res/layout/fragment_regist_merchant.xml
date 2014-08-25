@@ -189,6 +189,7 @@
                 android:textSize="18sp" />
 
             <TextView 
+                android:id="@+id/tv_select_brand"
                 android:layout_width="159dp"
                 android:layout_height="32dp"
                 android:textColor="@android:color/white"
@@ -214,26 +215,61 @@
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
 
+            <RelativeLayout 
+                android:layout_width="72dp"
+                android:layout_height="32dp">
             <Spinner 
                 android:id="@+id/sp_province"
                 android:layout_width="72dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 style="@style/spinner_style"/>
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_spinner"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/view_margin_small"/>
+            </RelativeLayout>
             
+            <RelativeLayout 
+                android:layout_width="72dp"
+                android:layout_height="32dp">
             <Spinner 
                 android:id="@+id/sp_city"
                 android:layout_width="72dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 style="@style/spinner_style"/>
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_spinner"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/view_margin_small"/>
+            </RelativeLayout>
             
+             <RelativeLayout 
+                android:layout_width="72dp"
+                android:layout_height="32dp">
             <Spinner 
                 android:id="@+id/sp_county"
                 android:layout_width="72dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 style="@style/spinner_style"/>
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_spinner"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/view_margin_small"/>
+            </RelativeLayout>
+            
+            
             
         </LinearLayout>
 

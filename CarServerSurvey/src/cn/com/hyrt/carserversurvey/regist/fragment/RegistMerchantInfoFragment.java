@@ -1,20 +1,9 @@
 package cn.com.hyrt.carserversurvey.regist.fragment;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-import org.kobjects.base64.Base64;
-
-import cn.com.hyrt.carserversurvey.R;
-import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
-import cn.com.hyrt.carserversurvey.base.adapter.CheckBoxGridAdapter;
-import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
-import cn.com.hyrt.carserversurvey.base.helper.FileHelper;
-import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
-import cn.com.hyrt.carserversurvey.base.helper.PhotoHelper;
-import cn.com.hyrt.carserversurvey.base.helper.PhotoPopupHelper;
-import android.R.anim;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -29,8 +18,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
+import android.widget.TextView;
+import cn.com.hyrt.carserversurvey.R;
+import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
+import cn.com.hyrt.carserversurvey.base.adapter.CheckBoxGridAdapter;
+import cn.com.hyrt.carserversurvey.base.baseFunction.ClassifyJsonParser;
+import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
+import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserversurvey.base.helper.FileHelper;
+import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
+import cn.com.hyrt.carserversurvey.base.helper.PhotoHelper;
+import cn.com.hyrt.carserversurvey.base.helper.PhotoPopupHelper;
+import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserversurvey.regist.adapter.BrandCheckAdapter;
 
 public class RegistMerchantInfoFragment extends Fragment{
 
@@ -41,6 +44,7 @@ public class RegistMerchantInfoFragment extends Fragment{
 	private Spinner spProvince;
 	private Spinner spCity;
 	private Spinner spCounty;
+	private TextView tvSelectBrand;
 	
 	private List<String> services;
 	
@@ -49,10 +53,18 @@ public class RegistMerchantInfoFragment extends Fragment{
 	private AddPhotoGridAdapter merchantAdapter;
 	private AddPhotoGridAdapter licenseAdapter;
 	
+	private List<Map<String, String>> oneList 
+	= new ArrayList<Map<String,String>>();
+	
+	private List<List<Map<String, String>>> twoList 
+	= new ArrayList<List<Map<String,String>>>();
+	
 	private boolean isMerchantSelect = true;//是否正在选商户照片
 	private Uri faceUri;
 	private PhotoHelper mPhotoHelper;
 	private String imgBuffer;
+	
+	private Dialog mBrandDialog;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -94,6 +106,23 @@ public class RegistMerchantInfoFragment extends Fragment{
 		services.add("专业美容");
 		services.add("专业美容");
 		services.add("专业美容");
+		
+		WebServiceHelper mBrandWebServiceHelper 
+		= new WebServiceHelper(new BaseWebServiceHelper.OnSuccessListener() {
+			
+			@Override
+			public void onSuccess(String result) {
+				oneList.clear();
+				twoList.clear();
+				ClassifyJsonParser classifyJsonParser = new ClassifyJsonParser();
+				classifyJsonParser.parse(result);
+				oneList.addAll(classifyJsonParser.getOneList());
+				 LogHelper.i("tag", "oneList:"+oneList);
+				twoList.addAll(classifyJsonParser.getTwoList());
+				 LogHelper.i("tag", "twoList:"+twoList);
+			}
+		}, getActivity());
+		mBrandWebServiceHelper.getCLWDfl(getString(R.string.flid_brand));
 	}
 	
 	private void setListener(){
@@ -140,6 +169,14 @@ public class RegistMerchantInfoFragment extends Fragment{
 				}else{
 					delPhoto(position, false);
 				}
+			}
+		});
+		
+		tvSelectBrand.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				showBrand();
 			}
 		});
 	}
@@ -210,6 +247,31 @@ public class RegistMerchantInfoFragment extends Fragment{
         }
 	}
 	
+	private void showBrand(){
+		if(mBrandDialog == null){
+			mBrandDialog = new Dialog(getActivity(), R.style.MyDialog);
+			mBrandDialog.setContentView(R.layout.layout_list_popup);
+			mBrandDialog.getWindow().setLayout(
+					LinearLayout.LayoutParams.MATCH_PARENT,
+					LinearLayout.LayoutParams.MATCH_PARENT);
+			mBrandDialog.getWindow().findViewById(R.id.view_bg)
+			.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View arg0) {
+					mBrandDialog.dismiss();
+					mBrandDialog = null;
+				}
+			});
+			
+			ListView listview = (ListView) mBrandDialog
+					.getWindow().findViewById(R.id.listview);
+			BrandCheckAdapter mBrandCheckAdapter = new BrandCheckAdapter(
+					oneList, twoList, getActivity());
+			listview.setAdapter(mBrandCheckAdapter);
+		}
+		mBrandDialog.show();
+	}
+	
 	private void findView(){
 		gvMerchantPhoto = (GridView) rootView.findViewById(R.id.gv_merchant_photo);
 		gvLicensePhoto = (GridView) rootView.findViewById(R.id.gv_license_photo);
@@ -217,5 +279,6 @@ public class RegistMerchantInfoFragment extends Fragment{
 		spProvince = (Spinner) rootView.findViewById(R.id.sp_province);
 		spCity = (Spinner) rootView.findViewById(R.id.sp_city);
 		spCounty = (Spinner) rootView.findViewById(R.id.sp_county);
+		tvSelectBrand = (TextView) rootView.findViewById(R.id.tv_select_brand);
 	}
 }

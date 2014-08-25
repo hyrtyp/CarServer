@@ -2,4 +2,8 @@
 <resources>
     <string name="method_login">getHwLogininfo</string>
     <string name="method_existsjname">sjname</string>
+    <string name="method_getCLWDfl">getCLWDfl</string>
+    
+    <!-- 分类查询ID -->
+    <string name="flid_brand">000021</string>
 </resources>

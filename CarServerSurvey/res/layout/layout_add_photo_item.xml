@@ -8,5 +8,12 @@
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:scaleType="centerCrop"/>
+    <TextView 
+        android:id="@+id/tv_text"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:textColor="#818181"
+        android:textSize="15sp"
+        android:gravity="center"/>
 
 </RelativeLayout>

@@ -54,6 +54,16 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				type, sjname);
 		get(getString(R.string.method_existsjname), params, Define.BASE.class);
 	}
+	
+	/**
+	 * 分类查询统一方法
+	 */
+	public void getCLWDfl(String id){
+		String params = String.format(
+				"{\"flid\":\"%s\",\"depth\":\"2;3\"}",
+				id);
+		get(getString(R.string.method_getCLWDfl), params, Define.BASE.class);
+	}
 
 	private String getString(int resId) {
 		if (mContext == null) {

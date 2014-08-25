@@ -5,6 +5,7 @@ import java.util.List;
 
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
+import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class AddPhotoGridAdapter extends BaseAdapter{
 
@@ -31,6 +33,9 @@ public class AddPhotoGridAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		if(photos.size() < maxNum){
+			if(photos.size() == 0){
+				return 2;
+			}
 			return photos.size()+1;
 		}
 		return photos.size();
@@ -54,15 +59,23 @@ public class AddPhotoGridAdapter extends BaseAdapter{
 					.inflate(R.layout.layout_add_photo_item, null);
 			mHolder = new ViewHolder();
 			mHolder.img = (ImageView) convertView.findViewById(R.id.iv_img);
+			mHolder.text = (TextView) convertView.findViewById(R.id.tv_text);
 			convertView.setTag(mHolder);
 		}else{
 			mHolder = (ViewHolder) convertView.getTag();
 		}
-		
 		if(photos.size() < maxNum && position == photos.size()){
 			mHolder.img.setImageResource(R.drawable.ic_photo_add);
+			mHolder.img.setVisibility(View.VISIBLE);
+			mHolder.text.setVisibility(View.GONE);
+		}else if(photos.size() == 0 && position == 1){
+			mHolder.text.setText("添加照片");
+			mHolder.text.setVisibility(View.VISIBLE);
+			mHolder.img.setVisibility(View.GONE);
 		}else{
 			mHolder.img.setImageBitmap(photos.get(position));
+			mHolder.img.setVisibility(View.VISIBLE);
+			mHolder.text.setVisibility(View.GONE);
 		}
 		
 		mHolder.img.setOnClickListener(new View.OnClickListener() {
@@ -99,6 +112,7 @@ public class AddPhotoGridAdapter extends BaseAdapter{
 	
 	private class ViewHolder{
 		public ImageView img;
+		public TextView text;
 	}
 	
 	public static interface PhotoGridCallback{
