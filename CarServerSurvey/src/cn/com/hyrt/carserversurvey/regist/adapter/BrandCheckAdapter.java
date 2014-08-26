@@ -36,6 +36,7 @@ public class BrandCheckAdapter extends BaseAdapter{
 	private boolean ignoreCheckChange = false;
 	
 	private List<String> checkedId = new ArrayList<String>();
+	private List<String> checkedName = new ArrayList<String>();
 	
 	public BrandCheckAdapter(List<Map<String, String>> oneList,
 			List<List<Map<String, String>>> twoList, Context mContext) {
@@ -123,9 +124,9 @@ public class BrandCheckAdapter extends BaseAdapter{
 			if(checkedId.contains("-1")){
 				checkBox.setChecked(true);
 			}
-			checkBox.setTag("-1");
+			String[] mTag = new String[]{"-1", "-1"};
+			checkBox.setTag(mTag);
 		}else{
-			
 			tvName.setText(data.get("name"));
 			if(!isPinyin){
 //				ImageLoaderView ivImg = (ImageLoaderView) convertView.findViewById(R.id.iv_img);
@@ -134,7 +135,7 @@ public class BrandCheckAdapter extends BaseAdapter{
 				if(checkedId.contains(data.get("id"))){
 					checkBox.setChecked(true);
 				}
-				checkBox.setTag(data.get("id"));
+				checkBox.setTag(new String[]{data.get("id"), data.get("name")});
 //				ivImg.setVisibility(View.VISIBLE);
 			}else{
 				tvName.setTag(null);
@@ -152,21 +153,27 @@ public class BrandCheckAdapter extends BaseAdapter{
 							CheckBox mCheckBox = (CheckBox) parentView.getChildAt(i).findViewById(R.id.checkbox);
 							if(mCheckBox != null){
 								mCheckBox.setChecked(isChecked);
-								if(isChecked){
-									checkedId.add((String) mCheckBox.getTag());
-								}else{
-									checkedId.clear();
-								}
+//								if(isChecked){
+//									String[] mTag = (String[]) mCheckBox.getTag();
+//									checkedId.add(mTag[0]);
+//									checkedName.add(mTag[1]);
+//								}else{
+//									checkedId.clear();
+//									checkedName.clear();
+//								}
 							}
 						}
 					}else{
 						CheckBox mCheckBox = (CheckBox) parentView.getChildAt(0).findViewById(R.id.checkbox);
+						String[] mTag = (String[]) parentView.getChildAt(position).findViewById(R.id.checkbox).getTag();
 						if(!isChecked){
 							ignoreCheckChange = true;
 							mCheckBox.setChecked(false);
-							checkedId.remove(mCheckBox.getTag());
+							checkedId.remove(mTag[0]);
+							checkedName.remove(mTag[1]);
 						}else{
-							checkedId.add((String) mCheckBox.getTag());
+							checkedId.add(mTag[0]);
+							checkedName.add(mTag[1]);
 						}
 					}
 					ignoreCheckChange = false;

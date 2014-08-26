@@ -64,6 +64,10 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				id);
 		get(getString(R.string.method_getCLWDfl), params, Define.BASE.class);
 	}
+	
+	public void getCodingArea(){
+		get(getString(R.string.method_getCodingArea), null, Define.BASE.class);
+	}
 
 	private String getString(int resId) {
 		if (mContext == null) {
@@ -80,3 +84,4 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				Define.REGRECODE.class);
 	}
 }
+
