@@ -4,6 +4,7 @@ import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.info.activity.EditPasswordActivity;
 import cn.com.hyrt.carserversurvey.info.activity.LoginActivity;
+import cn.com.hyrt.carserversurvey.info.activity.RegRecodeActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -53,7 +54,7 @@ public class InfoFragment extends Fragment{
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent();
-				intent.setClass(getActivity(), LoginActivity.class);
+				intent.setClass(getActivity(), RegRecodeActivity.class);
 				startActivity(intent);
 			}
 		});

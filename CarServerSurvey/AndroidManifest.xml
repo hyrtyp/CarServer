@@ -57,7 +57,11 @@
             android:name=".info.activity.LoginActivity"
             android:theme="@style/NoTitleAppTheme"/>
          <activity 
-            android:name=".info.activity.EditPasswordActivity"/>
+            android:name=".info.activity.EditPasswordActivity"
+            android:label="@string/editPassword_title"/>
+         <activity 
+            android:name=".info.activity.RegRecodeActivity"
+            android:label="@string/regrecode_title"/>
         <!-- <activity 
             android:name=".info.activity.RegistMerchantInfoActivity"
             android:label="@string/label_merchant_info">

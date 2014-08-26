@@ -71,4 +71,12 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		}
 		return mContext.getString(resId);
 	}
+	
+	/**
+	 * 获取 注册记录 列表
+	 */
+	public void getRegRecode() {
+		get(getString(R.string.method_getMerchantUseridList), null,
+				Define.REGRECODE.class);
+	}
 }

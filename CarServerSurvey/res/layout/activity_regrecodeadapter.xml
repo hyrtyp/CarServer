@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="122dp"
+    android:orientation="horizontal" 
+    android:background="#ffffff">
+ <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
+    <cn.com.hyrt.carserversurvey.base.view.ImageLoaderView 
+        android:id="@+id/iv_ic_img"
+        android:layout_width="@dimen/face_img_size"
+        android:layout_height="@dimen/face_img_size"
+        android:background="@drawable/face_img_border_not_click"
+        android:padding="1dp"
+        android:layout_marginLeft="@dimen/view_margin"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/view_margin"
+        android:layout_marginBottom="@dimen/view_margin"
+        android:scaleType="centerCrop"/>
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/iv_ic_img"
+        android:layout_alignTop="@id/iv_ic_img"
+        android:layout_marginLeft="@dimen/main_top_margin">
+    <LinearLayout 
+        android:id="@+id/iv_face_text1"
+        android:layout_width="80dp"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/view_margin">
+        <TextView 
+            android:id="@+id/tv_recode_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/input_text_size"
+            android:textColor="#000000"
+            android:text="北京海淀通惠汽车修理厂"
+            android:layout_marginBottom="@dimen/main_top_margin"/>
+        <include layout="@layout/layout_line"/>
+        <TextView 
+            android:id="@+id/tv_recode_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size"
+            android:textColor="#646363"
+            android:text="地址：海淀区新街口13号"
+            android:layout_marginTop="@dimen/main_top_margin"/>
+        <TextView 
+            android:id="@+id/tv_recode_regdata"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size"
+            android:textColor="#289fff"
+            android:text="注册时间：2014-08-26 14:29"
+            android:layout_marginTop="@dimen/main_top_margin"/>
+    </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -25,6 +25,7 @@
 	<!-- info -->
 	<string name="username_hint">用户名</string>
 	<string name="pwd_hint">密码</string>
+	
 	<string name="login_succuss">登录成功</string>
 	<string name="login_fail">用户名或密码有误</string>
 	<string name="login_msg">登录中...</string>
@@ -40,5 +41,20 @@
 	<string name="curlogin">近期登录:</string>
 	<string name="updatepassword">修改密码</string>
 	<string name="loginout">退出登录</string>
+	
+	<string name="editPassword_title">修改密码</string>
+	<string name="info_old_pwd_label">原始密码</string>
+	<string name="info_new_pwd_label">新改密码</string>
+	<string name="info_confirm_pwd_label">确认密码</string>
+	<string name="info_confirm_edit">确认修改</string>
+	<string name="info_confirm_editinfo">确认修改后，需要重新登陆哦！</string>
+	
+	<string name="regrecode_title">注册记录</string>
+	<string name="pull_to_refresh_release_label">下拉刷新&#8230;</string>
+	<string name="pull_to_refresh_footer_release_label">松开以加载&#8230;</string>
+	<string name="pull_to_refresh_footer_pull_label">上拉加载更多&#8230;</string>
+	<string name="pull_to_refresh_pull_label">多</string>
+	<string name="pull_to_refresh_footer_refreshing_label">正在加载&#8230;</string>
+	<string name="pull_to_refresh_refreshing_label">正在刷新&#8230;</string>
 	
 </resources>
