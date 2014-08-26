@@ -57,4 +57,7 @@
 	<string name="pull_to_refresh_footer_refreshing_label">正在加载&#8230;</string>
 	<string name="pull_to_refresh_refreshing_label">正在刷新&#8230;</string>
 	
+	<string name="infodetail_title">基本信息</string>
+	<string name="info_edit_photo">修改照片</string>
+	
 </resources>

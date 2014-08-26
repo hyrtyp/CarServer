@@ -62,6 +62,10 @@
          <activity 
             android:name=".info.activity.RegRecodeActivity"
             android:label="@string/regrecode_title"/>
+         <activity 
+            android:name=".info.activity.InfoDetailActivity"
+            android:label="@string/infodetail_title"/>
+         
         <!-- <activity 
             android:name=".info.activity.RegistMerchantInfoActivity"
             android:label="@string/label_merchant_info">
