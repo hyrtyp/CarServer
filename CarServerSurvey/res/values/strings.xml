@@ -32,5 +32,13 @@
 	<string name="no_pwd">密码不能为空</string>
 	<string name="login_fail2">登录频繁，请稍后再试！</string>
 	<string name="label_merchant_info">商户信息</string>
+	<string name="logout_succuss">注销成功</string>
+	
+	<string name="usercode">人员编号:</string>
+	<string name="regrecode">注册记录:</string>
+	<string name="dregrecode">注册记录</string>
+	<string name="curlogin">近期登录:</string>
+	<string name="updatepassword">修改密码</string>
+	<string name="loginout">退出登录</string>
 	
 </resources>
