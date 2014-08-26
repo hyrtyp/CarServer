@@ -25,7 +25,7 @@
 
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:background="@drawable/bg_textview_blue"
@@ -54,7 +54,7 @@
 
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:background="@drawable/bg_textview_blue"
@@ -83,7 +83,7 @@
 
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:background="@drawable/bg_textview_blue"
@@ -216,60 +216,70 @@
                 android:textSize="18sp" />
 
             <RelativeLayout 
-                android:layout_width="72dp"
-                android:layout_height="32dp">
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:orientation="horizontal"
+                android:background="@color/login_blue"
+                android:layout_marginLeft="@dimen/main_top_margin">
             <Spinner 
                 android:id="@+id/sp_province"
-                android:layout_width="72dp"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:layout_marginLeft="@dimen/main_top_margin"
-                style="@style/spinner_style"/>
+                style="@style/spinner_style"
+                android:paddingRight="18dp"/>
             <ImageView 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_spinner"
-                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/view_margin_small"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/view_margin_small"/>
+                android:layout_gravity="center_vertical"
+                android:layout_alignRight="@id/sp_province"/>
             </RelativeLayout>
             
             <RelativeLayout 
-                android:layout_width="72dp"
-                android:layout_height="32dp">
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:orientation="horizontal"
+                android:background="@color/login_blue"
+                android:layout_marginLeft="@dimen/main_top_margin">
             <Spinner 
                 android:id="@+id/sp_city"
-                android:layout_width="72dp"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:layout_marginLeft="@dimen/main_top_margin"
-                style="@style/spinner_style"/>
+                style="@style/spinner_style"
+                android:paddingRight="18dp"/>
             <ImageView 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_spinner"
-                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/view_margin_small"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/view_margin_small"/>
+                android:layout_gravity="center_vertical"
+                android:layout_alignRight="@id/sp_city"/>
             </RelativeLayout>
             
-             <RelativeLayout 
-                android:layout_width="72dp"
-                android:layout_height="32dp">
+            <RelativeLayout 
+                android:layout_width="wrap_content"
+                android:layout_height="32dp"
+                android:orientation="horizontal"
+                android:background="@color/login_blue"
+                android:layout_marginLeft="@dimen/main_top_margin">
             <Spinner 
                 android:id="@+id/sp_county"
-                android:layout_width="72dp"
+                android:layout_width="wrap_content"
                 android:layout_height="32dp"
-                android:layout_marginLeft="@dimen/main_top_margin"
-                style="@style/spinner_style"/>
+                style="@style/spinner_style"
+                android:paddingRight="18dp"/>
             <ImageView 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_spinner"
-                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/view_margin_small"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/view_margin_small"/>
+                android:layout_gravity="center_vertical"
+                android:layout_alignRight="@id/sp_county"/>
             </RelativeLayout>
-            
-            
             
         </LinearLayout>
 
@@ -291,7 +301,7 @@
 
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:background="@drawable/bg_textview_blue"
@@ -320,7 +330,7 @@
 
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:background="@drawable/bg_textview_blue"
@@ -349,7 +359,7 @@
 
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:background="@drawable/bg_textview_blue"
@@ -378,7 +388,7 @@
 
             <EditText
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:background="@drawable/bg_textview_blue"

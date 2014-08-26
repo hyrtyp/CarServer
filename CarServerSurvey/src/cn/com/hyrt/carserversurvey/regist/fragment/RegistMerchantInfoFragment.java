@@ -7,6 +7,7 @@ import java.util.Map;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,6 +17,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -52,12 +54,36 @@ public class RegistMerchantInfoFragment extends Fragment{
 	private List<Bitmap> licensePhoto = new ArrayList<Bitmap>();
 	private AddPhotoGridAdapter merchantAdapter;
 	private AddPhotoGridAdapter licenseAdapter;
+	private ArrayAdapter<String> mProvinceArrayAdapter;
+	private ArrayAdapter<String> mCityArrayAdapter;
+	private ArrayAdapter<String> mCountyArrayAdapter;
 	
 	private List<Map<String, String>> oneList 
 	= new ArrayList<Map<String,String>>();
 	
 	private List<List<Map<String, String>>> twoList 
 	= new ArrayList<List<Map<String,String>>>();
+	
+	private List<Map<String, String>> addressOneList 
+	= new ArrayList<Map<String,String>>();
+	
+	private List<List<Map<String, String>>> addressTwoList 
+	= new ArrayList<List<Map<String,String>>>();
+	
+	private List<List<List<Map<String, String>>>> addressThreeList
+	= new ArrayList<List<List<Map<String,String>>>>();
+	
+	private List<String> provinceId = new ArrayList<String>();
+	private List<String> provinceName = new ArrayList<String>();
+	private List<String> cityId = new ArrayList<String>();
+	private List<String> cityName = new ArrayList<String>();
+	private List<String> countyId = new ArrayList<String>();
+	private List<String> countyName = new ArrayList<String>();
+	
+	private int curProvinceIndex = 0;
+	private int curCityIndex = 0;
+	private int curCountyIndex = 0;
+	
 	
 	private boolean isMerchantSelect = true;//是否正在选商户照片
 	private Uri faceUri;
@@ -72,14 +98,6 @@ public class RegistMerchantInfoFragment extends Fragment{
 		rootView = inflater.inflate(R.layout.fragment_regist_merchant, null);
 		findView();
 		loadData();
-		
-		ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String>(
-				getActivity(),
-				R.layout.layout_spinner_item,
-				getResources().getStringArray(R.array.spinnername));
-		spProvince.setAdapter(mArrayAdapter);
-		spCity.setAdapter(mArrayAdapter);
-		spCounty.setAdapter(mArrayAdapter);
 		
 		CheckBoxGridAdapter mCheckBoxGridAdapter = new CheckBoxGridAdapter(services, getActivity());
 		gvServices.setAdapter(mCheckBoxGridAdapter);
@@ -117,12 +135,82 @@ public class RegistMerchantInfoFragment extends Fragment{
 				ClassifyJsonParser classifyJsonParser = new ClassifyJsonParser();
 				classifyJsonParser.parse(result);
 				oneList.addAll(classifyJsonParser.getOneList());
-				 LogHelper.i("tag", "oneList:"+oneList);
+//				 LogHelper.i("tag", "oneList:"+oneList);
 				twoList.addAll(classifyJsonParser.getTwoList());
-				 LogHelper.i("tag", "twoList:"+twoList);
+//				 LogHelper.i("tag", "twoList:"+twoList);
 			}
 		}, getActivity());
 		mBrandWebServiceHelper.getCLWDfl(getString(R.string.flid_brand));
+		
+		provinceId.clear();
+		provinceName.clear();
+		provinceId.add("-1");
+		provinceName.add("省");
+		
+		cityId.clear();
+		cityName.clear();
+		cityId.add("-1");
+		cityName.add("市");
+		
+		countyId.clear();
+		countyName.clear();
+		countyId.add("-1");
+		countyName.add("县");
+		
+		WebServiceHelper mAddressWebServiceHelper = new WebServiceHelper(new BaseWebServiceHelper.OnSuccessListener() {
+			
+			@Override
+			public void onSuccess(String result) {
+				ClassifyJsonParser classifyJsonParser = new ClassifyJsonParser();
+				classifyJsonParser.parse(result);
+				addressOneList.addAll(classifyJsonParser.getOneList());
+				addressTwoList.addAll(classifyJsonParser.getTwoList());
+				addressThreeList.addAll(classifyJsonParser.getThreeList());
+				LogHelper.i("tag", "addressOneList:"+addressOneList);
+				LogHelper.i("tag", "addressTwoList:"+addressTwoList);
+				LogHelper.i("tag", "addressThreeList:"+addressThreeList);
+				
+//				provinceId.clear();
+//				provinceName.clear();
+				for(int i=0,j=addressOneList.size(); i<j; i++){
+					Map<String, String> oneData = addressOneList.get(i);
+					provinceId.add(oneData.get("id"));
+					provinceName.add(oneData.get("name"));
+				}
+				
+				if(mProvinceArrayAdapter == null){
+					mProvinceArrayAdapter = new ArrayAdapter<String>(
+							getActivity(),
+							R.layout.layout_spinner_item,
+							provinceName);
+				}else{
+					mProvinceArrayAdapter.notifyDataSetChanged();
+				}
+				
+				if(mCityArrayAdapter == null){
+					mCityArrayAdapter = new ArrayAdapter<String>(
+							getActivity(),
+							R.layout.layout_spinner_item,
+							cityName);
+				}
+				
+				if(mCountyArrayAdapter == null){
+					mCountyArrayAdapter = new ArrayAdapter<String>(
+							getActivity(),
+							R.layout.layout_spinner_item,
+							countyName);
+				}
+				
+//				ArrayAdapter<String> mArrayAdapter = new ArrayAdapter<String>(
+//						getActivity(),
+//						R.layout.layout_spinner_item,
+//						getResources().getStringArray(R.array.spinnername));
+				spProvince.setAdapter(mProvinceArrayAdapter);
+				spCity.setAdapter(mCityArrayAdapter);
+				spCounty.setAdapter(mCountyArrayAdapter);
+			}
+		}, getActivity());
+		mAddressWebServiceHelper.getCodingArea();
 	}
 	
 	private void setListener(){
@@ -178,6 +266,88 @@ public class RegistMerchantInfoFragment extends Fragment{
 			public void onClick(View arg0) {
 				showBrand();
 			}
+		});
+		
+		spProvince.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				curProvinceIndex = position-1;
+				
+				cityId.clear();
+				cityName.clear();
+				cityId.add("-1");
+				cityName.add("市");
+				
+				countyId.clear();
+				countyName.clear();
+				countyId.add("-1");
+				countyName.add("县");
+				mCountyArrayAdapter.notifyDataSetChanged();
+				mCityArrayAdapter.notifyDataSetChanged();
+				
+				if(position <= 0){
+					return;
+				}
+				
+				List<Map<String, String>> mCitys = addressTwoList.get(position-1);
+				
+				spCity.setSelection(0);
+				
+				for(int i=0,j=mCitys.size(); i<j; i++){
+					Map<String, String> mCityData = mCitys.get(i);
+					cityId.add(mCityData.get("id"));
+					cityName.add(mCityData.get("name"));
+				}
+				mCityArrayAdapter.notifyDataSetChanged();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {}
+		});
+		
+		spCity.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				curCityIndex = position-1;
+				if(position <= 0 || curProvinceIndex < 0){
+					return;
+				}
+				List<Map<String, String>> mCountys = addressThreeList.get(curProvinceIndex).get(position-1);
+				
+				countyId.clear();
+				countyName.clear();
+				countyId.add("-1");
+				countyName.add("县");
+				
+				for(int i=0,j=mCountys.size(); i<j; i++){
+					Map<String, String> mCountyData = mCountys.get(i);
+					countyId.add(mCountyData.get("id"));
+					countyName.add(mCountyData.get("name"));
+				}
+				mCountyArrayAdapter.notifyDataSetChanged();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {}
+		});
+		
+		spCounty.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1,
+					int position, long arg3) {
+				curCountyIndex = position-1;
+				if(position <= 0){
+					return;
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {}
 		});
 	}
 	
