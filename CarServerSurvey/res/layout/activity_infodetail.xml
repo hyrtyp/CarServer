@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+    <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+
+                    <ImageView 
+	                    android:layout_width="232dp"
+	                    android:layout_height="232dp" 
+	                    android:background="@drawable/face_img_border"
+                    	android:padding="1dp"
+	                    android:src="@drawable/ic_launcher"
+	                    android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/usercode"
+                        android:textColor="#242323"
+                        android:textSize="@dimen/input_text_size" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/regrecode"
+                        android:textColor="#242323"
+                        android:textSize="@dimen/text_size" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="80dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/curlogin"
+                        android:textColor="#242323"
+                        android:textSize="@dimen/text_size" />
+
+    </LinearLayout>
+    <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="45dp"
+                android:orientation="vertical" >        
+    <Button 
+            android:id="@+id/btn_change_photo"
+            android:layout_width="140dp"
+            android:layout_height="47dp"
+            android:background="@drawable/bg_button"
+            android:text="@string/info_edit_photo"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="70dp"
+            android:layout_margin="@dimen/view_margin"
+            android:layout_gravity="center_horizontal"/>
+	</LinearLayout>
+</LinearLayout>

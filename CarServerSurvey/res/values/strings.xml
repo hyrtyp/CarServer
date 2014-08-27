@@ -16,7 +16,7 @@
 	<string name="cancle">取消</string>
 	<string name="photo_from_album">从相册选择</string>
 	<string name="load_done">已加载全部数据</string>
-	
+	<string name="text_count_beyond">字数超出</string>
 	<string name="regist_label">商户注册</string>
 	<string name="product_label">上架商品</string>
 	<string name="shop_label">店铺首页</string>
@@ -25,6 +25,7 @@
 	<!-- info -->
 	<string name="username_hint">用户名</string>
 	<string name="pwd_hint">密码</string>
+	
 	<string name="login_succuss">登录成功</string>
 	<string name="login_fail">用户名或密码有误</string>
 	<string name="login_msg">登录中...</string>
@@ -42,5 +43,27 @@
 	<string name="loginout">退出登录</string>
 	<string name="text_not_null">%s不能为空</string>
 	<string name="text_not_symbol">%s不能输入符号</string>
+	
+	<string name="editPassword_title">修改密码</string>
+	<string name="info_old_pwd_label">原始密码</string>
+	<string name="info_new_pwd_label">新改密码</string>
+	<string name="info_confirm_pwd_label">确认密码</string>
+	<string name="info_confirm_edit">确认修改</string>
+	<string name="info_confirm_editinfo">确认修改后，需要重新登陆哦！</string>
+	<string name="info_oldpwd_is_null">原始密码不能为空！</string>
+	<string name="info_newpwd_is_null">新改密码不能为空！</string>
+	<string name="info_confirmpwd_is_null">确认密码不能为空！</string>
+	<string name="info_confirmpwd_not_tally">确认密码与密码不符！</string>
+	<string name="info_change_success">密码修改成功</string>
+	<string name="regrecode_title">注册记录</string>
+	<string name="pull_to_refresh_release_label">下拉刷新&#8230;</string>
+	<string name="pull_to_refresh_footer_release_label">松开以加载&#8230;</string>
+	<string name="pull_to_refresh_footer_pull_label">上拉加载更多&#8230;</string>
+	<string name="pull_to_refresh_pull_label">多</string>
+	<string name="pull_to_refresh_footer_refreshing_label">正在加载&#8230;</string>
+	<string name="pull_to_refresh_refreshing_label">正在刷新&#8230;</string>
+	
+	<string name="infodetail_title">基本信息</string>
+	<string name="info_edit_photo">修改照片</string>
 	
 </resources>

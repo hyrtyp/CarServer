@@ -105,7 +105,12 @@ public class StorageHelper {
 	
 	public void saveLoginInfo(Define.INFO_LOGIN loginInfo){
 		Editor mEditor = mSharedPreferences.edit();
-		String json = gson.toJson(loginInfo);
+		String json = null;
+		if(loginInfo != null){
+			json = gson.toJson(loginInfo);
+		}else{
+			json = "";
+		}
 		mEditor.putString(INFO_LOGIN_NAME, json);
 		mEditor.commit();
 	}

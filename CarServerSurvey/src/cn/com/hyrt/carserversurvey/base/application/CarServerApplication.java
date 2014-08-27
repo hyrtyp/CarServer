@@ -6,7 +6,7 @@ import android.app.Application;
 
 public class CarServerApplication extends Application{
 	
-	private Define.INFO_LOGIN mLoginInfo;
+	public static Define.INFO_LOGIN mLoginInfo;
 	
 	public Define.INFO_LOGIN getLoginInfo() {
 		if(mLoginInfo == null){
