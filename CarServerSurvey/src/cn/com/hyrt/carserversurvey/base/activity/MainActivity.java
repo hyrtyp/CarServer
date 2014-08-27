@@ -201,6 +201,16 @@ public class MainActivity extends BaseActivity {
 					((RegistMerchantInfoFragment)mFragments.get(i)).onActivityResult(arg0, arg1, arg2);
 				}
 			}
+		}else if(curIndex == 1){
+			List<Fragment> mFragments = getSupportFragmentManager().getFragments();
+			if(mFragments == null){
+				return;
+			}
+			for(int i=0,j=mFragments.size(); i<j; i++){
+				if(mFragments.get(i) instanceof ProductFragment){
+					((ProductFragment)mFragments.get(i)).onActivityResult(arg0, arg1, arg2);
+				}
+			}
 		}
 	}
 

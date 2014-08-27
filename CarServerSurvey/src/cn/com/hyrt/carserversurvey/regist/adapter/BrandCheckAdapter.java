@@ -24,6 +24,8 @@ public class BrandCheckAdapter extends BaseAdapter{
 	private List<List<Map<String, String>>> twoList;
 	
 	private List<Map<String, String>> datas = new ArrayList<Map<String,String>>();
+	private List<String> imgIds = new ArrayList<String>();
+	private List<String> imgNames = new ArrayList<String>();
 	
 	private Context mContext;
 	
@@ -38,13 +40,28 @@ public class BrandCheckAdapter extends BaseAdapter{
 	private List<String> checkedId = new ArrayList<String>();
 	private List<String> checkedName = new ArrayList<String>();
 	
+	private int imgCount;
+	
+	public List<String> getCheckedId() {
+		return checkedId;
+	}
+
+	public List<String> getCheckedName() {
+		return checkedName;
+	}
+
 	public BrandCheckAdapter(List<Map<String, String>> oneList,
-			List<List<Map<String, String>>> twoList, Context mContext) {
+			List<List<Map<String, String>>> twoList, List<String> checkedId, List<String> checkedName, Context mContext) {
 		super();
 		this.oneList = oneList;
 		this.twoList = twoList;
+		this.checkedId.addAll(checkedId);
+		this.checkedName.addAll(checkedName);
 		this.mContext = mContext;
 		this.count = 0;
+		
+		imgIds.clear();
+		imgNames.clear();
 		
 		for(int i=0,j=oneList.size(); i<j; i++){
 			List<Map<String, String>> mList = twoList.get(i);
@@ -62,6 +79,9 @@ public class BrandCheckAdapter extends BaseAdapter{
 				cmap.put("attacpath", mList.get(a).get("attacpath"));
 				datas.add(cmap);
 				this.count++;
+				imgCount++;
+				imgIds.add(cmap.get("id"));
+				imgNames.add(cmap.get("name"));
 			}
 			
 		}
@@ -121,8 +141,15 @@ public class BrandCheckAdapter extends BaseAdapter{
 		if(position == 0){
 //			tvName.setTag(new String[]{data.get("id"), data.get("name")});
 			tvName.setText("全部");
-			if(checkedId.contains("-1")){
+			
+			if(checkedId.size() == imgCount){
+				ignoreCheckChange = true;
 				checkBox.setChecked(true);
+				ignoreCheckChange = false;
+			}else{
+				ignoreCheckChange = true;
+				checkBox.setChecked(false);
+				ignoreCheckChange = false;
 			}
 			String[] mTag = new String[]{"-1", "-1"};
 			checkBox.setTag(mTag);
@@ -133,7 +160,13 @@ public class BrandCheckAdapter extends BaseAdapter{
 //				ivImg.setImageUrl(data.get("attacpath"));
 				tvName.setTag(new String[]{data.get("id"), data.get("name")});
 				if(checkedId.contains(data.get("id"))){
+					ignoreCheckChange = true;
 					checkBox.setChecked(true);
+					ignoreCheckChange = false;
+				}else{
+					ignoreCheckChange = true;
+					checkBox.setChecked(false);
+					ignoreCheckChange = false;
 				}
 				checkBox.setTag(new String[]{data.get("id"), data.get("name")});
 //				ivImg.setVisibility(View.VISIBLE);
@@ -148,7 +181,12 @@ public class BrandCheckAdapter extends BaseAdapter{
 				
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					if(position == 0 && !ignoreCheckChange){
+					LogHelper.i("tag", "isChecked:"+isChecked+" ignoreCheckChange:"+ignoreCheckChange);
+					if(ignoreCheckChange){
+						ignoreCheckChange = false;
+						return;
+					}
+					if(position == 0){
 						for(int i=0,j=parentView.getChildCount(); i<j; i++){
 							CheckBox mCheckBox = (CheckBox) parentView.getChildAt(i).findViewById(R.id.checkbox);
 							if(mCheckBox != null){
@@ -163,17 +201,48 @@ public class BrandCheckAdapter extends BaseAdapter{
 //								}
 							}
 						}
+						checkedId.clear();
+						checkedName.clear();
+						if(isChecked){
+							checkedId.addAll(imgIds);
+							checkedName.addAll(imgNames);
+						}
 					}else{
 						CheckBox mCheckBox = (CheckBox) parentView.getChildAt(0).findViewById(R.id.checkbox);
-						String[] mTag = (String[]) parentView.getChildAt(position).findViewById(R.id.checkbox).getTag();
+						if(mCheckBox != null){
+							String[] temp = (String[]) mCheckBox.getTag();
+							if(!"-1".equals(temp[0])){
+								mCheckBox = null;
+							}
+						}
+//						View mView = (View) parentView.getChildAt(position);
+//						if(mView == null){
+//							LogHelper.i("tag", "mView is null - position:"+position);
+//							return;
+//						}
+						String[] mTag = (String[]) buttonView.getTag();
+						
 						if(!isChecked){
 							ignoreCheckChange = true;
-							mCheckBox.setChecked(false);
+							if(mCheckBox != null){
+								mCheckBox.setChecked(false);
+							}
 							checkedId.remove(mTag[0]);
 							checkedName.remove(mTag[1]);
+							LogHelper.i("tag", "remove name:"+mTag[1]);
 						}else{
-							checkedId.add(mTag[0]);
-							checkedName.add(mTag[1]);
+							if(!checkedId.contains(mTag[0]) && !"-1".equals(mTag[0])){
+								checkedId.add(mTag[0]);
+								checkedName.add(mTag[1]);
+								LogHelper.i("tag", "add name:"+mTag[1]);
+							}
+//							LogHelper.i("tag", "checkedId.size() :"+checkedId.size() + "imgCount:"+imgCount);
+							if(checkedId.size() == imgCount){
+								ignoreCheckChange = true;
+								if(mCheckBox != null){
+									mCheckBox.setChecked(true);
+								}
+							}
 						}
 					}
 					ignoreCheckChange = false;

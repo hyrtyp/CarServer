@@ -24,6 +24,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/et_fullname"
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
@@ -33,7 +34,8 @@
                 android:paddingRight="@dimen/main_top_margin"
                 android:textColor="#000"
                 android:textSize="18sp" 
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:maxLength="50"/>
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />
@@ -53,6 +55,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/et_singlename"
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
@@ -62,7 +65,8 @@
                 android:paddingRight="@dimen/main_top_margin"
                 android:textColor="#000"
                 android:textSize="18sp" 
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:maxLength="10"/>
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />
@@ -82,6 +86,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/et_username"
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
@@ -91,7 +96,8 @@
                 android:paddingRight="@dimen/main_top_margin"
                 android:textColor="#000"
                 android:textSize="18sp" 
-                android:singleLine="true"/>
+                android:singleLine="true"
+                android:inputType="phone"/>
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />
@@ -162,14 +168,24 @@
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
 
-            <cn.com.hyrt.carserversurvey.base.view.FullGridView
+            <!-- <cn.com.hyrt.carserversurvey.base.view.FullGridView
                 android:id="@+id/gv_services"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:numColumns="2"
-                android:verticalSpacing="10dp" />
+                android:verticalSpacing="10dp" /> -->
+                <TextView 
+                android:id="@+id/tv_select_fwclass"
+                android:layout_width="159dp"
+                android:layout_height="32dp"
+                android:textColor="@android:color/white"
+                android:background="@color/login_blue"
+                android:text="选择服务"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:singleLine="true"/>
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />
@@ -184,7 +200,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="服务品牌"
+                android:text="选择品牌"
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
 
@@ -196,7 +212,8 @@
                 android:background="@color/login_blue"
                 android:text="全部品牌"
                 android:gravity="center"
-                android:layout_marginLeft="@dimen/main_top_margin"/>
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:singleLine="true"/>
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />
@@ -300,6 +317,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/et_address"
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
@@ -329,6 +347,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/et_contactname"
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
@@ -358,6 +377,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/et_phonenum"
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
@@ -387,6 +407,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/et_telnum"
                 android:layout_width="fill_parent"
                 android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
@@ -416,6 +437,7 @@
                 android:textSize="18sp" />
 
             <EditText
+                android:id="@+id/et_desc"
                 android:layout_width="fill_parent"
                 android:layout_height="119dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
@@ -429,6 +451,7 @@
         </LinearLayout>
 
         <Button 
+            android:id="@+id/btn_submit"
             android:layout_width="242dp"
             android:layout_height="47dp"
             android:background="@drawable/bg_button"

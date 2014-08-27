@@ -146,4 +146,11 @@ public class StringHelper {
         return m.matches();
 
     }
+	
+	public static boolean nameValidate(String str){
+		 Pattern p = Pattern
+	                .compile("[\u4e00-\u9fa5A-Za-z0-99]+");
+		Matcher m = p.matcher(str);
+		return m.matches();
+	}
 }

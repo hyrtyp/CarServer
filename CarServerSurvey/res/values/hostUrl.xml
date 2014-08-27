@@ -4,6 +4,8 @@
     <string name="method_existsjname">sjname</string>
     <string name="method_getCLWDfl">getCLWDfl</string>
     <string name="method_getCodingArea">getCodingArea</string>
+    <string name="method_getFwClassList">getFwClassList</string>
+    <string name="method_saveMerchant">saveMerchant</string>
     
     <!-- 分类查询ID -->
     <string name="flid_brand">000021</string>
