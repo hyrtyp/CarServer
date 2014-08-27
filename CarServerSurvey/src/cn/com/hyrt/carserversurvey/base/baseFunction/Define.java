@@ -47,6 +47,7 @@ public class Define {
 	
 	public static class INFO_PRODUCT extends BASE {
 		public String id;//商品主键ID
+		public String userid;
 		public String price;//价格
 		public String imagepath0;
 		public String imagepath1;
@@ -56,6 +57,7 @@ public class Define {
 		public String sptitle;//商品介绍
 		public String type;//类型
 		public String discount;//折扣
+		public String serviceid;//商家ID
 	}
 	
 	/**

@@ -8,6 +8,7 @@
     <string name="method_saveMerchant">saveMerchant</string>
     <string name="method_getMerchantUseridList">getMerchantUseridList</string>
     <string name="method_saveUserinfo">saveUserinfo</string>
+    <string name="method_saveMerchantComm">saveMerchantComm</string>
     
     <!-- 分类查询ID -->
     <string name="flid_brand">000021</string>

@@ -5,11 +5,16 @@ import java.util.List;
 
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_PRODUCT;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
+import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.helper.FileHelper;
 import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 import cn.com.hyrt.carserversurvey.base.helper.PhotoHelper;
 import cn.com.hyrt.carserversurvey.base.helper.PhotoPopupHelper;
+import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
+import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -21,7 +26,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.GridView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 
 public class ProductFragment extends Fragment{
 
@@ -35,7 +45,15 @@ public class ProductFragment extends Fragment{
 	private Uri faceUri;
 	private PhotoHelper mPhotoHelper;
 	private String imgBuffer;
-
+	private Button btnSubmit;
+	private TextView et_proName;
+	private TextView et_proPrice;
+	private TextView et_proDisPrice;
+	private TextView et_proDec;
+	private RadioGroup isproductservice;
+	private RadioButton rb_product;
+	private RadioButton rb_service;
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -69,6 +87,14 @@ public class ProductFragment extends Fragment{
 				}else{
 					delPhoto(position);
 				}
+			}
+		});
+
+		btnSubmit.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				submit();
 			}
 		});
 	}
@@ -129,9 +155,78 @@ public class ProductFragment extends Fragment{
         }
 	}
 	
+	private void submit(){
+
+		String productname = et_proName.getText().toString();
+		String curpirce = et_proPrice.getText().toString();
+		String discountprice = et_proDisPrice.getText().toString();
+		String productdec = et_proDec.getText().toString();
+		String istype="";
+		if("".equals(productname) || productname == null){
+			AlertHelper.getInstance(getActivity()).showCenterToast(String.format(getString(R.string.text_not_null), "商品名称"));
+			return;
+		}
+		if("".equals(curpirce) || curpirce == null){
+			AlertHelper.getInstance(getActivity()).showCenterToast(String.format(getString(R.string.text_not_null), "售出价格"));
+			return;
+		}else{
+			if(!StringHelper.isNumeric(curpirce)){
+				AlertHelper.getInstance(getActivity()).showCenterToast(String.format(getString(R.string.text_not_null), "售出价格必须为数字"));
+				return;
+			}
+		}
+		if("".equals(discountprice) || discountprice == null){
+			if(!StringHelper.isNumeric(curpirce)){
+				AlertHelper.getInstance(getActivity()).showCenterToast(String.format(getString(R.string.text_not_null), "折扣价格必须为数字"));
+				return;
+			}
+		}
+		String issp = String.valueOf(isproductservice.getCheckedRadioButtonId()); 
+
+		if(issp.equals(String.valueOf(rb_product.getId()))){
+			istype="sp";
+		}else{
+			istype="fw";
+		}
+		
+		Define.INFO_PRODUCT productInfo = new Define.INFO_PRODUCT();
+		productInfo.spname=productname;
+		productInfo.price=curpirce;
+		productInfo.discount=discountprice;
+		productInfo.sptitle=productdec;
+		productInfo.type=istype;
+		productInfo.serviceid = "1";
+		//调用保存商品接口saveMerchantComm
+		AlertHelper.getInstance(getActivity()).showLoading(null);
+		WebServiceHelper SaveProductHelper = new WebServiceHelper(
+				new BaseWebServiceHelper.RequestCallback<Define.INFO_PRODUCT>() {
+
+			@Override
+			public void onFailure(int errorNo, String errorMsg) {
+				AlertHelper.getInstance(getActivity()).hideLoading();
+			}
+
+			@Override
+			public void onSuccess(INFO_PRODUCT result) {
+				AlertHelper.getInstance(getActivity()).hideLoading();
+				
+			}
+		}, getActivity());
+		SaveProductHelper.saveProductInfo(productInfo);
+		
+	}
+	
 	private void findView(){
 		gvProductPhoto = (GridView) rootView.findViewById(R.id.gv_product_photo);
+		et_proName = (TextView) rootView.findViewById(R.id.et_proName);
+		et_proPrice = (TextView) rootView.findViewById(R.id.et_proPrice);
+		et_proDisPrice = (TextView) rootView.findViewById(R.id.et_proDisPrice);
+		et_proDec = (TextView) rootView.findViewById(R.id.et_proDec); 
+		isproductservice = (RadioGroup)rootView.findViewById(R.id.rg_issp);
+		rb_product=(RadioButton)rootView.findViewById(R.id.rb_product);
+		rb_service=(RadioButton)rootView.findViewById(R.id.rb_service);
 		
+		btnSubmit =(Button)rootView.findViewById(R.id.btn_prodectsubmit);
 		if(productAdapter == null){
 			productAdapter = new AddPhotoGridAdapter(productPhotos, getActivity());
 		}
