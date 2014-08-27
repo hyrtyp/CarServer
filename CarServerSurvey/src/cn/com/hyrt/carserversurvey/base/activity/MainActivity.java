@@ -222,5 +222,9 @@ public class MainActivity extends BaseActivity {
 			}
 		}
 	}
+	
+	public void jump(int position){
+		mTabHost.setCurrentTab(position);
+	}
 
 }

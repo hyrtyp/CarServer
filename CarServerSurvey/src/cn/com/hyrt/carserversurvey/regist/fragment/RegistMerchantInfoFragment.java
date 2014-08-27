@@ -29,6 +29,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import cn.com.hyrt.carserversurvey.R;
+import cn.com.hyrt.carserversurvey.base.activity.MainActivity;
 import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
 import cn.com.hyrt.carserversurvey.base.adapter.CheckBoxGridAdapter;
 import cn.com.hyrt.carserversurvey.base.baseFunction.ClassifyJsonParser;
@@ -124,6 +125,17 @@ public class RegistMerchantInfoFragment extends Fragment{
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		
+		merchantPhotos.clear();
+		licensePhoto.clear();
+		brandCheckedId.clear();
+		brandCheckedName.clear();
+		fwClassCheckedId.clear();
+		fwClassCheckedName.clear();
+		curCityIndex = 0;
+		curCountyIndex = 0;
+		curProvinceIndex = 0;
+		
 		rootView = inflater.inflate(R.layout.fragment_regist_merchant, null);
 		findView();
 		loadData();
@@ -742,17 +754,42 @@ public class RegistMerchantInfoFragment extends Fragment{
 
 			@Override
 			public void onSuccess(SAVE_INFO_MERCHANT_RESULT result) {
+				AlertHelper.getInstance(getActivity()).showCenterToast(R.string.regist_success);
 				AlertHelper.getInstance(getActivity()).hideLoading();
+				etFullname.setText("");
+				etSinglename.setText("");
+				etUsername.setText("");
+				etAddress.setText("");
+				etContactname.setText("");
+				etPhonenum.setText("");
+				etTelnum.setText("");
+				etDesc.setText("");
+				((MainActivity)getActivity()).jump(1);
 			}
 
 			@Override
 			public void onFailure(int errorNo, String errorMsg) {
+				AlertHelper.getInstance(getActivity()).showCenterToast(R.string.regist_error);
 				AlertHelper.getInstance(getActivity()).hideLoading();
 			}
 		}, getActivity());
 		SaveMerchantHelper.saveMerchantInfo(merchantInfo);
+		
+		
 	}
 	
+	@Override
+	public void onStop() {
+		LogHelper.i("tag", "onStop");
+		
+		super.onStop();
+	}
+	
+	@Override
+	public void onDestroy() {
+		LogHelper.i("tag", "onDestroy");
+		super.onDestroy();
+	}
 	
 	private void findView(){
 		gvMerchantPhoto = (GridView) rootView.findViewById(R.id.gv_merchant_photo);
