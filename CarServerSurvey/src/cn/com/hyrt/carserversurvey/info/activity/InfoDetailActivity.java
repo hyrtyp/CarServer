@@ -1,6 +1,9 @@
 package cn.com.hyrt.carserversurvey.info.activity;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -29,4 +32,5 @@ public class InfoDetailActivity extends BaseActivity{
 		mPhotoHelper = new PhotoHelper(this, faceUri, 50);
 		mPhotoHelper.getPhoto();
 	}
+	
 }
