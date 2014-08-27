@@ -3,8 +3,10 @@
     <string name="method_login">getHwLogininfo</string>
     <string name="method_existsjname">sjname</string>
     <string name="method_getCLWDfl">getCLWDfl</string>
-    <string name="method_getMerchantUseridList">getMerchantUseridList</string>
     <string name="method_getCodingArea">getCodingArea</string>
+    <string name="method_getFwClassList">getFwClassList</string>
+    <string name="method_saveMerchant">saveMerchant</string>
+    <string name="method_getMerchantUseridList">getMerchantUseridList</string>
     <string name="method_saveUserinfo">saveUserinfo</string>
     
     <!-- 分类查询ID -->

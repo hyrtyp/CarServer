@@ -68,6 +68,28 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	public void getCodingArea(){
 		get(getString(R.string.method_getCodingArea), null, Define.BASE.class);
 	}
+	
+	/**
+	 * 获取服务类型
+	 */
+	public void getFwClassList(){
+		get(getString(R.string.method_getFwClassList), null, Define.BASE.class);
+	}
+	
+	/**
+	 * 保存商户信息
+	 */
+	public void saveMerchantInfo(Define.SAVE_INFO_MERCHANT merchantInfo){
+		merchantInfo.userid = getUserId();
+		String params = new Gson().toJson(merchantInfo);
+		get(getString(R.string.method_saveMerchant), params,
+				Define.SAVE_INFO_MERCHANT_RESULT.class);
+	}
+	
+	private String getUserId(){
+		return ((CarServerApplication)mContext
+				.getApplicationContext()).getLoginInfo().id;
+	}
 
 	private String getString(int resId) {
 		if (mContext == null) {

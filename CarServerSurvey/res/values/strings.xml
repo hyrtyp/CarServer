@@ -41,6 +41,8 @@
 	<string name="curlogin">近期登录:</string>
 	<string name="updatepassword">修改密码</string>
 	<string name="loginout">退出登录</string>
+	<string name="text_not_null">%s不能为空</string>
+	<string name="text_not_symbol">%s不能输入符号</string>
 	
 	<string name="editPassword_title">修改密码</string>
 	<string name="info_old_pwd_label">原始密码</string>

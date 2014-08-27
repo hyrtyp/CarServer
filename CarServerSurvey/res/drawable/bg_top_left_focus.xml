@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+<corners
+        android:topLeftRadius="5dp"
+        android:bottomLeftRadius="5dp"
+        android:topRightRadius="0dp"
+        android:bottomRightRadius="0dp"/>
+    <!-- <stroke android:color="@color/login_blue"
+        android:width="1px"/> -->
+    <solid 
+        android:color="@color/login_blue"/>
+</shape>
