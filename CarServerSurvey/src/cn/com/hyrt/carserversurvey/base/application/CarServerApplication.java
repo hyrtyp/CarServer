@@ -6,8 +6,17 @@ import android.app.Application;
 
 public class CarServerApplication extends Application{
 	
-	public static Define.INFO_LOGIN mLoginInfo;
+	private static Define.INFO_LOGIN mLoginInfo;
+	private static String merchantId;//当前商户ID
 	
+	public static String getMerchantId() {
+		return merchantId;
+	}
+
+	public static void setMerchantId(String merchantId) {
+		CarServerApplication.merchantId = merchantId;
+	}
+
 	public Define.INFO_LOGIN getLoginInfo() {
 		if(mLoginInfo == null){
 			mLoginInfo = StorageHelper.getInstance(getApplicationContext()).getLoginInfo();

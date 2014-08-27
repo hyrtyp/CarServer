@@ -4,6 +4,7 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.TextView;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
@@ -53,6 +54,19 @@ public class RegRecodeActivity  extends BaseActivity{
 				isLoadMore = true;
 				loadData();
 			}
+		});
+		
+		lvclaim.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				LogHelper.i("tag", "lvclaim:"+position);
+				Intent intent = new Intent();
+				intent.setClass(RegRecodeActivity.this, MerchantInfoActivity.class);
+				startActivity(intent);
+			}
+			
 		});
 	}
 	
