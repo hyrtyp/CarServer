@@ -79,9 +79,19 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	/**
 	 * 获取 注册记录 列表
 	 */
-	public void getRegRecode() {
-		get(getString(R.string.method_getMerchantUseridList), null,
-				Define.REGRECODE.class);
+	public void getRegRecode(String id,int pageNo) {
+		String params = String.format("{\"userid\":\"%s\",\"page\":\"%s\"}", id,pageNo);
+		get(getString(R.string.method_getMerchantUseridList), params,Define.REGRECODE.class);
+	}
+	
+	/**
+	 * 用户密码修改
+	 */
+	public void saveUserInfo(Define.SAVE_INFO info) {
+		Gson mGson = new Gson();
+		String params = mGson.toJson(info);
+		get(mContext.getString(R.string.method_saveUserinfo), params,
+				Define.BASE.class);
 	}
 }
 

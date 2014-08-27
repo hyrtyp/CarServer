@@ -55,8 +55,8 @@ public class RegRecodeAdapter extends BaseAdapter {
 		Define.REGRECODE.CDATA icc = ic.data.get(position);
 		ivFaceImg.setImageUrl(icc.recodeimagepath);
 		regname.setText(icc.sjname);
-		regadd.setText(icc.sjaddress);
-		regdate.setText(icc.peopledate);
+		regadd.setText("地址："+icc.sjaddress);
+		regdate.setText("注册时间："+icc.peopledate);
 		return convertView;
 	}
 

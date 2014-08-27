@@ -3,6 +3,7 @@ package cn.com.hyrt.carserversurvey.base.activity;
 import java.util.List;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -47,6 +48,9 @@ public class MainActivity extends BaseActivity {
 //	LinearLayout layout_line;
 	@ViewInject(id = R.id.iv_topright)
 	ImageView ivTopRight;
+	
+	public static MainActivity meContext;
+	public static boolean needFinish = false;
 
 	private Class<?> fragmentArray[] = {
 			RegistMerchantInfoFragment.class, ProductFragment.class,
@@ -82,7 +86,7 @@ public class MainActivity extends BaseActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		showActionBar(false);
-
+		meContext = this;
 		initView();
 		LogHelper.i("tag", "sp:" + ScreenHelper.px2sp(this, 24) + " dp:"
 				+ ScreenHelper.px2dip(this, 24));
@@ -176,6 +180,11 @@ public class MainActivity extends BaseActivity {
 	
 	@Override
 	public void finish() {
+		if(needFinish){
+			needFinish = false;
+			super.finish();
+			return;
+		}
 		if(!needExit){
 			needExit = true;
 			AlertHelper.getInstance(MainActivity.this).showCenterToast(R.string.exit_prompt);

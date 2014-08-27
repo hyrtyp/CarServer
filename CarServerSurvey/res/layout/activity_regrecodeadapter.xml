@@ -40,7 +40,6 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/input_text_size"
             android:textColor="#000000"
-            android:text="北京海淀通惠汽车修理厂"
             android:layout_marginBottom="@dimen/main_top_margin"/>
         <include layout="@layout/layout_line"/>
         <TextView 
@@ -49,7 +48,6 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size"
             android:textColor="#646363"
-            android:text="地址：海淀区新街口13号"
             android:layout_marginTop="@dimen/main_top_margin"/>
         <TextView 
             android:id="@+id/tv_recode_regdata"
@@ -57,7 +55,6 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_size"
             android:textColor="#289fff"
-            android:text="注册时间：2014-08-26 14:29"
             android:layout_marginTop="@dimen/main_top_margin"/>
     </LinearLayout>
     </LinearLayout>

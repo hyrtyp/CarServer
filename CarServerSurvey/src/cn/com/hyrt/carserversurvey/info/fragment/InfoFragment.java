@@ -1,6 +1,8 @@
 package cn.com.hyrt.carserversurvey.info.fragment;
 
 import cn.com.hyrt.carserversurvey.R;
+import cn.com.hyrt.carserversurvey.base.activity.MainActivity;
+import cn.com.hyrt.carserversurvey.base.application.CarServerApplication;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.info.activity.EditPasswordActivity;
 import cn.com.hyrt.carserversurvey.info.activity.InfoDetailActivity;
@@ -22,6 +24,7 @@ public class InfoFragment extends Fragment{
     private Button btn_regrecode;
     private Button btn_loginout;
 	private LinearLayout layout_info;
+	public Object CarServerApplication  ;
     
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -83,12 +86,15 @@ public class InfoFragment extends Fragment{
 			
 			@Override
 			public void onClick(View arg0) {
-				//android.os.Process.killProcess(android.os.Process.myPid());    //获取PID 
-				//System.exit(0);   //常规java、c#的标准退出法，返回值为0代表正常退出
 				AlertHelper.getInstance(getActivity()).showCenterToast(R.string.logout_succuss);
 				Intent intent = new Intent();
 				intent.setClass(getActivity(), LoginActivity.class);
 				startActivity(intent);
+				((CarServerApplication)getActivity().getApplicationContext()).setLoginInfo(null);
+				if(MainActivity.meContext != null){
+					MainActivity.needFinish = true;
+					MainActivity.meContext.finish();
+				}
 			}
 		});
 	}

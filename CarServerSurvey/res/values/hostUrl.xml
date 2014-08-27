@@ -5,6 +5,8 @@
     <string name="method_getCLWDfl">getCLWDfl</string>
     <string name="method_getMerchantUseridList">getMerchantUseridList</string>
     <string name="method_getCodingArea">getCodingArea</string>
+    <string name="method_saveUserinfo">saveUserinfo</string>
+    
     <!-- 分类查询ID -->
     <string name="flid_brand">000021</string>
 </resources>

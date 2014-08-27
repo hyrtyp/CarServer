@@ -16,6 +16,7 @@ public class Define {
 	public static String REQUEST_SAVE_SUCCESS_CODE = "205";
 	public static String REQUEST_ERROR_CODE = "500";
 	public static int RESULT_FROM_ALTER_CAR = 101;
+	public static int RESULT_FROM_CHANGE_INFO = 102;
 
 	public static class BASE {
 		public String code;
@@ -25,6 +26,12 @@ public class Define {
 	public static class INFO_LOGIN extends BASE {
 		public String id;
 		public String loginname;
+	}
+	
+	public static class SAVE_INFO extends BASE {
+		public String id;
+		public String password;
+		public String newpassword; 
 	}
 	
 	/**
