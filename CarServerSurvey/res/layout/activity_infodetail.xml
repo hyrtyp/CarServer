@@ -11,14 +11,14 @@
                 android:gravity="center"
                 android:orientation="vertical" >
 
-
-                    <ImageView 
-	                    android:layout_width="232dp"
-	                    android:layout_height="232dp" 
-	                    android:background="@drawable/face_img_border"
-                    	android:padding="1dp"
-	                    android:src="@drawable/ic_launcher"
-	                    android:scaleType="centerCrop"/>
+                    <cn.com.hyrt.carserversurvey.base.view.ImageLoaderView
+                    android:id="@+id/iv_user_img"
+                    android:layout_width="232dp"
+                    android:layout_height="232dp"
+                    android:background="@drawable/face_img_border"
+                    android:padding="1dp"
+                    android:src="@drawable/ic_launcher"
+                    android:scaleType="centerCrop"/>
 
                     <TextView
                         android:layout_width="wrap_content"
