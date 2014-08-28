@@ -35,7 +35,8 @@
                 android:textColor="#000"
                 android:textSize="18sp" 
                 android:singleLine="true"
-                android:maxLength="50"/>
+                android:maxLength="50"
+                />
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />
@@ -97,7 +98,8 @@
                 android:textColor="#000"
                 android:textSize="18sp" 
                 android:singleLine="true"
-                android:inputType="phone"/>
+                android:inputType="phone"
+                android:enabled="false"/>
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />

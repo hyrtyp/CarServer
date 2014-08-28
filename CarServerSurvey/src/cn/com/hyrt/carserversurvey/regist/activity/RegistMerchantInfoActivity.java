@@ -32,6 +32,8 @@ import cn.com.hyrt.carserversurvey.base.activity.MainActivity;
 import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
 import cn.com.hyrt.carserversurvey.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_MERCHANT;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_MERCHANT.CDATA;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.SAVE_INFO_MERCHANT_RESULT;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
@@ -73,7 +75,6 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	private ImageLoaderView ivLicensePhoto;
 	private TextView tvLicensePhoto;
 	
-	private List<String> services;
 	
 //	private List<Bitmap> merchantPhotos = new  ArrayList<Bitmap>();
 //	private List<Bitmap> licensePhoto = new ArrayList<Bitmap>();
@@ -117,9 +118,8 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	private List<String> countyName = new ArrayList<String>();
 	
 	private int curProvinceIndex = 0;
-	private int curCityIndex = 0;
-	private int curCountyIndex = 0;
-	
+	private int curCityIndex = -1;
+	private int curCountyIndex = -1;
 	
 	private boolean isMerchantSelect = true;//是否正在选商户照片
 	private Uri faceUri;
@@ -127,17 +127,22 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 //	private String merchantImgBuffer;
 	private Bitmap merchantBitmap;
 	private Bitmap licenseBitmap;
+	private String merchantImgUrl;
+	private String licenseImgUrl;
 	
 	private Dialog mBrandDialog;
 	private Dialog mfwClassDialog;
+	
+	private INFO_MERCHANT.CDATA mData;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_regist_merchant);
+		mData = (CDATA) getIntent().getSerializableExtra("vo");
 		findView();
+		initView();
 		loadData();
-		
 //		if(merchantAdapter == null){
 //			merchantAdapter = new AddPhotoGridAdapter(merchantPhotos, RegistMerchantInfoActivity.this);
 //		}
@@ -150,14 +155,58 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 		setListener();
 	}
 	
+	private void initView(){
+		String[] brandids = mData.brandid.split(";");
+		String[] brandNames = mData.brandname.split("、");
+		brandCheckedId.clear();
+		brandCheckedName.clear();
+		for (String str : brandids) {
+			brandCheckedId.add(str);
+		}
+		for (String str : brandNames) {
+			brandCheckedName.add(str);
+		}
+		tvSelectBrand.setText(mData.brandname);
+		
+		String[] fwClassIds = mData.serviceTypeid.split(";");
+		String[] fwClassNames = mData.serviceTypename.split(";");
+		fwClassCheckedId.clear();
+		fwClassCheckedName.clear();
+		for(String str : fwClassIds){
+			fwClassCheckedId.add(str);
+		}
+		for(String str : fwClassNames){
+			fwClassCheckedName.add(str);
+		}
+		tvSelectFwClass.setText(mData.serviceTypename);
+		
+		merchantImgUrl = mData.imagepath;
+		if(merchantImgUrl != null && !"".equals(merchantImgUrl)){
+			ivMerchantPhoto.setImageUrl(merchantImgUrl);
+			tvMerchantPhoto.setVisibility(View.GONE);
+		}else{
+			merchantImgUrl = null;
+		}
+		
+		licenseImgUrl = mData.zzimagepath;
+		if(licenseImgUrl != null && !"".equals(licenseImgUrl)){
+			ivLicensePhoto.setImageUrl(licenseImgUrl);
+			tvLicensePhoto.setVisibility(View.GONE);
+		}else{
+			licenseImgUrl = null;
+		}
+		
+		etFullname.setText(mData.sjname);
+		etSinglename.setText(mData.sjjc);
+		etUsername.setText(mData.loginname);
+		etAddress.setText(mData.sjaddress);
+		etContactname.setText(mData.sjmanager);
+		etPhonenum.setText(mData.phonenum);
+		etTelnum.setText(mData.sjtel);
+		etDesc.setText(mData.desc);
+	}
+	
 	private void loadData(){
-		services = new ArrayList<String>();
-		services.add("专业美容");
-		services.add("专业美容");
-		services.add("专业美容");
-		services.add("专业美容");
-		services.add("专业美容");
-		services.add("专业美容");
 		
 		WebServiceHelper mBrandWebServiceHelper 
 		= new WebServiceHelper(new BaseWebServiceHelper.OnSuccessListener() {
@@ -246,6 +295,7 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 				spProvince.setAdapter(mProvinceArrayAdapter);
 				spCity.setAdapter(mCityArrayAdapter);
 				spCounty.setAdapter(mCountyArrayAdapter);
+				changeCountySelected();
 			}
 		}, RegistMerchantInfoActivity.this);
 		mAddressWebServiceHelper.getCodingArea();
@@ -270,11 +320,15 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View arg0) {
-				if(merchantBitmap == null){
+				if(merchantBitmap == null && merchantImgUrl == null){
 					isMerchantSelect = true;
 					addPhoto();
 				}else{
-					PhotoPopupHelper.showPop(merchantBitmap, RegistMerchantInfoActivity.this);
+					if(merchantBitmap != null){
+						PhotoPopupHelper.showPop(merchantBitmap, RegistMerchantInfoActivity.this);
+					}else{
+						PhotoPopupHelper.showPop(merchantImgUrl, RegistMerchantInfoActivity.this);
+					}
 				}
 			}
 		});
@@ -282,7 +336,7 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 			
 			@Override
 			public boolean onLongClick(View arg0) {
-				if(merchantBitmap == null){
+				if(merchantBitmap == null && merchantImgUrl == null){
 					isMerchantSelect = true;
 					addPhoto();
 				}else{
@@ -296,11 +350,15 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 			
 			@Override
 			public void onClick(View arg0) {
-				if(licenseBitmap == null){
+				if(licenseBitmap == null && licenseImgUrl == null){
 					isMerchantSelect = false;
 					addPhoto();
 				}else{
-					PhotoPopupHelper.showPop(licenseBitmap, RegistMerchantInfoActivity.this);
+					if(licenseBitmap != null){
+						PhotoPopupHelper.showPop(licenseBitmap, RegistMerchantInfoActivity.this);
+					}else{
+						PhotoPopupHelper.showPop(licenseImgUrl, RegistMerchantInfoActivity.this);
+					}
 				}
 			}
 		});
@@ -309,7 +367,7 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 			
 			@Override
 			public boolean onLongClick(View arg0) {
-				if(licenseBitmap == null){
+				if(licenseBitmap == null && licenseImgUrl == null){
 					isMerchantSelect = false;
 					addPhoto();
 				}else{
@@ -414,6 +472,9 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 					cityName.add(mCityData.get("name"));
 				}
 				mCityArrayAdapter.notifyDataSetChanged();
+				if(curCityIndex >= 0){
+					spCity.setSelection(curCityIndex);
+				}
 			}
 
 			@Override
@@ -425,8 +486,7 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
-				curCityIndex = position-1;
-				
+				curCityIndex = -1;
 				countyId.clear();
 				countyName.clear();
 				countyId.add("-1");
@@ -447,6 +507,9 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 					countyName.add(mCountyData.get("name"));
 				}
 				mCountyArrayAdapter.notifyDataSetChanged();
+				if(curCountyIndex >= 0){
+					spCounty.setSelection(curCountyIndex);
+				}
 			}
 
 			@Override
@@ -458,7 +521,7 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
-				curCountyIndex = position-1;
+				curCountyIndex = -1;
 				if(position <= 0){
 					return;
 				}
@@ -509,10 +572,12 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 				if(isMerchant){
 					tvMerchantPhoto.setVisibility(View.VISIBLE);
 					merchantBitmap = null;
+					merchantImgUrl = null;
 					ivMerchantPhoto.setImageResource(R.drawable.ic_photo_add);
 				}else{
 					tvLicensePhoto.setVisibility(View.VISIBLE);
 					licenseBitmap = null;
+					licenseImgUrl = null;
 					ivLicensePhoto.setImageResource(R.drawable.ic_photo_add);
 				}
 			}
@@ -547,10 +612,12 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 //                	merchantAdapter.notifyDataSetChanged();
                 	tvMerchantPhoto.setVisibility(View.GONE);
                 	merchantBitmap = bitmap;
+                	merchantImgUrl = null;
                 	ivMerchantPhoto.setImageBitmap(bitmap);
                 }else{
                 	tvLicensePhoto.setVisibility(View.GONE);
                 	licenseBitmap = bitmap;
+                	licenseImgUrl = null;
                 	ivLicensePhoto.setImageBitmap(bitmap);
 //                	licensePhoto.add(bitmap);
 //                	licenseAdapter.notifyDataSetChanged();
@@ -831,10 +898,11 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 		merchantInfo.desc = desc;
 		merchantInfo.sjimage = sjPhoto;
 		merchantInfo.imagename = sjPhotoName;
-		merchantInfo.zzimage = zzPhoto.toString();
-		merchantInfo.zzimagename = zzPhotoName.toString();
+		merchantInfo.zzimage = zzPhoto;
+		merchantInfo.zzimagename = zzPhotoName;
 		merchantInfo.brandid = brands.toString();
 		merchantInfo.servicetype = fwClass.toString();
+		merchantInfo.id = mData.id;
 		
 		AlertHelper.getInstance(RegistMerchantInfoActivity.this).showLoading(null);
 		
@@ -843,7 +911,7 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 
 			@Override
 			public void onSuccess(SAVE_INFO_MERCHANT_RESULT result) {
-				AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast(R.string.regist_success);
+				AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast(R.string.change_success);
 				AlertHelper.getInstance(RegistMerchantInfoActivity.this).hideLoading();
 				finish();
 			}
@@ -859,18 +927,31 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 		
 	}
 	
-	@Override
-	public void onStop() {
-		LogHelper.i("tag", "onStop");
+	private void changeCountySelected(){
+		ok:
+		if(mData.areaid != null && !"".equals(mData.areaid)){
+			for(int i=0,j=addressThreeList.size(); i<j; i++){
+				List<List<Map<String, String>>> list1 = addressThreeList.get(i);
+				for(int a=0,b=list1.size(); a<b; a++){
+					List<Map<String, String>> list2 = list1.get(a);
+					for(int x=0,y=list2.size(); x<y; x++){
+						Map<String, String> map1 = list2.get(x);
+						LogHelper.i("tag", "id:"+map1.get("id"));
+						if(mData.areaid.equals(map1.get("id"))){
+							LogHelper.i("tag", "i:"+i+" a:"+a+" x:"+x);
+							spProvince.setSelection(i+1);
+							curCityIndex = a+1;
+							curCountyIndex = x+1;
+							break ok;
+						}
+					}
+				}
+			}
+		}
 		
-		super.onStop();
 	}
 	
-	@Override
-	public void onDestroy() {
-		LogHelper.i("tag", "onDestroy");
-		super.onDestroy();
-	}
+	
 	
 	private void findView(){
 //		gvMerchantPhoto = (GridView) findViewById(R.id.gv_merchant_photo);

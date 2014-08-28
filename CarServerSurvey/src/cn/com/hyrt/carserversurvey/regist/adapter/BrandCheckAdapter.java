@@ -234,7 +234,7 @@ public class BrandCheckAdapter extends BaseAdapter{
 							if(!checkedId.contains(mTag[0]) && !"-1".equals(mTag[0])){
 								checkedId.add(mTag[0]);
 								checkedName.add(mTag[1]);
-								LogHelper.i("tag", "add name:"+mTag[1]);
+								LogHelper.i("tag", "add name:"+mTag[1]+" id:"+mTag[0]);
 							}
 //							LogHelper.i("tag", "checkedId.size() :"+checkedId.size() + "imgCount:"+imgCount);
 							if(checkedId.size() == imgCount){

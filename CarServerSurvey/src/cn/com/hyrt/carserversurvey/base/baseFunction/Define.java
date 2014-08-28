@@ -1,5 +1,6 @@
 package cn.com.hyrt.carserversurvey.base.baseFunction;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -128,7 +129,7 @@ public class Define {
 
 		public ArrayList<CDATA> data;
 
-		public class CDATA {
+		public class CDATA implements Serializable {
 			public String id;// ID
 			public String loginname;// 用户登陆名
 			public String sjtel;// 服务电话/固定电话
@@ -140,8 +141,15 @@ public class Define {
 			public String phonenum;// 手机号码
 			public String peopledate;// 采集时间
 			public String serviceTypename;// 服务类型
+			public String serviceTypeid;//服务类型ID
 			public String sjname;// 商家名称
 			public String sjjc;// 商家简称
+			public String brandid;//品牌ID
+			public String areaid;//区域ID
+			public String desc;//简介
+			public String status;//
+			public String imagepath;//商家图片路径
+			public String zzimagepath;//执照图片路径
 		}
 	}
 }
