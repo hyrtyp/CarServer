@@ -121,5 +121,14 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				Define.BASE.class);
 	}
 	
+	/**
+	 * 保存商品信息
+	 */
+	public void saveProductInfo(Define.INFO_PRODUCT productInfo){
+		productInfo.userid = getUserId();
+		String params = new Gson().toJson(productInfo);
+		get(getString(R.string.method_saveMerchantComm), params,
+				Define.INFO_PRODUCT.class);
+	}
 }
 
