@@ -83,6 +83,9 @@
         <activity android:name=".regist.activity.RegistMerchantInfoActivity"
             android:label="@string/change_info_label"/>
         
+        <activity android:name=".product.activity.ProductActivity"
+            android:label="@string/activity_product_label"/>
+        
     </application>
 
 </manifest>

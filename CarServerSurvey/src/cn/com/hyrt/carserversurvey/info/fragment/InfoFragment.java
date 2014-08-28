@@ -114,7 +114,7 @@ public class InfoFragment extends Fragment{
 		});
 	}
 	
-	private void loadData(){
+	public void loadData(){
 		String id = ((CarServerApplication)getActivity().getApplicationContext()).mLoginInfo.id;
 		final String username = ((CarServerApplication)getActivity().getApplicationContext()).mLoginInfo.loginname;
 		AlertHelper.getInstance(getActivity()).showLoading(null);

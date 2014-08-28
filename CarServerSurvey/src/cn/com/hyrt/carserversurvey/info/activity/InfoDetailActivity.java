@@ -35,6 +35,7 @@ public class InfoDetailActivity extends BaseActivity{
 	private PhotoHelper mPhotoHelper;
 	private String imgBuffer;
 	private WebServiceHelper mUserInfoWebServiceHelper;
+	private WebServiceHelper mSaveUserInfoWebServiceHelper;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -68,7 +69,7 @@ public class InfoDetailActivity extends BaseActivity{
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 imgBuffer = new String(Base64.encode(baos.toByteArray()));
                 savePhoto();
-                loadData();
+//                loadData();
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
@@ -121,28 +122,28 @@ public class InfoDetailActivity extends BaseActivity{
 		}
 		info.id = ((CarServerApplication)getApplicationContext()).getLoginInfo().id;
 		
-		if(mUserInfoWebServiceHelper == null){
-			mUserInfoWebServiceHelper = new WebServiceHelper(
+		if(mSaveUserInfoWebServiceHelper == null){
+			mSaveUserInfoWebServiceHelper = new WebServiceHelper(
 					new WebServiceHelper.RequestCallback<Define.SAVE_INFO>() {
 
 						@Override
 						public void onFailure(int errorNo, String errorMsg) {
-							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.info_load_fail);
-							setResult(Define.RESULT_FROM_CHANGE_INFO);
-							finish();
+							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.change_fail);
+//							setResult(Define.RESULT_FROM_CHANGE_INFO);
+//							finish();
 							
 						}
 
 						@Override
 						public void onSuccess(SAVE_INFO result) {
-							LogHelper.i("tag", "result:"+result.message);
+//							LogHelper.i("tag", "result:"+result.message);
 							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.infophoto_change_success);
-							setResult(Define.RESULT_FROM_CHANGE_INFO);
+//							setResult(Define.RESULT_FROM_CHANGE_INFO);
 							//finish();
 						}
 			}, this);
 		}
-		mUserInfoWebServiceHelper.saveUserInfo(info);
+		mSaveUserInfoWebServiceHelper.saveUserInfo(info);
 	}
 	
 }

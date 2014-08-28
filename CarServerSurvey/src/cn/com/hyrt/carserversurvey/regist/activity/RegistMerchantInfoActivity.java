@@ -41,12 +41,18 @@ import cn.com.hyrt.carserversurvey.base.helper.PhotoHelper;
 import cn.com.hyrt.carserversurvey.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
 import cn.com.hyrt.carserversurvey.regist.adapter.BrandCheckAdapter;
 
+/**
+ * 修改商户
+ * @author zoe
+ *
+ */
 public class RegistMerchantInfoActivity extends BaseActivity{
 
-	private GridView gvMerchantPhoto;
-	private GridView gvLicensePhoto;
+//	private GridView gvMerchantPhoto;
+//	private GridView gvLicensePhoto;
 //	private GridView gvServices;
 	private Spinner spProvince;
 	private Spinner spCity;
@@ -62,13 +68,17 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	private TextView etTelnum;
 	private TextView etDesc;
 	private Button btnSubmit;
+	private ImageLoaderView ivMerchantPhoto;
+	private TextView tvMerchantPhoto;
+	private ImageLoaderView ivLicensePhoto;
+	private TextView tvLicensePhoto;
 	
 	private List<String> services;
 	
-	private List<Bitmap> merchantPhotos = new  ArrayList<Bitmap>();
-	private List<Bitmap> licensePhoto = new ArrayList<Bitmap>();
-	private AddPhotoGridAdapter merchantAdapter;
-	private AddPhotoGridAdapter licenseAdapter;
+//	private List<Bitmap> merchantPhotos = new  ArrayList<Bitmap>();
+//	private List<Bitmap> licensePhoto = new ArrayList<Bitmap>();
+//	private AddPhotoGridAdapter merchantAdapter;
+//	private AddPhotoGridAdapter licenseAdapter;
 	private ArrayAdapter<String> mProvinceArrayAdapter;
 	private ArrayAdapter<String> mCityArrayAdapter;
 	private ArrayAdapter<String> mCountyArrayAdapter;
@@ -114,7 +124,9 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	private boolean isMerchantSelect = true;//是否正在选商户照片
 	private Uri faceUri;
 	private PhotoHelper mPhotoHelper;
-	private String imgBuffer;
+//	private String merchantImgBuffer;
+	private Bitmap merchantBitmap;
+	private Bitmap licenseBitmap;
 	
 	private Dialog mBrandDialog;
 	private Dialog mfwClassDialog;
@@ -122,18 +134,18 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fragment_regist_merchant);
+		setContentView(R.layout.activity_regist_merchant);
 		findView();
 		loadData();
 		
-		if(merchantAdapter == null){
-			merchantAdapter = new AddPhotoGridAdapter(merchantPhotos, RegistMerchantInfoActivity.this);
-		}
-		if(licenseAdapter == null){
-			licenseAdapter = new AddPhotoGridAdapter(licensePhoto, RegistMerchantInfoActivity.this);
-		}
-		gvMerchantPhoto.setAdapter(merchantAdapter);
-		gvLicensePhoto.setAdapter(licenseAdapter);
+//		if(merchantAdapter == null){
+//			merchantAdapter = new AddPhotoGridAdapter(merchantPhotos, RegistMerchantInfoActivity.this);
+//		}
+//		if(licenseAdapter == null){
+//			licenseAdapter = new AddPhotoGridAdapter(licensePhoto, RegistMerchantInfoActivity.this);
+//		}
+//		gvMerchantPhoto.setAdapter(merchantAdapter);
+//		gvLicensePhoto.setAdapter(licenseAdapter);
 		
 		setListener();
 	}
@@ -254,51 +266,104 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	}
 	
 	private void setListener(){
-		merchantAdapter.setCallback(new AddPhotoGridAdapter.PhotoGridCallback() {
+		ivMerchantPhoto.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
-			public void onClick(int position) {
-				if(position == -1){
+			public void onClick(View arg0) {
+				if(merchantBitmap == null){
 					isMerchantSelect = true;
 					addPhoto();
 				}else{
-					PhotoPopupHelper.showPop(merchantPhotos.get(position), RegistMerchantInfoActivity.this);
+					PhotoPopupHelper.showPop(merchantBitmap, RegistMerchantInfoActivity.this);
 				}
 			}
-
+		});
+		ivMerchantPhoto.setOnLongClickListener(new View.OnLongClickListener() {
+			
 			@Override
-			public void onLongClick(int position) {
-				if(position == -1){
+			public boolean onLongClick(View arg0) {
+				if(merchantBitmap == null){
 					isMerchantSelect = true;
 					addPhoto();
 				}else{
-					delPhoto(position, true);
+					delPhoto(true);
+				}
+				return true;
+			}
+		});
+		
+		ivLicensePhoto.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				if(licenseBitmap == null){
+					isMerchantSelect = false;
+					addPhoto();
+				}else{
+					PhotoPopupHelper.showPop(licenseBitmap, RegistMerchantInfoActivity.this);
 				}
 			}
 		});
 		
-		licenseAdapter.setCallback(new AddPhotoGridAdapter.PhotoGridCallback() {
+		ivLicensePhoto.setOnLongClickListener(new View.OnLongClickListener() {
 			
 			@Override
-			public void onClick(int position) {
-				if(position == -1){
+			public boolean onLongClick(View arg0) {
+				if(licenseBitmap == null){
 					isMerchantSelect = false;
 					addPhoto();
 				}else{
-					PhotoPopupHelper.showPop(licensePhoto.get(position), RegistMerchantInfoActivity.this);
+					delPhoto(false);
 				}
-			}
-
-			@Override
-			public void onLongClick(int position) {
-				if(position == -1){
-					isMerchantSelect = false;
-					addPhoto();
-				}else{
-					delPhoto(position, false);
-				}
+				return true;
 			}
 		});
+		
+//		merchantAdapter.setCallback(new AddPhotoGridAdapter.PhotoGridCallback() {
+//			
+//			@Override
+//			public void onClick(int position) {
+//				if(position == -1){
+//					isMerchantSelect = true;
+//					addPhoto();
+//				}else{
+//					PhotoPopupHelper.showPop(merchantPhotos.get(position), RegistMerchantInfoActivity.this);
+//				}
+//			}
+//
+//			@Override
+//			public void onLongClick(int position) {
+//				if(position == -1){
+//					isMerchantSelect = true;
+//					addPhoto();
+//				}else{
+//					delPhoto(position, true);
+//				}
+//			}
+//		});
+		
+//		licenseAdapter.setCallback(new AddPhotoGridAdapter.PhotoGridCallback() {
+//			
+//			@Override
+//			public void onClick(int position) {
+//				if(position == -1){
+//					isMerchantSelect = false;
+//					addPhoto();
+//				}else{
+//					PhotoPopupHelper.showPop(licensePhoto.get(position), RegistMerchantInfoActivity.this);
+//				}
+//			}
+//
+//			@Override
+//			public void onLongClick(int position) {
+//				if(position == -1){
+//					isMerchantSelect = false;
+//					addPhoto();
+//				}else{
+//					delPhoto(position, false);
+//				}
+//			}
+//		});
 		
 		tvSelectBrand.setOnClickListener(new View.OnClickListener() {
 			
@@ -412,7 +477,7 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 		});
 	}
 	
-	private void delPhoto(final int position, final boolean isMerchant){
+	/*private void delPhoto(final int position, final boolean isMerchant){
 		AlertDialog.Builder mDelPhotoDialog = new Builder(RegistMerchantInfoActivity.this);
 		mDelPhotoDialog.setTitle("删除");
 		mDelPhotoDialog.setMessage("是否删除？");
@@ -421,11 +486,34 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 			@Override
 			public void onClick(DialogInterface arg0, int arg1) {
 				if(isMerchant){
-					merchantPhotos.remove(position);
-					merchantAdapter.notifyDataSetChanged();
+//					merchantPhotos.remove(position);
+//					merchantAdapter.notifyDataSetChanged();
 				}else{
 					licensePhoto.remove(position);
 					licenseAdapter.notifyDataSetChanged();
+				}
+			}
+		});
+		mDelPhotoDialog.setNegativeButton("取消", null);
+		mDelPhotoDialog.show();
+	}*/
+	
+	private void delPhoto(final boolean isMerchant){
+		AlertDialog.Builder mDelPhotoDialog = new Builder(RegistMerchantInfoActivity.this);
+		mDelPhotoDialog.setTitle("删除");
+		mDelPhotoDialog.setMessage("是否删除？");
+		mDelPhotoDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+				if(isMerchant){
+					tvMerchantPhoto.setVisibility(View.VISIBLE);
+					merchantBitmap = null;
+					ivMerchantPhoto.setImageResource(R.drawable.ic_photo_add);
+				}else{
+					tvLicensePhoto.setVisibility(View.VISIBLE);
+					licenseBitmap = null;
+					ivLicensePhoto.setImageResource(R.drawable.ic_photo_add);
 				}
 			}
 		});
@@ -444,7 +532,6 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast("onActivityResult:"+resultCode);
 		if (resultCode == 0) {
 			return;
 		}
@@ -456,11 +543,17 @@ public class RegistMerchantInfoActivity extends BaseActivity{
             if (data.getParcelableExtra("data") != null) {
                 Bitmap bitmap = data.getParcelableExtra("data");
                 if(isMerchantSelect){
-                	merchantPhotos.add(bitmap);
-                	merchantAdapter.notifyDataSetChanged();
+//                	merchantPhotos.add(bitmap);
+//                	merchantAdapter.notifyDataSetChanged();
+                	tvMerchantPhoto.setVisibility(View.GONE);
+                	merchantBitmap = bitmap;
+                	ivMerchantPhoto.setImageBitmap(bitmap);
                 }else{
-                	licensePhoto.add(bitmap);
-                	licenseAdapter.notifyDataSetChanged();
+                	tvLicensePhoto.setVisibility(View.GONE);
+                	licenseBitmap = bitmap;
+                	ivLicensePhoto.setImageBitmap(bitmap);
+//                	licensePhoto.add(bitmap);
+//                	licenseAdapter.notifyDataSetChanged();
                 }
 //                ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -663,35 +756,50 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 			return;
 		}
 		
-		StringBuffer sjPhoto = new StringBuffer("");
-		StringBuffer sjPhotoName = new StringBuffer("");
-		for(int i=0,j=merchantPhotos.size(); i<j; i++){
+		String sjPhoto = null;
+		String sjPhotoName = null;
+		if(merchantBitmap != null){
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			Bitmap mBitmap = merchantPhotos.get(i);
-			mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-			if(i == j-1){
-				sjPhoto.append(new String(Base64.encode(baos.toByteArray())));
-				sjPhotoName.append("sjphoto"+(i+1)+".jpeg");
-			}else{
-				sjPhoto.append(new String(Base64.encode(baos.toByteArray()))+";");
-				sjPhotoName.append("sjphoto"+(i+1)+".jpeg;");
-			}
+			merchantBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+			sjPhoto = new String(Base64.encode(baos.toByteArray()));
+			sjPhotoName = "sjPhoto.jpeg";
+		}
+//		for(int i=0,j=merchantPhotos.size(); i<j; i++){
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//			Bitmap mBitmap = merchantPhotos.get(i);
+//			mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//			if(i == j-1){
+//				sjPhoto.append(new String(Base64.encode(baos.toByteArray())));
+//				sjPhotoName.append("sjphoto"+(i+1)+".jpeg");
+//			}else{
+//				sjPhoto.append(new String(Base64.encode(baos.toByteArray()))+";");
+//				sjPhotoName.append("sjphoto"+(i+1)+".jpeg;");
+//			}
+//		}
+		
+		String zzPhoto = null;
+		String zzPhotoName = null;
+		if(licenseBitmap != null){
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			licenseBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+			zzPhoto = new String(Base64.encode(baos.toByteArray()));
+			zzPhotoName = "sjPhoto.jpeg";
 		}
 		
-		StringBuffer zzPhoto = new StringBuffer("");
-		StringBuffer zzPhotoName = new StringBuffer("");
-		for(int i=0,j=licensePhoto.size(); i<j; i++){
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			Bitmap mBitmap = licensePhoto.get(i);
-			mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-			if(i == j-1){
-				zzPhoto.append(new String(Base64.encode(baos.toByteArray())));
-				zzPhotoName.append("zzphoto"+(i+1)+".jpeg");
-			}else{
-				zzPhoto.append(new String(Base64.encode(baos.toByteArray()))+";");
-				zzPhotoName.append("zzphoto"+(i+1)+".jpeg;");
-			}
-		}
+//		StringBuffer zzPhoto = new StringBuffer("");
+//		StringBuffer zzPhotoName = new StringBuffer("");
+//		for(int i=0,j=licensePhoto.size(); i<j; i++){
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//			Bitmap mBitmap = licensePhoto.get(i);
+//			mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//			if(i == j-1){
+//				zzPhoto.append(new String(Base64.encode(baos.toByteArray())));
+//				zzPhotoName.append("zzphoto"+(i+1)+".jpeg");
+//			}else{
+//				zzPhoto.append(new String(Base64.encode(baos.toByteArray()))+";");
+//				zzPhotoName.append("zzphoto"+(i+1)+".jpeg;");
+//			}
+//		}
 		
 		StringBuffer fwClass = new StringBuffer("");
 		for(int i=0,j=fwClassCheckedId.size(); i<j; i++){
@@ -721,8 +829,8 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 		merchantInfo.loginname = username;
 		merchantInfo.phonenum = phoneNum;
 		merchantInfo.desc = desc;
-		merchantInfo.sjimage = sjPhoto.toString();
-		merchantInfo.imagename = sjPhotoName.toString();
+		merchantInfo.sjimage = sjPhoto;
+		merchantInfo.imagename = sjPhotoName;
 		merchantInfo.zzimage = zzPhoto.toString();
 		merchantInfo.zzimagename = zzPhotoName.toString();
 		merchantInfo.brandid = brands.toString();
@@ -765,8 +873,12 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	}
 	
 	private void findView(){
-		gvMerchantPhoto = (GridView) findViewById(R.id.gv_merchant_photo);
-		gvLicensePhoto = (GridView) findViewById(R.id.gv_license_photo);
+//		gvMerchantPhoto = (GridView) findViewById(R.id.gv_merchant_photo);
+		ivMerchantPhoto = (ImageLoaderView) findViewById(R.id.iv_merchant_photo);
+		tvMerchantPhoto = (TextView) findViewById(R.id.tv_merchant_photo);
+		ivLicensePhoto = (ImageLoaderView) findViewById(R.id.iv_license_photo);
+		tvLicensePhoto = (TextView) findViewById(R.id.tv_license_photo);
+//		gvLicensePhoto = (GridView) findViewById(R.id.gv_license_photo);
 //		gvServices = (GridView) findViewById(R.id.gv_services);
 		spProvince = (Spinner) findViewById(R.id.sp_province);
 		spCity = (Spinner) findViewById(R.id.sp_city);
