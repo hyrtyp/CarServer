@@ -13,6 +13,7 @@ import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_MERCHANT;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
+import cn.com.hyrt.carserversurvey.product.activity.ProductActivity;
 import cn.com.hyrt.carserversurvey.regist.activity.RegistMerchantInfoActivity;
 
 public class MerchantInfoActivity extends BaseActivity{
@@ -65,6 +66,8 @@ public class MerchantInfoActivity extends BaseActivity{
 	}
 	
 	public void addProduct(View view){
-		
+		Intent intent = new Intent();
+		intent.setClass(this, ProductActivity.class);
+		startActivity(intent);
 	}
 }

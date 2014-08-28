@@ -36,6 +36,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+/**
+ * 上架商品
+ * @author zoe
+ *
+ */
 public class ProductFragment extends Fragment{
 
 	private View rootView;

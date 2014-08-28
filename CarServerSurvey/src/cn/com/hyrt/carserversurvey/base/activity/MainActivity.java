@@ -165,17 +165,14 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		if(curIndex == 3){
-//			List<Fragment> mFragments = getSupportFragmentManager().getFragments();
-//			if(mFragments == null){
-//				return;
-//			}
-//			for(int i=0,j=mFragments.size(); i<j; i++){
-//				if(mFragments.get(i) instanceof InfoFragment){
-//					((InfoFragment)mFragments.get(i)).loadData();
-//				}
-//			}
-//		}
+		if(curIndex == 3){
+			InfoFragment mInfoFragment = 
+					(InfoFragment) getSupportFragmentManager()
+					.findFragmentByTag(mTabHost.getCurrentTabTag());
+			if(mInfoFragment != null){
+				mInfoFragment.loadData();
+			}
+		}
 	}
 	
 	@Override
