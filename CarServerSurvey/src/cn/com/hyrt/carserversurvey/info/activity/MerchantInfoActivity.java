@@ -1,6 +1,7 @@
 package cn.com.hyrt.carserversurvey.info.activity;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_MERCHANT;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
+import cn.com.hyrt.carserversurvey.regist.activity.RegistMerchantInfoActivity;
 
 public class MerchantInfoActivity extends BaseActivity{
 
@@ -57,7 +59,9 @@ public class MerchantInfoActivity extends BaseActivity{
 	}
 	
 	public void changeInfo(View view){
-		
+		Intent intent = new Intent();
+		intent.setClass(this, RegistMerchantInfoActivity.class);
+		startActivity(intent);
 	}
 	
 	public void addProduct(View view){
