@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="天籁~公爵配备三区独立空调"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="发布日期 ：2014-08-28 13:36"
+                android:textColor="#289fff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <cn.com.hyrt.carserversurvey.base.view.ImageLoaderView
+                    android:id="@+id/iv_user_img"
+                    android:layout_width="fill_parent"
+                    android:layout_height="232dp"
+                    android:background="@drawable/face_img_border"
+                    android:padding="1dp"
+                    android:src="@drawable/ic_launcher"
+                    android:scaleType="centerCrop"/>
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="价格:"
+                android:textColor="#050505"
+                android:textSize="18sp" />
+			<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥260"
+                android:layout_marginLeft="20dp"
+                android:textColor="#c40e0e"
+                android:textSize="23sp" />
+			<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥390"
+                android:layout_marginLeft="20dp"
+                android:textColor="#757474"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="介绍："
+                android:textColor="#050505"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="在逐位填写金额的表格中用阿拉伯数字填写金额时，在金额首位之前加一个“¥”符号，既可防止在金额前填加数字，又可表明是人民币的金额数量。由于“¥”本身表示人民币的单位“元”，所以，凡是在金额前加了“¥ ”符号的，金额后就不需要再加“元”字"
+                android:textColor="#646363"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        
+		<LinearLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_margin="@dimen/main_top_margin"
+	            android:orientation="horizontal" >
+	        <Button
+	            android:id="@+id/btn_addgono"
+	            android:layout_width="120dp"
+	            android:layout_height="47dp"
+	            android:background="@drawable/bg_button"
+	            android:text="继续添加"
+	            android:textColor="#fff" 
+				android:textSize="20sp" />
+	        <Button
+	            android:id="@+id/btn_checkinfo"
+	            android:layout_width="120dp"
+	            android:layout_height="47dp"
+	            android:layout_marginLeft="60dp"
+	            android:background="@drawable/bg_button"
+	            android:text="查看上架"
+	            android:textColor="#fff" 
+	            android:textSize="20sp" />
+	    </LinearLayout>
+    </LinearLayout>
+</ScrollView>
