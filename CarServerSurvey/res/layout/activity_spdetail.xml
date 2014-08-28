@@ -15,12 +15,14 @@
             android:orientation="vertical" >
 
             <TextView
+                android:id="@+id/tv_pro_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="天籁~公爵配备三区独立空调"
                 android:textColor="#000000"
                 android:textSize="24sp" />
             <TextView
+                android:id="@+id/tv_pro_data"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -30,7 +32,7 @@
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />
-
+        
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -46,9 +48,6 @@
                     android:src="@drawable/ic_launcher"
                     android:scaleType="centerCrop"/>
         </LinearLayout>
-
-        <include layout="@layout/layout_line_small" />
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -62,6 +61,7 @@
                 android:textColor="#050505"
                 android:textSize="18sp" />
 			<TextView
+                android:id="@+id/tv_pro_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¥260"
@@ -69,6 +69,7 @@
                 android:textColor="#c40e0e"
                 android:textSize="23sp" />
 			<TextView
+                android:id="@+id/tv_pro_discountprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="¥390"
@@ -93,6 +94,7 @@
                 android:textColor="#050505"
                 android:textSize="18sp" />
             <TextView
+                android:id="@+id/tv_pro_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -117,6 +119,7 @@
 	            android:background="@drawable/bg_button"
 	            android:text="继续添加"
 	            android:textColor="#fff" 
+	            android:layout_marginLeft="20dp"
 				android:textSize="20sp" />
 	        <Button
 	            android:id="@+id/btn_checkinfo"

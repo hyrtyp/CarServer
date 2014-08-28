@@ -138,6 +138,15 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(getString(R.string.method_getUserInfoImage), params,Define.SAVE_INFO.class);
 	}
 	
+	/**
+	 * 用户基本信息
+	 */
+	public void getMerchantComm(String id){
+		String params = String.format("{\"id\":\"%s\"}", id);
+		get(getString(R.string.method_getMerchantComm), params,Define.INFO_PRODUCT.class);
+	}
+	
+	
 	
 }
 

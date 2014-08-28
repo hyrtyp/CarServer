@@ -61,6 +61,7 @@ public class Define {
 		public String discount;// 折扣
 		public String serviceid;
 		public String userid;
+		public String fbtime;
 	}
 
 	/**

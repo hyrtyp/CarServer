@@ -66,7 +66,6 @@
          <activity 
             android:name=".info.activity.InfoDetailActivity"
             android:label="@string/infodetail_title"/>
-         
         <!-- <activity 
             android:name=".info.activity.RegistMerchantInfoActivity"
             android:label="@string/label_merchant_info">
@@ -85,7 +84,9 @@
         
         <activity android:name=".product.activity.ProductActivity"
             android:label="@string/activity_product_label"/>
-        
+         <activity 
+            android:name=".product.activity.ProductDetailActivity"
+            android:label="@string/productdetail_title"/>
     </application>
 
 </manifest>

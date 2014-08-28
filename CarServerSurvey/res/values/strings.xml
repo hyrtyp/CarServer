@@ -72,6 +72,7 @@
 	<string name="change_info_label">修改信息</string>
 	<string name="infophoto_change_success">照片修改成功</string>
 	<string name="activity_product_label">上架商品</string>
+	<string name="productdetail_title">商品详情</string>
 	<string name="change_fail">修改失败</string>
 	
 </resources>
