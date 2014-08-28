@@ -35,10 +35,10 @@
 	<string name="label_merchant_info">商户信息</string>
 	<string name="logout_succuss">注销成功</string>
 	
-	<string name="usercode">人员编号:</string>
-	<string name="regrecode">注册记录:</string>
+	<string name="usercode">人员编号:%s</string>
+	<string name="regrecode">注册记录:%s</string>
 	<string name="dregrecode">注册记录</string>
-	<string name="curlogin">近期登录:</string>
+	<string name="curlogin">近期登录:%s</string>
 	<string name="updatepassword">修改密码</string>
 	<string name="loginout">退出登录</string>
 	<string name="text_not_null">%s不能为空</string>
@@ -66,8 +66,10 @@
 	<string name="infodetail_title">基本信息</string>
 	<string name="info_edit_photo">修改照片</string>
 	<string name="regist_success">注册成功</string>
+	<string name="info_load_fail">暂无数据</string>
 	<string name="regist_error">注册失败</string>
 	<string name="merchantinfo_label">商户信息</string>
 	<string name="change_info_label">修改信息</string>
+	<string name="infophoto_change_success">照片修改成功</string>
 	
 </resources>

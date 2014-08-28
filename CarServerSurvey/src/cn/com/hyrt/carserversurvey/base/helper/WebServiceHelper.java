@@ -118,7 +118,7 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		Gson mGson = new Gson();
 		String params = mGson.toJson(info);
 		get(mContext.getString(R.string.method_saveUserinfo), params,
-				Define.BASE.class);
+				Define.SAVE_INFO.class);
 	}
 	
 	/**
@@ -130,5 +130,14 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(getString(R.string.method_saveMerchantComm), params,
 				Define.INFO_PRODUCT.class);
 	}
+	/**
+	 * 用户基本信息
+	 */
+	public void getUserInfoImage(String id){
+		String params = String.format("{\"id\":\"%s\"}", id);
+		get(getString(R.string.method_getUserInfoImage), params,Define.SAVE_INFO.class);
+	}
+	
+	
 }
 

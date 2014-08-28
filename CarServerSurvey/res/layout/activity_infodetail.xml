@@ -21,6 +21,7 @@
                     android:scaleType="centerCrop"/>
 
                     <TextView
+                        android:id="@+id/tv_usercode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -31,6 +32,7 @@
                         android:textSize="@dimen/input_text_size" />
 
                     <TextView
+                        android:id="@+id/tv_regrecode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
@@ -40,6 +42,7 @@
                         android:textColor="#242323"
                         android:textSize="@dimen/text_size" />
                     <TextView
+                        android:id="@+id/tv_curlogin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
