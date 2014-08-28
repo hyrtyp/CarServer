@@ -5,35 +5,41 @@ import java.io.ByteArrayOutputStream;
 import org.kobjects.base64.Base64;
 
 import net.tsz.afinal.annotation.view.ViewInject;
-import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.SAVE_INFO;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
+import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
 import cn.com.hyrt.carserversurvey.base.helper.FileHelper;
 import cn.com.hyrt.carserversurvey.base.helper.PhotoHelper;
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.activity.BaseActivity;
+import cn.com.hyrt.carserversurvey.base.application.CarServerApplication;
 
 public class InfoDetailActivity extends BaseActivity{
 	
 	@ViewInject(id=R.id.btn_change_photo,click="changePhoto") Button btnChangeFace;
 	@ViewInject(id=R.id.iv_user_img) ImageLoaderView iv_user_img;
+	@ViewInject(id=R.id.tv_usercode) TextView tv_usercode;
+	@ViewInject(id=R.id.tv_regrecode) TextView tv_regrecode;
+	@ViewInject(id=R.id.tv_curlogin) TextView tv_curlogin;
 	private Uri faceUri;
 	private PhotoHelper mPhotoHelper;
 	private String imgBuffer;
+	private WebServiceHelper mUserInfoWebServiceHelper;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_infodetail);
+		loadData();
 	}
 	
 	public void changePhoto(View view){
@@ -61,6 +67,8 @@ public class InfoDetailActivity extends BaseActivity{
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 imgBuffer = new String(Base64.encode(baos.toByteArray()));
+                savePhoto();
+                loadData();
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
@@ -73,8 +81,68 @@ public class InfoDetailActivity extends BaseActivity{
             mPhotoHelper.startPhotoZoom(faceUri, 50);
         }else if(resultCode == Define.RESULT_FROM_ALTER_CAR){
         	AlertHelper.getInstance(this).showLoading(null);
-        	//loadData();
+        	loadData();
         }
+	}
+	
+	private void loadData(){
+		LogHelper.i("tag", "调我一次");
+		final String id = ((CarServerApplication)getApplicationContext()).getLoginInfo().id;
+		final String username = ((CarServerApplication)getApplicationContext()).getLoginInfo().loginname;
+		if(mUserInfoWebServiceHelper == null){
+			mUserInfoWebServiceHelper = new WebServiceHelper(
+					new WebServiceHelper.RequestCallback<Define.SAVE_INFO>() {
+
+						@Override
+						public void onSuccess(SAVE_INFO result) {
+							iv_user_img.setImageUrl(result.imagepath);
+							tv_usercode.setText(String.format(getString(R.string.usercode), username));
+							tv_regrecode.setText(String.format(getString(R.string.regrecode), result.mercount+"条"));
+							tv_curlogin.setText(String.format(getString(R.string.curlogin),result.lasttime));
+						}
+
+						@Override
+						public void onFailure(int errorNo, String errorMsg) {
+							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.info_load_fail);
+							setResult(Define.RESULT_FROM_CHANGE_INFO);
+							finish();
+							
+						}
+			}, this);
+		}
+		mUserInfoWebServiceHelper.getUserInfoImage(id);
+	}
+	
+	private void savePhoto(){
+		SAVE_INFO info = new SAVE_INFO();
+		if(imgBuffer != null && !"".equals(imgBuffer)){
+			info.image = imgBuffer;
+			info.imagename = "face.jpg";
+		}
+		info.id = ((CarServerApplication)getApplicationContext()).getLoginInfo().id;
+		
+		if(mUserInfoWebServiceHelper == null){
+			mUserInfoWebServiceHelper = new WebServiceHelper(
+					new WebServiceHelper.RequestCallback<Define.SAVE_INFO>() {
+
+						@Override
+						public void onFailure(int errorNo, String errorMsg) {
+							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.info_load_fail);
+							setResult(Define.RESULT_FROM_CHANGE_INFO);
+							finish();
+							
+						}
+
+						@Override
+						public void onSuccess(SAVE_INFO result) {
+							LogHelper.i("tag", "result:"+result.message);
+							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.infophoto_change_success);
+							setResult(Define.RESULT_FROM_CHANGE_INFO);
+							//finish();
+						}
+			}, this);
+		}
+		mUserInfoWebServiceHelper.saveUserInfo(info);
 	}
 	
 }

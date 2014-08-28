@@ -1,7 +1,10 @@
 package cn.com.hyrt.carserversurvey.product.fragment;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.kobjects.base64.Base64;
 
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
@@ -189,13 +192,31 @@ public class ProductFragment extends Fragment{
 			istype="fw";
 		}
 		
+		StringBuffer pdPhoto = new StringBuffer("");
+		StringBuffer pdPhotoName = new StringBuffer("");
+		for(int i=0,j=productPhotos.size(); i<j; i++){
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			Bitmap mBitmap = productPhotos.get(i);
+			mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+			if(i == j-1){
+				pdPhoto.append(new String(Base64.encode(baos.toByteArray())));
+				pdPhotoName.append("sjphoto"+(i+1)+".jpeg");
+			}else{
+				pdPhoto.append(new String(Base64.encode(baos.toByteArray()))+";");
+				pdPhotoName.append("sjphoto"+(i+1)+".jpeg;");
+			}
+		}
+		
 		Define.INFO_PRODUCT productInfo = new Define.INFO_PRODUCT();
 		productInfo.spname=productname;
 		productInfo.price=curpirce;
 		productInfo.discount=discountprice;
 		productInfo.sptitle=productdec;
 		productInfo.type=istype;
-		productInfo.serviceid = "1";
+		productInfo.serviceid = "1";	
+		productInfo.imagepath0=pdPhoto.toString();
+		productInfo.imagename0=pdPhotoName.toString();
+
 		//调用保存商品接口saveMerchantComm
 		AlertHelper.getInstance(getActivity()).showLoading(null);
 		WebServiceHelper SaveProductHelper = new WebServiceHelper(

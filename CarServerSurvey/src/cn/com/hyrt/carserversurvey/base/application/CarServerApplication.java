@@ -6,7 +6,7 @@ import android.app.Application;
 
 public class CarServerApplication extends Application{
 	
-	private static Define.INFO_LOGIN mLoginInfo;
+	public static Define.INFO_LOGIN mLoginInfo;
 	private static String merchantId;//当前商户ID
 	
 	public static String getMerchantId() {

@@ -48,9 +48,13 @@ public class Define {
 		public String id;// 商品主键ID
 		public String price;// 价格
 		public String imagepath0;
+		public String imagename0;
 		public String imagepath1;
+		public String imagename1;
 		public String imagepath2;
+		public String imagename2;
 		public String imagepath3;
+		public String imagename3;
 		public String spname;// 商品名称
 		public String sptitle;// 商品介绍
 		public String type;// 类型
@@ -95,8 +99,13 @@ public class Define {
 		public String id;
 		public String password;
 		public String newpassword;
+		public String image;
+		public String imagename;
+		public String imagepath;
+		public String lasttime;
+		public String mercount;
 	}
-
+	
 	/**
 	 * 注册记录列表
 	 * 

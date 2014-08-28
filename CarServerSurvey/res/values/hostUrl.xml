@@ -10,6 +10,7 @@
     <string name="method_saveUserinfo">saveUserinfo</string>
    	<string name="method_getMerchantInfo">getMerchantInfo</string>
     <string name="method_saveMerchantComm">saveMerchantComm</string>
+    <string name="method_getUserInfoImage">getUserInfoImage</string>
     
     <!-- 分类查询ID -->
     <string name="flid_brand">000021</string>
