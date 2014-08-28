@@ -67,6 +67,7 @@
 	<string name="info_edit_photo">修改照片</string>
 	<string name="regist_success">注册成功</string>
 	<string name="regist_error">注册失败</string>
-	<string name="merchantinfo_lable">商户信息</string>
+	<string name="merchantinfo_label">商户信息</string>
+	<string name="change_info_label">修改信息</string>
 	
 </resources>

@@ -106,6 +106,11 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(getString(R.string.method_getMerchantUseridList), params,Define.REGRECODE.class);
 	}
 	
+	public void getMerchantInfo(String id){
+		String params = String.format("{\"serviceid\":\"%s\"}", id);
+		get(getString(R.string.method_getMerchantInfo), params,Define.INFO_MERCHANT.class);
+	}
+	
 	/**
 	 * 用户密码修改
 	 */
@@ -115,5 +120,6 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(mContext.getString(R.string.method_saveUserinfo), params,
 				Define.BASE.class);
 	}
+	
 }
 

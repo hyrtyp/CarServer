@@ -64,6 +64,7 @@ public class RegRecodeActivity  extends BaseActivity{
 				LogHelper.i("tag", "lvclaim:"+position);
 				Intent intent = new Intent();
 				intent.setClass(RegRecodeActivity.this, MerchantInfoActivity.class);
+				intent.putExtra("id", recode.data.get(position).id);
 				startActivity(intent);
 			}
 			

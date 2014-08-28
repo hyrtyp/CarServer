@@ -112,4 +112,25 @@ public class Define {
 			
 		}
 	}
+	
+	public static class INFO_MERCHANT extends BASE {
+		
+		public ArrayList<CDATA> data;
+
+		public class CDATA {
+			public String id;// ID
+			public String loginname;//用户登陆名
+			public String sjtel;//服务电话/固定电话
+			public String brandname;//品牌名称
+			public String sjaddress;//详细地址
+			public String sjmanager;//联系人员
+			public String attacpathname;//图片名称
+			public String attacpath;//图片路径
+			public String phonenum;//手机号码
+			public String peopledate;//采集时间
+			public String serviceTypename;//服务类型
+			public String sjname;//商家名称
+			public String sjjc;//商家简称
+		}
+	}
 }

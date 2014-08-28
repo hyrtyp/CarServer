@@ -78,7 +78,10 @@
         </activity> -->
         
         <activity android:name=".info.activity.MerchantInfoActivity"
-            android:label="@string/merchantinfo_lable"/>
+            android:label="@string/merchantinfo_label"/>
+        
+        <activity android:name=".regist.activity.RegistMerchantInfoActivity"
+            android:label="@string/change_info_label"/>
         
     </application>
 
