@@ -69,7 +69,6 @@ public class InfoDetailActivity extends BaseActivity{
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
                 imgBuffer = new String(Base64.encode(baos.toByteArray()));
                 savePhoto();
-//                loadData();
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {

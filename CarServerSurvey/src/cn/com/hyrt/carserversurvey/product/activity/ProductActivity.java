@@ -21,7 +21,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.activity.BaseActivity;
+import cn.com.hyrt.carserversurvey.base.activity.MainActivity;
 import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
+import cn.com.hyrt.carserversurvey.base.application.CarServerApplication;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_PRODUCT;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
@@ -32,6 +34,7 @@ import cn.com.hyrt.carserversurvey.base.helper.PhotoHelper;
 import cn.com.hyrt.carserversurvey.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserversurvey.info.activity.LoginActivity;
 
 public class ProductActivity extends BaseActivity{
 
@@ -209,8 +212,8 @@ private void loadData(){
 		productInfo.sptitle=productdec;
 		productInfo.type=istype;
 		productInfo.serviceid = "1";	
-		productInfo.imagepath0=pdPhoto.toString();
-		productInfo.imagename0=pdPhotoName.toString();
+		productInfo.image=pdPhoto.toString();
+		productInfo.imagename=pdPhotoName.toString();
 
 		//调用保存商品接口saveMerchantComm
 		AlertHelper.getInstance(ProductActivity.this).showLoading(null);
@@ -219,13 +222,19 @@ private void loadData(){
 
 			@Override
 			public void onFailure(int errorNo, String errorMsg) {
+				LogHelper.i("tag", "errorMsg:"+errorMsg);
 				AlertHelper.getInstance(ProductActivity.this).hideLoading();
 			}
 
 			@Override
 			public void onSuccess(INFO_PRODUCT result) {
 				AlertHelper.getInstance(ProductActivity.this).hideLoading();
-				
+				Intent intent = new Intent();
+				intent.setClass(getApplicationContext(), ProductDetailActivity.class);
+				intent.putExtra("id", (String) result.id);
+				startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
+				startActivity(intent);
+				finish();
 			}
 		}, ProductActivity.this);
 		SaveProductHelper.saveProductInfo(productInfo);

@@ -20,7 +20,7 @@ public class AddPhotoGridAdapter extends BaseAdapter{
 
 	private List<Bitmap> photos;
 	private Context mContext;
-	private int maxNum = 1;
+	public int maxNum = 1;
 	
 	private PhotoGridCallback mCallback;
 	
