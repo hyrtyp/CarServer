@@ -82,5 +82,6 @@
 	<string name="spprice">价格:</string>
 	<string name="pro_price">¥%s</string>
 	<string name="pro_discount">¥%s</string>
+	<string name="change_success">修改成功</string>
 	
 </resources>

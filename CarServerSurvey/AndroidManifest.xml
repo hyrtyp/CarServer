@@ -80,13 +80,17 @@
             android:label="@string/merchantinfo_label"/>
         
         <activity android:name=".regist.activity.RegistMerchantInfoActivity"
-            android:label="@string/change_info_label"/>
+            android:label="@string/change_info_label"
+            android:windowSoftInputMode="stateHidden"/>
         
         <activity android:name=".product.activity.ProductActivity"
             android:label="@string/activity_product_label"/>
          <activity 
             android:name=".product.activity.ProductDetailActivity"
             android:label="@string/productdetail_title"/>
+            android:label="@string/activity_product_label"
+            android:windowSoftInputMode="stateHidden"/>
+        
     </application>
 
 </manifest>

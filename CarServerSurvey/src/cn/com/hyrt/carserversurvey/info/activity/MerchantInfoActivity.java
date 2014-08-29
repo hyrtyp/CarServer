@@ -10,6 +10,7 @@ import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.activity.BaseActivity;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_MERCHANT;
+import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
@@ -28,11 +29,19 @@ public class MerchantInfoActivity extends BaseActivity{
 	@ViewInject(id=R.id.btn_change_info,click="changeInfo") Button btn_change_info;
 	@ViewInject(id=R.id.btn_add_product,click="addProduct") Button btn_add_product;
 	
+	private INFO_MERCHANT.CDATA mData;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_merchantinfo);
 		curInfoId = getIntent().getStringExtra("id");
+		
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		loadData();
 	}
 	
@@ -42,7 +51,7 @@ public class MerchantInfoActivity extends BaseActivity{
 
 					@Override
 					public void onSuccess(INFO_MERCHANT result) {
-						INFO_MERCHANT.CDATA mData = result.data.get(0);
+						mData = result.data.get(0);
 						tvFullname.setText(mData.sjname);
 						tvSignlename.setText(mData.sjjc);
 						tvUsername.setText(mData.loginname);
@@ -60,8 +69,13 @@ public class MerchantInfoActivity extends BaseActivity{
 	}
 	
 	public void changeInfo(View view){
+		if(mData == null){
+			AlertHelper.getInstance(this).showCenterToast("用户信息获取失败");
+			return;
+		}
 		Intent intent = new Intent();
 		intent.setClass(this, RegistMerchantInfoActivity.class);
+		intent.putExtra("vo", mData);
 		startActivity(intent);
 	}
 	
