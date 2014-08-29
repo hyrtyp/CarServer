@@ -62,6 +62,8 @@ public class Define {
 		public String serviceid;
 		public String userid;
 		public String fbtime;
+		public String image;
+		public String imagename;
 	}
 
 	/**

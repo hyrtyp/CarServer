@@ -111,7 +111,7 @@ public class StringHelper {
 		if(time == null || "".equals(time)){
 			return "";
 		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		return sdf.format(string2Date(time));
 	}
 	

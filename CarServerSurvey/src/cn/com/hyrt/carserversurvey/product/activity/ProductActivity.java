@@ -212,8 +212,8 @@ private void loadData(){
 		productInfo.sptitle=productdec;
 		productInfo.type=istype;
 		productInfo.serviceid = "1";	
-		productInfo.imagepath0=pdPhoto.toString();
-		productInfo.imagename0=pdPhotoName.toString();
+		productInfo.image=pdPhoto.toString();
+		productInfo.imagename=pdPhotoName.toString();
 
 		//调用保存商品接口saveMerchantComm
 		AlertHelper.getInstance(ProductActivity.this).showLoading(null);

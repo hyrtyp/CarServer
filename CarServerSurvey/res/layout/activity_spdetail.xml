@@ -18,7 +18,6 @@
                 android:id="@+id/tv_pro_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="天籁~公爵配备三区独立空调"
                 android:textColor="#000000"
                 android:textSize="24sp" />
             <TextView
@@ -26,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="发布日期 ：2014-08-28 13:36"
+                android:text="@string/spfbtime"
                 android:textColor="#289fff"
                 android:textSize="12sp" />
         </LinearLayout>
@@ -43,9 +42,7 @@
                     android:id="@+id/iv_user_img"
                     android:layout_width="fill_parent"
                     android:layout_height="232dp"
-                    android:background="@drawable/face_img_border"
                     android:padding="1dp"
-                    android:src="@drawable/ic_launcher"
                     android:scaleType="centerCrop"/>
         </LinearLayout>
         <LinearLayout
@@ -57,14 +54,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="价格:"
+                android:text="@string/spprice"
                 android:textColor="#050505"
                 android:textSize="18sp" />
 			<TextView
                 android:id="@+id/tv_pro_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¥260"
+                android:text="@string/pro_price"
                 android:layout_marginLeft="20dp"
                 android:textColor="#c40e0e"
                 android:textSize="23sp" />
@@ -72,7 +69,7 @@
                 android:id="@+id/tv_pro_discountprice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¥390"
+                android:text="@string/pro_discount"
                 android:layout_marginLeft="20dp"
                 android:textColor="#757474"
                 android:textSize="15sp" />
@@ -90,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="介绍："
+                android:text="@string/infodetail"
                 android:textColor="#050505"
                 android:textSize="18sp" />
             <TextView
@@ -98,8 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="在逐位填写金额的表格中用阿拉伯数字填写金额时，在金额首位之前加一个“¥”符号，既可防止在金额前填加数字，又可表明是人民币的金额数量。由于“¥”本身表示人民币的单位“元”，所以，凡是在金额前加了“¥ ”符号的，金额后就不需要再加“元”字"
-                android:textColor="#646363"
+                 android:textColor="#646363"
                 android:textSize="13sp" />
 
         </LinearLayout>
@@ -117,7 +113,7 @@
 	            android:layout_width="120dp"
 	            android:layout_height="47dp"
 	            android:background="@drawable/bg_button"
-	            android:text="继续添加"
+	            android:text="@string/addgono"
 	            android:textColor="#fff" 
 	            android:layout_marginLeft="20dp"
 				android:textSize="20sp" />
@@ -127,7 +123,7 @@
 	            android:layout_height="47dp"
 	            android:layout_marginLeft="60dp"
 	            android:background="@drawable/bg_button"
-	            android:text="查看上架"
+	            android:text="@string/checkinfo"
 	            android:textColor="#fff" 
 	            android:textSize="20sp" />
 	    </LinearLayout>

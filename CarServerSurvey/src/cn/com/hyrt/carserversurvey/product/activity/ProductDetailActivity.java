@@ -2,6 +2,7 @@ package cn.com.hyrt.carserversurvey.product.activity;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +13,7 @@ import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_PRODUCT;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
 import cn.com.hyrt.carserversurvey.shop.fragment.ShopFragment;
@@ -50,9 +52,11 @@ public class ProductDetailActivity extends BaseActivity{
 					@Override
 					public void onSuccess(INFO_PRODUCT result) {
 						tv_pro_title.setText(result.spname);
-						tv_pro_data.setText(result.fbtime);
-						tv_pro_price.setText(result.price);
-						tv_pro_discountprice.setText(result.discount);
+						String fbdta = StringHelper.formatDate(result.fbtime);
+						tv_pro_data.setText(String.format(getString(R.string.spfbtime), fbdta));
+						tv_pro_price.setText(String.format(getString(R.string.pro_price), result.price));
+						tv_pro_discountprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG );
+						tv_pro_discountprice.setText(String.format(getString(R.string.pro_discount), result.discount));
 						tv_pro_content.setText(result.sptitle);
 						iv_user_img.setImageUrl(result.imagepath0);
 					}
