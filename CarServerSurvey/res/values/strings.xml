@@ -19,6 +19,7 @@
 	<string name="text_count_beyond">字数超出</string>
 	<string name="regist_label">商户注册</string>
 	<string name="product_label">上架商品</string>
+	<string name="regist_record_label">注册记录</string>
 	<string name="shop_label">店铺首页</string>
 	<string name="info_label">个人信息</string>
 	

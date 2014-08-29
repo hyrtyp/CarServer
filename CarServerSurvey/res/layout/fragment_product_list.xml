@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <cn.com.hyrt.carserversurvey.base.view.PullToRefreshView 
+        android:id="@+id/ptrv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+        <ListView 
+            android:id="@+id/lv_product"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+    </cn.com.hyrt.carserversurvey.base.view.PullToRefreshView>
+
+</LinearLayout>

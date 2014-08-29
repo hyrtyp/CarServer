@@ -24,6 +24,7 @@ import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 import cn.com.hyrt.carserversurvey.base.helper.ScreenHelper;
 import cn.com.hyrt.carserversurvey.base.helper.StorageHelper;
 import cn.com.hyrt.carserversurvey.info.fragment.InfoFragment;
+import cn.com.hyrt.carserversurvey.info.fragment.RegistRecordFragment;
 import cn.com.hyrt.carserversurvey.product.fragment.ProductFragment;
 import cn.com.hyrt.carserversurvey.regist.fragment.RegistMerchantInfoFragment;
 import cn.com.hyrt.carserversurvey.shop.fragment.ShopFragment;
@@ -53,10 +54,10 @@ public class MainActivity extends BaseActivity {
 	public static boolean needFinish = false;
 
 	private Class<?> fragmentArray[] = {
-			RegistMerchantInfoFragment.class, ProductFragment.class,
+			RegistMerchantInfoFragment.class, RegistRecordFragment.class,
 			ShopFragment.class, InfoFragment.class };
 
-	private int mTextArray[] = {R.string.regist_label, R.string.product_label,
+	private int mTextArray[] = {R.string.regist_label, R.string.regist_record_label,
 			R.string.shop_label, R.string.info_label };
 
 	private int mImgArray[] = {R.drawable.bg_regist_tab, R.drawable.bg_product_tab,

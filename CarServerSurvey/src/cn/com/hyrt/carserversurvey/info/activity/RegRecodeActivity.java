@@ -18,6 +18,11 @@ import cn.com.hyrt.carserversurvey.base.baseFunction.Define.REGRECODE;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.info.adapter.RegRecodeAdapter;
 
+/**
+ * 注册记录
+ * @author zoe
+ *
+ */
 public class RegRecodeActivity  extends BaseActivity{
 	
 	@ViewInject(id=R.id.lv_insuranceclaim) FullListView lvclaim;
