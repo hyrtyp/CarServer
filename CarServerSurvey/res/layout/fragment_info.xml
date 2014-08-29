@@ -99,7 +99,7 @@
 	        android:textColor="#ffffff"
 	        android:layout_marginTop="30dp"
 	        android:textSize="24sp"
-	        android:text="@string/dregrecode" />
+	        android:text="@string/chinfophoto" />
             
             <Button
 	        android:id="@+id/btn_loginout"
