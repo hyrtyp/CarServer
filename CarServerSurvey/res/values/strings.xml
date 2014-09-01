@@ -39,7 +39,7 @@
 	<string name="usercode">人员编号:%s</string>
 	<string name="regrecode">注册记录:%s</string>
 	<string name="dregrecode">注册记录</string>
-	<string name="chinfophoto">替换头像</string>
+	<string name="chinfophoto">修改照片</string>
 	<string name="curlogin">近期登录:%s</string>
 	<string name="updatepassword">修改密码</string>
 	<string name="loginout">退出登录</string>
