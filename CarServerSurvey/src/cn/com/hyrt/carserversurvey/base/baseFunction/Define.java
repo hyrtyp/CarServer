@@ -45,7 +45,7 @@ public class Define {
 		}
 	}
 
-	public static class INFO_PRODUCT extends BASE {
+	public static class INFO_PRODUCT extends BASE implements Serializable{
 		public String id;// 商品主键ID
 		public String price;// 价格
 		public String imagepath0;
@@ -56,6 +56,7 @@ public class Define {
 		public String imagename2;
 		public String imagepath3;
 		public String imagename3;
+		public String attacpath;
 		public String spname;// 商品名称
 		public String sptitle;// 商品介绍
 		public String type;// 类型
@@ -65,6 +66,11 @@ public class Define {
 		public String fbtime;
 		public String image;
 		public String imagename;
+	}
+	
+	public static class INFO_PRODUCT_LIST extends BASE {
+		
+		public ArrayList<INFO_PRODUCT> data;
 	}
 
 	/**

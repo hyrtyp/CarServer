@@ -80,14 +80,30 @@
                 android:textColor="#302f2f"
                 android:textSize="19sp" />
 
-            <cn.com.hyrt.carserversurvey.base.view.FullGridView
+            <cn.com.hyrt.carserversurvey.base.view.ImageLoaderView 
+                android:id="@+id/iv_product_photo"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_photo_add"
+                android:layout_marginLeft="@dimen/view_margin"/>
+            
+            <TextView 
+                android:id="@+id/tv_product_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加照片"
+                android:textColor="#818181"
+                android:textSize="15sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/view_margin"/>
+            <!-- <cn.com.hyrt.carserversurvey.base.view.FullGridView
                 android:id="@+id/gv_product_photo"
                 android:layout_width="164dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:numColumns="2"
-                android:verticalSpacing="10dp" />
+                android:verticalSpacing="10dp" /> -->
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />

@@ -16,6 +16,7 @@ import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
 import cn.com.hyrt.carserversurvey.product.activity.ProductActivity;
 import cn.com.hyrt.carserversurvey.regist.activity.RegistMerchantInfoActivity;
+import cn.com.hyrt.carserversurvey.shop.activity.ShopActivity;
 
 public class MerchantInfoActivity extends BaseActivity{
 
@@ -28,6 +29,7 @@ public class MerchantInfoActivity extends BaseActivity{
 	@ViewInject(id=R.id.iv_photo) ImageLoaderView ivPhoto;
 	@ViewInject(id=R.id.btn_change_info,click="changeInfo") Button btn_change_info;
 	@ViewInject(id=R.id.btn_add_product,click="addProduct") Button btn_add_product;
+	@ViewInject(id=R.id.btn_go_shop,click="goShop") Button btnGoShop;
 	
 	private INFO_MERCHANT.CDATA mData;
 	
@@ -61,7 +63,6 @@ public class MerchantInfoActivity extends BaseActivity{
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
-						// TODO Auto-generated method stub
 						
 					}
 		}, this);
@@ -82,6 +83,13 @@ public class MerchantInfoActivity extends BaseActivity{
 	public void addProduct(View view){
 		Intent intent = new Intent();
 		intent.setClass(this, ProductActivity.class);
+		startActivity(intent);
+	}
+	
+	public void goShop(View view){
+		Intent intent = new Intent();
+		intent.setClass(this, ShopActivity.class);
+		intent.putExtra("id", mData.id);
 		startActivity(intent);
 	}
 }

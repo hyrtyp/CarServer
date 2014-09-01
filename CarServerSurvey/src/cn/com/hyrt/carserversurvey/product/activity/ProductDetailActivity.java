@@ -4,7 +4,6 @@ import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -30,13 +29,38 @@ public class ProductDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.btn_addgono,click="add") Button btn_addgono;
 	@ViewInject(id=R.id.btn_checkinfo,click="find") Button btn_checkinfo;
 	
+	INFO_PRODUCT productInfo;
+	
 	private String id;
+	private boolean isFromAdd = true;
+	private boolean isSp = true;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_spdetail);
 		Intent intent = getIntent();
 		id = intent.getStringExtra("id");
-		setContentView(R.layout.activity_spdetail);
+		isFromAdd = intent.getBooleanExtra("isFromAdd", true);
+		isSp = intent.getBooleanExtra("isSp", true);
+		if(isSp){
+			setTitle("商品详情");
+		}else{
+			setTitle("服务详情");
+		}
+		if(isFromAdd){
+			btn_addgono.setText("继续添加");
+			btn_checkinfo.setText("查看上架");
+		}else{
+			btn_addgono.setText("下架商品");
+			btn_checkinfo.setText("编辑商品");
+		}
+		
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
 		loadData();
 	}
 	
@@ -52,6 +76,7 @@ public class ProductDetailActivity extends BaseActivity{
 
 					@Override
 					public void onSuccess(INFO_PRODUCT result) {
+						productInfo = result;
 						tv_pro_title.setText(result.spname);
 						String fbdta = StringHelper.formatDate(result.fbtime);
 						tv_pro_data.setText(String.format(getString(R.string.spfbtime), fbdta));
@@ -65,13 +90,21 @@ public class ProductDetailActivity extends BaseActivity{
 		infoWebServiceHelper.getMerchantComm(id);
 	}
 	public void add(View view){
-		Intent intent = new Intent();
-		intent.setClass(this, ProductActivity.class);
-		startActivity(intent);
+		if(isFromAdd){
+			Intent intent = new Intent();
+			intent.setClass(this, ProductActivity.class);
+			startActivity(intent);
+		}
 	}
 	public void find(View view){
 		Intent intent = new Intent();
-		intent.setClass(this, ShopFragment.class);
+		if(isFromAdd){
+			intent.setClass(this, ShopFragment.class);
+		}else{
+			intent.setClass(this, ProductActivity.class);
+			intent.putExtra("isAdd", false);
+			intent.putExtra("vo", productInfo);
+		}
 		startActivity(intent);
 	}
 }

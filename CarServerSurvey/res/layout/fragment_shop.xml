@@ -1,51 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_width="fill_parent"
+        android:layout_height="46dp"
+        android:layout_marginBottom="@dimen/view_margin"
+        android:layout_marginLeft="@dimen/view_margin_big"
+        android:layout_marginRight="@dimen/view_margin_big"
+        android:layout_marginTop="@dimen/view_margin"
+        android:orientation="horizontal" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="46dp"
-            android:layout_marginBottom="@dimen/view_margin"
-            android:layout_marginLeft="@dimen/view_margin_big"
-            android:layout_marginRight="@dimen/view_margin_big"
-            android:layout_marginTop="@dimen/view_margin"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/bg_top_left_focus"
-                android:gravity="center"
-                android:text="商品"
-                android:textColor="#fff"
-                android:textSize="24sp" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/bg_top_right"
-                android:gravity="center"
-                android:text="服务"
-                android:textColor="@color/login_blue"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <include layout="@layout/layout_line_small" />
-
-        <ListView
-            android:id="@+id/lv_content"
-            android:layout_width="fill_parent"
+        <TextView
+            android:id="@+id/tv_to_product"
+            android:layout_width="0dp"
             android:layout_height="fill_parent"
-            android:layout_marginBottom="@dimen/view_margin"
-            android:layout_marginTop="@dimen/view_margin" />
+            android:layout_weight="1"
+            android:background="@drawable/bg_top_left_focus"
+            android:gravity="center"
+            android:text="商品"
+            android:textColor="#fff"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tv_to_service"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:background="@drawable/bg_top_right"
+            android:gravity="center"
+            android:text="服务"
+            android:textColor="@color/login_blue"
+            android:textSize="24sp" />
     </LinearLayout>
 
-</ScrollView>
+    <include layout="@layout/layout_line_small" />
+
+    <FrameLayout
+        android:id="@+id/content"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginBottom="@dimen/view_margin"
+        android:layout_marginTop="@dimen/view_margin" />
+
+</LinearLayout>

@@ -243,7 +243,7 @@ public class ProductFragment extends Fragment{
 	}
 	
 	private void findView(){
-		gvProductPhoto = (GridView) rootView.findViewById(R.id.gv_product_photo);
+//		gvProductPhoto = (GridView) rootView.findViewById(R.id.gv_product_photo);
 		et_proName = (TextView) rootView.findViewById(R.id.et_proName);
 		et_proPrice = (TextView) rootView.findViewById(R.id.et_proPrice);
 		et_proDisPrice = (TextView) rootView.findViewById(R.id.et_proDisPrice);

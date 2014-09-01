@@ -209,6 +209,15 @@
                 android:text="上架商品"
                 android:textColor="#fff" />
         </LinearLayout>
+        <Button
+                android:id="@+id/btn_go_shop"
+                android:layout_width="138dp"
+                android:layout_height="47dp"
+                android:layout_marginLeft="32dp"
+                android:background="@drawable/bg_button"
+                android:gravity="center"
+                android:text="店铺首页"
+                android:textColor="#fff" />
     </LinearLayout>
 
 </ScrollView>

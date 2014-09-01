@@ -34,15 +34,22 @@ import cn.com.hyrt.carserversurvey.base.helper.PhotoHelper;
 import cn.com.hyrt.carserversurvey.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
 import cn.com.hyrt.carserversurvey.info.activity.LoginActivity;
+import cn.com.hyrt.carserversurvey.regist.activity.RegistMerchantInfoActivity;
 
+/**
+ * 上架商品
+ * @author zoe
+ *
+ */
 public class ProductActivity extends BaseActivity{
 
-	private GridView gvProductPhoto;
+//	private GridView gvProductPhoto;
 	
-	private AddPhotoGridAdapter productAdapter;
+//	private AddPhotoGridAdapter productAdapter;
 	
-	private List<Bitmap> productPhotos = new  ArrayList<Bitmap>();
+//	private List<Bitmap> productPhotos = new  ArrayList<Bitmap>();
 	
 	private Uri faceUri;
 	private PhotoHelper mPhotoHelper;
@@ -55,41 +62,104 @@ public class ProductActivity extends BaseActivity{
 	private RadioGroup isproductservice;
 	private RadioButton rb_product;
 	private RadioButton rb_service;
+	private ImageLoaderView ivProductPhoto;
+	private TextView tvProductPhoto;
+	private Bitmap productBitmap;
+	private String productImgUrl;
+	
+	private boolean isAdd = true;
+	
+	private INFO_PRODUCT productInfo;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_product);
 		findView();
+		Intent intent = getIntent();
+		isAdd = intent.getBooleanExtra("isAdd", true);
+		productInfo = (INFO_PRODUCT) intent.getSerializableExtra("vo");
+		if(isAdd){
+			setTitle("上架商品");
+			btnSubmit.setText("提交查看");
+		}else{
+			setTitle("编辑商品");
+			btnSubmit.setText("提交编辑");
+			loadData();
+		}
 		setListener();
-		loadData();
 	}
 	
-private void loadData(){
-		
+	private void loadData(){
+		if(productInfo == null){
+			return;
+		}
+		if("sp".equals(productInfo.type)){
+			rb_product.setChecked(true);
+			rb_service.setChecked(false);
+		}else{
+			rb_product.setChecked(false);
+			rb_service.setChecked(true);
+		}
+		et_proName.setText(productInfo.spname);
+		if(productInfo.imagepath0 != null && !"".equals(productInfo.imagepath0)){
+			productImgUrl = productInfo.imagepath0;
+			ivProductPhoto.setImageUrl(productImgUrl);
+			tvProductPhoto.setVisibility(View.GONE);
+		}
+		et_proPrice.setText(productInfo.price);
+		et_proDisPrice.setText(productInfo.discount);
+		et_proDec.setText(productInfo.sptitle);
 	}
 	
 	private void setListener(){
-		productAdapter.setCallback(new AddPhotoGridAdapter.PhotoGridCallback() {
+		ivProductPhoto.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
-			public void onClick(int position) {
-				if(position == -1){
+			public void onClick(View arg0) {
+				if(productBitmap == null && productImgUrl == null){
 					addPhoto();
 				}else{
-					PhotoPopupHelper.showPop(productPhotos.get(position), ProductActivity.this);
-				}
-			}
-
-			@Override
-			public void onLongClick(int position) {
-				if(position == -1){
-					addPhoto();
-				}else{
-					delPhoto(position);
+					if(productBitmap != null){
+						PhotoPopupHelper.showPop(productBitmap, ProductActivity.this);
+					}else{
+						PhotoPopupHelper.showPop(productImgUrl, ProductActivity.this);
+					}
 				}
 			}
 		});
+		ivProductPhoto.setOnLongClickListener(new View.OnLongClickListener() {
+			
+			@Override
+			public boolean onLongClick(View arg0) {
+				if(productBitmap == null && productImgUrl == null){
+					addPhoto();
+				}else{
+					delPhoto();
+				}
+				return true;
+			}
+		});
+//		productAdapter.setCallback(new AddPhotoGridAdapter.PhotoGridCallback() {
+//			
+//			@Override
+//			public void onClick(int position) {
+//				if(position == -1){
+//					addPhoto();
+//				}else{
+//					PhotoPopupHelper.showPop(productPhotos.get(position), ProductActivity.this);
+//				}
+//			}
+//
+//			@Override
+//			public void onLongClick(int position) {
+//				if(position == -1){
+//					addPhoto();
+//				}else{
+//					delPhoto(position);
+//				}
+//			}
+//		});
 
 		btnSubmit.setOnClickListener(new View.OnClickListener() {
 			
@@ -108,7 +178,7 @@ private void loadData(){
 		mPhotoHelper.getPhoto();
 	}
 	
-	private void delPhoto(final int position){
+	/*private void delPhoto(final int position){
 		AlertDialog.Builder mDelPhotoDialog = new Builder(ProductActivity.this);
 		mDelPhotoDialog.setTitle("删除");
 		mDelPhotoDialog.setMessage("是否删除？");
@@ -118,6 +188,24 @@ private void loadData(){
 			public void onClick(DialogInterface arg0, int arg1) {
 					productPhotos.remove(position);
 					productAdapter.notifyDataSetChanged();
+			}
+		});
+		mDelPhotoDialog.setNegativeButton("取消", null);
+		mDelPhotoDialog.show();
+	}*/
+	
+	private void delPhoto(){
+		AlertDialog.Builder mDelPhotoDialog = new Builder(ProductActivity.this);
+		mDelPhotoDialog.setTitle("删除");
+		mDelPhotoDialog.setMessage("是否删除？");
+		mDelPhotoDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface arg0, int arg1) {
+					tvProductPhoto.setVisibility(View.VISIBLE);
+					productBitmap = null;
+					productImgUrl = null;
+					ivProductPhoto.setImageResource(R.drawable.ic_photo_add);
 			}
 		});
 		mDelPhotoDialog.setNegativeButton("取消", null);
@@ -138,8 +226,12 @@ private void loadData(){
         	
             if (data.getParcelableExtra("data") != null) {
                 Bitmap bitmap = data.getParcelableExtra("data");
-                	productPhotos.add(bitmap);
-                	productAdapter.notifyDataSetChanged();
+//                	productPhotos.add(bitmap);
+//                	productAdapter.notifyDataSetChanged();
+                tvProductPhoto.setVisibility(View.GONE);
+            	productBitmap = bitmap;
+            	productImgUrl = null;
+            	ivProductPhoto.setImageBitmap(bitmap);
 //                ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 //                imgBuffer = new String(Base64.encode(baos.toByteArray()));
@@ -157,7 +249,6 @@ private void loadData(){
 	}
 	
 	private void submit(){
-
 		String productname = et_proName.getText().toString();
 		String curpirce = et_proPrice.getText().toString();
 		String discountprice = et_proDisPrice.getText().toString();
@@ -190,30 +281,42 @@ private void loadData(){
 			istype="fw";
 		}
 		
-		StringBuffer pdPhoto = new StringBuffer("");
-		StringBuffer pdPhotoName = new StringBuffer("");
-		for(int i=0,j=productPhotos.size(); i<j; i++){
+//		StringBuffer pdPhoto = new StringBuffer("");
+//		StringBuffer pdPhotoName = new StringBuffer("");
+//		for(int i=0,j=productPhotos.size(); i<j; i++){
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//			Bitmap mBitmap = productPhotos.get(i);
+//			mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//			if(i == j-1){
+//				pdPhoto.append(new String(Base64.encode(baos.toByteArray())));
+//				pdPhotoName.append("sjphoto"+(i+1)+".jpeg");
+//			}else{
+//				pdPhoto.append(new String(Base64.encode(baos.toByteArray()))+";");
+//				pdPhotoName.append("sjphoto"+(i+1)+".jpeg;");
+//			}
+//		}
+		
+		String pdPhoto = null;
+		String pdPhotoName = null;
+		if(productBitmap != null){
 			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			Bitmap mBitmap = productPhotos.get(i);
-			mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-			if(i == j-1){
-				pdPhoto.append(new String(Base64.encode(baos.toByteArray())));
-				pdPhotoName.append("sjphoto"+(i+1)+".jpeg");
-			}else{
-				pdPhoto.append(new String(Base64.encode(baos.toByteArray()))+";");
-				pdPhotoName.append("sjphoto"+(i+1)+".jpeg;");
-			}
+			productBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+			pdPhoto = new String(Base64.encode(baos.toByteArray()));
+			pdPhotoName = "sjPhoto.jpeg";
 		}
 		
-		Define.INFO_PRODUCT productInfo = new Define.INFO_PRODUCT();
-		productInfo.spname=productname;
-		productInfo.price=curpirce;
-		productInfo.discount=discountprice;
-		productInfo.sptitle=productdec;
-		productInfo.type=istype;
-		productInfo.serviceid = "1";	
-		productInfo.image=pdPhoto.toString();
-		productInfo.imagename=pdPhotoName.toString();
+		Define.INFO_PRODUCT mProductInfo = new Define.INFO_PRODUCT();
+		if(!isAdd && productInfo != null){
+			mProductInfo.id = ProductActivity.this.productInfo.id;
+		}
+		mProductInfo.spname=productname;
+		mProductInfo.price=curpirce;
+		mProductInfo.discount=discountprice;
+		mProductInfo.sptitle=productdec;
+		mProductInfo.type=istype;
+		mProductInfo.serviceid = "1";	
+		mProductInfo.image=pdPhoto;
+		mProductInfo.imagename=pdPhotoName;
 
 		//调用保存商品接口saveMerchantComm
 		AlertHelper.getInstance(ProductActivity.this).showLoading(null);
@@ -229,20 +332,22 @@ private void loadData(){
 			@Override
 			public void onSuccess(INFO_PRODUCT result) {
 				AlertHelper.getInstance(ProductActivity.this).hideLoading();
-				Intent intent = new Intent();
-				intent.setClass(getApplicationContext(), ProductDetailActivity.class);
-				intent.putExtra("id", (String) result.id);
-				startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
-				startActivity(intent);
+				if(isAdd){
+					Intent intent = new Intent();
+					intent.setClass(getApplicationContext(), ProductDetailActivity.class);
+					intent.putExtra("id", (String) result.id);
+					startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
+					startActivity(intent);
+				}
 				finish();
 			}
 		}, ProductActivity.this);
-		SaveProductHelper.saveProductInfo(productInfo);
+		SaveProductHelper.saveProductInfo(mProductInfo);
 		
 	}
 	
 	private void findView(){
-		gvProductPhoto = (GridView) findViewById(R.id.gv_product_photo);
+//		gvProductPhoto = (GridView) findViewById(R.id.gv_product_photo);
 		et_proName = (TextView) findViewById(R.id.et_proName);
 		et_proPrice = (TextView) findViewById(R.id.et_proPrice);
 		et_proDisPrice = (TextView) findViewById(R.id.et_proDisPrice);
@@ -252,9 +357,11 @@ private void loadData(){
 		rb_service=(RadioButton)findViewById(R.id.rb_service);
 		
 		btnSubmit =(Button)findViewById(R.id.btn_prodectsubmit);
-		if(productAdapter == null){
-			productAdapter = new AddPhotoGridAdapter(productPhotos, ProductActivity.this);
-		}
-		gvProductPhoto.setAdapter(productAdapter);
+		ivProductPhoto = (ImageLoaderView) findViewById(R.id.iv_product_photo);
+		tvProductPhoto = (TextView) findViewById(R.id.tv_product_photo);
+//		if(productAdapter == null){
+//			productAdapter = new AddPhotoGridAdapter(productPhotos, ProductActivity.this);
+//		}
+//		gvProductPhoto.setAdapter(productAdapter);
 	}
 }

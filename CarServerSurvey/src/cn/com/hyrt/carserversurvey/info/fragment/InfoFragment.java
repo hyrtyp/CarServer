@@ -90,8 +90,7 @@ public class InfoFragment extends Fragment{
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent();
-				intent.setClass(getActivity(), InfoDetailActivity.class);
-				//intent.setClass(getActivity(), RegRecodeActivity.class);
+				intent.setClass(getActivity(), RegRecodeActivity.class);
 				startActivity(intent);
 			}
 		});

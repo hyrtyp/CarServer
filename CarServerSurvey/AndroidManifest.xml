@@ -84,13 +84,14 @@
             android:windowSoftInputMode="stateHidden"/>
         
         <activity android:name=".product.activity.ProductActivity"
-            android:label="@string/activity_product_label"/>
+            android:label="@string/activity_product_label"
+            android:windowSoftInputMode="stateHidden"/>
          <activity 
             android:name=".product.activity.ProductDetailActivity"
             android:label="@string/productdetail_title"/>
-            android:label="@string/activity_product_label"
-            android:windowSoftInputMode="stateHidden"/>
-        
+            
+        <activity android:name=".shop.activity.ShopActivity"
+            android:label="@string/shop_label"/>
     </application>
 
 </manifest>

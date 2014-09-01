@@ -139,11 +139,27 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	}
 	
 	/**
-	 * 用户基本信息
+	 * 商品信息
 	 */
 	public void getMerchantComm(String id){
 		String params = String.format("{\"id\":\"%s\"}", id);
 		get(getString(R.string.method_getMerchantComm), params,Define.INFO_PRODUCT.class);
+	}
+	
+	/**
+	 * 获取商品信息列表
+	 * @param id 商户ID
+	 * @param isSp 是否查询商品
+	 * @param pageNo 页码
+	 */
+	public void getMerchantCommList(String id, boolean isSp, String pageNo){
+		String type = isSp ? "sp" : "fw";
+		String params = String.format(
+				"{\"serviceid\":\"%s\",\"type\":\"%s\",\"page\":\"%s\"}",
+				id, type, pageNo);
+		get(
+				getString(R.string.method_getMerchantCommList),
+				params,Define.INFO_PRODUCT_LIST.class);
 	}
 	
 	
