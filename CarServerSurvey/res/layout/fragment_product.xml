@@ -23,7 +23,8 @@
                 android:button="@drawable/bg_radiobutton"
                 android:text="上架商品"
                 android:textColor="#302f2f"
-                android:textSize="19sp" />
+                android:textSize="19sp" 
+                android:checked="true"/>
 
             <RadioButton
                 android:id="@+id/rb_service"

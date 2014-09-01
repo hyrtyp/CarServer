@@ -162,7 +162,14 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				params,Define.INFO_PRODUCT_LIST.class);
 	}
 	
-	
+	public void saveDelMerchantCommStatus(String spId, String shId){
+		String params = String.format(
+				"{\"spid\":\"%s\",\"shid\":\"%s\",\"userid\":\"%s\"}",
+				spId, shId, getUserId());
+		get(
+				getString(R.string.method_saveDelMerchantCommStatus),
+				params,Define.BASE.class);
+	}
 	
 }
 

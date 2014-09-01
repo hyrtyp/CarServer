@@ -112,7 +112,7 @@ public class BaseWebServiceHelper {
 					}
 				} catch (IOException e) {
 					LogHelper.i("tag", "e1:"+e.getMessage());
-					if(e.getMessage().contains("Network is unreachable")|| e.getMessage().contains("ECONNREFUSED")){
+					if(e.getMessage() == null || e.getMessage().contains("Network is unreachable")|| e.getMessage().contains("ECONNREFUSED")){
 						if(mCallback != null){
 							((Activity)mContext).runOnUiThread(new Runnable() {
 								

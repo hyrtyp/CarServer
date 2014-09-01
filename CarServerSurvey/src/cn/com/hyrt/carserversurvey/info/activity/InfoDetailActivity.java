@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -97,7 +98,8 @@ public class InfoDetailActivity extends BaseActivity{
 						public void onSuccess(SAVE_INFO result) {
 							iv_user_img.setImageUrl(result.imagepath);
 							tv_usercode.setText(String.format(getString(R.string.usercode), username));
-							tv_regrecode.setText(String.format(getString(R.string.regrecode), result.mercount+"条"));
+//							tv_regrecode.setText(String.format(getString(R.string.regrecode), result.mercount+"条"));
+							tv_regrecode.setText(Html.fromHtml("注册记录：<font color=\"#299fff\">"+result.mercount+"条</font>"));
 							tv_curlogin.setText(String.format(getString(R.string.curlogin),result.lasttime));
 						}
 

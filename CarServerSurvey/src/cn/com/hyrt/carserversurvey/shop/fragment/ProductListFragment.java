@@ -8,6 +8,7 @@ import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_PRODUCT_LIST;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.PullToRefreshView;
 import cn.com.hyrt.carserversurvey.product.activity.ProductDetailActivity;
@@ -36,12 +37,14 @@ public class ProductListFragment extends Fragment{
 	private WebServiceHelper mWebServiceHelper;
 	
 	private boolean isSp = true;
+	private String shId = "";
 	
 	private List<Define.INFO_PRODUCT> products = new ArrayList<Define.INFO_PRODUCT>();
 	
-	public ProductListFragment(boolean isSp) {
+	public ProductListFragment(boolean isSp, String shId) {
 		super();
 		this.isSp = isSp;
+		this.shId = shId;
 	}
 
 	@Override
@@ -78,6 +81,7 @@ public class ProductListFragment extends Fragment{
 				Intent intent = new Intent();
 				intent.setClass(getActivity(), ProductDetailActivity.class);
 				intent.putExtra("id", products.get(position).id);
+				intent.putExtra("shId", shId);
 				intent.putExtra("isSp", isSp);
 				intent.putExtra("isFromAdd", false);
 				startActivity(intent);
@@ -151,7 +155,7 @@ public class ProductListFragment extends Fragment{
 		}else{
 			pageNo = 1;
 		}
-		mWebServiceHelper.getMerchantCommList("1", isSp, pageNo+"");
+		mWebServiceHelper.getMerchantCommList(shId, isSp, pageNo+"");
 	}
 	
 	private void findView(){

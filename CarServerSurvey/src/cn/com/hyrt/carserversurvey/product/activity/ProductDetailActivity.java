@@ -10,12 +10,15 @@ import android.widget.TextView;
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.activity.BaseActivity;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_PRODUCT;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
+import cn.com.hyrt.carserversurvey.shop.activity.ShopActivity;
 import cn.com.hyrt.carserversurvey.shop.fragment.ShopFragment;
 
 public class ProductDetailActivity extends BaseActivity{
@@ -32,6 +35,7 @@ public class ProductDetailActivity extends BaseActivity{
 	INFO_PRODUCT productInfo;
 	
 	private String id;
+	private String shId = "";
 	private boolean isFromAdd = true;
 	private boolean isSp = true;
 	
@@ -41,6 +45,7 @@ public class ProductDetailActivity extends BaseActivity{
 		setContentView(R.layout.activity_spdetail);
 		Intent intent = getIntent();
 		id = intent.getStringExtra("id");
+		shId = intent.getStringExtra("shId");
 		isFromAdd = intent.getBooleanExtra("isFromAdd", true);
 		isSp = intent.getBooleanExtra("isSp", true);
 		if(isSp){
@@ -92,19 +97,50 @@ public class ProductDetailActivity extends BaseActivity{
 	public void add(View view){
 		if(isFromAdd){
 			Intent intent = new Intent();
+			intent.putExtra("shId", shId);
 			intent.setClass(this, ProductActivity.class);
 			startActivity(intent);
+		}else{
+			AlertHelper.getInstance(ProductDetailActivity.this).showLoading(null);
+			//下架商品
+			WebServiceHelper xjSpWebServiceHelper =new WebServiceHelper(
+					new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+
+						@Override
+						public void onSuccess(BASE result) {
+							AlertHelper.getInstance(ProductDetailActivity.this).hideLoading();
+							AlertHelper.getInstance(ProductDetailActivity.this).showCenterToast("下架成功");
+							finish();
+						}
+
+						@Override
+						public void onFailure(int errorNo, String errorMsg) {
+							AlertHelper.getInstance(ProductDetailActivity.this).hideLoading();
+							AlertHelper.getInstance(ProductDetailActivity.this).showCenterToast("下架失败");
+						}
+			}, this);
+			xjSpWebServiceHelper.saveDelMerchantCommStatus(productInfo.id, shId);
 		}
 	}
 	public void find(View view){
 		Intent intent = new Intent();
+		boolean needFinish = false;
 		if(isFromAdd){
-			intent.setClass(this, ShopFragment.class);
+//			intent.setClass(this, ShopFragment.class);
+			intent.setClass(this, ShopActivity.class);
+			intent.putExtra("id", id);
+			intent.putExtra("shId", shId);
+			needFinish = true;
 		}else{
+			needFinish = false;
 			intent.setClass(this, ProductActivity.class);
+			intent.putExtra("shId", shId);
 			intent.putExtra("isAdd", false);
 			intent.putExtra("vo", productInfo);
 		}
 		startActivity(intent);
+		if(needFinish){
+			finish();
+		}
 	}
 }

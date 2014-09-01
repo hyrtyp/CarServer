@@ -9,6 +9,11 @@ import cn.com.hyrt.carserversurvey.base.activity.BaseActivity;
 import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 import cn.com.hyrt.carserversurvey.shop.fragment.ProductListFragment;
 
+/**
+ * 店铺首页
+ * @author zoe
+ *
+ */
 public class ShopActivity extends BaseActivity{
 	
 	private ProductListFragment spListFragment;
@@ -17,14 +22,32 @@ public class ShopActivity extends BaseActivity{
 	@ViewInject(id=R.id.tv_to_service,click="toService") TextView tvToService;
 	
 	private boolean isSp = true;
+	private String shId = "";
+	private boolean isFirst = true;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_shop);
-		spListFragment = new ProductListFragment(true);
+		shId = getIntent().getStringExtra("shId");
+		spListFragment = new ProductListFragment(true, shId);
 		getSupportFragmentManager().beginTransaction()
 		.add(R.id.content, spListFragment).commit();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(isFirst){
+			isFirst = false;
+			return;
+		}
+		if(spListFragment != null){
+			spListFragment.loadData(false);
+		}
+		if(serviceListFragment != null){
+			serviceListFragment.loadData(false);
+		}
 	}
 	
 	public void toProduct(View view){
@@ -36,7 +59,7 @@ public class ShopActivity extends BaseActivity{
 			tvToService.setBackgroundResource(R.drawable.bg_top_right);
 			isSp = true;
 			if(spListFragment == null){
-				spListFragment = new ProductListFragment(true);
+				spListFragment = new ProductListFragment(true, shId);
 				getSupportFragmentManager().beginTransaction()
 				.add(R.id.content, spListFragment).commit();
 			}else{
@@ -59,7 +82,7 @@ public class ShopActivity extends BaseActivity{
 			tvToProduct.setBackgroundResource(R.drawable.bg_top_left);
 			isSp = false;
 			if(serviceListFragment == null){
-				serviceListFragment = new ProductListFragment(false);
+				serviceListFragment = new ProductListFragment(false, shId);
 				getSupportFragmentManager().beginTransaction()
 				.add(R.id.content, serviceListFragment).commit();
 			}else{

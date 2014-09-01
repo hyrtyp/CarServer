@@ -68,6 +68,7 @@ public class ProductActivity extends BaseActivity{
 	private String productImgUrl;
 	
 	private boolean isAdd = true;
+	private String shId = "";
 	
 	private INFO_PRODUCT productInfo;
 	
@@ -78,6 +79,7 @@ public class ProductActivity extends BaseActivity{
 		findView();
 		Intent intent = getIntent();
 		isAdd = intent.getBooleanExtra("isAdd", true);
+		shId = intent.getStringExtra("shId");
 		productInfo = (INFO_PRODUCT) intent.getSerializableExtra("vo");
 		if(isAdd){
 			setTitle("上架商品");
@@ -309,12 +311,17 @@ public class ProductActivity extends BaseActivity{
 		if(!isAdd && productInfo != null){
 			mProductInfo.id = ProductActivity.this.productInfo.id;
 		}
+		
+		if(Integer.parseInt(curpirce) > Integer.parseInt(discountprice)){
+			AlertHelper.getInstance(ProductActivity.this).showCenterToast("售出价格不能超出折扣前价");
+			return;
+		}
 		mProductInfo.spname=productname;
 		mProductInfo.price=curpirce;
 		mProductInfo.discount=discountprice;
 		mProductInfo.sptitle=productdec;
 		mProductInfo.type=istype;
-		mProductInfo.serviceid = "1";	
+		mProductInfo.serviceid = shId;	
 		mProductInfo.image=pdPhoto;
 		mProductInfo.imagename=pdPhotoName;
 
@@ -336,7 +343,8 @@ public class ProductActivity extends BaseActivity{
 					Intent intent = new Intent();
 					intent.setClass(getApplicationContext(), ProductDetailActivity.class);
 					intent.putExtra("id", (String) result.id);
-					startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
+					intent.putExtra("shId", shId);
+//					startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
 					startActivity(intent);
 				}
 				finish();

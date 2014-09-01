@@ -18,6 +18,11 @@ import cn.com.hyrt.carserversurvey.product.activity.ProductActivity;
 import cn.com.hyrt.carserversurvey.regist.activity.RegistMerchantInfoActivity;
 import cn.com.hyrt.carserversurvey.shop.activity.ShopActivity;
 
+/**
+ * 商户信息
+ * @author zoe
+ *
+ */
 public class MerchantInfoActivity extends BaseActivity{
 
 	private String curInfoId = "";
@@ -83,6 +88,7 @@ public class MerchantInfoActivity extends BaseActivity{
 	public void addProduct(View view){
 		Intent intent = new Intent();
 		intent.setClass(this, ProductActivity.class);
+		intent.putExtra("shId", "1");
 		startActivity(intent);
 	}
 	
@@ -90,6 +96,7 @@ public class MerchantInfoActivity extends BaseActivity{
 		Intent intent = new Intent();
 		intent.setClass(this, ShopActivity.class);
 		intent.putExtra("id", mData.id);
+		intent.putExtra("shId", "1");
 		startActivity(intent);
 	}
 }
