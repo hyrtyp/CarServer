@@ -126,7 +126,7 @@ public class Define {
 
 		public class CDATA {
 			public String id;// ID
-			public String recodeimagepath;// 图片地址
+			public String imagepath;// 图片地址
 			public String sjname;// 商家名称
 			public String sjaddress; // 详细地址
 			public String peopledate;// 采集时间
