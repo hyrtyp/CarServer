@@ -77,18 +77,6 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_line" />
             <Button
-	        android:id="@+id/btn_editpassword"
-	        android:background="#299fff"
-	        android:layout_width="match_parent"
-	        android:layout_height="60dp"
-	        android:layout_marginLeft="20dp"
-	    	android:layout_marginRight="20dp"
-	        android:layout_gravity="center_horizontal"
-	        android:textColor="#ffffff"
-	        android:layout_marginTop="30dp"
-	        android:textSize="24sp"
-	        android:text="@string/updatepassword" />
-            <Button
 	        android:id="@+id/btn_regrecode"
 	        android:background="#299fff"
 	        android:layout_width="match_parent"
@@ -100,6 +88,18 @@
 	        android:layout_marginTop="30dp"
 	        android:textSize="24sp"
 	        android:text="@string/chinfophoto" />
+            <Button
+	        android:id="@+id/btn_editpassword"
+	        android:background="#299fff"
+	        android:layout_width="match_parent"
+	        android:layout_height="60dp"
+	        android:layout_marginLeft="20dp"
+	    	android:layout_marginRight="20dp"
+	        android:layout_gravity="center_horizontal"
+	        android:textColor="#ffffff"
+	        android:layout_marginTop="30dp"
+	        android:textSize="24sp"
+	        android:text="@string/updatepassword" />
             
             <Button
 	        android:id="@+id/btn_loginout"

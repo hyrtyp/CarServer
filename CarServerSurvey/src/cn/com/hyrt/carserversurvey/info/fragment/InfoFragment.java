@@ -41,7 +41,7 @@ public class InfoFragment extends Fragment{
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.fragment_info, null);
 		findView();
-		setListener();
+		//setListener();
 		editListener();
 		recodeListener();
 		loginoutListener();
@@ -78,19 +78,19 @@ public class InfoFragment extends Fragment{
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent();
-				intent.setClass(getActivity(), EditPasswordActivity.class);
+				intent.setClass(getActivity(), InfoDetailActivity.class);
 				startActivity(intent);
 			}
 		});
 	}
-	//注册记录
+	//修改照片
 	private void recodeListener(){
 		btn_regrecode.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
 				Intent intent = new Intent();
-				intent.setClass(getActivity(), RegRecodeActivity.class);
+				intent.setClass(getActivity(), EditPasswordActivity.class);
 				startActivity(intent);
 			}
 		});
