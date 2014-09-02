@@ -32,6 +32,7 @@ import cn.com.hyrt.carserversurvey.base.helper.FileHelper;
 import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 import cn.com.hyrt.carserversurvey.base.helper.PhotoHelper;
 import cn.com.hyrt.carserversurvey.base.helper.PhotoPopupHelper;
+import cn.com.hyrt.carserversurvey.base.helper.StorageHelper;
 import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
@@ -176,7 +177,7 @@ public class ProductActivity extends BaseActivity{
 		if(faceUri == null){
 			faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
 		}
-		mPhotoHelper = new PhotoHelper(ProductActivity.this, faceUri, 50);
+		mPhotoHelper = new PhotoHelper(ProductActivity.this, faceUri, 400);
 		mPhotoHelper.getPhoto();
 	}
 	
@@ -233,9 +234,11 @@ public class ProductActivity extends BaseActivity{
             	productBitmap = bitmap;
             	productImgUrl = null;
             	ivProductPhoto.setImageBitmap(bitmap);
-//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-//                imgBuffer = new String(Base64.encode(baos.toByteArray()));
+            	
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                imgBuffer = new String(Base64.encode(baos.toByteArray()));
+                StorageHelper.getInstance(ProductActivity.this).saveTest(imgBuffer);
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
@@ -243,9 +246,9 @@ public class ProductActivity extends BaseActivity{
                 if(faceUri == null){
                     faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
                 }
-                mPhotoHelper = new PhotoHelper(ProductActivity.this, faceUri, 50);
+                mPhotoHelper = new PhotoHelper(ProductActivity.this, faceUri, 400);
             }
-            mPhotoHelper.startPhotoZoom(faceUri, 50);
+            mPhotoHelper.startPhotoZoom(faceUri, 400);
         }
 	}
 	

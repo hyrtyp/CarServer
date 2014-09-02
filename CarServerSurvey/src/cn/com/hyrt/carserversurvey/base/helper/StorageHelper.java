@@ -122,6 +122,13 @@ public class StorageHelper {
 		}
 		return gson.fromJson(json, Define.INFO_LOGIN.class);
 	}
+	
+	public void saveTest(String str){
+		LogHelper.i("tag", "saveTest");
+		Editor mEditor = mSharedPreferences.edit();
+		mEditor.putString("test", str);
+		mEditor.commit();
+	}
 
 	
 	

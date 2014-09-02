@@ -456,14 +456,13 @@ public class RegistMerchantInfoFragment extends Fragment{
 		if(faceUri == null){
 			faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
 		}
-		mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 50);
+		mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 400);
 		mPhotoHelper.getPhoto();
 	}
 	
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		AlertHelper.getInstance(getActivity()).showCenterToast("onActivityResult:"+resultCode);
 		if (resultCode == 0) {
 			return;
 		}
@@ -491,9 +490,9 @@ public class RegistMerchantInfoFragment extends Fragment{
                 if(faceUri == null){
                     faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
                 }
-                mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 50);
+                mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 400);
             }
-            mPhotoHelper.startPhotoZoom(faceUri, 50);
+            mPhotoHelper.startPhotoZoom(faceUri, 400);
         }
 	}
 	

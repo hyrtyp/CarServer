@@ -134,7 +134,8 @@
                 android:paddingRight="@dimen/main_top_margin"
                 android:singleLine="true"
                 android:textColor="#000"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:inputType="number" />
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />
@@ -164,7 +165,8 @@
                 android:paddingRight="@dimen/main_top_margin"
                 android:singleLine="true"
                 android:textColor="#000"
-                android:textSize="18sp" />
+                android:textSize="18sp" 
+                android:inputType="number"/>
         </LinearLayout>
 
         <include layout="@layout/layout_line_small" />
