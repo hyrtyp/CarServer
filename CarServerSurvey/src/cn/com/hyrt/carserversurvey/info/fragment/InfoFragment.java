@@ -7,6 +7,7 @@ import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.SAVE_INFO;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
 import cn.com.hyrt.carserversurvey.info.activity.EditPasswordActivity;
@@ -133,7 +134,8 @@ public class InfoFragment extends Fragment{
 				userphoto.setImageUrl(result.imagepath);
 				usercode.setText(String.format(getString(R.string.usercode), username));
 				regrecode.setText(String.format(getString(R.string.regrecode), result.mercount+"条"));
-				curlogin.setText(String.format(getString(R.string.curlogin),result.lasttime));
+				String latime = StringHelper.formatDate(result.lasttime);
+				curlogin.setText(String.format(getString(R.string.curlogin),latime));
 			}
 		}, getActivity());
 		mUserInfoWebServiceHelper.getUserInfoImage(id);
