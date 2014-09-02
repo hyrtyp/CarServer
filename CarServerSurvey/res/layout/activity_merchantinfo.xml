@@ -144,6 +144,34 @@
                     android:src="@drawable/bg_img_default"
                     android:layout_marginLeft="50dp"/>
             </LinearLayout>
+              <View
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#a8a7a8" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/main_top_margin" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="营业执照"
+                    android:textColor="#262626"
+                    android:textSize="18sp" />
+
+                <cn.com.hyrt.carserversurvey.base.view.ImageLoaderView 
+                    android:id="@+id/iv_zzphoto"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_img_default"
+                    android:layout_marginLeft="50dp"/>
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -156,6 +184,7 @@
             android:orientation="vertical" >
 
             <LinearLayout
+                android:id="@+id/layout_fwclass"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
@@ -181,6 +210,228 @@
                     android:textColor="#000"
                     android:textSize="18sp" />
             </LinearLayout>
+            <View
+                android:id="@+id/line_fwclass"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#a8a7a8" />
+            <LinearLayout
+                android:id="@+id/layout_brands"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/main_top_margin" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="服务品牌"
+                    android:textColor="#262626"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_brands"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <View
+                android:id="@+id/line_brands"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#a8a7a8" />
+            
+            <LinearLayout
+                android:id="@+id/layout_address1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/main_top_margin" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="所属地区"
+                    android:textColor="#262626"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_address1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <View
+                android:id="@+id/line_address1"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#a8a7a8" />
+            <LinearLayout
+                android:id="@+id/layout_address2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/main_top_margin" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="具体地址"
+                    android:textColor="#262626"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_address2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <View
+                android:id="@+id/line_address2"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#a8a7a8" />
+            <LinearLayout
+                android:id="@+id/layout_contact"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/main_top_margin" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="联系人员"
+                    android:textColor="#262626"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_contact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <View
+                android:id="@+id/line_contact"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#a8a7a8" />
+            <LinearLayout
+                android:id="@+id/layout_phonenum"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/main_top_margin" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="手机号码"
+                    android:textColor="#262626"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_phonenum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <View
+                android:id="@+id/line_phonenum"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#a8a7a8" />
+            <LinearLayout
+                android:id="@+id/layout_telnum"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/main_top_margin" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="固定电话"
+                    android:textColor="#262626"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_telnum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </LinearLayout>
+            <View
+                android:id="@+id/line_telnum"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:background="#a8a7a8" />
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="@dimen/main_top_margin" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="商家简介"
+                    android:textColor="#262626"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/tv_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -199,7 +450,7 @@
                 android:text="修改信息"
                 android:textColor="#fff" />
 
-            <Button
+          <!--   <Button
                 android:id="@+id/btn_add_product"
                 android:layout_width="138dp"
                 android:layout_height="47dp"
@@ -207,9 +458,9 @@
                 android:background="@drawable/bg_button"
                 android:gravity="center"
                 android:text="上架商品"
-                android:textColor="#fff" />
+                android:textColor="#fff" /> -->
         </LinearLayout>
-        <Button
+       <!--  <Button
                 android:id="@+id/btn_go_shop"
                 android:layout_width="138dp"
                 android:layout_height="47dp"
@@ -217,7 +468,7 @@
                 android:background="@drawable/bg_button"
                 android:gravity="center"
                 android:text="店铺首页"
-                android:textColor="#fff" />
+                android:textColor="#fff" /> -->
     </LinearLayout>
 
 </ScrollView>

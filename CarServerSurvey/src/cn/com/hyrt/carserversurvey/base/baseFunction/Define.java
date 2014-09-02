@@ -159,6 +159,7 @@ public class Define {
 			public String status;//
 			public String imagepath;//商家图片路径
 			public String zzimagepath;//执照图片路径
+			public String areaname;//所属地区
 		}
 	}
 }

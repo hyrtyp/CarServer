@@ -80,9 +80,24 @@ public class LoginActivity extends FinalActivity{
 
 			@Override
 			public void onFailure(int errorNo, String errorMsg) {
-				loginFailCount++;
-				AlertHelper.getInstance(LoginActivity.this).hideLoading();
-				AlertHelper.getInstance(LoginActivity.this).showCenterToast(R.string.login_fail);
+				switch (errorNo) {
+				case 201:
+				case 202:
+					loginFailCount++;
+					AlertHelper.getInstance(LoginActivity.this).hideLoading();
+					AlertHelper.getInstance(LoginActivity.this).showCenterToast(R.string.login_fail);
+					break;
+				case 203:
+					loginFailCount++;
+					AlertHelper.getInstance(LoginActivity.this).hideLoading();
+					AlertHelper.getInstance(LoginActivity.this).showCenterToast("用户未激活");
+					break;
+				default:
+					AlertHelper.getInstance(LoginActivity.this).hideLoading();
+					AlertHelper.getInstance(LoginActivity.this).showCenterToast(R.string.login_error);
+					break;
+				}
+				
 			}
 		}, this);
 		loginWebServiceHelper.login(username, pwd);

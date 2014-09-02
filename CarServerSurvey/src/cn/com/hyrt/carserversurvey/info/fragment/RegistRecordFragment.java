@@ -13,6 +13,10 @@ import cn.com.hyrt.carserversurvey.base.view.PullToRefreshView;
 import cn.com.hyrt.carserversurvey.info.activity.MerchantInfoActivity;
 import cn.com.hyrt.carserversurvey.info.activity.RegRecodeActivity;
 import cn.com.hyrt.carserversurvey.info.adapter.RegRecodeAdapter;
+import cn.com.hyrt.carserversurvey.product.activity.ProductActivity;
+import cn.com.hyrt.carserversurvey.regist.activity.RegistMerchantInfoActivity;
+import cn.com.hyrt.carserversurvey.shop.activity.ShopActivity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -20,6 +24,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 public class RegistRecordFragment extends Fragment{
@@ -65,14 +72,74 @@ public class RegistRecordFragment extends Fragment{
 		
 		lvclaim.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+			private Dialog mSelectInfoDialog;
+
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+			public void onItemClick(AdapterView<?> arg0, View arg1, final int position,
 					long arg3) {
 				LogHelper.i("tag", "lvclaim:"+position);
-				Intent intent = new Intent();
-				intent.setClass(getActivity(), MerchantInfoActivity.class);
-				intent.putExtra("id", recode.data.get(position).id);
-				startActivity(intent);
+//				Intent intent = new Intent();
+//				intent.setClass(getActivity(), MerchantInfoActivity.class);
+//				intent.putExtra("id", recode.data.get(position).id);
+//				startActivity(intent);
+				
+				mSelectInfoDialog = new Dialog(getActivity(), R.style.MyDialog);
+				mSelectInfoDialog.setContentView(R.layout.layout_select_info);
+				mSelectInfoDialog.getWindow().setLayout(
+						 RelativeLayout.LayoutParams.MATCH_PARENT,
+						 RelativeLayout.LayoutParams.MATCH_PARENT);
+				
+				final Button btnProductIndex = (Button) mSelectInfoDialog
+						.findViewById(R.id.btn_product_index);
+				final Button btnSjProduct = (Button) mSelectInfoDialog
+						.findViewById(R.id.btn_sj_product);
+				final Button btnRegRecord = (Button) mSelectInfoDialog
+						.findViewById(R.id.btn_reg_record);
+				final Button btnCancle = (Button) mSelectInfoDialog
+						.findViewById(R.id.btn_cancle);
+				final View bg = mSelectInfoDialog.findViewById(R.id.bg);
+				final LinearLayout layout_select 
+				= (LinearLayout) mSelectInfoDialog.findViewById(R.id.layout_select);
+				
+				View.OnClickListener mClickListener = new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View view) {
+						int id = view.getId();
+						boolean needDismiss = true;
+						
+						if(id == btnProductIndex.getId()){
+							Intent intent = new Intent();
+							intent.setClass(getActivity(), ShopActivity.class);
+							intent.putExtra("shId", recode.data.get(position).id);
+							startActivity(intent);
+						}else if(id == btnSjProduct.getId()){
+							Intent intent = new Intent();
+							intent.setClass(getActivity(), ProductActivity.class);
+							intent.putExtra("shId", recode.data.get(position).id);
+							startActivity(intent);
+						}else if(id == btnRegRecord.getId()){
+							Intent intent = new Intent();
+							intent.setClass(getActivity(), MerchantInfoActivity.class);
+							intent.putExtra("id", recode.data.get(position).id);
+							startActivity(intent);
+						}else if(id == layout_select.getId()){
+							needDismiss = false;
+						}
+						if(needDismiss){
+							mSelectInfoDialog.dismiss();
+							mSelectInfoDialog = null;
+						}
+					}
+				};
+				btnProductIndex.setOnClickListener(mClickListener);
+				btnSjProduct.setOnClickListener(mClickListener);
+				btnRegRecord.setOnClickListener(mClickListener);
+				btnCancle.setOnClickListener(mClickListener);
+				bg.setOnClickListener(mClickListener);
+				layout_select.setOnClickListener(mClickListener);
+				
+				mSelectInfoDialog.show();
 			}
 			
 		});

@@ -55,13 +55,13 @@ public class MainActivity extends BaseActivity {
 
 	private Class<?> fragmentArray[] = {
 			RegistMerchantInfoFragment.class, RegistRecordFragment.class,
-			ShopFragment.class, InfoFragment.class };
+			InfoFragment.class };
 
 	private int mTextArray[] = {R.string.regist_label, R.string.regist_record_label,
-			R.string.shop_label, R.string.info_label };
+			R.string.info_label };
 
-	private int mImgArray[] = {R.drawable.bg_regist_tab, R.drawable.bg_product_tab,
-			R.drawable.bg_shop_tab, R.drawable.bg_info_tab};
+	private int mImgArray[] = {R.drawable.bg_regist_tab, R.drawable.bg_merchant_list_tab,
+			R.drawable.bg_info_tab};
 	
 	private static final int EXIT = 0;
 	
@@ -166,7 +166,7 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(curIndex == 3){
+		if(curIndex == 2){
 			InfoFragment mInfoFragment = 
 					(InfoFragment) getSupportFragmentManager()
 					.findFragmentByTag(mTabHost.getCurrentTabTag());

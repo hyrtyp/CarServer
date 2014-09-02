@@ -28,6 +28,7 @@
 	<string name="pwd_hint">密码</string>
 	
 	<string name="login_succuss">登录成功</string>
+	<string name="login_error">登录失败</string>
 	<string name="login_fail">用户名或密码有误</string>
 	<string name="login_msg">登录中...</string>
 	<string name="no_username">用户名不能为空</string>

@@ -25,7 +25,8 @@
         android:textColorHint="@android:color/white"
         android:textColor="@color/login_blue"
         android:textSize="21sp" 
-        android:textCursorDrawable="@null"/>
+        android:textCursorDrawable="@null"
+        android:singleLine="true"/>
     
     <EditText
         android:id="@+id/tv_pwd"
@@ -40,7 +41,9 @@
         android:textColorHint="@android:color/white"
         android:textColor="#298fff" 
         android:textSize="21sp" 
-        android:textCursorDrawable="@null"/>
+        android:textCursorDrawable="@null"
+        android:singleLine="true"
+        android:inputType="textPassword"/>
     
     <Button 
         android:id="@+id/btn_submit"
