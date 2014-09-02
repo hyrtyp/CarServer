@@ -217,7 +217,6 @@ public class ProductActivity extends BaseActivity{
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		AlertHelper.getInstance(ProductActivity.this).showCenterToast("onActivityResult:"+resultCode);
 		if (resultCode == 0) {
 			return;
 		}
