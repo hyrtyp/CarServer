@@ -3,6 +3,7 @@ package cn.com.hyrt.carserversurvey.info.adapter;
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.REGRECODE;
+import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -53,10 +54,11 @@ public class RegRecodeAdapter extends BaseAdapter {
 
 		
 		Define.REGRECODE.CDATA icc = ic.data.get(position);
-		ivFaceImg.setImageUrl(icc.recodeimagepath);
+		ivFaceImg.setImageUrl(icc.imagepath);
 		regname.setText(icc.sjname);
 		regadd.setText("地址："+icc.sjaddress);
-		regdate.setText("注册时间："+icc.peopledate);
+		String date = StringHelper.formatDate(icc.peopledate);
+		regdate.setText("注册时间："+date);
 		return convertView;
 	}
 
