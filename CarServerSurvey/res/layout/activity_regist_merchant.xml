@@ -22,6 +22,14 @@
                 android:text="输入全称"
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_fullname"
@@ -54,6 +62,14 @@
                 android:text="输入简称"
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_singlename"
@@ -84,6 +100,14 @@
                 android:layout_gravity="center_vertical"
                 android:text="注册账户"
                 android:textColor="#302f2f"
+                android:textSize="18sp" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
                 android:textSize="18sp" />
 
             <EditText
@@ -117,6 +141,14 @@
                 android:text="商户照片"
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" 
+                android:visibility="invisible"/>
 
             <cn.com.hyrt.carserversurvey.base.view.ImageLoaderView 
                 android:id="@+id/iv_merchant_photo"
@@ -161,6 +193,15 @@
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
             
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" 
+                android:visibility="invisible"/>
+            
             <cn.com.hyrt.carserversurvey.base.view.ImageLoaderView 
                 android:id="@+id/iv_license_photo"
                 android:layout_width="72dp"
@@ -203,6 +244,14 @@
                 android:text="服务类型"
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" />
 
             <!-- <cn.com.hyrt.carserversurvey.base.view.FullGridView
                 android:id="@+id/gv_services"
@@ -239,6 +288,14 @@
                 android:text="选择品牌"
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" />
 
             <TextView 
                 android:id="@+id/tv_select_brand"
@@ -268,6 +325,14 @@
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
 
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" />
+            
             <RelativeLayout 
                 android:layout_width="wrap_content"
                 android:layout_height="32dp"
@@ -351,6 +416,14 @@
                 android:text="具体地址"
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_address"
@@ -382,6 +455,15 @@
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
 
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" 
+                android:visibility="invisible"/>
+            
             <EditText
                 android:id="@+id/et_contactname"
                 android:layout_width="fill_parent"
@@ -410,6 +492,14 @@
                 android:layout_gravity="center_vertical"
                 android:text="手机号码"
                 android:textColor="#302f2f"
+                android:textSize="18sp" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
                 android:textSize="18sp" />
 
             <EditText
@@ -441,6 +531,15 @@
                 android:text="固定电话"
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" 
+                android:visibility="invisible"/>
 
             <EditText
                 android:id="@+id/et_telnum"
@@ -471,6 +570,14 @@
                 android:text="商家简介"
                 android:textColor="#302f2f"
                 android:textSize="18sp" />
+            
+             <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="*"
+                android:textColor="#ff0000"
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/et_desc"
@@ -486,6 +593,15 @@
                 android:gravity="left"/>
         </LinearLayout>
 
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="带“*”为必填项，请您尽量配合"
+                android:textColor="#ff0000"
+                android:textSize="18sp" 
+                android:layout_marginTop="@dimen/view_margin"/>
+        
         <Button 
             android:id="@+id/btn_submit"
             android:layout_width="242dp"
