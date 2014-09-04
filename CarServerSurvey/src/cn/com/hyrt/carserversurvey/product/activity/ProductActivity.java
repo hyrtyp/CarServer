@@ -25,6 +25,7 @@ import cn.com.hyrt.carserversurvey.base.activity.MainActivity;
 import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
 import cn.com.hyrt.carserversurvey.base.application.CarServerApplication;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_PRODUCT;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
@@ -37,7 +38,6 @@ import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
 import cn.com.hyrt.carserversurvey.info.activity.LoginActivity;
-import cn.com.hyrt.carserversurvey.regist.activity.RegistMerchantInfoActivity;
 
 /**
  * 上架商品
@@ -253,6 +253,21 @@ public class ProductActivity extends BaseActivity{
 	}
 	
 	private void submit(){
+		
+//		WebServiceHelper mUploadImage = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+//
+//			@Override
+//			public void onSuccess(BASE result) {
+//			}
+//
+//			@Override
+//			public void onFailure(int errorNo, String errorMsg) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		}, this);
+//		mUploadImage.saveImage(productBitmap, "productPhoto.jpeg", WebServiceHelper.IMAGE_TYPE_SJ, "5");
+		
 		String productname = et_proName.getText().toString();
 		String curpirce = et_proPrice.getText().toString();
 		String discountprice = et_proDisPrice.getText().toString();
@@ -300,14 +315,14 @@ public class ProductActivity extends BaseActivity{
 //			}
 //		}
 		
-		String pdPhoto = null;
-		String pdPhotoName = null;
-		if(productBitmap != null){
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			productBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-			pdPhoto = new String(Base64.encode(baos.toByteArray()));
-			pdPhotoName = "sjPhoto.jpeg";
-		}
+//		String pdPhoto = null;
+//		String pdPhotoName = null;
+//		if(productBitmap != null){
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//			productBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//			pdPhoto = new String(Base64.encode(baos.toByteArray()));
+//			pdPhotoName = "sjPhoto.jpeg";
+//		}
 		
 		Define.INFO_PRODUCT mProductInfo = new Define.INFO_PRODUCT();
 		if(!isAdd && productInfo != null){
@@ -324,8 +339,8 @@ public class ProductActivity extends BaseActivity{
 		mProductInfo.sptitle=productdec;
 		mProductInfo.type=istype;
 		mProductInfo.serviceid = shId;	
-		mProductInfo.image=pdPhoto;
-		mProductInfo.imagename=pdPhotoName;
+//		mProductInfo.image=pdPhoto;
+//		mProductInfo.imagename=pdPhotoName;
 
 		//调用保存商品接口saveMerchantComm
 		AlertHelper.getInstance(ProductActivity.this).showLoading(null);
@@ -335,21 +350,44 @@ public class ProductActivity extends BaseActivity{
 			@Override
 			public void onFailure(int errorNo, String errorMsg) {
 				LogHelper.i("tag", "errorMsg:"+errorMsg);
+				AlertHelper.getInstance(ProductActivity.this).showCenterToast("上传失败");
 				AlertHelper.getInstance(ProductActivity.this).hideLoading();
 			}
 
 			@Override
-			public void onSuccess(INFO_PRODUCT result) {
-				AlertHelper.getInstance(ProductActivity.this).hideLoading();
-				if(isAdd){
-					Intent intent = new Intent();
-					intent.setClass(getApplicationContext(), ProductDetailActivity.class);
-					intent.putExtra("id", (String) result.id);
-					intent.putExtra("shId", shId);
-//					startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
-					startActivity(intent);
-				}
-				finish();
+			public void onSuccess(final INFO_PRODUCT result) {
+				WebServiceHelper mUploadImage = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+				
+							@Override
+							public void onSuccess(BASE result2) {
+								AlertHelper.getInstance(ProductActivity.this).hideLoading();
+								if(isAdd){
+									Intent intent = new Intent();
+									intent.setClass(getApplicationContext(), ProductDetailActivity.class);
+									intent.putExtra("id", (String) result.id);
+									intent.putExtra("shId", shId);
+//									startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
+									startActivity(intent);
+								}
+								finish();
+							}
+				
+							@Override
+							public void onFailure(int errorNo, String errorMsg) {
+								LogHelper.i("tag", "errorMsg:"+errorMsg);
+								AlertHelper.getInstance(ProductActivity.this).showCenterToast("上传失败");
+								AlertHelper.getInstance(ProductActivity.this).hideLoading();
+							}
+						}, ProductActivity.this);
+						String mId = result.id;
+						if(!isAdd){
+							mId = productInfo.id;
+						}
+						mUploadImage.saveImage(
+								productBitmap, "productPhoto.jpeg",
+								WebServiceHelper.IMAGE_TYPE_SJSP, mId);
+				
+				
 			}
 		}, ProductActivity.this);
 		SaveProductHelper.saveProductInfo(mProductInfo);

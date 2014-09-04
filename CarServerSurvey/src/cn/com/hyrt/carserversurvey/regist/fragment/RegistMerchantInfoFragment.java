@@ -34,6 +34,7 @@ import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
 import cn.com.hyrt.carserversurvey.base.adapter.CheckBoxGridAdapter;
 import cn.com.hyrt.carserversurvey.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.SAVE_INFO_MERCHANT_RESULT;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
@@ -43,6 +44,7 @@ import cn.com.hyrt.carserversurvey.base.helper.PhotoHelper;
 import cn.com.hyrt.carserversurvey.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserversurvey.regist.activity.RegistMerchantInfoActivity;
 import cn.com.hyrt.carserversurvey.regist.adapter.BrandCheckAdapter;
 
 public class RegistMerchantInfoFragment extends Fragment{
@@ -121,11 +123,12 @@ public class RegistMerchantInfoFragment extends Fragment{
 	
 	private Dialog mBrandDialog;
 	private Dialog mfwClassDialog;
+	private boolean photoUploadDone = false;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		
+		LogHelper.i("tag", "onCreateView:");
 		merchantPhotos.clear();
 		licensePhoto.clear();
 		brandCheckedId.clear();
@@ -138,6 +141,7 @@ public class RegistMerchantInfoFragment extends Fragment{
 		
 		rootView = inflater.inflate(R.layout.fragment_regist_merchant, null);
 		findView();
+		release();
 		loadData();
 		
 //		CheckBoxGridAdapter mCheckBoxGridAdapter = new CheckBoxGridAdapter(services, getActivity());
@@ -155,6 +159,18 @@ public class RegistMerchantInfoFragment extends Fragment{
 		setListener();
 		
 		return rootView;
+	}
+	
+	private void release(){
+		LogHelper.i("tag", "release:");
+		etFullname.setText("");
+		etSinglename.setText("");
+		etUsername.setText("");
+		etAddress.setText("");
+		etContactname.setText("");
+		etPhonenum.setText("");
+		etTelnum.setText("");
+		etDesc.setText("");
 	}
 	
 	private void loadData(){
@@ -427,6 +443,32 @@ public class RegistMerchantInfoFragment extends Fragment{
 			@Override
 			public void onClick(View arg0) {
 				submit();
+			}
+		});
+		
+		etFullname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View arg0, boolean hasFocus) {
+				if(!hasFocus){
+					String sjname = etFullname.getText().toString();
+					if(sjname != null && !"".equals(sjname)){
+						sjnameExist(sjname, true);
+					}
+				}
+			}
+		});
+		
+		etUsername.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View arg0, boolean hasFocus) {
+				if(!hasFocus){
+					String sjname = etUsername.getText().toString();
+					if(sjname != null && !"".equals(sjname)){
+						sjnameExist(sjname, false);
+					}
+				}
 			}
 		});
 	}
@@ -753,17 +795,19 @@ public class RegistMerchantInfoFragment extends Fragment{
 
 			@Override
 			public void onSuccess(SAVE_INFO_MERCHANT_RESULT result) {
-				AlertHelper.getInstance(getActivity()).showCenterToast(R.string.regist_success);
-				AlertHelper.getInstance(getActivity()).hideLoading();
-				etFullname.setText("");
-				etSinglename.setText("");
-				etUsername.setText("");
-				etAddress.setText("");
-				etContactname.setText("");
-				etPhonenum.setText("");
-				etTelnum.setText("");
-				etDesc.setText("");
-				((MainActivity)getActivity()).jump(1);
+//				AlertHelper.getInstance(getActivity()).showCenterToast(R.string.regist_success);
+//				AlertHelper.getInstance(getActivity()).hideLoading();
+//				etFullname.setText("");
+//				etSinglename.setText("");
+//				etUsername.setText("");
+//				etAddress.setText("");
+//				etContactname.setText("");
+//				etPhonenum.setText("");
+//				etTelnum.setText("");
+//				etDesc.setText("");
+//				((MainActivity)getActivity()).jump(1);
+				uploadImage(licensePhoto.get(0), "zzPhoto.jpeg", true, result.id);
+				uploadImage(merchantPhotos.get(0), "sjPhoto.jpeg", false, result.id);
 			}
 
 			@Override
@@ -788,6 +832,72 @@ public class RegistMerchantInfoFragment extends Fragment{
 	public void onDestroy() {
 		LogHelper.i("tag", "onDestroy");
 		super.onDestroy();
+	}
+	
+	public void uploadImage(Bitmap bitmap, String imageName, boolean isZZ, String id){
+		WebServiceHelper mUploadImage = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+			
+			@Override
+			public void onSuccess(BASE result2) {
+				boolean isFinish = false;
+				if(licensePhoto.size() <= 0 || merchantPhotos.size() <= 0){
+					photoUploadDone = false;
+					isFinish = true;
+				}else if(photoUploadDone){
+					photoUploadDone = false;
+					isFinish = true;
+				}else{
+					photoUploadDone = true;
+				}
+				if(isFinish){
+					AlertHelper.getInstance(getActivity()).showCenterToast(R.string.regist_success);
+					AlertHelper.getInstance(getActivity()).hideLoading();
+					etFullname.setText("");
+					etSinglename.setText("");
+					etUsername.setText("");
+					etAddress.setText("");
+					etContactname.setText("");
+					etPhonenum.setText("");
+					etTelnum.setText("");
+					etDesc.setText("");
+					((MainActivity)getActivity()).jump(1);
+				}
+			}
+
+			@Override
+			public void onFailure(int errorNo, String errorMsg) {
+				photoUploadDone = false;
+				AlertHelper.getInstance(getActivity()).showCenterToast(R.string.regist_error);
+				AlertHelper.getInstance(getActivity()).hideLoading();
+			}
+		}, getActivity());
+		String imageType = isZZ ? WebServiceHelper.IMAGE_TYPE_ZZ : WebServiceHelper.IMAGE_TYPE_SJ;
+		mUploadImage.saveImage(bitmap, imageName, imageType, id);
+	}
+	
+	public void sjnameExist(String sjname, final boolean isFullName){
+		WebServiceHelper mSjNameExistWebService = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+
+			@Override
+			public void onSuccess(BASE result) {
+			}
+
+			@Override
+			public void onFailure(int errorNo, String errorMsg) {
+				switch (errorNo) {
+				case 207:
+					if(isFullName){
+						AlertHelper.getInstance(getActivity()).showCenterToast("商家全称重复");
+					}else{
+						AlertHelper.getInstance(getActivity()).showCenterToast("注册账户重复");
+					}
+					break;
+				default:
+					break;
+				}
+			}
+		}, getActivity());
+		mSjNameExistWebService.sjnameExist(sjname, isFullName);
 	}
 	
 	private void findView(){

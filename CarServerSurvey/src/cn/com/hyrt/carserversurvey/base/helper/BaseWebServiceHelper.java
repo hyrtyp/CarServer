@@ -1,7 +1,10 @@
 package cn.com.hyrt.carserversurvey.base.helper;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
+import org.kobjects.base64.Base64;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -10,6 +13,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
@@ -29,7 +33,7 @@ public class BaseWebServiceHelper {
 	private static final String END_POINT = "http://192.168.10.238:8080/CSPHWInterface/services/CspHwInterface?wsdl";
 //	private static final String END_POINT = "http://61.233.18.68:8080/CSPInterface/services/CspInterface?wsdl";
 
-	private static final int TIMEOUT = 10*1000;
+	private static final int TIMEOUT = 20*1000;
 
 	private RequestCallback mCallback;
 	private Gson mGson;
@@ -75,6 +79,85 @@ public class BaseWebServiceHelper {
 			public void run() {
 				SoapObject soapObject = new SoapObject(NAME_SPACE, method);
 				LogHelper.i("tag", "params:"+params+" method:"+method);
+				if(params != null){
+					soapObject.addProperty("jsonstr", params);
+				}
+		        SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(SoapEnvelope.VER11);
+		        envelope.bodyOut = soapObject;
+		        envelope.dotNet = true;
+		        envelope.setOutputSoapObject(soapObject);
+		        
+		        HttpTransportSE ht = new HttpTransportSE(END_POINT, TIMEOUT);
+		        ht.debug = true;
+		        
+				try {
+					ht.call("urn:"+method, envelope);
+					final String result = envelope.getResponse().toString();
+					LogHelper.i("tag", "result:"+result);
+					if(result != null && mContext != null){
+						((Activity)mContext).runOnUiThread(new Runnable() {
+							@Override
+							public void run() {
+								if(mListener != null){
+									mListener.onSuccess(result);
+								}
+								if(mCallback != null){
+									Define.BASE base = (BASE) mGson.fromJson(result, clazz);
+									if(Define.REQUEST_SUCCESS_CODE.equals(base.code)
+											|| Define.REQUEST_SAVE_SUCCESS_CODE.equals(base.code)){
+										mCallback.onSuccess(base);
+									}else{
+										mCallback.onFailure(Integer.parseInt(base.code), base.message);
+									}
+								}
+							}
+						});
+						
+					}
+				} catch (IOException e) {
+					LogHelper.i("tag", "e1:"+e.getMessage());
+					if(e.getMessage() == null || e.getMessage().contains("Network is unreachable")|| e.getMessage().contains("ECONNREFUSED")){
+						if(mCallback != null){
+							((Activity)mContext).runOnUiThread(new Runnable() {
+								
+								@Override
+								public void run() {
+									mCallback.onFailure(Integer.parseInt(Define.REQUEST_ERROR_CODE),
+											mContext.getString(R.string.net_error_msg));
+								}
+							});
+							
+						}
+					}else if(e.getMessage().contains("BufferedInputStream is closed")){
+						((Activity)mContext).runOnUiThread(new Runnable() {
+							
+							@Override
+							public void run() {
+								mHandler.sendEmptyMessage(MESSAGE_TIMEOUT);
+							}
+						});
+					}else{
+						mHandler.sendEmptyMessage(MESSAGE_TIMEOUT);
+					}
+					e.printStackTrace();
+				} catch (XmlPullParserException e) {
+					LogHelper.i("tag", "e2:"+e.getMessage());
+					e.printStackTrace();
+				}
+			};
+		};
+		mThread.start();
+	}
+	
+	protected void uploadImage(final String method, final String params, final String image, final Class<?> clazz){
+		
+		Thread mThread = new Thread(){
+			public void run() {
+				LogHelper.i("tag", "params:"+params+" method:"+method);
+				SoapObject soapObject = new SoapObject(NAME_SPACE, method);
+				if(image != null){
+					soapObject.addProperty("image", image);
+				}
 				if(params != null){
 					soapObject.addProperty("jsonstr", params);
 				}

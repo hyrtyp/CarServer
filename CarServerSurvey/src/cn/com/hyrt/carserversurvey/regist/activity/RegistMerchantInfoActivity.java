@@ -32,6 +32,7 @@ import cn.com.hyrt.carserversurvey.base.activity.MainActivity;
 import cn.com.hyrt.carserversurvey.base.adapter.AddPhotoGridAdapter;
 import cn.com.hyrt.carserversurvey.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_MERCHANT;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_MERCHANT.CDATA;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.SAVE_INFO_MERCHANT_RESULT;
@@ -44,6 +45,7 @@ import cn.com.hyrt.carserversurvey.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
+import cn.com.hyrt.carserversurvey.info.activity.MerchantInfoActivity;
 import cn.com.hyrt.carserversurvey.regist.adapter.BrandCheckAdapter;
 
 /**
@@ -134,6 +136,8 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	private Dialog mfwClassDialog;
 	
 	private INFO_MERCHANT.CDATA mData;
+	
+	private boolean photoUploadDone = false;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -538,6 +542,19 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 				submit();
 			}
 		});
+		
+		etFullname.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+			
+			@Override
+			public void onFocusChange(View arg0, boolean hasFocus) {
+				if(!hasFocus){
+					String sjname = etFullname.getText().toString();
+					if(sjname != null && !"".equals(sjname) && !mData.sjname.equals(sjname)){
+						sjnameExist(sjname, true);
+					}
+				}
+			}
+		});
 	}
 	
 	/*private void delPhoto(final int position, final boolean isMerchant){
@@ -823,14 +840,14 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 			return;
 		}
 		
-		String sjPhoto = null;
-		String sjPhotoName = null;
-		if(merchantBitmap != null){
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			merchantBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-			sjPhoto = new String(Base64.encode(baos.toByteArray()));
-			sjPhotoName = "sjPhoto.jpeg";
-		}
+//		String sjPhoto = null;
+//		String sjPhotoName = null;
+//		if(merchantBitmap != null){
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//			merchantBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//			sjPhoto = new String(Base64.encode(baos.toByteArray()));
+//			sjPhotoName = "sjPhoto.jpeg";
+//		}
 //		for(int i=0,j=merchantPhotos.size(); i<j; i++){
 //			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 //			Bitmap mBitmap = merchantPhotos.get(i);
@@ -844,14 +861,14 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 //			}
 //		}
 		
-		String zzPhoto = null;
-		String zzPhotoName = null;
-		if(licenseBitmap != null){
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			licenseBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-			zzPhoto = new String(Base64.encode(baos.toByteArray()));
-			zzPhotoName = "sjPhoto.jpeg";
-		}
+//		String zzPhoto = null;
+//		String zzPhotoName = null;
+//		if(licenseBitmap != null){
+//			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//			licenseBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//			zzPhoto = new String(Base64.encode(baos.toByteArray()));
+//			zzPhotoName = "sjPhoto.jpeg";
+//		}
 		
 //		StringBuffer zzPhoto = new StringBuffer("");
 //		StringBuffer zzPhotoName = new StringBuffer("");
@@ -896,10 +913,10 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 		merchantInfo.loginname = username;
 		merchantInfo.phonenum = phoneNum;
 		merchantInfo.desc = desc;
-		merchantInfo.sjimage = sjPhoto;
-		merchantInfo.imagename = sjPhotoName;
-		merchantInfo.zzimage = zzPhoto;
-		merchantInfo.zzimagename = zzPhotoName;
+//		merchantInfo.sjimage = sjPhoto;
+//		merchantInfo.imagename = sjPhotoName;
+//		merchantInfo.zzimage = zzPhoto;
+//		merchantInfo.zzimagename = zzPhotoName;
 		merchantInfo.brandid = brands.toString();
 		merchantInfo.servicetype = fwClass.toString();
 		merchantInfo.id = mData.id;
@@ -911,9 +928,15 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 
 			@Override
 			public void onSuccess(SAVE_INFO_MERCHANT_RESULT result) {
-				AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast(R.string.change_success);
-				AlertHelper.getInstance(RegistMerchantInfoActivity.this).hideLoading();
-				finish();
+//				AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast(R.string.change_success);
+//				AlertHelper.getInstance(RegistMerchantInfoActivity.this).hideLoading();
+//				finish();
+				if(merchantBitmap != null){
+					uploadImage(merchantBitmap, "sjPhoto.jpeg", false);
+				}
+				if(licenseBitmap != null){
+					uploadImage(licenseBitmap, "zzPhoto.jpeg", true);
+				}
 			}
 
 			@Override
@@ -951,6 +974,61 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 		
 	}
 	
+	public void uploadImage(Bitmap bitmap, String imageName, boolean isZZ){
+		WebServiceHelper mUploadImage = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+			
+			@Override
+			public void onSuccess(BASE result2) {
+				if(licenseBitmap == null || merchantBitmap == null){
+					photoUploadDone = false;
+					AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast(R.string.change_success);
+					AlertHelper.getInstance(RegistMerchantInfoActivity.this).hideLoading();
+					finish();
+				}else if(photoUploadDone){
+					photoUploadDone = false;
+					AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast(R.string.change_success);
+					AlertHelper.getInstance(RegistMerchantInfoActivity.this).hideLoading();
+					finish();
+				}else{
+					photoUploadDone = true;
+				}
+			}
+
+			@Override
+			public void onFailure(int errorNo, String errorMsg) {
+				photoUploadDone = false;
+				AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast(R.string.regist_error);
+				AlertHelper.getInstance(RegistMerchantInfoActivity.this).hideLoading();
+			}
+		}, RegistMerchantInfoActivity.this);
+		String imageType = isZZ ? WebServiceHelper.IMAGE_TYPE_ZZ : WebServiceHelper.IMAGE_TYPE_SJ;
+		mUploadImage.saveImage(bitmap, imageName, imageType, mData.id);
+	}
+	
+	public void sjnameExist(String sjname, final boolean isFullName){
+		WebServiceHelper mSjNameExistWebService = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+
+			@Override
+			public void onSuccess(BASE result) {
+			}
+
+			@Override
+			public void onFailure(int errorNo, String errorMsg) {
+				switch (errorNo) {
+				case 207:
+					if(isFullName){
+						AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast("商家全称重复");
+					}else{
+						AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast("注册账户重复");
+					}
+					break;
+				default:
+					break;
+				}
+			}
+		}, RegistMerchantInfoActivity.this);
+		mSjNameExistWebService.sjnameExist(sjname, isFullName);
+	}
 	
 	
 	private void findView(){

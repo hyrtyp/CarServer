@@ -47,11 +47,11 @@ public class RegistRecordFragment extends Fragment{
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.activity_regrecode, null);
 		findView();
+		isLoadMore = false;
 		loadData();
 		setListener();
 		return rootView;
 	}
-	
 	private void setListener() {
 		ptrv.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
 			@Override

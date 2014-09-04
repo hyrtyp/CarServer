@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="method_login">getHwLogininfo</string>
-    <string name="method_existsjname">sjname</string>
+    <string name="method_existsjname">getMerchantUserinfo</string>
     <string name="method_getCLWDfl">getCLWDfl</string>
     <string name="method_getCodingArea">getCodingArea</string>
     <string name="method_getFwClassList">getFwClassList</string>
@@ -14,6 +14,7 @@
     <string name="method_getMerchantComm">getMerchantComm</string>
     <string name="method_getMerchantCommList">getMerchantCommList</string>
     <string name="method_saveDelMerchantCommStatus">saveDelMerchantCommStatus</string>
+    <string name="method_saveImageWithByte">saveImageWithByte</string>
     
     <!-- 分类查询ID -->
     <string name="flid_brand">000021</string>

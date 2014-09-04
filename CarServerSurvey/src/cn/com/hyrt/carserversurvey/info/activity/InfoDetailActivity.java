@@ -14,8 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.SAVE_INFO;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
+import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
@@ -37,6 +39,7 @@ public class InfoDetailActivity extends BaseActivity{
 	private String imgBuffer;
 	private WebServiceHelper mUserInfoWebServiceHelper;
 	private WebServiceHelper mSaveUserInfoWebServiceHelper;
+	private Bitmap bitmap;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -64,11 +67,11 @@ public class InfoDetailActivity extends BaseActivity{
         	LogHelper.i("tag", "data:"+data.getParcelableExtra("data")+"---"+data.getData());
         	
             if (data.getParcelableExtra("data") != null) {
-                Bitmap bitmap = data.getParcelableExtra("data");
+                bitmap = data.getParcelableExtra("data");
                 iv_user_img.setImageBitmap(bitmap);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                imgBuffer = new String(Base64.encode(baos.toByteArray()));
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                imgBuffer = new String(Base64.encode(baos.toByteArray()));
                 savePhoto();
             }
 
@@ -116,35 +119,50 @@ public class InfoDetailActivity extends BaseActivity{
 	}
 	
 	private void savePhoto(){
-		SAVE_INFO info = new SAVE_INFO();
-		if(imgBuffer != null && !"".equals(imgBuffer)){
-			info.image = imgBuffer;
-			info.imagename = "face.jpg";
-		}
-		info.id = ((CarServerApplication)getApplicationContext()).getLoginInfo().id;
+//		SAVE_INFO info = new SAVE_INFO();
+//		if(imgBuffer != null && !"".equals(imgBuffer)){
+//			info.image = imgBuffer;
+//			info.imagename = "face.jpg";
+//		}
+//		info.id = ((CarServerApplication)getApplicationContext()).getLoginInfo().id;
+//		
+//		if(mSaveUserInfoWebServiceHelper == null){
+//			mSaveUserInfoWebServiceHelper = new WebServiceHelper(
+//					new WebServiceHelper.RequestCallback<Define.SAVE_INFO>() {
+//
+//						@Override
+//						public void onFailure(int errorNo, String errorMsg) {
+//							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.change_fail);
+////							setResult(Define.RESULT_FROM_CHANGE_INFO);
+////							finish();
+//							
+//						}
+//
+//						@Override
+//						public void onSuccess(SAVE_INFO result) {
+////							LogHelper.i("tag", "result:"+result.message);
+//							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.infophoto_change_success);
+////							setResult(Define.RESULT_FROM_CHANGE_INFO);
+//							//finish();
+//						}
+//			}, this);
+//		}
+//		mSaveUserInfoWebServiceHelper.saveUserInfo(info);
 		
-		if(mSaveUserInfoWebServiceHelper == null){
-			mSaveUserInfoWebServiceHelper = new WebServiceHelper(
-					new WebServiceHelper.RequestCallback<Define.SAVE_INFO>() {
+		WebServiceHelper mUploadImageWebService = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
 
-						@Override
-						public void onFailure(int errorNo, String errorMsg) {
-							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.change_fail);
-//							setResult(Define.RESULT_FROM_CHANGE_INFO);
-//							finish();
-							
-						}
+			@Override
+			public void onSuccess(BASE result) {
+				LogHelper.i("tag", "result:"+result.message);
+				AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.infophoto_change_success);
+			}
 
-						@Override
-						public void onSuccess(SAVE_INFO result) {
-//							LogHelper.i("tag", "result:"+result.message);
-							AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.infophoto_change_success);
-//							setResult(Define.RESULT_FROM_CHANGE_INFO);
-							//finish();
-						}
-			}, this);
-		}
-		mSaveUserInfoWebServiceHelper.saveUserInfo(info);
+			@Override
+			public void onFailure(int errorNo, String errorMsg) {
+				AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast(R.string.change_fail);
+			}
+		}, this);
+		mUploadImageWebService.saveImage(bitmap, "face.jpeg", WebServiceHelper.IMAGE_TYPE_USER, ((CarServerApplication)getApplication()).getLoginInfo().id);
 	}
 	
 }

@@ -1,6 +1,11 @@
 package cn.com.hyrt.carserversurvey.base.helper;
 
+import java.io.ByteArrayOutputStream;
+
+import org.kobjects.base64.Base64;
+
 import android.content.Context;
+import android.graphics.Bitmap;
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.application.CarServerApplication;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
@@ -20,6 +25,11 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 
 	public static final String REPLY_DETAIL_QUESTION = "consultationid";
 	public static final String REPLY_DETAIL_HISTORY = "wtid";
+	
+	public static final String IMAGE_TYPE_SJ = "sjimage";
+	public static final String IMAGE_TYPE_ZZ = "zzimage";
+	public static final String IMAGE_TYPE_SJSP = "sjspimage";
+	public static final String IMAGE_TYPE_USER = "userimage";
 
 	public WebServiceHelper(RequestCallback mCallback, Context context) {
 		super(mCallback, context);
@@ -169,6 +179,19 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(
 				getString(R.string.method_saveDelMerchantCommStatus),
 				params,Define.BASE.class);
+	}
+	
+	
+	public void saveImage(Bitmap image, String imageName, String imageType, String id){
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageByte = baos.toByteArray();
+        String imageBuffer = new String(Base64.encode(imageByte));
+		String params = String.format(
+				"{\"imagename\":\"%s\",\"length\":\"%s\"," +
+				"\"type\":\"%s\",\"userid\":\"%s\",\"id\":\"%s\"}",
+				imageName, imageByte.length+"", imageType, getUserId(), id);
+		uploadImage(getString(R.string.method_saveImageWithByte), params, imageBuffer, Define.BASE.class);
 	}
 	
 }
