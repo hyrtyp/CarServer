@@ -928,9 +928,12 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 
 			@Override
 			public void onSuccess(SAVE_INFO_MERCHANT_RESULT result) {
-//				AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast(R.string.change_success);
-//				AlertHelper.getInstance(RegistMerchantInfoActivity.this).hideLoading();
-//				finish();
+				if(merchantBitmap == null && licenseBitmap == null){
+					AlertHelper.getInstance(RegistMerchantInfoActivity.this).showCenterToast(R.string.change_success);
+					AlertHelper.getInstance(RegistMerchantInfoActivity.this).hideLoading();
+					finish();
+					return;
+				}
 				if(merchantBitmap != null){
 					uploadImage(merchantBitmap, "sjPhoto.jpeg", false);
 				}

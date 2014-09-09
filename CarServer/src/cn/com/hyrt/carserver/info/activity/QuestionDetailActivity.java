@@ -25,6 +25,7 @@ import cn.com.hyrt.carserver.base.activity.BaseActivity;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.FileHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
@@ -36,6 +37,7 @@ import cn.com.hyrt.carserver.base.view.PullToRefreshView;
 import cn.com.hyrt.carserver.base.view.PullToRefreshView.OnHeaderRefreshListener;
 import cn.com.hyrt.carserver.info.adapter.QuestionDetailAdapter;
 import cn.com.hyrt.carserver.question.activity.CommentExpertActivity;
+import cn.com.hyrt.carserver.question.activity.QuestionActivity;
 
 public class QuestionDetailActivity extends BaseActivity{
 
@@ -59,7 +61,8 @@ public class QuestionDetailActivity extends BaseActivity{
 	
 	private Uri faceUri;
 	private PhotoHelper mPhotoHelper;
-	private String imgBuffer;
+//	private String imgBuffer;
+	private Bitmap imgBitmap;
 	private String imageName = "photo.jpg";
 	
 	public static final int TYPE_NEW = 0;
@@ -70,13 +73,13 @@ public class QuestionDetailActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_question_detail);
 		Intent intent = getIntent();
-		type = intent.getIntExtra("type", QuestionActivity.TYPE_NEW);
+		type = intent.getIntExtra("type", QuestionDetailActivity.TYPE_NEW);
 		replyId = intent.getStringExtra("replyId");
 		ptrv.disableScroolUp();
 		setListener();
 		AlertHelper.getInstance(this).showLoading(null);
 		
-		if(type == QuestionActivity.TYPE_HISTORY){
+		if(type == QuestionDetailActivity.TYPE_HISTORY){
 			tvPromptOne.setVisibility(View.GONE);
 			tvPromptTwo.setVisibility(View.GONE);
 			layoutReply.setVisibility(View.GONE);
@@ -195,11 +198,11 @@ public class QuestionDetailActivity extends BaseActivity{
         	LogHelper.i("tag", "data:"+data.getParcelableExtra("data")+"---"+data.getData());
         	
             if (data.getParcelableExtra("data") != null) {
-                Bitmap bitmap = data.getParcelableExtra("data");
-                ivPhoto.setImageBitmap(bitmap);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                imgBuffer = new String(Base64.encode(baos.toByteArray()));
+            	imgBitmap = data.getParcelableExtra("data");
+                ivPhoto.setImageBitmap(imgBitmap);
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                imgBuffer = new String(Base64.encode(baos.toByteArray()));
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
@@ -218,8 +221,8 @@ public class QuestionDetailActivity extends BaseActivity{
 	
 	//上传照片
 	public void uploadPhoto(View view){
-		if(imgBuffer != null && !"".equals(imgBuffer)){
-			imgBuffer = null;
+		if(imgBitmap != null){
+			imgBitmap = null;
 			ivPhoto.setImageResource(R.drawable.ic_question_camera);
 			return;
 		}
@@ -237,34 +240,35 @@ public class QuestionDetailActivity extends BaseActivity{
 	public void reply(View view){
 		if(replyId == null){
 			return;
-		}else if("".equals(etContent.getText().toString().trim()) && imgBuffer == null){
+		}else if("".equals(etContent.getText().toString().trim()) && imgBitmap == null){
 			AlertHelper.getInstance(this).showCenterToast(R.string.reply_hint);
 			return;
 		}
 		AlertHelper.getInstance(this).showLoading(null);
 		Define.QUESTION_SAVE questionSave = new Define.QUESTION_SAVE();
 		questionSave.consultationid = replyId;
-		if(imgBuffer != null){
-			questionSave.image = imgBuffer;
-			questionSave.imagename = imageName;
-		}
+//		if(imgBuffer != null){
+//			questionSave.image = imgBuffer;
+//			questionSave.imagename = imageName;
+//		}
 		questionSave.content = etContent.getText().toString();
 		
 		
 		if(mReplyWebServiceHelper == null){
 			mReplyWebServiceHelper = new WebServiceHelper(
-					new WebServiceHelper.RequestCallback<Define.BASE>() {
+					new WebServiceHelper.RequestCallback<Define.RESULT_ID>() {
 
 						@Override
-						public void onSuccess(BASE result) {
-							AlertHelper.getInstance(QuestionDetailActivity.this)
-							.hideLoading();
-							ivPhoto.setImageResource(R.drawable.ic_question_camera);
-							etContent.setText("");
-							imgBuffer = null;
-							InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
-							imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); 
-							loadData();
+						public void onSuccess(Define.RESULT_ID result) {
+							uploadImg(result.id);
+//							AlertHelper.getInstance(QuestionDetailActivity.this)
+//							.hideLoading();
+//							ivPhoto.setImageResource(R.drawable.ic_question_camera);
+//							etContent.setText("");
+//							imgBitmap = null;
+//							InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
+//							imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); 
+//							loadData();
 						}
 
 						@Override
@@ -280,6 +284,47 @@ public class QuestionDetailActivity extends BaseActivity{
 		mReplyWebServiceHelper.replyQuestion(questionSave);
 	}
 	
+	private void uploadImg(String uid){
+		if(imgBitmap == null){
+			AlertHelper.getInstance(QuestionDetailActivity.this)
+			.hideLoading();
+			ivPhoto.setImageResource(R.drawable.ic_question_camera);
+			etContent.setText("");
+			imgBitmap = null;
+			InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
+			imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); 
+			loadData();
+			return;
+		}
+		WebServiceHelper mUploadImgWebServiceHelper = new WebServiceHelper(
+				new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+
+					@Override
+					public void onSuccess(BASE result) {
+						AlertHelper.getInstance(QuestionDetailActivity.this)
+						.hideLoading();
+						ivPhoto.setImageResource(R.drawable.ic_question_camera);
+						etContent.setText("");
+						imgBitmap = null;
+						InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);  
+						imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0); 
+						loadData();
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						AlertHelper.getInstance(QuestionDetailActivity.this)
+						.hideLoading();
+						AlertHelper.getInstance(QuestionDetailActivity.this)
+						.showCenterToast(R.string.question_sava_fail);
+					}
+		}, this);
+		mUploadImgWebServiceHelper.saveImage(
+				imgBitmap, "requestionPhoto.jpeg",
+				WebServiceHelper.IMAGE_TYPE_RE_QUESTION,
+				uid);
+
+	}
 	
 	@Override
 	protected void onDestroy() {

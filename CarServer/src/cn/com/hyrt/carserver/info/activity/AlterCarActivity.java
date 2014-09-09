@@ -32,11 +32,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
+import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.FileHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
@@ -67,7 +69,8 @@ public class AlterCarActivity extends BaseActivity{
 	private String carId;
 	private Uri faceUri;
 	private PhotoHelper mPhotoHelper;
-	private String imgBuffer;
+//	private String imgBuffer;
+	private Bitmap imgBitmap;
 	private String imageName = "carphoto.jpg";
 	private Calendar mycalendar;
 	private int year;
@@ -319,16 +322,22 @@ public class AlterCarActivity extends BaseActivity{
 		car.insurancenum = etInsuranceNum.getText().toString();
 		car.insurancecompany = etInsuranceCompany.getText().toString();
 		car.checkdate = StringHelper.getNowTime();
-		car.imagepath = imgBuffer;
+//		car.imagepath = imgBuffer;
 		car.imagename = imageName;
 		
 		if(mWebServiceHelper == null){
-			mWebServiceHelper = new WebServiceHelper(new WebServiceHelper.RequestCallback<Define.BASE>() {
+			mWebServiceHelper = new WebServiceHelper(new WebServiceHelper.RequestCallback<Define.INFO_CAR>() {
 
 				@Override
-				public void onSuccess(BASE result) {
-					setResult(Define.RESULT_FROM_ALTER_CAR);
-					finish();
+				public void onSuccess(Define.INFO_CAR result) {
+					if(!isAdd){
+						uploadImg(carId);
+					}else{
+						uploadImg(result.id);
+					}
+
+//					setResult(Define.RESULT_FROM_ALTER_CAR);
+//					finish();
 				}
 
 				@Override
@@ -356,12 +365,12 @@ public class AlterCarActivity extends BaseActivity{
         	LogHelper.i("tag", "data:"+data.getParcelableExtra("data")+"---"+data.getData());
         	
             if (data.getParcelableExtra("data") != null) {
-                Bitmap bitmap = data.getParcelableExtra("data");
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                iv_car_img.setImageBitmap(bitmap);
+            	imgBitmap = data.getParcelableExtra("data");
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                iv_car_img.setImageBitmap(imgBitmap);
                 btnAddPhoto.setText("");
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                imgBuffer = new String(Base64.encode(baos.toByteArray()));
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                imgBuffer = new String(Base64.encode(baos.toByteArray()));
 
             }
 
@@ -461,6 +470,34 @@ public class AlterCarActivity extends BaseActivity{
 		 mDatePickerDialog.show();
 		 
 		
+	}
+	
+	private void uploadImg(String uid){
+		if(imgBitmap == null){
+			setResult(Define.RESULT_FROM_ALTER_CAR);
+			finish();
+			return;
+		}
+		WebServiceHelper mUploadImgWebServiceHelper = new WebServiceHelper(
+				new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+
+					@Override
+					public void onSuccess(BASE result) {
+						setResult(Define.RESULT_FROM_ALTER_CAR);
+						finish();
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						AlertHelper.getInstance(AlterCarActivity.this).showCenterToast("保存失败");
+						LogHelper.i("tag", "errorMsg:"+errorMsg);
+					}
+		}, this);
+		mUploadImgWebServiceHelper.saveImage(
+				imgBitmap, "carPhoto.jpeg",
+				WebServiceHelper.IMAGE_TYPE_CAR,
+				uid);
+
 	}
 	
 	@Override

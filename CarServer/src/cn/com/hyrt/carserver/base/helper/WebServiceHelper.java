@@ -1,9 +1,13 @@
 package cn.com.hyrt.carserver.base.helper;
 
+import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Type;
 import java.util.LinkedList;
 
+import org.kobjects.base64.Base64;
+
 import android.content.Context;
+import android.graphics.Bitmap;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
@@ -25,6 +29,11 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 
 	public static final String REPLY_DETAIL_QUESTION = "consultationid";
 	public static final String REPLY_DETAIL_HISTORY = "wtid";
+	
+	public static final String IMAGE_TYPE_CAR = "carimage";
+	public static final String IMAGE_TYPE_QUESTION = "answers";
+	public static final String IMAGE_TYPE_RE_QUESTION = "sedanswers";
+	public static final String IMAGE_TYPE_USER = "userimage";
 
 	public WebServiceHelper(RequestCallback mCallback, Context context) {
 		super(mCallback, context);
@@ -365,14 +374,14 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		info.terminalid = getUserId();
 		Gson mGson = new Gson();
 		String params = mGson.toJson(info);
-		get(mContext.getString(R.string.method_question_save), params,Define.BASE.class);
+		get(mContext.getString(R.string.method_question_save), params,Define.RESULT_ID.class);
 	}
 	
 	public void replyQuestion(Define.QUESTION_SAVE info){
 		info.terminalid = getUserId();
 		Gson mGson = new Gson();
 		String params = mGson.toJson(info);
-		get(mContext.getString(R.string.method_question_reply), params,Define.BASE.class);
+		get(mContext.getString(R.string.method_question_reply), params,Define.RESULT_ID.class);
 	}
 	
 	/**
@@ -552,5 +561,17 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 			return null;
 		}
 		return mContext.getString(resId);
+	}
+	
+	public void saveImage(Bitmap image, String imageName, String imageType, String id){
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageByte = baos.toByteArray();
+        String imageBuffer = new String(Base64.encode(imageByte));
+		String params = String.format(
+				"{\"imagename\":\"%s\",\"length\":\"%s\"," +
+				"\"type\":\"%s\",\"userid\":\"%s\",\"id\":\"%s\"}",
+				imageName, imageByte.length+"", imageType, getUserId(), id);
+		uploadImage(getString(R.string.method_saveImageWithByte), params, imageBuffer, Define.BASE.class);
 	}
 }

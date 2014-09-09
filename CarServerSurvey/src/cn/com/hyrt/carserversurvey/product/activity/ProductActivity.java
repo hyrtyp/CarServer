@@ -356,6 +356,18 @@ public class ProductActivity extends BaseActivity{
 
 			@Override
 			public void onSuccess(final INFO_PRODUCT result) {
+				if(productBitmap == null){
+					if(isAdd){
+						Intent intent = new Intent();
+						intent.setClass(getApplicationContext(), ProductDetailActivity.class);
+						intent.putExtra("id", (String) result.id);
+						intent.putExtra("shId", shId);
+//						startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
+						startActivity(intent);
+					}
+					finish();
+					return;
+				}
 				WebServiceHelper mUploadImage = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
 				
 							@Override

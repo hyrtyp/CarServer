@@ -33,6 +33,7 @@ import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR_LIST;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_SAVE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.FileHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
@@ -57,7 +58,8 @@ public class ChangeInfoActivity extends BaseActivity{
 	
 	private Uri faceUri;
 	private PhotoHelper mPhotoHelper;
-	private String imgBuffer;
+//	private String imgBuffer;
+	private Bitmap imgBitmap;
 	private WebServiceHelper mWebServiceHelper;
 	
 	@Override
@@ -276,11 +278,11 @@ public class ChangeInfoActivity extends BaseActivity{
         	LogHelper.i("tag", "data:"+data.getParcelableExtra("data")+"---"+data.getData());
         	
             if (data.getParcelableExtra("data") != null) {
-                Bitmap bitmap = data.getParcelableExtra("data");
-                ivFaceImg.setImageBitmap(bitmap);
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                imgBuffer = new String(Base64.encode(baos.toByteArray()));
+            	imgBitmap = data.getParcelableExtra("data");
+                ivFaceImg.setImageBitmap(imgBitmap);
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                imgBuffer = new String(Base64.encode(baos.toByteArray()));
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
@@ -337,10 +339,10 @@ public class ChangeInfoActivity extends BaseActivity{
 			info.unitname = userName;
 		}
 		
-		if(imgBuffer != null && !"".equals(imgBuffer)){
-			info.image = imgBuffer;
-			info.imagename = "face.jpg";
-		}
+//		if(imgBuffer != null && !"".equals(imgBuffer)){
+//			info.image = imgBuffer;
+//			info.imagename = "face.jpg";
+//		}
 		
 		
 		WebServiceHelper mWebServiceHelper = 
@@ -349,6 +351,34 @@ public class ChangeInfoActivity extends BaseActivity{
 					@Override
 					public void onSuccess(BASE result) {
 						LogHelper.i("tag", "result:"+result.message);
+						uploadImg();
+						
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						LogHelper.i("tag", "onFailure:"+errorMsg);
+						AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(errorMsg);
+						setResult(Define.RESULT_FROM_CHANGE_INFO);
+						finish();
+					}
+		}, this);
+		mWebServiceHelper.saveUserInfo(info);
+		
+	}
+	
+	private void uploadImg(){
+		if(imgBitmap == null){
+			AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(R.string.info_change_success);
+			setResult(Define.RESULT_FROM_CHANGE_INFO);
+			finish();
+			return;
+		}
+		WebServiceHelper mUploadImgWebServiceHelper = new WebServiceHelper(
+				new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+
+					@Override
+					public void onSuccess(BASE result) {
 						AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(R.string.info_change_success);
 						setResult(Define.RESULT_FROM_CHANGE_INFO);
 						finish();
@@ -362,8 +392,11 @@ public class ChangeInfoActivity extends BaseActivity{
 						finish();
 					}
 		}, this);
-		mWebServiceHelper.saveUserInfo(info);
-		
+		mUploadImgWebServiceHelper.saveImage(
+				imgBitmap, "face.jpeg",
+				WebServiceHelper.IMAGE_TYPE_USER,
+				CarServerApplication.loginInfo.id);
+
 	}
 
 }

@@ -795,17 +795,20 @@ public class RegistMerchantInfoFragment extends Fragment{
 
 			@Override
 			public void onSuccess(SAVE_INFO_MERCHANT_RESULT result) {
-//				AlertHelper.getInstance(getActivity()).showCenterToast(R.string.regist_success);
-//				AlertHelper.getInstance(getActivity()).hideLoading();
-//				etFullname.setText("");
-//				etSinglename.setText("");
-//				etUsername.setText("");
-//				etAddress.setText("");
-//				etContactname.setText("");
-//				etPhonenum.setText("");
-//				etTelnum.setText("");
-//				etDesc.setText("");
-//				((MainActivity)getActivity()).jump(1);
+				if(licensePhoto.size() <= 0 && merchantPhotos.size() <= 0){
+					AlertHelper.getInstance(getActivity()).showCenterToast(R.string.regist_success);
+					AlertHelper.getInstance(getActivity()).hideLoading();
+					etFullname.setText("");
+					etSinglename.setText("");
+					etUsername.setText("");
+					etAddress.setText("");
+					etContactname.setText("");
+					etPhonenum.setText("");
+					etTelnum.setText("");
+					etDesc.setText("");
+					((MainActivity)getActivity()).jump(1);
+					return;
+				}
 				uploadImage(licensePhoto.get(0), "zzPhoto.jpeg", true, result.id);
 				uploadImage(merchantPhotos.get(0), "sjPhoto.jpeg", false, result.id);
 			}

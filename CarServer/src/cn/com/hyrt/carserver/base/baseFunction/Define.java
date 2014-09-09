@@ -471,5 +471,9 @@ public class Define {
 			public String issearch;//是否签到
 		}
 	}
-
+	
+	public static class RESULT_ID extends BASE {
+		public String id;
+	}
+	
 }

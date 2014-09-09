@@ -39,12 +39,14 @@ import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_POISTION;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_SAVE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserver.base.helper.FileHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.PhotoHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
+import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
 import cn.com.hyrt.carserver.info.activity.QuestionDetailActivity;
 import cn.com.hyrt.carserver.question.adapter.PositionAdapter;
 
@@ -67,7 +69,8 @@ public class QuestionActivity extends BaseActivity {
 	private ImageView camer;
 	private RelativeLayout leftLayout;
 	private RelativeLayout rightLayout;
-	private String imgBuffer;
+//	private String imgBuffer;
+	private Bitmap imgBitmap;
 	private Uri questionUri;
 	private Boolean isSuccess;
 	@ViewInject(id=R.id.leftlay) RelativeLayout leftlay;
@@ -119,16 +122,16 @@ public class QuestionActivity extends BaseActivity {
 					+ "---" + data.getData());
 
 			if (data.getParcelableExtra("data") != null) {
-				Bitmap bitmap = data.getParcelableExtra("data");
+				imgBitmap = data.getParcelableExtra("data");
 				ivFaceImg.setVisibility(View.VISIBLE);
 				imageTxt.setVisibility(View.GONE);
 				camer.setVisibility(View.GONE);
-				ivFaceImg.setImageBitmap(bitmap);
+				ivFaceImg.setImageBitmap(imgBitmap);
 				flag1 = 1;
 				sysimage.setBackgroundResource(R.drawable.position_close);
-				ByteArrayOutputStream baos = new ByteArrayOutputStream();
-				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-				imgBuffer = new String(Base64.encode(baos.toByteArray()));
+//				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//				bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//				imgBuffer = new String(Base64.encode(baos.toByteArray()));
 			}
 
 		} else if (requestCode == PhotoHelper.FROM_CAMERA) {
@@ -193,7 +196,7 @@ public class QuestionActivity extends BaseActivity {
 			@Override
 			public void onClick(View arg0) {
 				if (flag1 == 1) {
-					imgBuffer = "";
+					imgBitmap = null;
 					ivFaceImg.setVisibility(View.GONE);
 					imageTxt.setVisibility(View.VISIBLE);
 					camer.setVisibility(View.VISIBLE);
@@ -434,22 +437,23 @@ public class QuestionActivity extends BaseActivity {
 		} else {
 
 			isSuccess = true;
-			if (imgBuffer != null && !"".equals(imgBuffer)) {
-				question.image = imgBuffer;
-				question.imagename = "question.jpg";
-			}
+//			if (imgBuffer != null && !"".equals(imgBuffer)) {
+//				question.image = imgBuffer;
+//				question.imagename = "question.jpg";
+//			}
 
 			WebServiceHelper mWebServiceHelper = new WebServiceHelper(
-					new WebServiceHelper.RequestCallback<Define.BASE>() {
+					new WebServiceHelper.RequestCallback<Define.RESULT_ID>() {
 
 						@Override
-						public void onSuccess(BASE result) {
+						public void onSuccess(Define.RESULT_ID result) {
 							LogHelper.i("tag", "result:" + result.message);
-							AlertHelper.getInstance(QuestionActivity.this)
-									.showCenterToast(
-											R.string.question_sava_success);
-							setResult(Define.RESULT_FROM_CHANGE_INFO);
-							finish();
+//							AlertHelper.getInstance(QuestionActivity.this)
+//									.showCenterToast(
+//											R.string.question_sava_success);
+//							setResult(Define.RESULT_FROM_CHANGE_INFO);
+//							finish();
+							uploadImg(result.id);
 						}
 
 						@Override
@@ -464,6 +468,43 @@ public class QuestionActivity extends BaseActivity {
 			mWebServiceHelper.saveQuestionInfo(question);
 
 		}
+
+	}
+	
+	private void uploadImg(String uid){
+		if(imgBitmap == null){
+			AlertHelper.getInstance(QuestionActivity.this)
+			.showCenterToast(
+					R.string.question_sava_success);
+			setResult(Define.RESULT_FROM_CHANGE_INFO);
+			finish();
+			return;
+		}
+		WebServiceHelper mUploadImgWebServiceHelper = new WebServiceHelper(
+				new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+
+					@Override
+					public void onSuccess(BASE result) {
+						AlertHelper.getInstance(QuestionActivity.this)
+						.showCenterToast(
+								R.string.question_sava_success);
+						setResult(Define.RESULT_FROM_CHANGE_INFO);
+						finish();
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						LogHelper.i("tag", "onFailure:" + errorMsg);
+						AlertHelper.getInstance(QuestionActivity.this)
+						.showCenterToast(errorMsg);
+						setResult(Define.RESULT_FROM_CHANGE_INFO);
+						finish();
+					}
+		}, this);
+		mUploadImgWebServiceHelper.saveImage(
+				imgBitmap, "questionPhoto.jpeg",
+				WebServiceHelper.IMAGE_TYPE_QUESTION,
+				uid);
 
 	}
 }
