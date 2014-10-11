@@ -1,13 +1,10 @@
 package cn.com.hyrt.carserverseller.base.activity;
 
-import java.util.List;
-
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,9 +54,9 @@ public class MainActivity extends BaseActivity {
 			R.string.order_label, R.string.shop_label,
 			R.string.preferential_label, R.string.info_label };
 
-	private int mImgArray[] = { R.drawable.bg_classify_tab,
-			R.drawable.bg_classify_tab, R.drawable.bg_classify_tab,
-			R.drawable.bg_classify_tab, R.drawable.bg_classify_tab };
+	private int mImgArray[] = { R.drawable.bg_product_tab,
+			R.drawable.bg_orders_tab, R.drawable.bg_shop_tab,
+			R.drawable.bg_preferential_tab, R.drawable.bg_info_tab };
 	
 	private static final int EXIT = 0;
 	
@@ -175,6 +172,26 @@ public class MainActivity extends BaseActivity {
 //				}
 //			}
 //		}
+	}
+	
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		super.onActivityResult(arg0, arg1, arg2);
+		if(curIndex == 0){
+			ProductFragment mProductFragment = 
+					(ProductFragment) getSupportFragmentManager()
+					.findFragmentByTag(mTabHost.getCurrentTabTag());
+			if(mProductFragment != null){
+				mProductFragment.onActivityResult(arg0, arg1, arg2);
+			}
+		}else if(curIndex == 3){
+			PreferentialFragment mPreferentialFragment =
+					(PreferentialFragment)getSupportFragmentManager()
+					.findFragmentByTag(mTabHost.getCurrentTabTag());
+			if(mPreferentialFragment != null){
+				mPreferentialFragment.onActivityResult(arg0, arg1, arg2);
+			}
+		}
 	}
 	
 	@Override

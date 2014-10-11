@@ -3,6 +3,7 @@ package cn.com.hyrt.carserverseller.base.view;
 import net.tsz.afinal.FinalBitmap;
 import uk.co.senab.photoview.PhotoView;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -52,6 +53,10 @@ public class PhotoPopupView extends RelativeLayout{
 			mFinalBitmap.configLoadfailImage(R.drawable.ic_launcher);
 		}
 		mFinalBitmap.display(pvPhoto, imageUrl);
+	}
+	
+	public void setBitmap(Bitmap bitmap){
+		pvPhoto.setImageBitmap(bitmap);
 	}
 	
 	private long downTime;

@@ -1,13 +1,304 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
- <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/preferential_label"/>
-    
-</LinearLayout>
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="选择类型"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+            
+            <RadioGroup 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical">
+                <RadioButton 
+                    android:id="@+id/rb_welfare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/bg_radiobutton2"
+                    android:text="  发布福利"
+                    android:checked="true"
+                    android:textColor="#757575"
+                    android:textSize="15sp"/>
+                <RadioButton 
+                    android:id="@+id/rb_activity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@drawable/bg_radiobutton2"
+                    android:text="  发布活动"
+                    android:layout_marginLeft="@dimen/view_margin_big"
+                    android:textColor="#757575"
+                    android:textSize="15sp"/>
+            </RadioGroup>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="优惠类型"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+            
+            <RelativeLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                 android:layout_marginLeft="@dimen/view_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_gray"
+                android:padding="1dp">
+                <Spinner 
+                android:id="@+id/sp_preferential_type"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+				style="@style/spinner_style2"/>
+                
+                <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_spinner2"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/main_top_margin"
+                android:layout_centerVertical="true"/>
+            </RelativeLayout>
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="宣传照片"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+
+            <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+                android:id="@+id/iv_propaganda_photo"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_photo_add"
+                android:layout_marginLeft="@dimen/view_margin"/>
+            
+            <TextView 
+                android:id="@+id/tv_propaganda_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="添加照片"
+                android:textColor="#818181"
+                android:textSize="15sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/view_margin"/>
+            
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="活动名称"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/et_activityname"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_gray"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="开始时间"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/et_starttime"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_gray"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="截止时间"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/et_endtime"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_gray"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="联系电话"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/et_telnum"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_gray"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="详细地址"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/et_address"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_gray"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="优惠介绍"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/et_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="83dp"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_gray"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </LinearLayout>
+        
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="235dp"
+            android:layout_height="50dp"
+            android:background="@color/login_blue"
+            android:textColor="#fff"
+            android:text="提交查看"
+            android:textSize="25sp"
+            android:layout_marginRight="25dp"
+            android:layout_gravity="right"
+            android:layout_marginBottom="@dimen/main_top_margin"/>
+        
+    </LinearLayout>
+
+</ScrollView>

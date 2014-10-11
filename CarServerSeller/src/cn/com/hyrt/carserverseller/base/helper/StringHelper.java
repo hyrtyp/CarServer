@@ -111,13 +111,19 @@ public class StringHelper {
 		if(time == null || "".equals(time)){
 			return "";
 		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		return sdf.format(string2Date(time));
 	}
 	
 	public static String getNowTime(){
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		return sdf.format(date);
+	}
+	
+	public static String getNowTime2(){
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss.SSS");
 		return sdf.format(date);
 	}
 	
@@ -146,4 +152,17 @@ public class StringHelper {
         return m.matches();
 
     }
+	
+	public static boolean nameValidate(String str){
+		 Pattern p = Pattern
+	                .compile("[\u4e00-\u9fa5A-Za-z0-99]+");
+		Matcher m = p.matcher(str);
+		return m.matches();
+	}
+	
+	public static boolean isNumeric(String str){ 
+	    Pattern pattern = Pattern.compile("[0-9]*"); 
+	    return pattern.matcher(str).matches();    
+	 } 
+
 }

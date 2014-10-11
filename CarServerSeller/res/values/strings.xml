@@ -22,5 +22,18 @@
 	<string name="shop_label">店铺首页</string>
 	<string name="preferential_label">优惠信息</string>
 	<string name="info_label">个人信息</string>
-
+	<string name="text_not_null">%s不能为空</string>
+	<string name="text_not_symbol">%s不能输入符号</string>
+	
+	<string name="merchant_info_label">商户信息</string>
+	<string name="start_time_label">开始时间</string>
+	<string name="end_time_label">截止时间</string>
+	
+	<string-array name="test_array">
+	    <item >测试1</item>
+	    <item >测试2</item>
+	    <item >测试3</item>
+	    <item >测试4</item>
+	    <item >测试5</item>
+	</string-array>
 </resources>

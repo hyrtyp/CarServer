@@ -55,7 +55,7 @@
     <string name="id_knowledge_brand">000021</string>
 	
     <!-- 汽车服务HTML地址 -->
-    <string name="method_weburl">http://192.168.10.135:8083</string>
+   <!--  <string name="method_weburl">http://192.168.10.135:8083</string> -->
     <!-- <string name="method_weburl">http://192.168.10.238:8083</string> -->
-   <!--  <string name="method_weburl">http://42.121.127.121:8083</string> -->
+    <string name="method_weburl">http://42.121.127.121:8083</string>
 </resources>

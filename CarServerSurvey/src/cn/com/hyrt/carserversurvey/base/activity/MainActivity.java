@@ -166,7 +166,14 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(curIndex == 2){
+		if(curIndex == 1){
+			RegistRecordFragment mInfoFragment = 
+					(RegistRecordFragment) getSupportFragmentManager()
+					.findFragmentByTag(mTabHost.getCurrentTabTag());
+			if(mInfoFragment != null){
+				mInfoFragment.loadData();
+			}
+		}else if(curIndex == 2){
 			InfoFragment mInfoFragment = 
 					(InfoFragment) getSupportFragmentManager()
 					.findFragmentByTag(mTabHost.getCurrentTabTag());

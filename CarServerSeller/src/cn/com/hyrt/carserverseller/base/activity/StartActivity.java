@@ -1,11 +1,14 @@
 package cn.com.hyrt.carserverseller.base.activity;
 
+import java.net.URLEncoder;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import cn.com.hyrt.carserverseller.R;
+import cn.com.hyrt.carserverseller.info.fragment.activity.MerchantInfoActivity;
 
 public class StartActivity extends Activity{
 	
@@ -20,6 +23,7 @@ public class StartActivity extends Activity{
 			case JUMP:
 				Intent intent = new Intent();
 				intent.setClass(StartActivity.this, MainActivity.class);
+//				intent.setClass(StartActivity.this, MerchantInfoActivity.class);
 				startActivity(intent);
 				finish();
 				break;

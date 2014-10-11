@@ -3,7 +3,7 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/full_bg"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context="cn.com.hyrt.carserver.base.activity.MainActivity" >
     
@@ -17,13 +17,13 @@
            android:layout_width="fill_parent"
            android:layout_height="65dp"
            android:orientation="horizontal"
-           android:background="#fff">
+           android:background="@color/login_blue">
             <TextView
             android:id="@+id/mainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textColor="#505050"
+            android:textColor="#fff"
             android:textSize="30sp" />
             <ImageView 
                 android:id="@+id/iv_topright"
@@ -41,12 +41,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             
-        <ImageView 
+       <!--  <ImageView 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/bg_line"
         android:scaleType="fitXY"
-        android:layout_marginBottom="@dimen/main_top_margin"/>
+        android:layout_marginBottom="@dimen/main_top_margin"/> -->
 
         
         </LinearLayout>

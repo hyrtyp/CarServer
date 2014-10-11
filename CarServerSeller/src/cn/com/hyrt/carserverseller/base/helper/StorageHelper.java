@@ -44,6 +44,18 @@ public class StorageHelper {
 		return mStorageHelper;
 	}
 	
+	public void saveLoginInfo(Define.INFO_LOGIN loginInfo){
+		Editor mEditor = mSharedPreferences.edit();
+		String json = null;
+		if(loginInfo != null){
+			json = gson.toJson(loginInfo);
+		}else{
+			json = "";
+		}
+		mEditor.putString(INFO_LOGIN_NAME, json);
+		mEditor.commit();
+	}
+	
 	/**
 	 * 保存定位信息
 	 * @param lon
@@ -99,6 +111,12 @@ public class StorageHelper {
 		return failTime;
 	}
 
-	
+	public Define.INFO_LOGIN getLoginInfo(){
+		String json = mSharedPreferences.getString(INFO_LOGIN_NAME, "");
+		if("".equals(json)){
+			return null;
+		}
+		return gson.fromJson(json, Define.INFO_LOGIN.class);
+	}
 	
 }

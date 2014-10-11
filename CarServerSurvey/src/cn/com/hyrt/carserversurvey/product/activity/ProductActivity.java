@@ -235,10 +235,10 @@ public class ProductActivity extends BaseActivity{
             	productImgUrl = null;
             	ivProductPhoto.setImageBitmap(bitmap);
             	
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                imgBuffer = new String(Base64.encode(baos.toByteArray()));
-                StorageHelper.getInstance(ProductActivity.this).saveTest(imgBuffer);
+//                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+//                imgBuffer = new String(Base64.encode(baos.toByteArray()));
+//                StorageHelper.getInstance(ProductActivity.this).saveTest(imgBuffer);
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {

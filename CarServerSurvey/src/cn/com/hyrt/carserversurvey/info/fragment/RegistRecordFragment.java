@@ -145,7 +145,7 @@ public class RegistRecordFragment extends Fragment{
 		});
 	}
 	
-	private void loadData(){
+	public void loadData(){
 		AlertHelper.getInstance(getActivity()).showLoading(getString(R.string.loading_msg));
 		String id = ((CarServerApplication)getActivity().getApplicationContext()).getLoginInfo().id;
 		if(mwebserviceHelper == null){
@@ -165,13 +165,15 @@ public class RegistRecordFragment extends Fragment{
 								lvclaim.setVisibility(View.VISIBLE);
 							}
 							recode = result;		
-							if(recodeAdapter == null){
+//							if(recodeAdapter == null){
 								recodeAdapter = new RegRecodeAdapter(recode, getActivity());
 								lvclaim.setAdapter(recodeAdapter);
-							}else{
-								lvclaim.setAdapter(recodeAdapter);
-								recodeAdapter.notifyDataSetChanged();
-							}
+//							}else{
+////								lvclaim.setAdapter(recodeAdapter);
+////								recodeAdapter.notifyDataSetChanged();
+//								recodeAdapter = new RegRecodeAdapter(recode, getActivity());
+//								lvclaim.setAdapter(recodeAdapter);
+//							}
 						}
 
 						@Override

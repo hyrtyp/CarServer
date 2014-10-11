@@ -51,6 +51,11 @@
         
         <activity android:name=".base.activity.WebActivity" />
         
+        <activity android:name=".info.fragment.activity.MerchantInfoActivity"
+            android:label="@string/merchant_info_label"/>
+        
+        <activity android:name=".product.activity.ProductDetailActivity"/>
+        
     </application>
 
 </manifest>
