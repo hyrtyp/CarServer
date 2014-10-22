@@ -1,42 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="#fff">
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:layout_height="wrap_content" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="@dimen/view_margin"
-            android:text="空调解决方案"
-            android:textColor="#000"
-            android:textSize="20sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-        <include layout="@layout/layout_line" />
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="30dp"
+                android:layout_marginTop="30dp"
+                android:text="空调解决方案"
+                android:textColor="#000"
+                android:textSize="20sp" />
 
-        <RelativeLayout
-            android:layout_width="324dp"
-            android:layout_height="200dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="@dimen/view_margin_small"
-            android:layout_marginTop="@dimen/view_margin"
-            android:background="@drawable/face_img_border_not_click"
-            android:padding="1dp" >
+            <include layout="@layout/layout_line" />
 
-            <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+            <RelativeLayout
+                android:layout_width="324dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/view_margin_small"
+                android:layout_marginTop="@dimen/view_margin"
+                android:background="@drawable/face_img_border_not_click"
+                android:padding="1dp" >
+
+                <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+                    android:id="@+id/iv_photo"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_img_default" />
+            </RelativeLayout>
+
+            <include layout="@layout/layout_line" />
+            <RelativeLayout 
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:scaleType="centerCrop"
-                android:src="@drawable/bg_img_default" />
-        </RelativeLayout>
+                android:layout_height="wrap_content">
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="53dp"
+                android:background="#f8f8f8"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#050505"
+                    android:textSize="18sp"
+                    android:text="价格："
+                    android:layout_marginLeft="18dp"/>
+                <TextView 
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#c40e0e"
+                    android:textSize="20sp"
+                    android:text="￥260"
+                    android:layout_marginLeft="16dp"/>
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#272727"
+                    android:textSize="17sp"
+                    android:text="优惠："
+                    android:layout_marginLeft="27dp"/>
+                <TextView 
+                    android:id="@+id/tv_preferential"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#757474"
+                    android:textSize="15sp"
+                    android:text="￥399"/>
+            </LinearLayout>
+             <Button 
+                 android:id="@+id/btn_change"
+                    android:layout_width="63dp"
+                    android:layout_height="35dp"
+                    android:background="@color/login_blue"
+                    android:text="修改"
+                    android:textSize="15sp"
+                    android:textColor="#fff"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="18dp"
+                    android:layout_centerVertical="true"
+                    android:visibility="gone"/>
+            </RelativeLayout>
+            <include layout="@layout/layout_line" />
+            
+            <TextView 
+                android:id="@+id/tv_desc"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="20dp"
+                android:textSize="13sp"
+                android:textColor="#646363"
+                android:text="内外大"
+                android:maxLines="3"
+                android:ellipsize="end"/>
+            <TextView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:textSize="18sp"
+                android:text="服务评价："
+                android:layout_marginLeft="18dp"
+                android:layout_marginTop="21dp"/>
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="55dp"
+                android:background="#f8f8f8"
+                android:layout_marginTop="11dp"
+                android:gravity="center_vertical">
+                <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+                    android:id="@+id/iv_face" 
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/bg_img_default"
+                    android:scaleType="centerCrop"
+                    android:layout_marginLeft="18dp"/>
+                <LinearLayout 
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="8dp">
+                    <TextView 
+                        android:id="@+id/tv_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#646363"
+                        android:textSize="13sp"
+                        android:text="修理的很好"/>
+                    <TextView 
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#646363"
+                        android:textSize="11sp"
+                        android:text="   2014-06-04"
+                        android:layout_marginTop="5dp"
+                        android:drawableLeft="@drawable/ic_time"
+                        android:gravity="center_vertical"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="@dimen/view_margin_big">
+                <Button 
+                    android:id="@+id/btn_close"
+                    android:layout_width="135dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_button"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:text="下   架"/>
+                
+                <Button 
+                    android:id="@+id/btn_edit"
+                    android:layout_width="135dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_button"
+                    android:textColor="#fff"
+                    android:textSize="20sp"
+                    android:text="编   辑"
+                    android:layout_marginLeft="34dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
-        <include layout="@layout/layout_line" />
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

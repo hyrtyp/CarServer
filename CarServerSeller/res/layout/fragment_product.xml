@@ -47,37 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="商品名称"
-                android:textColor="#302f2f"
-                android:textSize="19sp" />
-
-            <EditText
-                android:id="@+id/et_proName"
-                android:layout_width="fill_parent"
-                android:layout_height="33dp"
-                android:layout_marginLeft="@dimen/main_top_margin"
-                android:layout_marginRight="@dimen/view_margin"
-                android:background="@drawable/bg_textview_blue"
-                android:paddingLeft="@dimen/main_top_margin"
-                android:paddingRight="@dimen/main_top_margin"
-                android:singleLine="true"
-                android:textColor="#000"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <include layout="@layout/layout_line_small" />
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/main_top_margin"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="商品图片"
+                android:text="照片添加"
                 android:textColor="#302f2f"
                 android:textSize="19sp" />
 
@@ -107,7 +77,33 @@
                 android:verticalSpacing="10dp" /> -->
         </LinearLayout>
 
-        <include layout="@layout/layout_line_small" />
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="上架标题"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+
+            <EditText
+                android:id="@+id/et_proName"
+                android:layout_width="fill_parent"
+                android:layout_height="33dp"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_gray"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:singleLine="true"
+                android:textColor="#000"
+                android:textSize="18sp" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -129,7 +125,7 @@
                 android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
-                android:background="@drawable/bg_textview_blue"
+                android:background="@drawable/bg_textview_gray"
                 android:paddingLeft="@dimen/main_top_margin"
                 android:paddingRight="@dimen/main_top_margin"
                 android:singleLine="true"
@@ -137,8 +133,6 @@
                 android:textSize="18sp"
                 android:inputType="number" />
         </LinearLayout>
-
-        <include layout="@layout/layout_line_small" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -160,7 +154,7 @@
                 android:layout_height="33dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
-                android:background="@drawable/bg_textview_blue"
+                android:background="@drawable/bg_textview_gray"
                 android:paddingLeft="@dimen/main_top_margin"
                 android:paddingRight="@dimen/main_top_margin"
                 android:singleLine="true"
@@ -168,8 +162,6 @@
                 android:textSize="18sp" 
                 android:inputType="number"/>
         </LinearLayout>
-
-        <include layout="@layout/layout_line_small" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -191,7 +183,7 @@
                 android:layout_height="58dp"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
-                android:background="@drawable/bg_textview_blue"
+                android:background="@drawable/bg_textview_gray"
                 android:gravity="left"
                 android:hint="输入商品相关信息..."
                 android:padding="@dimen/main_top_margin"

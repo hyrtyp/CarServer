@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_pro_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="24sp" />
+            <TextView
+                android:id="@+id/tv_pro_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:text="@string/spfbtime"
+                android:textColor="#289fff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+                    android:id="@+id/iv_user_img"
+                    android:layout_width="fill_parent"
+                    android:layout_height="232dp"
+                    android:padding="1dp"
+                    android:scaleType="centerCrop"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/spprice"
+                android:textColor="#050505"
+                android:textSize="18sp" />
+			<TextView
+                android:id="@+id/tv_pro_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pro_price"
+                android:layout_marginLeft="20dp"
+                android:textColor="#c40e0e"
+                android:textSize="23sp" />
+			<TextView
+                android:id="@+id/tv_pro_discountprice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pro_discount"
+                android:layout_marginLeft="20dp"
+                android:textColor="#757474"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/infodetail"
+                android:textColor="#050505"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/tv_pro_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                 android:textColor="#646363"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+        <include layout="@layout/layout_line_small" />
+
+        
+		<LinearLayout
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_margin="@dimen/main_top_margin"
+	            android:orientation="horizontal" >
+	        <Button
+	            android:id="@+id/btn_addgono"
+	            android:layout_width="120dp"
+	            android:layout_height="47dp"
+	            android:background="@drawable/bg_button"
+	            android:text="@string/addgono"
+	            android:textColor="#fff" 
+	            android:layout_marginLeft="20dp"
+				android:textSize="20sp" />
+	        <Button
+	            android:id="@+id/btn_checkinfo"
+	            android:layout_width="120dp"
+	            android:layout_height="47dp"
+	            android:layout_marginLeft="60dp"
+	            android:background="@drawable/bg_button"
+	            android:text="@string/checkinfo"
+	            android:textColor="#fff" 
+	            android:textSize="20sp" />
+	    </LinearLayout>
+    </LinearLayout>
+</ScrollView>

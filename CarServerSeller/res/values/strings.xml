@@ -2,38 +2,79 @@
 <resources>
 
     <string name="app_name">汽车服务 商家端</string>
-    
     <string name="loading_msg">正在加载&#8230;</string>
     <string name="timeout">请求超时，请稍后再试！</string>
     <string name="net_error_msg">网络发生异常</string>
     <string name="unable_to_locate">无法定位</string>
     <string name="exit_prompt">再按一次退出</string>
-	<string name="no_baidumap">未安装百度地图</string>
-	<string name="location_label">定位中&#8230;</string>
-	<string name="upload_photo">上传照片</string>
-	<string name="no_data">暂无数据</string>
-	<string name="photo_from_camera">拍照</string>
-	<string name="cancle">取消</string>
-	<string name="photo_from_album">从相册选择</string>
-	<string name="load_done">已加载全部数据</string>
-	
-	<string name="product_label">上架商品</string>
-	<string name="order_label">订单查询</string>
-	<string name="shop_label">店铺首页</string>
-	<string name="preferential_label">优惠信息</string>
-	<string name="info_label">个人信息</string>
-	<string name="text_not_null">%s不能为空</string>
-	<string name="text_not_symbol">%s不能输入符号</string>
-	
-	<string name="merchant_info_label">商户信息</string>
-	<string name="start_time_label">开始时间</string>
-	<string name="end_time_label">截止时间</string>
-	
-	<string-array name="test_array">
-	    <item >测试1</item>
-	    <item >测试2</item>
-	    <item >测试3</item>
-	    <item >测试4</item>
-	    <item >测试5</item>
-	</string-array>
+    <string name="no_baidumap">未安装百度地图</string>
+    <string name="location_label">定位中&#8230;</string>
+    <string name="upload_photo">上传照片</string>
+    <string name="no_data">暂无数据</string>
+    <string name="photo_from_camera">拍照</string>
+    <string name="cancle">取消</string>
+    <string name="photo_from_album">从相册选择</string>
+    <string name="load_done">已加载全部数据</string>
+    <string name="product_label">上架商品</string>
+    <string name="order_label">订单查询</string>
+    <string name="shop_label">店铺首页</string>
+    <string name="preferential_label">优惠信息</string>
+    <string name="info_label">基本信息</string>
+    <string name="text_not_null">%s不能为空</string>
+    <string name="text_not_symbol">%s不能输入符号</string>
+    <string name="merchant_info_label">商户信息</string>
+    <string name="start_time_label">开始时间</string>
+    <string name="end_time_label">截止时间</string>
+
+    <string-array name="test_array">
+        <item>测试1</item>
+        <item>测试2</item>
+        <item>测试3</item>
+        <item>测试4</item>
+        <item>测试5</item>
+    </string-array>
+
+    <!-- info -->
+    <string name="username_hint">用户名</string>
+    <string name="pwd_hint">密码</string>
+    <string name="login_succuss">登录成功</string>
+    <string name="login_error">登录失败</string>
+    <string name="login_fail">用户名或密码有误</string>
+    <string name="login_msg">登录中...</string>
+    <string name="no_username">用户名不能为空</string>
+    <string name="no_pwd">密码不能为空</string>
+    <string name="login_fail2">登录频繁，请稍后再试！</string>
+    <string name="label_merchant_info">商户信息</string>
+    <string name="logout_succuss">注销成功</string>
+    <string name="pull_to_refresh_release_label">下拉刷新&#8230;</string>
+    <string name="pull_to_refresh_footer_release_label">松开以加载&#8230;</string>
+    <string name="pull_to_refresh_footer_pull_label">上拉加载更多&#8230;</string>
+    <string name="pull_to_refresh_pull_label">多</string>
+    <string name="pull_to_refresh_footer_refreshing_label">正在加载&#8230;</string>
+    <string name="pull_to_refresh_refreshing_label">正在刷新&#8230;</string>
+    <string name="regist_label">注册信息</string>
+    <string name="version_label">版本信息</string>
+    <string name="about_titile1">品格：诚信 合作 开拓 创新！</string>
+    <string name="about_content1">对待事业的追求和企业的发展要永不满足，倡导以高新技术推动企业发展。</string>
+    <string name="about_title2">追求：内外兼修 稳健共赢</string>
+    <string name="about_content2">以创新的精神、先进的信息技术、务实的态度和整合的资源，为客户提供完整的解决方案和信息服务，满足客户要求。提高客户价值。客户的成功，才是我们的成功。</string>
+    <string name="about_label">关于华源</string>
+    <string name="change_pwd_label">修改密码</string>
+    <string name="phone_error">请输入正确的手机号码</string>
+    <string name="change_shop_label">修改店铺</string>
+    <string name="product_detail_label">商品详情</string>
+    
+    <string name="activity_product_label">上架商品</string>
+	<string name="productdetail_title">商品详情</string>
+	<string name="change_fail">修改失败</string>
+	<string name="checkinfo">查看上架</string>
+	<string name="addgono">继续添加</string>
+	<string name="infodetail">介绍:</string>
+	<string name="spfbtime">发布日期 :%s</string>
+	<string name="spprice">价格:</string>
+	<string name="pro_price">¥%s</string>
+	<string name="pro_discount">¥%s</string>
+	<string name="change_success">修改成功</string>
+	<string name="order_detail_label">订单详情</string>
+
 </resources>

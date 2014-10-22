@@ -46,5 +46,8 @@
             android:textColor="@color/login_blue"
             android:textSize="25sp" />
     </LinearLayout>
-
+    <FrameLayout 
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"/>
 </LinearLayout>

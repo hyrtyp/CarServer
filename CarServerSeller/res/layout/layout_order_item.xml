@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp"
+    android:paddingTop="18dp"
+    android:paddingBottom="13dp">
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="9dp">
+        <TextView 
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000"
+            android:textSize="18sp"/>
+        
+        <TextView 
+            android:id="@+id/tv_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_alignParentRight="true"/>
+        
+    </RelativeLayout>
+        <include layout="@layout/layout_line_small"/>
+	<TextView 
+	    android:id="@+id/tv_time1"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textColor="#646363"
+	    android:textSize="12sp"
+	    android:layout_marginTop="10dp"/>
+	<TextView 
+	    android:id="@+id/tv_time2"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:textColor="#646363"
+	    android:textSize="12sp"
+	    android:layout_marginTop="10dp"/>
+</LinearLayout>

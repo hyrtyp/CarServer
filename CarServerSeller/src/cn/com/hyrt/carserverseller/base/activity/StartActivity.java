@@ -1,19 +1,18 @@
 package cn.com.hyrt.carserverseller.base.activity;
 
-import java.net.URLEncoder;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import cn.com.hyrt.carserverseller.R;
-import cn.com.hyrt.carserverseller.info.fragment.activity.MerchantInfoActivity;
+import cn.com.hyrt.carserverseller.base.application.CarServerApplication;
+import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_LOGIN;
+import cn.com.hyrt.carserverseller.info.activity.LoginActivity;
+import cn.com.hyrt.carserverseller.info.activity.MerchantInfoActivity;
 
 public class StartActivity extends Activity{
 	
-//	public static final String SENDER_ID = "668240857682";//该常量不要修改 
-//    public static final long APP_ID = 1408040301055760000L;//必选 
 	
 	private static final int JUMP = 0;
 	
@@ -22,7 +21,12 @@ public class StartActivity extends Activity{
 			switch (msg.what) {
 			case JUMP:
 				Intent intent = new Intent();
-				intent.setClass(StartActivity.this, MainActivity.class);
+				INFO_LOGIN loginInfo = ((CarServerApplication)getApplicationContext()).getLoginInfo();
+				if(loginInfo == null || loginInfo.bcxx == null || "0".equals(loginInfo.bcxx)){
+					intent.setClass(StartActivity.this, LoginActivity.class);
+				}else{
+					intent.setClass(StartActivity.this, MainActivity.class);
+				}
 //				intent.setClass(StartActivity.this, MerchantInfoActivity.class);
 				startActivity(intent);
 				finish();

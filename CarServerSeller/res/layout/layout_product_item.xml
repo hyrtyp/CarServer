@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <include layout="@layout/layout_line" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/view_margin"
+        android:paddingLeft="@dimen/view_margin"
+        android:paddingTop="@dimen/view_margin"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            android:background="@drawable/face_img_border_not_click"
+            android:padding="1dp" >
+            <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+                android:id="@+id/iv_face" 
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/bg_img_default"
+                android:scaleType="centerCrop"/>
+        </RelativeLayout>
+        
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="11dp">
+            <TextView 
+                android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="#000"
+            android:text="空调解决方案"
+            android:layout_marginBottom="8dp"/>
+            
+            <include layout="@layout/layout_line"/>
+            
+            <TextView 
+                android:id="@+id/tv_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#646363"
+                android:textSize="13sp"
+                android:text="简介：停车时使用空调会消耗蓄电池大的电,因为汽车蓄调会消耗蓄电汽会...."
+                android:lines="2"
+                android:layout_marginRight="@dimen/view_margin_small"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"/>
+            
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:orientation="horizontal"
+                android:gravity="bottom">
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#000"
+                    android:text="价格："/>
+                
+                <TextView 
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:textColor="#c40e0e"
+                    android:text="￥260"
+                    android:layout_marginLeft="@dimen/view_margin"/>
+                <TextView 
+                    android:id="@+id/tv_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="#757474"
+                    android:text="￥390"
+                    android:layout_marginLeft="@dimen/view_margin_big"/>
+            </LinearLayout>
+        </LinearLayout>
+        
+    </LinearLayout>
+
+    <include layout="@layout/layout_line" />
+
+</LinearLayout>

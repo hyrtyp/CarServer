@@ -24,7 +24,7 @@ public class StorageHelper {
 	private static final String LOCATION_NAME = "location";
 	private static final String LOGIN_FAIL = "loginFail";
 	
-	private Gson gson;
+	private static Gson gson;
 	
 	private StorageHelper(){}
 	
@@ -39,6 +39,9 @@ public class StorageHelper {
 		
 		if(mSharedPreferences == null){
 			mSharedPreferences = mContext.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
+		}
+		if(gson == null){
+			gson = new Gson();
 		}
 		
 		return mStorageHelper;

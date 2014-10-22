@@ -16,9 +16,11 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import cn.com.hyrt.carserverseller.R;
+import cn.com.hyrt.carserverseller.base.activity.MainActivity;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_PRODUCT;
+import cn.com.hyrt.carserverseller.base.baseFunction.Define.SINGLE_ID;
 import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
 import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserverseller.base.helper.FileHelper;
@@ -29,6 +31,7 @@ import cn.com.hyrt.carserverseller.base.helper.StringHelper;
 import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverseller.base.view.ImageLoaderView;
 import cn.com.hyrt.carserverseller.product.activity.ProductDetailActivity;
+import cn.com.hyrt.carserverseller.product.activity.ProductDetailActivity2;
 
 public class ProductFragment extends Fragment{
 
@@ -205,30 +208,20 @@ public class ProductFragment extends Fragment{
                 mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 400);
             }
             mPhotoHelper.startPhotoZoom(faceUri, 400);
+        }else if(resultCode == 101){
+        	((MainActivity)getActivity()).changeActionBar(2);
+        	((MainActivity)getActivity()).mTabHost.setCurrentTab(2);
         }
 	}
 	
 	private void submit(){
 		
-		if(true){
-			Intent intent = new Intent();
-			intent.setClass(getActivity(), ProductDetailActivity.class);
-			startActivity(intent);
-			return;
-		}
-//		WebServiceHelper mUploadImage = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
-//
-//			@Override
-//			public void onSuccess(BASE result) {
-//			}
-//
-//			@Override
-//			public void onFailure(int errorNo, String errorMsg) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		}, this);
-//		mUploadImage.saveImage(productBitmap, "productPhoto.jpeg", WebServiceHelper.IMAGE_TYPE_SJ, "5");
+//		if(true){
+//			Intent intent = new Intent();
+//			intent.setClass(getActivity(), ProductDetailActivity.class);
+//			startActivity(intent);
+//			return;
+//		}
 		
 		String productname = et_proName.getText().toString();
 		String curpirce = et_proPrice.getText().toString();
@@ -303,7 +296,7 @@ public class ProductFragment extends Fragment{
 		//调用保存商品接口saveMerchantComm
 		AlertHelper.getInstance(getActivity()).showLoading(null);
 		WebServiceHelper SaveProductHelper = new WebServiceHelper(
-				new BaseWebServiceHelper.RequestCallback<Define.INFO_PRODUCT>() {
+				new BaseWebServiceHelper.RequestCallback<Define.SINGLE_ID>() {
 
 			@Override
 			public void onFailure(int errorNo, String errorMsg) {
@@ -313,9 +306,17 @@ public class ProductFragment extends Fragment{
 			}
 
 			@Override
-			public void onSuccess(final INFO_PRODUCT result) {
+			public void onSuccess(final SINGLE_ID result) {
 				if(productBitmap == null){
-					getActivity().finish();
+//					getActivity().finish();
+					AlertHelper.getInstance(getActivity()).hideLoading();
+					AlertHelper.getInstance(getActivity()).showCenterToast("上架成功");
+					Intent intent = new Intent();
+					intent.setClass(getActivity(), ProductDetailActivity2.class);
+					intent.putExtra("id", (String) result.id);
+//					startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
+					cleanData();
+					startActivityForResult(intent, 101);
 					return;
 				}
 				WebServiceHelper mUploadImage = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
@@ -323,15 +324,14 @@ public class ProductFragment extends Fragment{
 							@Override
 							public void onSuccess(BASE result2) {
 								AlertHelper.getInstance(getActivity()).hideLoading();
-								/*if(isAdd){
+								AlertHelper.getInstance(getActivity()).showCenterToast("上架成功");
 									Intent intent = new Intent();
-									intent.setClass(getActivity(), ProductDetailActivity.class);
+									intent.setClass(getActivity(), ProductDetailActivity2.class);
 									intent.putExtra("id", (String) result.id);
-									intent.putExtra("shId", shId);
 //									startActivityForResult(intent, Define.RESULT_FROM_ALTER_CAR);
-									startActivity(intent);
-								}
-								getActivity().finish();*/
+									cleanData();
+									startActivityForResult(intent, 101);
+//								getActivity().finish();
 							}
 				
 							@Override
@@ -351,6 +351,17 @@ public class ProductFragment extends Fragment{
 		}, getActivity());
 		SaveProductHelper.saveProductInfo(mProductInfo);
 		
+	}
+	
+	private void cleanData(){
+		et_proName.setText("");
+		et_proPrice.setText("");
+		et_proDisPrice.setText("");
+		et_proDec.setText("");
+		ivProductPhoto.setImageResource(R.drawable.ic_photo_add);
+		productBitmap = null;
+		productImgUrl = null;
+		tvProductPhoto.setVisibility(View.VISIBLE);
 	}
 	
 	private void findView(){

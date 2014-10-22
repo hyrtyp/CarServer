@@ -7,6 +7,27 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="19" />
+    
+    <!-- 这个权限用于进行网络定位-->
+	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
+	<!-- 这个权限用于访问GPS定位-->
+	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
+	<!-- 用于访问wifi网络信息，wifi信息会用于进行网络定位-->
+	<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+	<!-- 获取运营商信息，用于支持提供运营商信息相关的接口-->
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+	<!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位-->
+	<uses-permission android:name="android.permission.CHANGE_WIFI_STATE"></uses-permission>
+	<!-- 用于读取手机当前的状态-->
+	<uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+	<!-- 写入扩展存储，向扩展卡写入数据，用于写入离线定位数据-->
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+	<!-- 访问网络，网络定位需要上网-->
+	<uses-permission android:name="android.permission.INTERNET" />
+	
+	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
+	<!--允许应用读取低级别的系统日志文件 -->
+	<uses-permission android:name="android.permission.READ_LOGS"></uses-permission>
 
     <application
          android:name=".base.application.CarServerApplication"
@@ -27,7 +48,7 @@
         
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="Uoasa9UVrIcDu9sLGayRpBeK" />
+            android:value="hZikTnxsW9s5vbFO86xhR1Ct" />
         
         <activity
             android:name="cn.com.hyrt.carserverseller.base.activity.MainActivity"
@@ -51,10 +72,46 @@
         
         <activity android:name=".base.activity.WebActivity" />
         
-        <activity android:name=".info.fragment.activity.MerchantInfoActivity"
+        <activity android:name="cn.com.hyrt.carserverseller.info.activity.MerchantInfoActivity"
             android:label="@string/merchant_info_label"/>
         
-        <activity android:name=".product.activity.ProductDetailActivity"/>
+        <activity android:name=".product.activity.ProductDetailActivity"
+            android:label="@string/product_detail_label"/>
+        <activity android:name=".product.activity.ProductDetailActivity2"
+            android:label="@string/product_detail_label"/>
+        <activity 
+            android:name=".info.activity.LoginActivity"
+            android:theme="@style/NoTitleAppTheme"/>
+        
+        <activity 
+            android:name=".info.activity.RegistActivity"
+            android:label="@string/regist_label"/>
+        <activity 
+            android:name=".info.activity.VersionInfoActivity"
+            android:label="@string/version_label"/>
+        
+        <activity 
+            android:name=".info.activity.InfoActivity"
+            android:label="@string/info_label"/>
+        
+        <activity 
+            android:name=".info.activity.AboutActivity"
+            android:label="@string/about_label"/>
+        
+        <activity 
+            android:name=".info.activity.ChangePwdActivity"
+            android:label="@string/change_pwd_label"/>
+        
+        <activity 
+            android:name=".product.activity.ProductActivity"/>
+        
+        <activity 
+            android:name=".info.activity.ChangeShopActivity"
+            android:label="@string/change_shop_label"/>
+        
+        <activity
+            android:name=".order.activity.OrderDetailActivity"
+            android:label="@string/order_detail_label"/>
         
     </application>
 

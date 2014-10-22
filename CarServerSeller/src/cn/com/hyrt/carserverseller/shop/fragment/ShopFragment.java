@@ -1,6 +1,8 @@
 package cn.com.hyrt.carserverseller.shop.fragment;
 
 import cn.com.hyrt.carserverseller.R;
+import cn.com.hyrt.carserverseller.product.fragment.ProductFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -15,6 +17,10 @@ public class ShopFragment extends Fragment{
 	private Button btnService;
 	private Button btnPreferential;
 	private int tabPosition = 0;
+	private int curPosition;
+	
+	private ProductListFragment mSpFragment;
+	private ProductListFragment mFwFragment;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -22,11 +28,58 @@ public class ShopFragment extends Fragment{
 		rootView = inflater.inflate(R.layout.fragment_shop, null);
 		findView();
 		setListener();
-		if(tabPosition != 0){
-			focusManage(false, 0);
-			focusManage(true, tabPosition);
-		}
+		mSpFragment = null;
+		mFwFragment = null;
+		tabPosition = 0;
+		curPosition = 0;
+//		if(tabPosition != 0){
+//			focusManage(false, 0);
+//			focusManage(true, tabPosition);
+//		}else{
+			mSpFragment = new ProductListFragment(false);
+			getChildFragmentManager().beginTransaction()
+			.add(R.id.layout_content, mSpFragment).commit();
+//		}
+		
+		
+		
 		return rootView;
+	}
+	
+	private void changeFragment(int position){
+		if(position == curPosition){
+			return;
+		}
+		switch (position) {
+		case 0:
+			if(mSpFragment == null){
+				mSpFragment = new ProductListFragment(false);
+				getChildFragmentManager().beginTransaction()
+				.add(R.id.layout_content, mSpFragment).commit();
+			}else{
+				getChildFragmentManager().beginTransaction().show(mSpFragment).commit();
+			}
+			if(mFwFragment != null){
+				getChildFragmentManager().beginTransaction().hide(mFwFragment).commit();
+			}
+			break;
+		case 1:
+			if(mFwFragment == null){
+				mFwFragment = new ProductListFragment(true);
+				getChildFragmentManager().beginTransaction()
+				.add(R.id.layout_content, mFwFragment).commit();
+			}else{
+				getChildFragmentManager().beginTransaction().show(mFwFragment).commit();
+			}
+			if(mSpFragment != null){
+				getChildFragmentManager().beginTransaction().hide(mSpFragment).commit();
+			}
+			break;
+		default:
+			break;
+		}
+		
+		curPosition = position;
 	}
 	
 	private void setListener(){
@@ -56,6 +109,7 @@ private View.OnClickListener mTabOnClickListener = new View.OnClickListener() {
 	
 	private void focusManage(boolean hasFocus, int position){
 		if(hasFocus){
+			changeFragment(position);
 			switch (position) {
 			case 0:
 				btnProduct.setBackgroundResource(R.drawable.bg_tab_left_focus);
@@ -85,6 +139,18 @@ private View.OnClickListener mTabOnClickListener = new View.OnClickListener() {
 				btnPreferential.setTextColor(getResources().getColor(R.color.login_blue));
 				break;
 			}
+		}
+		
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(mFwFragment != null){
+			mFwFragment.onActivityResult(requestCode, resultCode, data);
+		}
+		if(mSpFragment != null){
+			mSpFragment.onActivityResult(requestCode, resultCode, data);
 		}
 	}
 	

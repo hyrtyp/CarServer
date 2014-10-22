@@ -164,5 +164,58 @@ public class StringHelper {
 	    Pattern pattern = Pattern.compile("[0-9]*"); 
 	    return pattern.matcher(str).matches();    
 	 } 
+	
+	/**
+	 * 比较目标时间是否在当前时间之前
+	 * @param strTime
+	 * @return
+	 */
+	public static boolean beyondTime(String strTime){
+		Date time = string2Date(strTime);
+		if(time.getTime() < System.currentTimeMillis()){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	public static String timeAfterDay(String strTime){
+		Date time = string2Date(strTime);
+		if(time == null) {
+			return "Unknown";
+		}
+		String ftime = "";
+		Calendar cal = Calendar.getInstance();
+		
+		//判断是否是同一天
+		String curDate = dateFormater.get().format(cal.getTime());
+		String paramDate = dateFormater.get().format(time);
+		
+		if(curDate.equals(paramDate)){
+			int hour = (int)((time.getTime() - cal.getTimeInMillis())/3600000);
+			if(hour == 0)
+				ftime = Math.max((time.getTime() - cal.getTimeInMillis()) / 60000,1)+"分钟";
+			else 
+				ftime = hour+"小时";
+			return ftime;
+		}
+		long lt = time.getTime()/86400000;
+		long ct = cal.getTimeInMillis()/86400000;
+		int days = (int)(lt - ct);		
+		if(days == 0){
+			int hour = (int)((time.getTime() - cal.getTimeInMillis())/3600000);
+			if(hour == 0)
+				ftime = Math.max((time.getTime() - cal.getTimeInMillis()) / 60000,1)+"分钟";
+			else 
+				ftime = hour+"小时";
+		}
+		else{
+			ftime = days+"天";			
+		}
+//		else{
+//			ftime = dateFormater.get().format(time);
+//		}
+		return ftime;
+	}
 
 }

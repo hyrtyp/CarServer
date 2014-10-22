@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingTop="45dp" 
+    android:background="#fff">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" 
+        android:layout_marginLeft="57dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="店铺名称"
+            android:textColor="#302f2f"
+            android:textSize="18sp" />
+
+        <EditText
+            android:id="@+id/et_shopname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="17dp"
+            android:textColor="#757575"
+            android:textSize="15sp" 
+            android:background="@drawable/bg_textview_gray"
+            android:layout_marginRight="50dp"
+            android:padding="@dimen/view_margin_small"
+            android:maxLength="10"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="31dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" 
+        android:layout_marginLeft="57dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商家照片"
+            android:textColor="#302f2f"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="82dp"
+            android:layout_height="82dp"
+            android:layout_marginLeft="17dp"
+            android:background="@drawable/face_img_border_not_click"
+            android:padding="1dp" >
+
+            <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+                android:id="@+id/iv_sjphoto"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/bg_img_default" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" 
+        android:layout_marginLeft="57dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="营业执照"
+            android:textColor="#302f2f"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:layout_width="82dp"
+            android:layout_height="82dp"
+            android:layout_marginLeft="17dp"
+            android:background="@drawable/face_img_border_not_click"
+            android:padding="1dp" >
+
+            <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+                android:id="@+id/iv_zzphoto"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:src="@drawable/bg_img_default" />
+        </RelativeLayout>
+    </LinearLayout>
+    <Button 
+        android:id="@+id/btn_submit"
+        android:layout_width="fill_parent"
+        android:layout_height="47dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginRight="70dp"
+        android:background="@drawable/bg_button"
+        android:textColor="#fff"
+        android:textSize="24dp"
+        android:text="修改店铺"
+        android:layout_marginTop="68dp"/>
+</LinearLayout>

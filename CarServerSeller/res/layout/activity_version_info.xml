@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="100dp"
+        android:background="#f6f6f6"
+        android:orientation="horizontal"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="31dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="最新版本：商家版5.0.1"
+                android:textColor="#757575"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:text="大小：15.06MB"
+                android:textColor="#757575"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" >
+
+            <Button
+                android:layout_width="103dp"
+                android:layout_height="36dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/bg_button"
+                android:text="下载"
+                android:textColor="#fff"
+                android:textSize="15sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <include layout="@layout/layout_line" />
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:textSize="18dp"
+        android:textColor="#302f2f"
+        android:text="新版特性："
+        android:layout_marginLeft="19dp"/>
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:textColor="#757575"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="@dimen/view_margin_big"
+        android:text="健康中心，记录你每一天的改变\n健康中心，记录你每一天的改变\n健康中心，记录你每一天的改变"
+        android:lineSpacingExtra="20dp"/>
+
+</LinearLayout>

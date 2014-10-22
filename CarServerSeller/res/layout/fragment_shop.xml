@@ -7,7 +7,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/main_top_margin"
-        android:orientation="horizontal" >
+        android:orientation="horizontal" 
+        android:layout_marginBottom="@dimen/view_margin">
 
         <Button
             android:id="@+id/btn_product"
@@ -46,5 +47,10 @@
             android:textSize="25sp" />
     </LinearLayout>
     
+     <FrameLayout 
+         android:id="@+id/layout_content"
+         android:layout_width="fill_parent"
+         android:layout_height="0dp"
+         android:layout_weight="1"/>
 
 </LinearLayout>

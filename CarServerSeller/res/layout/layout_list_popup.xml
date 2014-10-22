@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <View 
+        android:id="@+id/view_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+	    android:background="#b21f1f1f"/>
+
+    <ListView 
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="60dp"
+        android:background="#fff"/>
+    
+    <RelativeLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+       	android:background="#d1d4d5">
+        
+        <Button 
+            android:id="@+id/btn_popup_submit"
+            android:layout_width="75dp"
+            android:layout_height="32dp"
+            android:textColor="#fff"
+            android:textSize="18sp"
+            android:background="@drawable/bg_button"
+            android:text="确定"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/view_margin"/>
+        
+    </RelativeLayout>
+
+</RelativeLayout>

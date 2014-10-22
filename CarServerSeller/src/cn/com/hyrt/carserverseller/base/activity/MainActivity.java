@@ -1,6 +1,7 @@
 package cn.com.hyrt.carserverseller.base.activity;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,7 +37,7 @@ public class MainActivity extends BaseActivity {
 	@ViewInject(id = R.id.layout_contain)
 	FrameLayout layoutContain;
 	@ViewInject(id = android.R.id.tabhost)
-	FragmentTabHost mTabHost;
+	public FragmentTabHost mTabHost;
 	@ViewInject(id = R.id.mainTitle)
 	TextView mainTitle;
 	@ViewInject(id = R.id.layout_main_top)
@@ -63,6 +64,8 @@ public class MainActivity extends BaseActivity {
 	private boolean needExit = false;
 	private int curIndex = 0;
 	
+	private static Context meContext;
+	
 	Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
@@ -81,6 +84,7 @@ public class MainActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		meContext = this;
 		showActionBar(false);
 
 		initView();
@@ -125,7 +129,7 @@ public class MainActivity extends BaseActivity {
 		return btnView;
 	}
 
-	private void changeActionBar(int index) {
+	public void changeActionBar(int index) {
 		curIndex = index;
 //		if(index == 2){
 //			ivTopRight.setVisibility(View.VISIBLE);
@@ -184,6 +188,15 @@ public class MainActivity extends BaseActivity {
 			if(mProductFragment != null){
 				mProductFragment.onActivityResult(arg0, arg1, arg2);
 			}
+		}else if(curIndex == 2 &&
+				getSupportFragmentManager()
+				.findFragmentByTag(mTabHost.getCurrentTabTag()) instanceof ShopFragment){
+			ShopFragment mShopFragment =
+					(ShopFragment) getSupportFragmentManager()
+			.findFragmentByTag(mTabHost.getCurrentTabTag());
+			if(mShopFragment != null){
+				mShopFragment.onActivityResult(arg0, arg1, arg2);
+			}
 		}else if(curIndex == 3){
 			PreferentialFragment mPreferentialFragment =
 					(PreferentialFragment)getSupportFragmentManager()
@@ -206,6 +219,15 @@ public class MainActivity extends BaseActivity {
 		}
 		mHandler.removeMessages(EXIT);
 		super.finish();
+	}
+	
+	public void mandatoryFinish(){
+		needExit = true;
+		finish();
+	}
+	
+	public static Context getMe(){
+		return meContext;
 	}
 
 }
