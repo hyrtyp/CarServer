@@ -22,7 +22,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="30dp"
-                android:text="空调解决方案"
                 android:textColor="#000"
                 android:textSize="20sp" />
 
@@ -68,7 +67,6 @@
                     android:layout_height="wrap_content"
                     android:textColor="#c40e0e"
                     android:textSize="20sp"
-                    android:text="￥260"
                     android:layout_marginLeft="16dp"/>
                 <TextView 
                     android:layout_width="wrap_content"
@@ -82,8 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#757474"
-                    android:textSize="15sp"
-                    android:text="￥399"/>
+                    android:textSize="15sp"/>
             </LinearLayout>
              <Button 
                  android:id="@+id/btn_change"
@@ -109,7 +106,6 @@
                 android:layout_marginTop="20dp"
                 android:textSize="13sp"
                 android:textColor="#646363"
-                android:text="内外大"
                 android:maxLines="3"
                 android:ellipsize="end"/>
             <TextView 
@@ -119,13 +115,15 @@
                 android:textSize="18sp"
                 android:text="服务评价："
                 android:layout_marginLeft="18dp"
-                android:layout_marginTop="21dp"/>
+                android:layout_marginTop="21dp"
+                android:visibility="gone"/>
             <LinearLayout 
                 android:layout_width="fill_parent"
                 android:layout_height="55dp"
                 android:background="#f8f8f8"
                 android:layout_marginTop="11dp"
-                android:gravity="center_vertical">
+                android:gravity="center_vertical"
+                android:visibility="gone">
                 <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
                     android:id="@+id/iv_face" 
                     android:layout_width="36dp"
@@ -157,6 +155,60 @@
                         android:gravity="center_vertical"/>
                 </LinearLayout>
             </LinearLayout>
+            
+            <include layout="@layout/layout_line_small"/>
+            
+            <RelativeLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp">
+                
+                <TextView 
+                    android:id="@+id/tv_shyj_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#050505"
+                    android:textSize="18sp"
+                    android:text="审核意见："
+                    android:layout_marginLeft="18dp"/>
+                
+                <TextView 
+                        android:id="@+id/tv_shyj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#646363"
+                        android:textSize="13sp"
+                        android:layout_toRightOf="@id/tv_shyj_label"/>
+                
+            </RelativeLayout>
+            
+            <include layout="@layout/layout_line_small"/>
+            
+            <LinearLayout 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="3dp"
+                android:layout_marginBottom="3dp"
+                android:gravity="center_vertical">
+                <TextView 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#050505"
+                    android:textSize="18sp"
+                    android:text="审核时间："
+                    android:layout_marginLeft="18dp"/>
+                <TextView 
+                        android:id="@+id/tv_shsj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#646363"
+                        android:textSize="13sp"/>
+            </LinearLayout>
+            
             <LinearLayout 
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

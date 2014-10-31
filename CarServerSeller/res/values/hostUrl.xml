@@ -5,6 +5,7 @@
     <string name="method_login">getSjLogininfo</string>
     <string name="method_regist">saveUserinfo</string>
     <string name="method_getProductInfoList">getMerchantCommList</string>
+    <string name="method_getMerchantComm">getMerchantComm</string>
     <string name="method_getCodingArea">getCodingArea</string>
     <string name="method_getCLWDfl">getCLWDfl</string>
     <string name="method_getFwClassList">getFwClassList</string>
@@ -13,8 +14,14 @@
     <string name="method_getMerchantUserinfo">getMerchantUserinfo</string>
     <string name="method_saveUserinfo">saveUserinfo</string>
     <string name="method_saveDelMerchantCommStatus">saveDelMerchantCommStatus</string>
-    <string name="method_getMerchantComm">getMerchantComm</string>
     <string name="method_getMwpmSysTerminalUsermakeList">getMwpmSysTerminalUsermakeList</string>
+    <string name="method_saveTerminalUsermakeStatus">saveTerminalUsermakeStatus</string>
+    <string name="method_getMwpmSysCarKnowList">getMwpmSysCarKnowList</string>
+    <string name="method_getMwpmSysCarKnowYhTypeList">getMwpmSysCarKnowYhTypeList</string>
+    <string name="method_saveMwpmSysCarKnowInfo">saveMwpmSysCarKnowInfo</string>
+    <string name="method_getWorkflowbhList">getWorkflowbhList</string>
+    <string name="method_getMerchantQualificImage">getMerchantQualificImage</string>
+    <string name="method_saveMerchantQualificStatus">saveMerchantQualificStatus</string>
     <!-- 分类查询ID -->
     <string name="flid_brand">000021</string>
 </resources>

@@ -1,10 +1,15 @@
 package cn.com.hyrt.carserverseller.info.activity;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.soundcloud.android.crop.Crop;
+
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Dialog;
@@ -15,6 +20,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -228,6 +234,9 @@ public class MerchantInfoActivity extends BaseActivity{
 							INFO_LOGIN loginInfo 
 							= ((CarServerApplication)getApplication()).getLoginInfo();
 							loginInfo.bcxx = "1";
+							if(result.id != null && !"".equals(result.id)){
+								loginInfo.serviceid = result.id;
+							}
 							((CarServerApplication)getApplication()).setLoginInfo(loginInfo);
 							Intent intent = new Intent();
 							intent.setClass(MerchantInfoActivity.this, MainActivity.class);
@@ -236,10 +245,10 @@ public class MerchantInfoActivity extends BaseActivity{
 							return;
 						}
 						if(merchantBitmap != null){
-							uploadImage(merchantBitmap, "sjPhoto.jpeg", false);
+							uploadImage(merchantBitmap, "sjPhoto.jpeg", false, result.id);
 						}
 						if(licenseBitmap != null){
-							uploadImage(licenseBitmap, "zzPhoto.jpeg", true);
+							uploadImage(licenseBitmap, "zzPhoto.jpeg", true, result.id);
 						}
 					}
 
@@ -384,17 +393,20 @@ public class MerchantInfoActivity extends BaseActivity{
 			ivLicensePhoto.setImageUrl(licenseImgUrl);
 			tvLicensePhoto.setVisibility(View.GONE);
 		}
-		String[] brandids = merchantInfo.brandid.split(";");
-		String[] brandNames = merchantInfo.brandname.split("、");
-		brandCheckedId.clear();
-		brandCheckedName.clear();
-		for (String str : brandids) {
-			brandCheckedId.add(str);
+		
+		if(merchantInfo.brandname != null && !"".equals(merchantInfo.brandname)){
+			String[] brandids = merchantInfo.brandid.split(";");
+			String[] brandNames = merchantInfo.brandname.split("、");
+			brandCheckedId.clear();
+			brandCheckedName.clear();
+			for (String str : brandids) {
+				brandCheckedId.add(str);
+			}
+			for (String str : brandNames) {
+				brandCheckedName.add(str);
+			}
+			tvSelectBrand.setText(merchantInfo.brandname);
 		}
-		for (String str : brandNames) {
-			brandCheckedName.add(str);
-		}
-		tvSelectBrand.setText(merchantInfo.brandname);
 		
 		String[] fwClassIds = merchantInfo.serviceTypeid.split(";");
 		String[] fwClassNames = merchantInfo.serviceTypename.split(";");
@@ -689,7 +701,6 @@ public class MerchantInfoActivity extends BaseActivity{
 				LogHelper.i("tag", "mCountys:"+mCountys.size());
 				for(int i=0,j=mCountys.size(); i<j; i++){
 					Map<String, String> mCountyData = mCountys.get(i);
-					LogHelper.i("tag", "mCountyData:"+mCountyData.get("id"));
 					countyId.add(mCountyData.get("id"));
 					countyName.add(mCountyData.get("name"));
 				}
@@ -804,7 +815,7 @@ public class MerchantInfoActivity extends BaseActivity{
 			return;
 		}
 		
-        if (requestCode == PhotoHelper.PHOTO_ZOOM && data != null) {
+        /*if (requestCode == PhotoHelper.PHOTO_ZOOM && data != null) {
             //保存剪切好的图片
         	LogHelper.i("tag", "data:"+data.getParcelableExtra("data")+"---"+data.getData());
         	
@@ -838,10 +849,54 @@ public class MerchantInfoActivity extends BaseActivity{
                 mPhotoHelper = new PhotoHelper(MerchantInfoActivity.this, faceUri, 50);
             }
             mPhotoHelper.startPhotoZoom(faceUri, 50);
+        }*/
+		
+		if (requestCode == Crop.REQUEST_PICK && resultCode == Activity.RESULT_OK) {
+			beginCrop(data.getData());
+		} else if (requestCode == Crop.REQUEST_CROP) {
+			handleCrop(resultCode, data);
+		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
+			beginCrop(faceUri);
         }
 	}
 	
-	public void uploadImage(Bitmap bitmap, String imageName, boolean isZZ){
+	private void beginCrop(Uri source) {
+		if(faceUri == null){
+            faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
+        }
+        new Crop(source).output(faceUri).asSquare().start(this);
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == Activity.RESULT_OK) {
+//            resultView.setImageURI(Crop.getOutput(result));
+        	Bitmap bitmap;
+			try {
+				bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Crop.getOutput(result));
+				if(isMerchantSelect){
+					tvMerchantPhoto.setVisibility(View.GONE);
+					merchantImgUrl = null;
+					merchantBitmap = bitmap;
+					ivMerchantPhoto.setImageBitmap(bitmap);
+				}else{
+					tvLicensePhoto.setVisibility(View.GONE);
+					licenseBitmap = bitmap;
+					licenseImgUrl = null;
+					ivLicensePhoto.setImageBitmap(bitmap);
+				}
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            AlertHelper.getInstance(this).showCenterToast(Crop.getError(result).getMessage());
+        }
+    }
+	
+	public void uploadImage(Bitmap bitmap, String imageName, boolean isZZ, final String serviceId){
 		WebServiceHelper mUploadImage = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
 			
 			@Override
@@ -853,6 +908,9 @@ public class MerchantInfoActivity extends BaseActivity{
 					INFO_LOGIN loginInfo 
 					= ((CarServerApplication)getApplication()).getLoginInfo();
 					loginInfo.bcxx = "1";
+					if(serviceId != null && !"".equals(serviceId)){
+						loginInfo.serviceid = serviceId;
+					}
 					((CarServerApplication)getApplication()).setLoginInfo(loginInfo);
 					Intent intent = new Intent();
 					intent.setClass(MerchantInfoActivity.this, MainActivity.class);
@@ -865,6 +923,9 @@ public class MerchantInfoActivity extends BaseActivity{
 					INFO_LOGIN loginInfo 
 					= ((CarServerApplication)getApplication()).getLoginInfo();
 					loginInfo.bcxx = "1";
+					if(serviceId != null && !"".equals(serviceId)){
+						loginInfo.serviceid = serviceId;
+					}
 					((CarServerApplication)getApplication()).setLoginInfo(loginInfo);
 					Intent intent = new Intent();
 					intent.setClass(MerchantInfoActivity.this, MainActivity.class);
@@ -883,9 +944,14 @@ public class MerchantInfoActivity extends BaseActivity{
 			}
 		}, MerchantInfoActivity.this);
 		String imageType = isZZ ? WebServiceHelper.IMAGE_TYPE_ZZ : WebServiceHelper.IMAGE_TYPE_SJ;
-		mUploadImage.saveImage(
-				bitmap, imageName, imageType,
-				((CarServerApplication)getApplication()).getLoginInfo().serviceid);
+		if(serviceId != null && !"".equals(serviceId)){
+			mUploadImage.saveImage(
+					bitmap, imageName, imageType, serviceId);
+		}else{
+			mUploadImage.saveImage(
+					bitmap, imageName, imageType,
+					((CarServerApplication)getApplication()).getLoginInfo().serviceid);
+		}
 	}
 	
 	private void changeCountySelected(){

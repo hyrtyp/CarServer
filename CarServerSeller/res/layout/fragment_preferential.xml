@@ -284,7 +284,8 @@
                 android:paddingLeft="@dimen/main_top_margin"
                 android:paddingRight="@dimen/main_top_margin"
                 android:textColor="#000"
-                android:textSize="18sp" />
+                android:textSize="18sp" 
+                android:gravity="left"/>
         </LinearLayout>
         
         <Button

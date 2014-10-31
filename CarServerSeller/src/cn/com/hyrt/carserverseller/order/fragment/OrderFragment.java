@@ -4,6 +4,7 @@ import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.helper.LogHelper;
 import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverseller.shop.fragment.ProductListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -28,6 +29,18 @@ public class OrderFragment extends Fragment{
 			Bundle savedInstanceState) {
 		tabPosition = 0;
 		curPosition = 0;
+		if(mNewOrderFragment != null){
+			getChildFragmentManager().beginTransaction()
+			.replace(R.id.container, mNewOrderFragment);
+		}
+		if(mAndOrderFragment != null){
+			getChildFragmentManager().beginTransaction()
+			.replace(R.id.container, mAndOrderFragment);
+		}
+		if(mHisOrderFragment != null){
+			getChildFragmentManager().beginTransaction()
+			.replace(R.id.container, mHisOrderFragment);
+		}
 		mNewOrderFragment = null;
 		mAndOrderFragment = null;
 		mHisOrderFragment = null;
@@ -152,6 +165,22 @@ public class OrderFragment extends Fragment{
 				btnOrdersHistory.setBackgroundResource(R.drawable.bg_tab_right);
 				btnOrdersHistory.setTextColor(getResources().getColor(R.color.login_blue));
 				break;
+			}
+		}
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if(resultCode == 101 && requestCode == 101){
+			if(mNewOrderFragment != null){
+				mNewOrderFragment.loadData(false);
+			}
+			if(mAndOrderFragment != null){
+				mAndOrderFragment.loadData(false);
+			}
+			if(mHisOrderFragment != null){
+				mHisOrderFragment.loadData(false);
 			}
 		}
 	}

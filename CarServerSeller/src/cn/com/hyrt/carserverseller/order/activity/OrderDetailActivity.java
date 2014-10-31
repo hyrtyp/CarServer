@@ -11,7 +11,11 @@ import android.widget.TextView;
 import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.activity.BaseActivity;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define;
+import cn.com.hyrt.carserverseller.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.ORDER_LIST.CDATA;
+import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
+import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserverseller.base.helper.LogHelper;
 import cn.com.hyrt.carserverseller.base.helper.StringHelper;
 import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
 
@@ -66,6 +70,7 @@ public class OrderDetailActivity extends BaseActivity{
 			tvAcceptTime.setText(StringHelper.formatDate(orderInfo.accepttime));
 			tvArriveTime.setText(StringHelper.formatDate(orderInfo.arrivetime));
 			String status = orderInfo.status;
+			LogHelper.i("tag", "status:"+status);
 			if("ywc".equals(status)){
 				tvStatus.setText("已完成");
 			}else if("qx".equals(status)){
@@ -85,7 +90,7 @@ public class OrderDetailActivity extends BaseActivity{
 	 * @param view
 	 */
 	public void refusal(View view){
-		
+		saveOrderStatus(false);
 	}
 	
 	/**
@@ -93,6 +98,29 @@ public class OrderDetailActivity extends BaseActivity{
 	 * @param view
 	 */
 	public void accept(View view){
-		
+		saveOrderStatus(true);
+	}
+	
+	private void saveOrderStatus(boolean isAccept){
+		AlertHelper.getInstance(this).showLoading(null);
+		WebServiceHelper mSaveStatusHelper = new WebServiceHelper(
+				new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+
+					@Override
+					public void onSuccess(BASE result) {
+						AlertHelper.getInstance(OrderDetailActivity.this).hideLoading();
+						setResult(101);
+						finish();
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						AlertHelper.getInstance(OrderDetailActivity.this).hideLoading();
+						AlertHelper.getInstance(OrderDetailActivity.this).showCenterToast("请求失败");
+					}
+		}, this);
+		String status = isAccept ? WebServiceHelper.ORDER_STATUS_ACCEPT
+				: WebServiceHelper.ORDER_STATUS_REFUSAL;
+		mSaveStatusHelper.saveOrderStatus(orderInfo.id, status);
 	}
 }

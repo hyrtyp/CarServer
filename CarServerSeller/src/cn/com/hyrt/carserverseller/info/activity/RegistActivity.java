@@ -1,15 +1,21 @@
 package cn.com.hyrt.carserverseller.info.activity;
 
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.activity.BaseActivity;
+import cn.com.hyrt.carserverseller.base.application.CarServerApplication;
+import cn.com.hyrt.carserverseller.base.baseFunction.Define;
+import cn.com.hyrt.carserverseller.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
+import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserverseller.base.helper.LogHelper;
 import cn.com.hyrt.carserverseller.base.helper.StringHelper;
+import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
 
 public class RegistActivity extends BaseActivity{
 	
@@ -52,7 +58,39 @@ public class RegistActivity extends BaseActivity{
 			return;
 		}
 		
-		
+		WebServiceHelper mRegistHelper = new WebServiceHelper(
+				new BaseWebServiceHelper.RequestCallback<Define.SINGLE_ID>() {
+
+					@Override
+					public void onSuccess(Define.SINGLE_ID result) {
+						AlertHelper.getInstance(RegistActivity.this).hideLoading();
+						Define.INFO_LOGIN loginInfo = new Define.INFO_LOGIN();
+						loginInfo.id = result.id;
+						loginInfo.loginname = etPhoneNum.getText().toString();
+						loginInfo.bcxx = "0";
+						((CarServerApplication)getApplication())
+						.setLoginInfo(loginInfo);
+						Intent intent = new Intent();
+						intent.setClass(RegistActivity.this, MerchantInfoActivity.class);
+						startActivity(intent);
+						finish();
+						((LoginActivity)LoginActivity.getMeContext()).finish();
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						AlertHelper.getInstance(RegistActivity.this).hideLoading();
+						if(errorNo == 206){
+							AlertHelper.getInstance(RegistActivity.this)
+							.showCenterToast("用户名已存在！");
+						}else{
+							AlertHelper.getInstance(RegistActivity.this)
+							.showCenterToast("注册失败！");
+						}
+					}
+		}, this);
+		AlertHelper.getInstance(RegistActivity.this).showLoading(null);
+		mRegistHelper.regist(phoneNnum, pwd);
 	}
 	
 	public void goback(View view){

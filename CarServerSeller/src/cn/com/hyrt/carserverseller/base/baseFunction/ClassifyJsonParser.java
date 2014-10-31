@@ -69,8 +69,10 @@ public class ClassifyJsonParser {
 			for(int i=0,j=oneArray.length(); i<j; i++){
 				JSONObject cJsonObject = oneArray.getJSONObject(i);
 				Map<String, String> map = new HashMap<String, String>();
-				map.put("id", cJsonObject.getString("id"));
-				map.put("name", cJsonObject.getString("name"));
+				map.put("id", cJsonObject.optString("id"));
+				map.put("name", cJsonObject.optString("name"));
+				map.put("zztype", cJsonObject.optString("zztype"));
+				map.put("zztypename", cJsonObject.optString("zztypename"));
 				oneList.add(map);
 			}
 			
@@ -81,9 +83,13 @@ public class ClassifyJsonParser {
 				for(int a=0,b=cJsonArray.length(); a<b; a++){
 					JSONObject cJsonObject = cJsonArray.getJSONObject(a);
 					Map<String, String> map = new HashMap<String, String>();
-					map.put("id", cJsonObject.getString("id"));
-					map.put("name", cJsonObject.getString("name"));
+					map.put("id", cJsonObject.optString("id"));
+					map.put("name", cJsonObject.optString("name"));
 					map.put("attacpath", cJsonObject.optString("attacpath"));
+					map.put("typelevel", cJsonObject.optString("typelevel"));
+					map.put("zzlevelname", cJsonObject.optString("zzlevelname"));
+					map.put("zztype", cJsonObject.optString("zztype"));
+					map.put("zztypename", cJsonObject.optString("zztypename"));
 					cList.add(map);
 				}
 				
@@ -103,8 +109,8 @@ public class ClassifyJsonParser {
 						for(int x=0,y=ccJsonArray.length(); x<y; x++){
 							JSONObject ccJsonObject = ccJsonArray.getJSONObject(x);
 							Map<String, String> map = new HashMap<String, String>();
-							map.put("id", ccJsonObject.getString("id"));
-							map.put("name", ccJsonObject.getString("name"));
+							map.put("id", ccJsonObject.optString("id"));
+							map.put("name", ccJsonObject.optString("name"));
 							ccList.add(map);
 						}
 						

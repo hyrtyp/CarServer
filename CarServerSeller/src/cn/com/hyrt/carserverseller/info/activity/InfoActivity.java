@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -12,7 +13,9 @@ import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.activity.BaseActivity;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_MERCHANT;
+import cn.com.hyrt.carserverseller.base.helper.StringHelper;
 import cn.com.hyrt.carserverseller.base.view.ImageLoaderView;
+import cn.com.hyrt.carserverseller.info.adapter.QualificationTypeAdapter;
 
 public class InfoActivity extends BaseActivity{
 
@@ -34,6 +37,10 @@ public class InfoActivity extends BaseActivity{
 	@ViewInject(id=R.id.line_telnum) LinearLayout lineTelNum;
 	@ViewInject(id=R.id.tv_desc) TextView tvDesc;
 	@ViewInject(id=R.id.btn_change,click="changeInfo") Button btnChange;
+	@ViewInject(id=R.id.tv_shyj) TextView tvShyj;
+	@ViewInject(id=R.id.tv_shtime) TextView tvShtime;
+	@ViewInject(id=R.id.gv_zztype) GridView gvZzType;
+	@ViewInject(id=R.id.tv_shtime_label) TextView tvShTimeLabel;
 	
 	private Define.INFO_MERCHANT mData;
 	
@@ -89,7 +96,19 @@ public class InfoActivity extends BaseActivity{
 			tvTelNum.setText(merchantInfo.sjtel);
 		}
 		tvDesc.setText(merchantInfo.desc);
+		tvShyj.setText(merchantInfo.shyj);
+		if("ybh".equals(merchantInfo.status)){
+			tvShTimeLabel.setText("驳回时间");
+		}else{
+			tvShTimeLabel.setText("审核时间");
+		}
+		tvShtime.setText(StringHelper.formatDate(merchantInfo.shbhtime));
 		
+		if(merchantInfo.qualificimg != null && !"".equals(merchantInfo.qualificimg)){
+			String[] zzType = merchantInfo.qualificimg.split(";");
+			QualificationTypeAdapter mQualificationTypeAdapter = new QualificationTypeAdapter(zzType, this);
+			gvZzType.setAdapter(mQualificationTypeAdapter);
+		}
 	}
 	
 	public void changeInfo(View view){

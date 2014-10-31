@@ -8,6 +8,7 @@ import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_PRODUCT_LIST.CD
 import cn.com.hyrt.carserverseller.base.view.ImageLoaderView;
 import android.content.Context;
 import android.graphics.Paint;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,17 +54,27 @@ public class ProductListAdapter extends BaseAdapter{
 			mHolder.tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
 			mHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
 			mHolder.tvDiscount.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
+			mHolder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
 			convertView.setTag(mHolder);
 		}else{
 			mHolder = (ViewHolder) convertView.getTag();
 		}
 		
 		Define.INFO_PRODUCT_LIST.CDATA productInfo = mData.get(position);
-		mHolder.ivFace.setImageUrl(productInfo.attacpath0);
+		mHolder.ivFace.setImageUrl(productInfo.attacpath);
 		mHolder.tvDesc.setText(productInfo.sptitle);
 		mHolder.tvDiscount.setText("￥"+productInfo.discount);
 		mHolder.tvPrice.setText("￥"+productInfo.price);
 		mHolder.tvTitle.setText(productInfo.spname);
+//		if("ysj".equals(productInfo.status)){
+//			mHolder.tvStatus.setText(Html.fromHtml("<font color='#ff7e0c'>已审核</font>"));
+//			mHolder.tvStatus.setVisibility(View.VISIBLE);
+//		}else if("bh".equals(productInfo.status)){
+//			mHolder.tvStatus.setText(Html.fromHtml("<font color='#939393'>已驳回</font>"));
+//			mHolder.tvStatus.setVisibility(View.VISIBLE);
+//		}else{
+//			mHolder.tvStatus.setVisibility(View.GONE);
+//		}
 		
 		return convertView;
 	}
@@ -74,6 +85,7 @@ public class ProductListAdapter extends BaseAdapter{
 		TextView tvDesc;
 		TextView tvPrice;
 		TextView tvDiscount;
+		TextView tvStatus;
 	}
 	
 

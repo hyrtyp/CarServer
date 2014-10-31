@@ -188,6 +188,13 @@ public class MainActivity extends BaseActivity {
 			if(mProductFragment != null){
 				mProductFragment.onActivityResult(arg0, arg1, arg2);
 			}
+		}else if(curIndex == 1){
+			OrderFragment mOrderFragment = 
+					(OrderFragment) getSupportFragmentManager()
+			.findFragmentByTag(mTabHost.getCurrentTabTag());
+			if(mOrderFragment != null){
+				mOrderFragment.onActivityResult(arg0, arg1, arg2);
+			}
 		}else if(curIndex == 2 &&
 				getSupportFragmentManager()
 				.findFragmentByTag(mTabHost.getCurrentTabTag()) instanceof ShopFragment){

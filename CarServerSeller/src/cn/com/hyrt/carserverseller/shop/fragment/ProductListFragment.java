@@ -140,7 +140,8 @@ public class ProductListFragment extends Fragment{
 					long arg3) {
 				Intent intent = new Intent();
 				intent.setClass(getActivity(), ProductDetailActivity.class);
-				intent.putExtra("vo", mData.get(position));
+//				intent.putExtra("vo", mData.get(position));
+				intent.putExtra("productId", mData.get(position).id);
 				intent.putExtra("isProduct", !isFw);
 				startActivityForResult(intent, 101);
 			}

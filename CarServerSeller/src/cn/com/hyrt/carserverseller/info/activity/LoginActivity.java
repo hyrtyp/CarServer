@@ -2,6 +2,7 @@ package cn.com.hyrt.carserverseller.info.activity;
 
 import net.tsz.afinal.FinalActivity;
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -28,12 +29,19 @@ public class LoginActivity extends FinalActivity{
 	
 	private int loginFailCount = 0;
 	private long LimitTime = 1000*60*3;
+	
+	private static Context meContext;
+	
+	public static Context getMeContext(){
+		return meContext;
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 		setListener();
+		meContext = this;
 	}
 	
 	public void regist(View view){

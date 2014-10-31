@@ -55,7 +55,7 @@ public class OrderListFragment extends Fragment{
 		return rootView;
 	}
 	
-	private void loadData(final boolean isMore){
+	public void loadData(final boolean isMore){
 		if(isMore){
 			page++;
 		}else{

@@ -31,14 +31,18 @@ public class ProductDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.tv_time) TextView tvTime;
 	@ViewInject(id=R.id.btn_close,click="close") Button btnClose;
 	@ViewInject(id=R.id.btn_edit,click="edit") Button btnEdit;
+	@ViewInject(id=R.id.tv_shyj) TextView tvShYj;
+	@ViewInject(id=R.id.tv_shsj) TextView tvShSj;
 	
 	private Define.INFO_PRODUCT_LIST.CDATA productInfo;
+	private String productId;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Intent intent = getIntent();
-		productInfo = (CDATA) intent.getSerializableExtra("vo");
+//		productInfo = (CDATA) intent.getSerializableExtra("vo");
+		productId = intent.getStringExtra("productId");
 		isProduct = intent.getBooleanExtra("isProduct", true);
 		if(isProduct){
 			setTitle("商品详情");
@@ -46,7 +50,30 @@ public class ProductDetailActivity extends BaseActivity{
 			setTitle("服务详情");
 		}
 		setContentView(R.layout.activity_product_detail);
-		initView();
+		loadData();
+//		initView();
+	}
+	
+	private void loadData(){
+		WebServiceHelper mGetProductHelper = new WebServiceHelper(
+				new BaseWebServiceHelper.RequestCallback<Define.INFO_PRODUCT_LIST.CDATA>() {
+
+					@Override
+					public void onSuccess(CDATA result) {
+						productInfo = result;
+						AlertHelper.getInstance(ProductDetailActivity.this).hideLoading();
+						initView();
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						AlertHelper.getInstance(ProductDetailActivity.this).hideLoading();
+						AlertHelper.getInstance(ProductDetailActivity.this).showCenterToast("信息获取失败");
+						finish();
+					}
+		}, ProductDetailActivity.this);
+		AlertHelper.getInstance(ProductDetailActivity.this).showLoading(null);
+		mGetProductHelper.getProductInfo(productId);
 	}
 	
 	public void close(View view){
@@ -84,16 +111,25 @@ public class ProductDetailActivity extends BaseActivity{
 		tvDesc.setText(productInfo.sptitle);
 		tvPrice.setText("￥"+productInfo.price);
 		tvPreferential.setText("￥"+productInfo.discount);
-		ivPhoto.setImageUrl(productInfo.attacpath);
+		ivPhoto.setImageUrl(productInfo.imagepath0);
 		tvTime.setText("   "+StringHelper.formatDate(productInfo.fbtime));
+		tvShYj.setText(productInfo.shyj);
+		tvShSj.setText(StringHelper.formatDate(productInfo.shbhtime));
 	}
 	
 	@Override
 	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
 		super.onActivityResult(arg0, arg1, arg2);
 		if(arg1 == 101){
-			setResult(101);
-			finish();
+//			setResult(101);
+//			finish();
+			loadData();
 		}
+	}
+	
+	@Override
+	public void finish() {
+		setResult(101);
+		super.finish();
 	}
 }

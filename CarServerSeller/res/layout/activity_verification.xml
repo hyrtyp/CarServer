@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+            
+            
+            
+            <RelativeLayout 
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_textview_gray"
+                android:layout_gravity="center_horizontal"
+                android:padding="1dp"
+                android:layout_marginTop="@dimen/view_margin">
+                <Spinner 
+                android:id="@+id/sp_zztype"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+				style="@style/spinner_style2"/>
+                
+                <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_spinner2"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/main_top_margin"
+                android:layout_centerVertical="true"/>
+            </RelativeLayout>
+            
+            <RelativeLayout 
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/bg_textview_gray"
+                android:padding="1dp"
+                android:layout_marginTop="@dimen/view_margin">
+                <Spinner 
+                android:id="@+id/sp_zzlevel"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+				style="@style/spinner_style2"/>
+                
+                <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_spinner2"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/main_top_margin"
+                android:layout_centerVertical="true"/>
+            </RelativeLayout>
+
+            <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+                android:id="@+id/iv_photo1"
+                android:layout_width="291dp"
+                android:layout_height="212dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/view_margin"
+                android:background="@drawable/bg_verification_photo_add" 
+                android:scaleType="centerCrop"/>
+
+            <cn.com.hyrt.carserverseller.base.view.ImageLoaderView
+                android:id="@+id/iv_photo2"
+                android:layout_width="291dp"
+                android:layout_height="212dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_verification_photo_add" 
+                android:scaleType="centerCrop"/>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="122dp"
+                android:layout_height="43dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="17dp"
+                android:text="提 交"
+                android:textColor="#fff" 
+                android:background="@drawable/bg_button"
+                android:layout_marginBottom="@dimen/view_margin"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

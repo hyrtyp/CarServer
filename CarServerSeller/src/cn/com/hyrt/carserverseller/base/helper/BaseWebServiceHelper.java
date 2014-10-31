@@ -99,7 +99,7 @@ public class BaseWebServiceHelper {
 								}
 								if(mCallback != null){
 									Define.BASE base = (BASE) mGson.fromJson(result, clazz);
-									if(Define.REQUEST_SUCCESS_CODE.equals(base.code)
+									if(base.code == null || Define.REQUEST_SUCCESS_CODE.equals(base.code)
 											|| Define.REQUEST_SAVE_SUCCESS_CODE.equals(base.code)){
 										mCallback.onSuccess(base);
 									}else{

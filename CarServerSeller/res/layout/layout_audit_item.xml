@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/layout_line" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="center_horizontal"
+        android:singleLine="true"
+        android:text="空调解决方案"
+        android:textColor="#000"
+        android:textSize="18sp" />
+
+    <include layout="@layout/layout_line_small" />
+
+    <TextView
+        android:id="@+id/tv_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="3dp"
+        android:text="审核意见：停车时使用空调会消耗蓄电池大的电,因为汽车蓄调会消耗蓄电汽会"
+        android:textColor="#646363"
+        android:textSize="13sp" />
+
+    <include layout="@layout/layout_line_small" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:text="审核时间：2014-10-26 15:55"
+        android:textColor="#646363"
+        android:textSize="13sp" />
+
+    <include layout="@layout/layout_line" />
+
+</LinearLayout>

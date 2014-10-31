@@ -1,5 +1,11 @@
 package cn.com.hyrt.carserverseller.product.activity;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import com.soundcloud.android.crop.Crop;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
@@ -7,6 +13,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -74,7 +81,7 @@ public class ProductActivity extends BaseActivity{
 			rb_product.setChecked(false);
 			rb_service.setChecked(true);
 		}
-		productImgUrl = productInfo.attacpath;
+		productImgUrl = productInfo.imagepath0;
 		if(productImgUrl != null && !"".equals(productImgUrl)){
 			ivProductPhoto.setImageUrl(productImgUrl);
 			tvProductPhoto.setVisibility(View.GONE);
@@ -195,7 +202,7 @@ public class ProductActivity extends BaseActivity{
 			return;
 		}
 		
-        if (requestCode == PhotoHelper.PHOTO_ZOOM && data != null) {
+        /*if (requestCode == PhotoHelper.PHOTO_ZOOM && data != null) {
             //保存剪切好的图片
         	LogHelper.i("tag", "data:"+data.getParcelableExtra("data")+"---"+data.getData());
         	
@@ -222,11 +229,45 @@ public class ProductActivity extends BaseActivity{
                 mPhotoHelper = new PhotoHelper(ProductActivity.this, faceUri, 400);
             }
             mPhotoHelper.startPhotoZoom(faceUri, 400);
-        }else if(resultCode == 101){
-//        	((MainActivity)ProductActivity.this).changeActionBar(2);
-//        	((MainActivity)ProductActivity.this).mTabHost.setCurrentTab(2);
+        }*/
+		
+		if (requestCode == Crop.REQUEST_PICK && resultCode == Activity.RESULT_OK) {
+			beginCrop(data.getData());
+		} else if (requestCode == Crop.REQUEST_CROP) {
+			handleCrop(resultCode, data);
+		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
+			beginCrop(faceUri);
         }
 	}
+	
+	private void beginCrop(Uri source) {
+		if(faceUri == null){
+            faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
+        }
+        new Crop(source).output(faceUri).asSquare().start(this);
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == Activity.RESULT_OK) {
+//            resultView.setImageURI(Crop.getOutput(result));
+        	Bitmap bitmap;
+			try {
+				bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Crop.getOutput(result));
+				tvProductPhoto.setVisibility(View.GONE);
+				productBitmap = bitmap;
+				productImgUrl = null;
+				ivProductPhoto.setImageBitmap(bitmap);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            AlertHelper.getInstance(this).showCenterToast(Crop.getError(result).getMessage());
+        }
+    }
 	
 	private void submit(){
 		

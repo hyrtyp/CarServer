@@ -113,6 +113,21 @@
             android:name=".order.activity.OrderDetailActivity"
             android:label="@string/order_detail_label"/>
         
+        <activity
+            android:name=".preferential.activity.PreferentialDetailActivity"
+            android:label="@string/preferential_detail_label"/>
+        
+        <activity 
+            android:name=".info.activity.AuditListActivity"
+            android:label="@string/audit_list_label"/>
+        
+        <activity 
+            android:name=".info.activity.VerificationActivity"
+            android:label="@string/verification_activity_label"/>
+        
+        <activity 
+            android:name="com.soundcloud.android.crop.CropImageActivity"/>
+        
     </application>
 
 </manifest>

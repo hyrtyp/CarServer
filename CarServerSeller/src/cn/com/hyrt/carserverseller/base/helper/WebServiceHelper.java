@@ -33,10 +33,13 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	
 	public static final String PRODUCT_TYPE_SP = "sp";
 	public static final String PRODUCT_TYPE_FW = "fw";
+	public static final String PRODUCT_TYPE_YH = "yh";
 	
 	public static final String ORDER_TYPE_NEW = "new";
 	public static final String ORDER_TYPE_AND = "and";
 	public static final String ORDER_TYPE_HIS = "his";
+	public static final String ORDER_STATUS_ACCEPT = "cg";
+	public static final String ORDER_STATUS_REFUSAL = "wcg";
 
 	public WebServiceHelper(RequestCallback mCallback, Context context) {
 		super(mCallback, context);
@@ -115,7 +118,7 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		String params = String.format(
 				"{\"loginname\":\"%s\",\"password\":\"%s\"}",
 				userName, pwd);
-		get(getString(R.string.method_regist), params, Define.BASE.class);
+		get(getString(R.string.method_regist), params, Define.SINGLE_ID.class);
 	}
 	
 	/**
@@ -130,6 +133,15 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(
 				getString(R.string.method_getProductInfoList),
 				params, Define.INFO_PRODUCT_LIST.class);
+	}
+	
+	public void getProductInfo(String productId){
+		String params = String.format(
+				"{\"id\":\"%s\"}"
+				, productId);
+		get(
+				getString(R.string.method_getMerchantComm),
+				params, Define.INFO_PRODUCT_LIST.CDATA.class);
 	}
 	
 	public void getCodingArea(){
@@ -230,5 +242,95 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(
 				getString(R.string.method_getMwpmSysTerminalUsermakeList),
 				params, Define.ORDER_LIST.class);
+	}
+	
+	/**
+	 * 保存预约成功&拒绝
+	 * @param id
+	 * @param type
+	 */
+	public void saveOrderStatus(String id, String type){
+		String params = String.format(
+				"{\"id\":\"%s\",\"type\":\"%s\"}",
+				id, type);
+		get(
+				getString(R.string.method_saveTerminalUsermakeStatus),
+				params, Define.BASE.class);
+	}
+	
+	/**
+	 * 获取优惠列表
+	 * @param page
+	 */
+	public void getPreferentials(int page){
+		String params = String.format(
+				"{\"userid\":\"%s\",\"page\":\"%s\"}",
+				getUserId(), page+"");
+		get(
+				getString(R.string.method_getMwpmSysCarKnowList),
+				params, Define.PREFERENTIAL_LIST.class);
+	}
+	
+	/**
+	 * 获取优惠类型列表
+	 */
+	public void getDiscountTypes(){
+		get(
+				getString(R.string.method_getMwpmSysCarKnowYhTypeList),
+				null, Define.DISCOUNT_TYPE_LIST.class);
+	}
+	
+	/**
+	 * 保存优惠信息
+	 */
+	public void savePreferential(Define.INFO_PREFERENTIAL preferentialInfo){
+		preferentialInfo.userid = getUserId();
+		Gson mGson = new Gson();
+		String params = mGson.toJson(preferentialInfo);
+		get(
+				getString(R.string.method_saveMwpmSysCarKnowInfo),
+				params, Define.SINGLE_ID.class);	
+	}
+	
+	/**
+	 * 获取审核列表
+	 * @param type
+	 * @param page
+	 */
+	public void getAuditInfoList(String type, int page){
+		String params = String.format(
+				"{\"userid\":\"%s\",\"page\":\"%s\"," +
+				"\"type\":\"%s\",\"sjid\":\"%s\"}",
+				getUserId(), page, type, getServiceId());
+		get(
+				getString(R.string.method_getWorkflowbhList),
+				params, Define.INFO_AUDIT_LIST.class);	
+	}
+	
+	/**
+	 * 获取认证类型
+	 */
+	public void getVerificationType(){
+		String params = String.format(
+				"{\"merchantid\":\"%s\"}",
+				getServiceId());
+		get(
+				getString(R.string.method_getMerchantQualificImage),
+				params, Define.BASE.class);	
+	}
+	
+	/**
+	 * 申请认证
+	 */
+	public void saveVerification(String zztype, String level, String qualificimageid){
+		String params = String.format(
+				"{\"userid\":\"%s\",\"id\":\"%s\"," +
+				"\"zztype\":\"%s\",\"level\":\"%s\"," +
+				"\"qualificimageid\":\"%s\"}",
+				getUserId(), getServiceId(),
+				zztype, level, qualificimageid);
+		get(
+				getString(R.string.method_saveMerchantQualificStatus),
+				params, Define.BASE.class);	
 	}
 }

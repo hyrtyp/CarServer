@@ -85,6 +85,82 @@
                     </RelativeLayout>
                     
                 </LinearLayout>
+                 <include 
+                    android:id="@+id/line_zzphoto"
+                    layout="@layout/layout_line_small"/>
+                <LinearLayout 
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp">
+                    
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#242323"
+                        android:text="审核意见"/>
+                    
+                    <TextView 
+                        android:id="@+id/tv_shyj"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#888787"
+                        android:layout_marginLeft="23dp"/>
+                    
+                </LinearLayout>
+                 <include 
+                    android:id="@+id/line_zzphoto"
+                    layout="@layout/layout_line_small"/>
+                <LinearLayout 
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp">
+                    
+                    <TextView 
+                        android:id="@+id/tv_shtime_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#242323"
+                        android:text="审核时间"/>
+                    
+                    <TextView 
+                        android:id="@+id/tv_shtime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#888787"
+                        android:layout_marginLeft="23dp"/>
+                    
+                </LinearLayout>
+                 <include 
+                    android:id="@+id/line_zzphoto"
+                    layout="@layout/layout_line_small"/>
+                <LinearLayout 
+                    android:layout_width="fill_parent"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp">
+                    
+                    <TextView 
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="#242323"
+                        android:text="资质类型"/>
+                    <GridView 
+                        android:id="@+id/gv_zztype"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="23dp"
+                        android:layout_marginTop="@dimen/view_margin_small"
+                        android:layout_marginBottom="@dimen/view_margin_small"
+                        android:layout_marginRight="@dimen/view_margin"
+                        android:numColumns="5"/>
+                </LinearLayout>
                 <include 
                     android:id="@+id/line_zzphoto"
                     layout="@layout/layout_line_small"/>

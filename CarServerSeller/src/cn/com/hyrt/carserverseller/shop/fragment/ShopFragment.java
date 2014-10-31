@@ -1,6 +1,7 @@
 package cn.com.hyrt.carserverseller.shop.fragment;
 
 import cn.com.hyrt.carserverseller.R;
+import cn.com.hyrt.carserverseller.preferential.fragment.PreferentialListFragment;
 import cn.com.hyrt.carserverseller.product.fragment.ProductFragment;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ public class ShopFragment extends Fragment{
 	
 	private ProductListFragment mSpFragment;
 	private ProductListFragment mFwFragment;
+	private PreferentialListFragment mPreferentialListFragment;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,8 +30,18 @@ public class ShopFragment extends Fragment{
 		rootView = inflater.inflate(R.layout.fragment_shop, null);
 		findView();
 		setListener();
+		if(mSpFragment != null){
+			getChildFragmentManager().beginTransaction().remove(mSpFragment).commit();
+		}
+		if(mFwFragment != null){
+			getChildFragmentManager().beginTransaction().remove(mFwFragment).commit();
+		}
+		if(mPreferentialListFragment != null){
+			getChildFragmentManager().beginTransaction().remove(mPreferentialListFragment).commit();
+		}
 		mSpFragment = null;
 		mFwFragment = null;
+		mPreferentialListFragment = null;
 		tabPosition = 0;
 		curPosition = 0;
 //		if(tabPosition != 0){
@@ -59,9 +71,6 @@ public class ShopFragment extends Fragment{
 			}else{
 				getChildFragmentManager().beginTransaction().show(mSpFragment).commit();
 			}
-			if(mFwFragment != null){
-				getChildFragmentManager().beginTransaction().hide(mFwFragment).commit();
-			}
 			break;
 		case 1:
 			if(mFwFragment == null){
@@ -71,8 +80,35 @@ public class ShopFragment extends Fragment{
 			}else{
 				getChildFragmentManager().beginTransaction().show(mFwFragment).commit();
 			}
+			
+			break;
+		case 2:
+			if(mPreferentialListFragment == null){
+				mPreferentialListFragment = new PreferentialListFragment();
+				getChildFragmentManager().beginTransaction()
+				.add(R.id.layout_content, mPreferentialListFragment).commit();
+			}else{
+				getChildFragmentManager().beginTransaction().show(mPreferentialListFragment).commit();
+			}
+			break;
+		default:
+			break;
+		}
+		
+		switch (curPosition) {
+		case 0:
 			if(mSpFragment != null){
 				getChildFragmentManager().beginTransaction().hide(mSpFragment).commit();
+			}
+			break;
+		case 1:
+			if(mFwFragment != null){
+				getChildFragmentManager().beginTransaction().hide(mFwFragment).commit();
+			}
+			break;
+		case 2:
+			if(mPreferentialListFragment != null){
+				getChildFragmentManager().beginTransaction().hide(mPreferentialListFragment).commit();
 			}
 			break;
 		default:

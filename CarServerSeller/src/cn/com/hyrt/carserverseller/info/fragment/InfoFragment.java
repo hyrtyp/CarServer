@@ -10,10 +10,12 @@ import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverseller.base.view.ImageLoaderView;
 import cn.com.hyrt.carserverseller.info.activity.AboutActivity;
+import cn.com.hyrt.carserverseller.info.activity.AuditListActivity;
 import cn.com.hyrt.carserverseller.info.activity.ChangePwdActivity;
 import cn.com.hyrt.carserverseller.info.activity.ChangeShopActivity;
 import cn.com.hyrt.carserverseller.info.activity.InfoActivity;
 import cn.com.hyrt.carserverseller.info.activity.LoginActivity;
+import cn.com.hyrt.carserverseller.info.activity.VerificationActivity;
 import cn.com.hyrt.carserverseller.info.activity.VersionInfoActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,6 +36,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 	private LinearLayout layoutAlterPwd;
 	private LinearLayout layoutVerification;
 	private LinearLayout layoutAbout;
+	private LinearLayout layoutAuditList;
 	private ImageLoaderView ivFace;
 	private TextView tvPhonenum;
 	private Button btnLogout;
@@ -76,6 +79,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 		layoutVerification.setOnClickListener(this);
 		layoutAbout.setOnClickListener(this);
 		btnLogout.setOnClickListener(this);
+		layoutAuditList.setOnClickListener(this);
 	}
 	
 	@Override
@@ -96,11 +100,23 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 			intent.putExtra("vo", mData);
 			startActivity(intent);
 		}else if(viewId == layoutAlterPwd.getId()){
+			if(mData == null){
+				AlertHelper.getInstance(getActivity())
+				.showCenterToast("商户信息获取失败");
+				return;
+			}
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), ChangePwdActivity.class);
 			startActivity(intent);
 		}else if(viewId == layoutVerification.getId()){
-			AlertHelper.getInstance(getActivity()).showCenterToast("此功能暂未开放");
+			if(mData == null){
+				AlertHelper.getInstance(getActivity())
+				.showCenterToast("商户信息获取失败");
+				return;
+			}
+			Intent intent = new Intent();
+			intent.setClass(getActivity(), VerificationActivity.class);
+			startActivity(intent);
 		}else if(viewId == layoutAbout.getId()){
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), AboutActivity.class);
@@ -112,6 +128,15 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 			intent.setClass(getActivity(), LoginActivity.class);
 			startActivity(intent);
 			((MainActivity)getActivity()).mandatoryFinish();
+		}else if(viewId == layoutAuditList.getId()){
+			if(mData == null){
+				AlertHelper.getInstance(getActivity())
+				.showCenterToast("商户信息获取失败");
+				return;
+			}
+			Intent intent = new Intent();
+			intent.setClass(getActivity(), AuditListActivity.class);
+			startActivity(intent);
 		}
 	}
 	
@@ -124,6 +149,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 		ivFace = (ImageLoaderView) rootView.findViewById(R.id.iv_face);
 		tvPhonenum = (TextView) rootView.findViewById(R.id.tv_phonenum);
 		btnLogout = (Button) rootView.findViewById(R.id.btn_logout);
+		layoutAuditList = (LinearLayout) rootView.findViewById(R.id.layout_verification_list);
 	}
 
 }

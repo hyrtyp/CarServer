@@ -38,7 +38,8 @@
                 android:background="@color/login_blue"
                 android:text="免费获取短信验证码"
                 android:textColor="#fff"
-                android:textSize="15sp" />
+                android:textSize="15sp" 
+                android:visibility="gone"/>
 
             <EditText
                 android:id="@+id/et_pwd"
@@ -70,7 +71,8 @@
                 android:background="@drawable/bg_textview_gray"
                 android:hint="填写验证码"
                 android:padding="@dimen/view_margin_small"
-                android:textSize="20sp" />
+                android:textSize="20sp" 
+                android:visibility="gone"/>
 
             <Button
                 android:id="@+id/btn_submit"

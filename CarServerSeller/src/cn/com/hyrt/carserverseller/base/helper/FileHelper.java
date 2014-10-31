@@ -10,6 +10,7 @@ public class FileHelper {
 	{
 		String folderPath = "carserver";
         boolean sdCardExist = Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
+        LogHelper.i("tag", "sdCardExist:"+sdCardExist);
         if (sdCardExist) {
             folderPath = Environment.getExternalStorageDirectory() + File.separator + folderPath + File.separator;
             File destDir = new File(folderPath);
