@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#fff"
+    android:paddingLeft="18dp"
+    android:paddingRight="18dp">
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+       	android:layout_marginTop="13dp">
+        
+        <Button
+            android:id="@+id/btn_left"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_left_focus"
+            android:text="维修信息"
+            android:textColor="#fff"
+            android:textSize="22sp"
+            android:gravity="center"/>
+        <Button 
+            android:id="@+id/btn_right"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_tab_right"
+            android:text="保养信息"
+            android:textColor="@color/login_blue"
+            android:textSize="22sp"
+            android:gravity="center"/>
+        
+    </LinearLayout>
+    
+    <FrameLayout 
+        android:id="@+id/container"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

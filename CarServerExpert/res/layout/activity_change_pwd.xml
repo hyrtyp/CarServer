@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#fff">
+    
+    <EditText 
+        android:id="@+id/et_oldpwd"
+        android:layout_width="fill_parent"
+        android:layout_height="49dp"
+        android:background="@drawable/bg_textview_gray"
+        android:textSize="20sp"
+        android:hint="原密码"
+        android:inputType="textPassword"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:padding="@dimen/view_margin_small"/>
+    
+    <EditText 
+        android:id="@+id/et_newpwd"
+        android:layout_width="fill_parent"
+        android:layout_height="49dp"
+        android:background="@drawable/bg_textview_gray"
+        android:textSize="20sp"
+        android:hint="新密码"
+        android:inputType="textPassword"
+        android:layout_marginTop="19dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:padding="@dimen/view_margin_small"/>
+    
+    <EditText 
+        android:id="@+id/et_rewpwd"
+        android:layout_width="fill_parent"
+        android:layout_height="49dp"
+        android:background="@drawable/bg_textview_gray"
+        android:textSize="20sp"
+        android:hint="确认密码"
+        android:inputType="textPassword"
+        android:layout_marginTop="19dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:padding="@dimen/view_margin_small"/>
+    
+    <Button 
+        android:id="@+id/btn_submit"
+        android:layout_width="fill_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:background="@drawable/bg_button"
+        android:textSize="24sp"
+        android:textColor="#fff"
+        android:text="确认修改"
+        android:layout_marginTop="37dp"/>
+    
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textSize="12sp"
+        android:textColor="#a6a6a7"
+        android:text="确认修改后，需要重新登录哦亲！"
+        android:layout_marginTop="19dp"/>
+
+</LinearLayout>

@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="真实姓名"
+                    android:textColor="#302f2f"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="24dp"
+                    android:background="@drawable/bg_textview_gray"
+                    android:padding="@dimen/view_margin_small"
+                    android:textColor="#302f2f"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商家名称"
+                    android:textColor="#302f2f"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/et_sjname"
+                    android:layout_width="fill_parent"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="24dp"
+                    android:background="@drawable/bg_textview_gray"
+                    android:padding="@dimen/view_margin_small"
+                    android:textColor="#302f2f"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="所属地区"
+                    android:textColor="#302f2f"
+                    android:textSize="18sp" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="24dp"
+                    android:background="@drawable/bg_textview_gray"
+                    android:orientation="horizontal" >
+
+                    <Spinner
+                        android:id="@+id/sp_province"
+                        style="@style/spinner_style2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:paddingRight="18dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@id/sp_province"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/view_margin_small"
+                        android:src="@drawable/ic_spinner2" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="@dimen/main_top_margin"
+                    android:background="@drawable/bg_textview_gray"
+                    android:orientation="horizontal" >
+
+                    <Spinner
+                        android:id="@+id/sp_city"
+                        style="@style/spinner_style2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:paddingRight="18dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@id/sp_city"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/view_margin_small"
+                        android:src="@drawable/ic_spinner2" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_marginLeft="@dimen/main_top_margin"
+                    android:background="@drawable/bg_textview_gray"
+                    android:orientation="horizontal" >
+
+                    <Spinner
+                        android:id="@+id/sp_county"
+                        style="@style/spinner_style2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:paddingRight="18dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignRight="@id/sp_county"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/view_margin_small"
+                        android:src="@drawable/ic_spinner2" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="所属单位"
+                    android:textColor="#302f2f"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/et_unit"
+                    android:layout_width="fill_parent"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="24dp"
+                    android:background="@drawable/bg_textview_gray"
+                    android:padding="@dimen/view_margin_small"
+                    android:textColor="#302f2f"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="上传头像"
+                    android:textColor="#302f2f"
+                    android:textSize="19sp" />
+
+                <cn.com.hyrt.carserverexpert.base.view.ImageLoaderView
+                    android:id="@+id/iv_face_photo"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginLeft="21dp"
+                    android:src="@drawable/ic_photo_add" />
+
+                <TextView
+                    android:id="@+id/tv_face_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:text="添加照片"
+                    android:textColor="#818181"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="上传证书"
+                    android:textColor="#302f2f"
+                    android:textSize="19sp" />
+
+                <cn.com.hyrt.carserverexpert.base.view.ImageLoaderView
+                    android:id="@+id/iv_license_photo"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginLeft="21dp"
+                    android:src="@drawable/ic_photo_add" />
+
+                <TextView
+                    android:id="@+id/tv_license_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:text="添加照片"
+                    android:textColor="#818181"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="所属专业"
+                    android:textColor="#302f2f"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:id="@+id/layout_specialty1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/tv_specialty"
+                        android:layout_width="fill_parent"
+                        android:layout_height="33dp"
+                        android:layout_marginLeft="24dp"
+                        android:background="@drawable/bg_textview_gray"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/view_margin_small"
+                        android:singleLine="true"
+                        android:textColor="#302f2f"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/btn_reselect"
+                        android:layout_width="wrap_content"
+                        android:layout_height="33dp"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="@dimen/view_margin_small"
+                        android:background="@drawable/bg_button"
+                        android:text="重新选择"
+                        android:textColor="#fff"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_specialty2"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone" >
+
+                    <RelativeLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="24dp"
+                        android:background="@drawable/bg_textview_gray" >
+
+                        <Spinner
+                            android:id="@+id/sp_specialty1"
+                            style="@style/spinner_style2"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/main_top_margin"
+                            android:src="@drawable/ic_spinner2" />
+                    </RelativeLayout>
+
+                    <cn.com.hyrt.carserverexpert.base.view.FullGridView
+                        android:id="@+id/gv_specialty"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="24dp"
+                        android:layout_marginTop="@dimen/view_margin"
+                        android:numColumns="2"
+                        android:verticalSpacing="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:layout_margin="18dp"
+                android:background="@drawable/bg_button"
+                android:text="编辑资料"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

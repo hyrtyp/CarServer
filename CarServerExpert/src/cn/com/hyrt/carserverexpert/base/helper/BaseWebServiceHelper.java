@@ -1,7 +1,10 @@
-package cn.com.hyrt.carserver.base.helper;
+package cn.com.hyrt.carserverexpert.base.helper;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.List;
 
+import org.kobjects.base64.Base64;
 import org.ksoap2.SoapEnvelope;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
@@ -10,10 +13,11 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Handler;
-import cn.com.hyrt.carserver.R;
-import cn.com.hyrt.carserver.base.baseFunction.Define;
-import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
+import cn.com.hyrt.carserverexpert.R;
+import cn.com.hyrt.carserverexpert.base.baseFunction.Define;
+import cn.com.hyrt.carserverexpert.base.baseFunction.Define.BASE;
 
 import com.google.gson.Gson;
 
@@ -24,15 +28,12 @@ import com.google.gson.Gson;
  */
 public class BaseWebServiceHelper {
 
-	public static String NAME_SPACE = "http://webservice.csp.hyrt.com";
+	public static String NAME_SPACE = "http://webservice.zj.csp.hyrt.com";
 
-//	private static final String END_POINT = "http://192.168.10.135:8080/CSPInterface/services/CspInterface?wsdl";
-	private static final String END_POINT = "http://192.168.10.238:8080/CSPInterface/services/CspInterface?wsdl";
-//	private static final String END_POINT = "http://61.233.18.68:8080/CSPInterface/services/CspInterface?wsdl";
-//	private static final String END_POINT = "http://42.121.127.121:8080/CSPInterface/services/CspInterface?wsdl";
-//	private static final String END_POINT = "http://121.42.43.20:82/CSPInterface/services/CspInterface?wsdl";
-
-	private static final int TIMEOUT = 10*1000;
+	private static final String END_POINT = "http://192.168.10.238:8080/CSPZJInterface/services/CspZJInterface?wsdl";
+//	private static final String END_POINT = "http://192.168.10.135:8080/CSPZJInterface/services/CspZJInterface?wsdl";
+	
+	private static final int TIMEOUT = 20*1000;
 
 	private RequestCallback mCallback;
 	private Gson mGson;
@@ -115,7 +116,7 @@ public class BaseWebServiceHelper {
 					}
 				} catch (IOException e) {
 					LogHelper.i("tag", "e1:"+e.getMessage());
-					if(e.getMessage().contains("Network is unreachable")|| e.getMessage().contains("ECONNREFUSED")){
+					if(e.getMessage() == null || e.getMessage().contains("Network is unreachable")|| e.getMessage().contains("ECONNREFUSED")){
 						if(mCallback != null){
 							((Activity)mContext).runOnUiThread(new Runnable() {
 								

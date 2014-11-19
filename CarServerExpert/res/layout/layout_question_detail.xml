@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical" >
+
+    <!--
+         <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical" >
+    -->
+
+    <cn.com.hyrt.carserverexpert.base.view.PullToRefreshView
+        android:id="@+id/ptrv"
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="#00000000" />
+    </cn.com.hyrt.carserverexpert.base.view.PullToRefreshView>
+
+    <Button
+        android:id="@+id/btn_accept"
+        android:layout_width="224dp"
+        android:layout_height="44dp"
+        android:layout_gravity="right"
+        android:layout_marginBottom="@dimen/view_margin"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="@dimen/view_margin"
+        android:background="@drawable/bg_button"
+        android:text="接受"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/layout_reply"
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="#eee"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="18dp"
+        android:paddingRight="18dp" >
+
+        <EditText
+            android:id="@+id/et_reply"
+            android:layout_width="0dp"
+            android:layout_height="29dp"
+            android:layout_marginRight="19dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_textview_white_gray"
+            android:gravity="center_vertical"
+            android:hint="输入回答"
+            android:padding="@dimen/view_margin_small"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/btn_reply"
+            android:layout_width="61dp"
+            android:layout_height="28dp"
+            android:background="@drawable/bg_button"
+            android:text="发送"
+            android:textColor="#fff"
+            android:textSize="15sp" />
+    </LinearLayout>
+    <!--
+    </LinearLayout>
+    </ScrollView>
+    -->
+
+</LinearLayout>

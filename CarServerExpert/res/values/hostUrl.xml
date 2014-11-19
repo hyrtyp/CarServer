@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="method_login">getLogininfo</string>
+    <string name="method_getCLWDfl3tb">getCLWDfl3tb</string>
+    <string name="method_getCodingArea">getCodingArea</string>
+    <string name="method_saveUserinfo">saveUserinfo</string>
+    <string name="method_getIntegrationList">getMwpmSysTerminalIntegrlHistoryList</string>
+    <string name="method_getUserInfo">getUserInfo</string>
+    <string name="method_getZjCLWDwdlb">getZjCLWDwdlb</string>
+    <string name="method_getTerminalSeekReplyNum">getTerminalSeekReplyNum</string>
+    <string name="method_saveImageWithByte">saveImageWithByte</string>
+    <string name="method_getCLWDwd">getCLWDwd</string>
+    <string name="method_saveMwpmSysTerminalSeekReply">saveMwpmSysTerminalSeekReply</string>
+    <string name="method_getTerminalCar">getTerminalCar</string>
+    <string name="method_getTerminalCarStatusYear">getTerminalCarStatusYear</string>
+    <string name="method_getTerminalCarMaintenanceYear">getTerminalCarMaintenanceYear</string>
+    <string name="method_getTerminalCarStatusYearList">getTerminalCarStatusYearList</string>
+    <string name="method_getTerminalCarMaintenanceList">getTerminalCarMaintenanceList</string>
+    
+    <!-- 福利中心 -->
+     <string name="method_get_cap_sys_user_search">getCapSysUserSearch</string>
+     <string name="method_get_user_search">getUserSearch</string>
+     <string name="method_save_cap_sys_user_search">saveCapSysUserSearch</string>
+</resources>

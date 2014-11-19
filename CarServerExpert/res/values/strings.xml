@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <string name="app_name">汽车服务 专家端</string>
+    
+    <string name="loading_msg">正在加载&#8230;</string>
+    <string name="timeout">请求超时，请稍后再试！</string>
+    <string name="net_error_msg">网络发生异常</string>
+    <string name="unable_to_locate">无法定位</string>
+    <string name="exit_prompt">再按一次退出</string>
+	<string name="no_baidumap">未安装百度地图</string>
+	<string name="location_label">定位中&#8230;</string>
+	<string name="upload_photo">上传照片</string>
+	<string name="no_data">暂无数据</string>
+	<string name="photo_from_camera">拍照</string>
+	<string name="cancle">取消</string>
+	<string name="photo_from_album">从相册选择</string>
+	<string name="load_done">已加载全部数据</string>
+	<string name="text_count_beyond">字数超出</string>
+	<string name="workbench_label">工作台</string>
+	<string name="welfare_label">福利中心</string>
+	<string name="history_label">回答历史</string>
+	<string name="regist_record_label">注册记录</string>
+	<string name="shop_label">店铺首页</string>
+	<string name="info_label">个人信息</string>
+	
+	<!-- info -->
+	<string name="username_hint">用户名</string>
+	<string name="pwd_hint">密码</string>
+	
+	<string name="login_succuss">登录成功</string>
+	<string name="login_error">登录失败</string>
+	<string name="login_fail">用户名或密码有误</string>
+	<string name="login_msg">登录中...</string>
+	<string name="no_username">用户名不能为空</string>
+	<string name="no_pwd">密码不能为空</string>
+	<string name="login_fail2">登录频繁，请稍后再试！</string>
+	<string name="label_merchant_info">商户信息</string>
+	<string name="logout_succuss">注销成功</string>
+	
+	<string name="usercode">人员编号:%s</string>
+	<string name="regrecode">注册记录:%s</string>
+	<string name="dregrecode">注册记录</string>
+	<string name="chinfophoto">修改照片</string>
+	<string name="curlogin">近期登录:%s</string>
+	<string name="updatepassword">修改密码</string>
+	<string name="loginout">退出登录</string>
+	<string name="text_not_null">%s不能为空</string>
+	<string name="text_not_symbol">%s不能输入符号</string>
+	
+	<string name="editPassword_title">修改密码</string>
+	<string name="info_old_pwd_label">原始密码</string>
+	<string name="info_new_pwd_label">新改密码</string>
+	<string name="info_confirm_pwd_label">确认密码</string>
+	<string name="info_confirm_edit">确认修改</string>
+	<string name="info_confirm_editinfo">确认修改后，需要重新登陆哦！</string>
+	<string name="info_oldpwd_is_null">原始密码不能为空！</string>
+	<string name="info_newpwd_is_null">新改密码不能为空！</string>
+	<string name="info_confirmpwd_is_null">确认密码不能为空！</string>
+	<string name="info_confirmpwd_not_tally">确认密码与密码不符！</string>
+	<string name="info_change_success">密码修改成功</string>
+	<string name="regrecode_title">注册记录</string>
+	<string name="pull_to_refresh_release_label">下拉刷新&#8230;</string>
+	<string name="pull_to_refresh_footer_release_label">松开以加载&#8230;</string>
+	<string name="pull_to_refresh_footer_pull_label">上拉加载更多&#8230;</string>
+	<string name="pull_to_refresh_pull_label">多</string>
+	<string name="pull_to_refresh_footer_refreshing_label">正在加载&#8230;</string>
+	<string name="pull_to_refresh_refreshing_label">正在刷新&#8230;</string>
+	
+	<string name="infodetail_title">基本信息</string>
+	<string name="info_edit_photo">修改照片</string>
+	<string name="regist_success">注册成功</string>
+	<string name="info_load_fail">暂无数据</string>
+	<string name="regist_error">注册失败</string>
+	<string name="merchantinfo_label">商户信息</string>
+	<string name="change_info_label">修改信息</string>
+	<string name="infophoto_change_success">照片修改成功</string>
+	
+	<string name="activity_product_label">上架商品</string>
+	<string name="productdetail_title">商品详情</string>
+	<string name="change_fail">修改失败</string>
+	<string name="checkinfo">查看上架</string>
+	<string name="addgono">继续添加</string>
+	<string name="infodetail">介绍:</string>
+	<string name="spfbtime">发布日期 :%s</string>
+	<string name="spprice">价格:</string>
+	<string name="pro_price">¥%s</string>
+	<string name="pro_discount">¥%s</string>
+	<string name="change_success">修改成功</string>
+	
+	<string name="crop__saving">Saving picture…</string>
+    <string name="crop__wait">Please wait…</string>
+    <string name="crop__pick_error">No image sources available</string>
+    <string name="crop__done">DONE</string>
+    <string name="crop__cancel" tools:ignore="ButtonCase">CANCEL</string>
+    <string name="my_integration_label">我的积分</string>
+    <string name="question_detail_label">问题详情</string>
+    <string name="welfare_signup_title">点击签到领取%d个金币！可以换取免费服务哦！</string>
+    <string name="signup_load_msg">签到中...</string>
+    <string name="regist_label">注册信息</string>
+    <string name="car_status_label">车辆状况</string>
+	
+</resources>

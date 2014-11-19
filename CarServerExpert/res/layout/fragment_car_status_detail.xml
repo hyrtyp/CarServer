@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" 
+    android:paddingTop="40dp">
+
+    <ListView 
+        android:id="@+id/lv_year"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:divider="#00000000"
+        android:dividerHeight="14dp"/>
+    
+    <GridView 
+        android:id="@+id/gv_item"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="22dp"
+        android:background="@drawable/bg_textview_gray"
+        android:numColumns="2"
+        android:padding="17dp"/>
+
+</LinearLayout>

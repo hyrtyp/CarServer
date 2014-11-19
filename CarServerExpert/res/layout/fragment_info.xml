@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#f5f5f5">
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:layout_marginTop="35dp"
+                android:background="@drawable/bg_border_gray"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/layout_info"
+                    android:layout_width="fill_parent"
+                    android:layout_height="43dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/ic_info" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:layout_weight="1"
+                        android:text="信息资料" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/ic_right" />
+                </LinearLayout>
+
+                <include layout="@layout/layout_line_small" />
+
+                <LinearLayout
+                    android:id="@+id/layout_integration"
+                    android:layout_width="fill_parent"
+                    android:layout_height="43dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/ic_integration" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:layout_weight="1"
+                        android:text="我的积分" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/ic_right" />
+                </LinearLayout>
+                
+                 <include layout="@layout/layout_line_small" />
+
+                <LinearLayout
+                    android:id="@+id/layout_changepwd"
+                    android:layout_width="fill_parent"
+                    android:layout_height="43dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/ic_change_pwd" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:layout_weight="1"
+                        android:text="修改密码" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/ic_right" />
+                </LinearLayout>
+                
+                 <include layout="@layout/layout_line_small" />
+
+                <LinearLayout
+                    android:id="@+id/layout_version"
+                    android:layout_width="fill_parent"
+                    android:layout_height="43dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:src="@drawable/ic_version" />
+
+                    <TextView
+                        android:id="@+id/tv_version"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="18dp"
+                        android:layout_weight="1"
+                        android:text="版本信息" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="15dp"
+                        android:src="@drawable/ic_right" 
+                        android:visibility="gone"/>
+                </LinearLayout>
+            </LinearLayout>
+            
+            <Button 
+                android:id="@+id/btn_log_out"
+                android:layout_width="fill_parent"
+                android:layout_height="48dp"
+                android:layout_marginLeft="18dp"
+                android:layout_marginRight="18dp"
+                android:background="@drawable/bg_button"
+                android:text="退出登录"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                android:layout_marginTop="43dp"
+                android:layout_marginBottom="@dimen/view_margin"/>
+            
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

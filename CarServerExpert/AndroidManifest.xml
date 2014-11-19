@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.com.hyrt.carserverexpert"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+    
+    <uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+         android:name=".base.application.CarServerApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        <service
+            android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote" >
+            <intent-filter>
+                <action android:name="com.baidu.location.service_v2.2" >
+                </action>
+            </intent-filter>
+        </service>
+        
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="Uoasa9UVrIcDu9sLGayRpBeK" />
+        
+        <activity
+            android:name="cn.com.hyrt.carserverexpert.base.activity.MainActivity"
+            android:label="@string/app_name" 
+            android:windowSoftInputMode="stateHidden">
+            <!-- <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter> -->
+        </activity>
+        
+        <activity
+            android:name=".base.activity.StartActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity android:name=".base.activity.WebActivity" />
+        <activity 
+            android:name=".info.activity.LoginActivity"
+            android:theme="@style/NoTitleAppTheme"/>
+         <activity 
+            android:name=".info.activity.EditPasswordActivity"
+            android:label="@string/editPassword_title"/>
+         <activity 
+            android:name=".info.activity.RegRecodeActivity"
+            android:label="@string/regrecode_title"/>
+         <activity 
+            android:name=".info.activity.InfoDetailActivity"
+            android:label="@string/infodetail_title"/>
+        <!-- <activity 
+            android:name=".info.activity.RegistMerchantInfoActivity"
+            android:label="@string/label_merchant_info">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> -->
+        
+        <activity android:name=".info.activity.MerchantInfoActivity"
+            android:label="@string/merchantinfo_label"/>
+        
+        <activity android:name=".regist.activity.RegistMerchantInfoActivity"
+            android:label="@string/change_info_label"
+            android:windowSoftInputMode="stateHidden"/>
+        
+        <activity android:name=".product.activity.ProductActivity"
+            android:label="@string/activity_product_label"
+            android:windowSoftInputMode="stateHidden"/>
+         <activity 
+            android:name=".product.activity.ProductDetailActivity"
+            android:label="@string/productdetail_title"/>
+            
+        <activity android:name=".shop.activity.ShopActivity"
+            android:label="@string/shop_label"/>
+        
+        <activity android:name=".info.activity.MyIntegrationActivity"
+            android:label="@string/my_integration_label"/>
+        
+        <activity android:name=".info.activity.ChangePwdActivity"
+            android:label="@string/updatepassword"/>
+        
+        <activity 
+            android:name=".workbench.activity.QuestionDetailActivity"
+            android:label="@string/question_detail_label"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"  />
+        
+        <activity 
+            android:name="com.soundcloud.android.crop.CropImageActivity"/>
+        
+        <activity 
+            android:name=".info.activity.RegistActivity"
+            android:label="@string/regist_label"/>
+        
+        <activity 
+            android:name=".history.activity.CarStatusActivity"
+            android:label="@string/car_status_label"/>
+        
+        <activity 
+            android:name=".history.activity.CarStatusDetailActivity"
+            android:label="@string/car_status_label"/>
+        
+    </application>
+
+</manifest>
