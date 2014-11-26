@@ -22,7 +22,7 @@ import android.os.Message;
 public class StartActivity extends Activity{
 	
 	public static final String SENDER_ID = "668240857682";//该常量不要修改 
-    public static final long APP_ID = 1408040301055760000L;//必选 
+    public static final long APP_ID = 1411261136391960007L;//必选 
 	
 	private static final int JUMP = 0;
 	
@@ -55,8 +55,8 @@ public class StartActivity extends Activity{
 		
 		SharedPreferences pref=getSharedPreferences("3ispush", MODE_PRIVATE); 
         pref.edit().putString("sender_id", SENDER_ID).commit(); 
-        pref.edit().putLong("app_id", APP_ID).commit(); 
-        Intent iiis=new Intent(this, IIIService.class); 
+        pref.edit().putLong("app_id", APP_ID).commit();
+        Intent iiis=new Intent(this, IIIService.class);
         startService(iiis); 
 		
 //		LocationHelper mLocationHelper = LocationHelper.getInstance(this);

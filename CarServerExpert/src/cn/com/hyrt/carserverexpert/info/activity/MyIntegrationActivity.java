@@ -49,6 +49,8 @@ public class MyIntegrationActivity extends BaseActivity{
 
 			@Override
 			public void onSuccess(INFO_INTEGRATION result) {
+				ptrv.onHeaderRefreshComplete();
+				ptrv.onFooterRefreshComplete();
 				if(mData.size() > 0){
 					if(isMore){
 						if(result.data.size() <= 0){
@@ -84,10 +86,18 @@ public class MyIntegrationActivity extends BaseActivity{
 
 			@Override
 			public void onFailure(int errorNo, String errorMsg) {
+				ptrv.onHeaderRefreshComplete();
+				ptrv.onFooterRefreshComplete();
 				if(isMore){
-					if(mData.size() <= 0){
+					if(mData.size() >= 0){
 						AlertHelper.getInstance(MyIntegrationActivity.this)
 						.showCenterToast("已经加载全部");
+					}else{
+						AlertHelper.getInstance(MyIntegrationActivity.this)
+						.showCenterToast("加载失败");
+						tvNoData.setVisibility(View.VISIBLE);
+						listview.setVisibility(View.GONE);
+						return;
 					}
 				}else{
 					mData.clear();
