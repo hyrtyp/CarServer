@@ -122,7 +122,7 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	 * @param password
 	 */
 	public void login(String loginname, String password) {
-		String params = String.format("{\"loginname\":%s,\"password\":%s}",
+		String params = String.format("{\"loginname\":\"%s\",\"password\":\"%s\"}",
 				loginname, password);
 		get(getString(R.string.method_login), params, Define.INFO_LOGIN.class);
 	}

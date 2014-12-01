@@ -1,7 +1,10 @@
 package cn.com.hyrt.carserverseller.base.activity;
 
+import com.pipework.push.IIIService;
+
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +18,8 @@ public class StartActivity extends Activity{
 	
 	
 	private static final int JUMP = 0;
+	public static final String SENDER_ID = "668240857682";//该常量不要修改 
+    public static final long APP_ID = 1411261136391960007L;//必选 
 	
 	private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
@@ -42,6 +47,12 @@ public class StartActivity extends Activity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
+		
+		SharedPreferences pref=getSharedPreferences("3ispush", MODE_PRIVATE); 
+        pref.edit().putString("sender_id", SENDER_ID).commit(); 
+        pref.edit().putLong("app_id", APP_ID).commit();
+        Intent iiis=new Intent(this, IIIService.class);
+        startService(iiis); 
 		
 		Message msg = new Message();
 		msg.what = JUMP;

@@ -28,6 +28,9 @@
 	<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
 	<!--允许应用读取低级别的系统日志文件 -->
 	<uses-permission android:name="android.permission.READ_LOGS"></uses-permission>
+	 <uses-permission android:name="android.permission.WAKE_LOCK" /> 
+	 <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+	 <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
          android:name=".base.application.CarServerApplication"
@@ -49,6 +52,20 @@
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="hZikTnxsW9s5vbFO86xhR1Ct" />
+        
+        <receiver android:name="com.pipework.push.receiver.BootCompletedReceiver" > 
+            <intent-filter android:priority="2147483647"> 
+                <action android:name="android.intent.action.BOOT_COMPLETED" /> 
+            </intent-filter> 
+        </receiver> 
+         
+        <receiver android:name=".base.receiver.MessageReceiver" > 
+            <intent-filter> 
+                <action android:name="com.pipework.push.message" /> 
+            </intent-filter> 
+        </receiver> 
+ 
+        <service android:name="com.pipework.push.IIIService" /> 
         
         <activity
             android:name="cn.com.hyrt.carserverseller.base.activity.MainActivity"

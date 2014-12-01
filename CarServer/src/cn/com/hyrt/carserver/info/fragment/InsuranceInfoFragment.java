@@ -27,7 +27,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 /**
- * 保养信息
+ * 保险信息
  * @author zoe
  *
  */
