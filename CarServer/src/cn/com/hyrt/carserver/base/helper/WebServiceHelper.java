@@ -42,6 +42,10 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	public WebServiceHelper(OnSuccessListener listener, Context context) {
 		super(listener, context);
 	}
+	
+	public WebServiceHelper(Context context) {
+		super(context);
+	}
 
 	/**
 	 * 获取 用户基本信息-专业类型 编码表

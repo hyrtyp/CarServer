@@ -107,6 +107,11 @@ public class ProductDetailActivity extends BaseActivity{
 	}
 	
 	private void initView(){
+		if("yxj".equals(productInfo.status)){
+			btnClose.setVisibility(View.GONE);
+		}else{
+			btnClose.setVisibility(View.VISIBLE);
+		}
 		tvTitle.setText(productInfo.spname);
 		tvDesc.setText(productInfo.sptitle);
 		tvPrice.setText("￥"+productInfo.price);

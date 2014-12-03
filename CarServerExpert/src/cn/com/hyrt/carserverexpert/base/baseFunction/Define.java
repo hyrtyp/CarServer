@@ -24,6 +24,7 @@ public class Define {
 		public String id;
 		public String loginname;
 		public String name;
+		public String status;
 	}
 
 	public static class SAVE_INFO extends BASE {
@@ -38,6 +39,7 @@ public class Define {
 		public String unitname;//所属单位
 		public String repairtel;//维修电话
 		public String areaid;//所属区域ID
+		public String zcstatus;
 	}
 	
 	public static class SAVE_INFO_RESULT extends BASE {

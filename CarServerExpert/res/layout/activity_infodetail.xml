@@ -326,12 +326,22 @@
                             android:src="@drawable/ic_spinner2" />
                     </RelativeLayout>
 
+                    <CheckBox 
+				        android:id="@+id/cb_select_all"
+				        android:layout_width="wrap_content"
+				        android:layout_height="wrap_content"
+				        android:button="@drawable/bg_checkbox"
+				        android:textSize="12sp"
+				        android:layout_marginLeft="24dp"
+				        android:textColor="#302f2f"
+				        android:layout_marginTop="@dimen/view_margin"
+				        android:text="全选"/>
                     <cn.com.hyrt.carserverexpert.base.view.FullGridView
                         android:id="@+id/gv_specialty"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="24dp"
-                        android:layout_marginTop="@dimen/view_margin"
+                        android:layout_marginTop="10dp"
                         android:numColumns="2"
                         android:verticalSpacing="10dp" />
                 </LinearLayout>

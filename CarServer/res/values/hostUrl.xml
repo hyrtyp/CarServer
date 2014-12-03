@@ -58,5 +58,5 @@
    <!--  <string name="method_weburl">http://192.168.10.135:8083</string> -->
     <string name="method_weburl">http://192.168.10.238:8083</string>
    <!--  <string name="method_weburl">http://42.121.127.121:8083</string> -->
-  <!--   <string name="method_weburl">http://121.42.43.20:84</string> -->
+    <!-- <string name="method_weburl">http://121.42.43.20:84</string> -->
 </resources>

@@ -20,6 +20,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.LinearLayout;
@@ -67,6 +69,7 @@ public class InfoDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.sp_county) Spinner spCounty;
 	@ViewInject(id=R.id.tv_specialty) TextView tvSpecialty;
 	@ViewInject(id=R.id.et_sjname) EditText etSjName;
+	@ViewInject(id=R.id.cb_select_all) CheckBox cbSelectAll;
 	
 	private Bitmap faceBitmap;
 	private String faceImgUrl;
@@ -107,6 +110,8 @@ public class InfoDetailActivity extends BaseActivity{
 	private int curCityIndex = -1;
 	private int curCountyIndex = -1;
 	private boolean photoUploadDone = false;
+	private int zcstatus = 0;
+	private boolean needSelectAll = true;
 	
 	private Define.INFO_USER mData;
 	
@@ -284,6 +289,7 @@ public class InfoDetailActivity extends BaseActivity{
 		saveInfo.name = etName.getText().toString();
 		saveInfo.merchantid = etSjName.getText().toString();
 		saveInfo.loginname = mData.loginname;
+		saveInfo.zcstatus = zcstatus+"";
 		List<String> checkedPosition = mSpecialtyAdapter2.getCheckedPosition();
 		String checkedIds = "";
 		for(int i=0,j=checkedPosition.size(); i<j; i++){
@@ -308,6 +314,11 @@ public class InfoDetailActivity extends BaseActivity{
 				if(faceBitmap == null && licenseBitmap == null){
 					AlertHelper.getInstance(InfoDetailActivity.this).hideLoading();
 					AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast("保存成功");
+					if(zcstatus == 1){
+						Define.INFO_LOGIN loginInfo = ((CarServerApplication)getApplication()).getLoginInfo();
+						loginInfo.status = "wsh";
+						((CarServerApplication)getApplication()).setLoginInfo(loginInfo);
+					}
 					finish();
 				}else{
 					if(faceBitmap != null){
@@ -508,6 +519,23 @@ public class InfoDetailActivity extends BaseActivity{
 			@Override
 			public void onNothingSelected(AdapterView<?> arg0) {}
 		});
+		
+		cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+				if(mSpecialtyAdapter2 != null && needSelectAll){
+					mSpecialtyAdapter2.selectAll(arg1);
+				}
+				needSelectAll = true;
+			}
+		});
+	}
+	
+	public void selectAll(boolean checked){
+		needSelectAll = false;
+		cbSelectAll.setChecked(checked);
+		
 	}
 	
 	private void delPhoto(final boolean isMerchant){
@@ -620,6 +648,7 @@ public class InfoDetailActivity extends BaseActivity{
 	}
     
     public void reselect(View view){
+    	zcstatus = 1;
     	layoutSpecialty1.setVisibility(View.GONE);
     	layoutSpecialty2.setVisibility(View.VISIBLE);
     }
@@ -633,11 +662,21 @@ public class InfoDetailActivity extends BaseActivity{
 					photoUploadDone = false;
 					AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast("保存成功");
 					AlertHelper.getInstance(InfoDetailActivity.this).hideLoading();
+					if(zcstatus == 1){
+						Define.INFO_LOGIN loginInfo = ((CarServerApplication)getApplication()).getLoginInfo();
+						loginInfo.status = "wsh";
+						((CarServerApplication)getApplication()).setLoginInfo(loginInfo);
+					}
 					finish();
 				}else if(photoUploadDone){
 					photoUploadDone = false;
 					AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast("保存成功");
 					AlertHelper.getInstance(InfoDetailActivity.this).hideLoading();
+					if(zcstatus == 1){
+						Define.INFO_LOGIN loginInfo = ((CarServerApplication)getApplication()).getLoginInfo();
+						loginInfo.status = "wsh";
+						((CarServerApplication)getApplication()).setLoginInfo(loginInfo);
+					}
 					finish();
 				}else{
 					photoUploadDone = true;

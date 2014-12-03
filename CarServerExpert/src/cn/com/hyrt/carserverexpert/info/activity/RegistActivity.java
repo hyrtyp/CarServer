@@ -70,7 +70,8 @@ public class RegistActivity extends BaseActivity{
 
 			@Override
 			public void onFailure(int errorNo, String errorMsg) {
-				AlertHelper.getInstance(RegistActivity.this).showCenterToast("注册失败");
+				AlertHelper.getInstance(RegistActivity.this).hideLoading();
+				AlertHelper.getInstance(RegistActivity.this).showCenterToast(errorMsg);
 			}
 		}, this).saveUserInfo(info);
 	}

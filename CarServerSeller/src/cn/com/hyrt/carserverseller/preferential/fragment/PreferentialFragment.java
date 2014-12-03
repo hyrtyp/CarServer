@@ -86,6 +86,8 @@ public class PreferentialFragment extends Fragment{
 	private int endDay;
 	private String startTime;
 	private String endTime;
+	private long startMillis;
+	private long endMillis;
 	
 	private List<String> discountIds = new ArrayList<String>();
 	private List<String> discountNames = new ArrayList<String>();
@@ -219,6 +221,22 @@ public class PreferentialFragment extends Fragment{
 	}
 	
 	private void submit(){
+		if(startMillis <= 0){
+			AlertHelper.getInstance(getActivity()).showCenterToast("请选择开始时间");
+			return;
+		}
+		if(endMillis <= 0){
+			AlertHelper.getInstance(getActivity()).showCenterToast("请选择结束时间");
+			return;
+		}
+		if(startMillis >= endMillis){
+			AlertHelper.getInstance(getActivity()).showCenterToast("结束时间在开始时间之前");
+			return;
+		}
+		if(endMillis <= System.currentTimeMillis()){
+			AlertHelper.getInstance(getActivity()).showCenterToast("结束时间在当前时间之前");
+			return;
+		}
 		Define.INFO_PREFERENTIAL preferentialInfo = new Define.INFO_PREFERENTIAL();
 		if(rbActivity.isChecked()){
 			preferentialInfo.yhtype = "fbhd";
@@ -290,7 +308,7 @@ public class PreferentialFragment extends Fragment{
 	 * 
 	 * @param type(0:开始时间 1：结束时间 2：车检有效期)
 	 */
-	private void showDatePickerDialog(int type) {
+	private void showDatePickerDialog(final int type) {
 		this.timeType = type;
 		if(mDatePickerDialog != null){
 			mDatePickerDialog = null;
@@ -327,6 +345,11 @@ public class PreferentialFragment extends Fragment{
 									dayOfMonth >= 10 ? dayOfMonth : "0"
 											+ (dayOfMonth));
 							long millis = StringHelper.string2Millis(time);
+							if(type == 0){
+								startMillis = millis;
+							}else if(type == 1){
+								endMillis = millis;
+							}
 							if(timeType == 0){
 								startYear = year;
 								startMonth = monthOfYear;
@@ -349,11 +372,11 @@ public class PreferentialFragment extends Fragment{
 							case 1:
 								etEndTime.setText(time);
 								endTime = time + " 12:00:00";
-								if(millis < System.currentTimeMillis()){
-									AlertHelper.getInstance(getActivity()).showCenterToast("截止时间不能比当前时间早");
-									etEndTime.setText(StringHelper.getNowTime());
-									endTime = StringHelper.getNowTime();
-								}
+//								if(millis < System.currentTimeMillis()){
+//									AlertHelper.getInstance(getActivity()).showCenterToast("截止时间不能比当前时间早");
+//									etEndTime.setText(StringHelper.getNowTime());
+//									endTime = StringHelper.getNowTime();
+//								}
 								break;
 							default:
 								break;

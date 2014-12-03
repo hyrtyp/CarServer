@@ -113,6 +113,7 @@
                             android:textSize="@dimen/text_size" 
                             android:background="#fff"
                             android:singleLine="true"
+                            android:inputType="number"
                             limit:textLength="10"/>
                     </LinearLayout>
                 </TableRow>

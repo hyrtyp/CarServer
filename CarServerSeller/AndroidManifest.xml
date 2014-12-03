@@ -98,7 +98,8 @@
             android:label="@string/product_detail_label"/>
         <activity 
             android:name=".info.activity.LoginActivity"
-            android:theme="@style/NoTitleAppTheme"/>
+            android:theme="@style/NoTitleAppTheme"
+            android:windowSoftInputMode="stateHidden"/>
         
         <activity 
             android:name=".info.activity.RegistActivity"

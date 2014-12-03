@@ -57,6 +57,12 @@ public class BaseWebServiceHelper {
 		this.mContext = context;
 	}
 	
+	protected BaseWebServiceHelper(Context context) {
+		super();
+		this.mGson = new Gson();
+		this.mContext = context;
+	}
+	
 	private Handler mHandler = new Handler(){
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {

@@ -68,7 +68,11 @@ public class CorrelationAdapter extends BaseAdapter {
 		String content = data.get(position).get("content") + "";
 		Spanned contenttext = StringHelper.KeywordHighlight(content, name);
 		tv_content.setText(contenttext);
-		tv_name.setText(data.get(position).get("username") + "-"+data.get(position).get("levelname"));
+		String nameStr = data.get(position).get("username").toString();
+		if(data.get(position).get("levelname") != null){
+			nameStr += "-"+data.get(position).get("levelname");
+		}
+		tv_name.setText(nameStr);
 		tv_work.setText(data.get(position).get("sjname") + "");
 		iv_face_img.setImageUrl(data.get(position).get("attacpath") + "");
 

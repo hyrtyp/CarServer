@@ -96,7 +96,7 @@ public class MaintenanceInfoFragment extends Fragment{
 							datas = result;
 							contents.clear();
 							for(int i=0,j=result.data.size(); i<j; i++){
-								contents.add(result.data.get(i).id);
+								contents.add(result.data.get(i).byitem);
 							}
 							if(mContentAdapter == null){
 								mContentAdapter = new ArrayAdapter<String>(

@@ -4,8 +4,10 @@ import java.util.List;
 
 import cn.com.hyrt.carserverexpert.R;
 import cn.com.hyrt.carserverexpert.base.activity.BaseActivity;
+import cn.com.hyrt.carserverexpert.base.application.CarServerApplication;
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define;
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define.INFO_QUESTION_LIST.CDATA;
+import cn.com.hyrt.carserverexpert.base.helper.AlertHelper;
 import cn.com.hyrt.carserverexpert.base.helper.LogHelper;
 import cn.com.hyrt.carserverexpert.base.helper.StringHelper;
 import cn.com.hyrt.carserverexpert.base.helper.WebServiceHelper;
@@ -93,6 +95,15 @@ public class QuestionAdapter extends BaseAdapter{
 			
 			@Override
 			public void onClick(View arg0) {
+				Define.INFO_LOGIN loginInfo = ((CarServerApplication)mContext
+						.getApplicationContext()).getLoginInfo();
+				if("wsh".equals(loginInfo.status)){
+					AlertHelper.getInstance(mContext).showCenterToast("资料审核中...");
+					return;
+				}else if("yzc".equals(loginInfo.status)){
+					AlertHelper.getInstance(mContext).showCenterToast("请补充资料...");
+					return;
+				}
 				Intent intent = new Intent();
 				intent.setClass(mContext, QuestionDetailActivity.class);
 				intent.putExtra("questionId", questioninfo.id);

@@ -46,24 +46,12 @@ public class CommentExpertActivity extends BaseActivity{
 		}
 		
 		if(mWebServiceHelper == null){
-			mWebServiceHelper = new WebServiceHelper(
-					new WebServiceHelper.RequestCallback<Define.BASE>() {
-
-						@Override
-						public void onSuccess(Define.BASE result) {
-							AlertHelper.getInstance(CommentExpertActivity.this)
-							.showCenterToast(R.string.comment_success);
-							setResult(101);
-							finish();
-						}
-
-						@Override
-						public void onFailure(int errorNo, String errorMsg) {
-							AlertHelper.getInstance(CommentExpertActivity.this)
-							.showCenterToast(R.string.comment_fail);
-						}
-			}, this);
+			mWebServiceHelper = new WebServiceHelper(this);
 		}
 		mWebServiceHelper.commentExpert(commentExpert);
+		AlertHelper.getInstance(CommentExpertActivity.this)
+		.showCenterToast(R.string.comment_success);
+		setResult(101);
+		finish();
 	}
 }

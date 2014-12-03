@@ -129,6 +129,7 @@ public class QuestionDetailAdapter extends BaseAdapter{
 							+"/cspportal/expert/view?id="
 							+data.userterminalid
 							+"&userid="+CarServerApplication.loginInfo.id;
+					LogHelper.i("tag", "url:"+url);
 					intent.putExtra("url", url);
 					mContext.startActivity(intent);
 				}

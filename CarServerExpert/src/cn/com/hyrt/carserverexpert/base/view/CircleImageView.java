@@ -65,7 +65,7 @@ public class CircleImageView extends ImageLoaderView{
          int saveCount = cns.getSaveCount();
         cns.save();
         cns.setDrawFilter(mPaintFlagsDrawFilter);
-        cns.clipPath(path,Region.Op.REPLACE);
+//        cns.clipPath(path,Region.Op.REPLACE);
         cns.setDrawFilter(mPaintFlagsDrawFilter);
         cns.drawColor(Color.WHITE);
         super.onDraw(cns);

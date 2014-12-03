@@ -3,6 +3,9 @@ package cn.com.hyrt.carserverexpert.info.fragment;
 import cn.com.hyrt.carserverexpert.R;
 import cn.com.hyrt.carserverexpert.base.activity.MainActivity;
 import cn.com.hyrt.carserverexpert.base.application.CarServerApplication;
+import cn.com.hyrt.carserverexpert.base.baseFunction.Define;
+import cn.com.hyrt.carserverexpert.base.helper.AlertHelper;
+import cn.com.hyrt.carserverexpert.base.helper.LogHelper;
 import cn.com.hyrt.carserverexpert.info.activity.ChangePwdActivity;
 import cn.com.hyrt.carserverexpert.info.activity.InfoDetailActivity;
 import cn.com.hyrt.carserverexpert.info.activity.LoginActivity;
@@ -51,6 +54,13 @@ public class InfoFragment extends Fragment implements OnClickListener{
 		int viewId = view.getId();
 		Intent intent = new Intent();
 		if(viewId == layoutInfo.getId()){
+			Define.INFO_LOGIN loginInfo = ((CarServerApplication)getActivity()
+					.getApplication()).getLoginInfo();
+			LogHelper.i("tag", "loginInfo.status:"+loginInfo.status);
+			if("wsh".equals(loginInfo.status)){
+				AlertHelper.getInstance(getActivity()).showCenterToast("资料审核中，无法编辑");
+				return;
+			}
 			intent.setClass(getActivity(), InfoDetailActivity.class);
 		}else if(viewId == layoutIntegration.getId()){
 			intent.setClass(getActivity(), MyIntegrationActivity.class);

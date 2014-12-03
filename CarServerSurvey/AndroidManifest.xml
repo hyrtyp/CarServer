@@ -56,7 +56,8 @@
         <activity android:name=".base.activity.WebActivity" />
         <activity 
             android:name=".info.activity.LoginActivity"
-            android:theme="@style/NoTitleAppTheme"/>
+            android:theme="@style/NoTitleAppTheme"
+            android:windowSoftInputMode="stateHidden"/>
          <activity 
             android:name=".info.activity.EditPasswordActivity"
             android:label="@string/editPassword_title"/>

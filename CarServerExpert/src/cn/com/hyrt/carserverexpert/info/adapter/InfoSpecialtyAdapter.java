@@ -5,6 +5,7 @@ import java.util.List;
 
 import cn.com.hyrt.carserverexpert.R;
 import cn.com.hyrt.carserverexpert.base.helper.LogHelper;
+import cn.com.hyrt.carserverexpert.info.activity.InfoDetailActivity;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ public class InfoSpecialtyAdapter extends BaseAdapter{
 	private List<String> mData;
 	private Context mContext;
 	private List<String> checkedPosition = new ArrayList<String>();
+	private ViewGroup rootView;
 	
 	public InfoSpecialtyAdapter(List<String> mData, Context mContext) {
 		super();
@@ -42,11 +44,13 @@ public class InfoSpecialtyAdapter extends BaseAdapter{
 	}
 
 	@Override
-	public View getView(final int position, View convertView, ViewGroup arg2) {
+	public View getView(final int position, View convertView, ViewGroup parentView) {
+		rootView = parentView;
 		if(convertView == null){
 			convertView = LayoutInflater.from(mContext)
 					.inflate(R.layout.layout_checkbox_item, null);
 		}
+		
 		CheckBox checkbox = (CheckBox) convertView.findViewById(R.id.checkbox);
 		checkbox.setChecked(checkedPosition.contains(position+""));
 		checkbox.setText(mData.get(position));
@@ -57,6 +61,7 @@ public class InfoSpecialtyAdapter extends BaseAdapter{
 				if(arg1){
 					checkedPosition.add(position+"");
 				}else{
+					((InfoDetailActivity)mContext).selectAll(false);
 					checkedPosition.remove(position+"");
 				}
 				for(int i=0,j=checkedPosition.size(); i<j; i++){
@@ -71,6 +76,14 @@ public class InfoSpecialtyAdapter extends BaseAdapter{
 	
 	public List<String> getCheckedPosition(){
 		return checkedPosition;
+	}
+	
+	public void selectAll(boolean checked){
+		for(int i=0,j=rootView.getChildCount(); i<j; i++){
+			View childView = rootView.getChildAt(i);
+			CheckBox cb = (CheckBox) childView.findViewById(R.id.checkbox);
+			cb.setChecked(checked);
+		}
 	}
 	
 	@Override

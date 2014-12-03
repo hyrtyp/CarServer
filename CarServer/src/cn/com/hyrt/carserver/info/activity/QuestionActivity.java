@@ -141,7 +141,7 @@ public class QuestionActivity extends BaseActivity{
 			map.put("seekdate", StringHelper.getFriendlydate(result.data.get(i).seekdate));
 			map.put("consultationid", result.data.get(i).consultationid);
 			String status = result.data.get(i).status;
-			if("gb".equals(status)){
+			if("gb".equals(status) || "fb".equals(status)){
 				map.put("status", getString(R.string.info_status_ygb));
 			}else if("wjj".equals(status)){
 				map.put("status", getString(R.string.info_status_wjj));
