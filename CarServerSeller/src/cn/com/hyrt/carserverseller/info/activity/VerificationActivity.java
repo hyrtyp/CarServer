@@ -329,6 +329,7 @@ public class VerificationActivity extends BaseActivity{
 			AlertHelper.getInstance(VerificationActivity.this).showCenterToast("至少上传一张图片");
 			return;
 		}else{
+			AlertHelper.getInstance(this).showLoading(null);
 			new WebServiceHelper(
 					new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
 
