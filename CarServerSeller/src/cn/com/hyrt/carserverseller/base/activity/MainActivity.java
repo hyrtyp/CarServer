@@ -1,11 +1,14 @@
 package cn.com.hyrt.carserverseller.base.activity;
 
+import java.util.List;
+
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTabHost;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -165,15 +168,12 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-//		if(curIndex == 3){
-//			List<Fragment> mFragments = getSupportFragmentManager().getFragments();
-//			if(mFragments == null){
-//				return;
-//			}
-//			for(int i=0,j=mFragments.size(); i<j; i++){
-//				if(mFragments.get(i) instanceof InfoFragment){
-//					((InfoFragment)mFragments.get(i)).loadData();
-//				}
+//		if(curIndex == 4){
+//			InfoFragment mInfoFragment = 
+//					(InfoFragment) getSupportFragmentManager()
+//					.findFragmentByTag(mTabHost.getCurrentTabTag());
+//			if(mInfoFragment != null){
+//				mInfoFragment.loadData();
 //			}
 //		}
 	}
