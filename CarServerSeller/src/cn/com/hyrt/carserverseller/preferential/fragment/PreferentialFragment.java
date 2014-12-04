@@ -272,6 +272,7 @@ public class PreferentialFragment extends Fragment{
 							Intent intent = new Intent();
 							intent.setClass(getActivity(), PreferentialDetailActivity.class);
 							intent.putExtra("isAdd", true);
+							intent.putExtra("id", result.id);
 							startActivity(intent);
 						}
 					}
@@ -510,6 +511,7 @@ public class PreferentialFragment extends Fragment{
 				Intent intent = new Intent();
 				intent.setClass(getActivity(), PreferentialDetailActivity.class);
 				intent.putExtra("isAdd", true);
+				intent.putExtra("id", id);
 				startActivity(intent);
 			}
 

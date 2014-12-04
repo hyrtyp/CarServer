@@ -176,6 +176,15 @@ public class MainActivity extends BaseActivity {
 //				mInfoFragment.loadData();
 //			}
 //		}
+		LogHelper.i("tag", "onresume");
+		if(curIndex == 1){
+			OrderFragment mOrderFragment =
+					(OrderFragment) getSupportFragmentManager()
+			.findFragmentByTag(mTabHost.getCurrentTabTag());
+			if(mOrderFragment != null){
+				mOrderFragment.loadData();
+			}
+		}
 	}
 	
 	@Override

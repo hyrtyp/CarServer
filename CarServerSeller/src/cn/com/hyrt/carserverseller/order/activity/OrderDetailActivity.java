@@ -32,6 +32,7 @@ public class OrderDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.btn_refusal,click="refusal") Button btnRefusal;
 	@ViewInject(id=R.id.btn_accept,click="accept") Button btnAccept;
 	@ViewInject(id=R.id.tv_status) TextView tvStatus;
+	@ViewInject(id=R.id.btn_submit,click="submit") Button btnSubmit;
 	private Define.ORDER_LIST.CDATA orderInfo;
 	private String type;
 	
@@ -47,11 +48,14 @@ public class OrderDetailActivity extends BaseActivity{
 			tvAcceptTime.setVisibility(View.GONE);
 			tvArriveTime.setVisibility(View.GONE);
 			layoutControl.setVisibility(View.VISIBLE);
+			btnSubmit.setVisibility(View.GONE);
 		}else if(WebServiceHelper.ORDER_TYPE_AND.equals(type)){
 			tvArriveTime.setVisibility(View.GONE);
 			tvStatus.setVisibility(View.VISIBLE);
+			btnSubmit.setVisibility(View.VISIBLE);
 		}else if(WebServiceHelper.ORDER_TYPE_HIS.equals(type)){
 			tvStatus.setVisibility(View.VISIBLE);
+			btnSubmit.setVisibility(View.GONE);
 		}
 		
 		initView();
@@ -99,6 +103,27 @@ public class OrderDetailActivity extends BaseActivity{
 	 */
 	public void accept(View view){
 		saveOrderStatus(true);
+	}
+	
+	public void submit(View view){
+		AlertHelper.getInstance(this).showLoading(null);
+		WebServiceHelper mSaveStatusHelper = new WebServiceHelper(
+				new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+
+					@Override
+					public void onSuccess(BASE result) {
+						AlertHelper.getInstance(OrderDetailActivity.this).hideLoading();
+						setResult(101);
+						finish();
+					}
+
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						AlertHelper.getInstance(OrderDetailActivity.this).hideLoading();
+						AlertHelper.getInstance(OrderDetailActivity.this).showCenterToast("请求失败");
+					}
+		}, this);
+		mSaveStatusHelper.saveOrderStatus(orderInfo.id, "ywc");
 	}
 	
 	private void saveOrderStatus(boolean isAccept){

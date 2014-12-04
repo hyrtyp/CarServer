@@ -189,4 +189,18 @@ public class AuditListActivity extends BaseActivity{
 		}
 	}
 	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		if(mSpAuditListFragment != null){
+			mSpAuditListFragment.loadData(false);
+		}
+		if(mFwAuditListFragment != null){
+			mFwAuditListFragment.loadData(false);
+		}
+		if(mYhAuditListFragment != null){
+			mYhAuditListFragment.loadData(false);
+		}
+	}
+	
 }
