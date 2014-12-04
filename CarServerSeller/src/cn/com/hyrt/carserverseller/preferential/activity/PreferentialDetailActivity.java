@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.activity.BaseActivity;
+import cn.com.hyrt.carserverseller.base.helper.LogHelper;
 
 public class PreferentialDetailActivity extends BaseActivity{
 
@@ -20,6 +21,7 @@ public class PreferentialDetailActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_preferential_detail);
 		Intent intent = getIntent();
+		String id = intent.getStringExtra("id");
 		boolean isAdd = intent.getBooleanExtra("isAdd", false);
 		if(isAdd){
 			btnAdd.setVisibility(View.VISIBLE);
@@ -28,7 +30,9 @@ public class PreferentialDetailActivity extends BaseActivity{
 		}
 		WebSettings webseting = webview.getSettings();
 		webseting.setJavaScriptEnabled(true);
-		webview.loadUrl("http://www.baidu.com");
+		String url = "http://192.168.10.238:8083/cspportal/knowledge/view?id="+id;
+		LogHelper.i("tag", "url:"+url);
+		webview.loadUrl(url);
 	}
 	
 	public void add(View view){

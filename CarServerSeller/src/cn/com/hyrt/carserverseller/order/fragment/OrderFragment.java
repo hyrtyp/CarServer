@@ -169,19 +169,32 @@ public class OrderFragment extends Fragment{
 		}
 	}
 	
-	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		super.onActivityResult(requestCode, resultCode, data);
-		if(resultCode == 101 && requestCode == 101){
-			if(mNewOrderFragment != null){
-				mNewOrderFragment.loadData(false);
-			}
-			if(mAndOrderFragment != null){
-				mAndOrderFragment.loadData(false);
-			}
-			if(mHisOrderFragment != null){
-				mHisOrderFragment.loadData(false);
-			}
+//	@Override
+//	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//		super.onActivityResult(requestCode, resultCode, data);
+//		if(resultCode == 101 && requestCode == 101){
+//			if(mNewOrderFragment != null){
+//				mNewOrderFragment.loadData(false);
+//			}
+//			if(mAndOrderFragment != null){
+//				mAndOrderFragment.loadData(false);
+//			}
+//			if(mHisOrderFragment != null){
+//				mHisOrderFragment.loadData(false);
+//			}
+//		}
+//	}
+	
+	public void loadData(){
+		LogHelper.i("tag", "loadData:");
+		if(mNewOrderFragment != null){
+			mNewOrderFragment.loadData(false);
+		}
+		if(mAndOrderFragment != null){
+			mAndOrderFragment.loadData(false);
+		}
+		if(mHisOrderFragment != null){
+			mHisOrderFragment.loadData(false);
 		}
 	}
 	

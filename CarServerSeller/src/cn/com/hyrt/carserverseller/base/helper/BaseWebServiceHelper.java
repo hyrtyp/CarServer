@@ -28,6 +28,7 @@ public class BaseWebServiceHelper {
 
 	private static final String END_POINT = "http://192.168.10.238:8080/CSPSJInterface/services/CspSjInterface?wsdl";
 //	private static final String END_POINT = "http://192.168.10.135:8080/CSPSJInterface/services/CspSjInterface?wsdl";
+//	private static final String END_POINT = "http://192.168.10.128:8080/CSPSJInterface/services/CspSjInterface?wsdl";
 
 	private static final int TIMEOUT = 10*1000;
 
