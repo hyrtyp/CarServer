@@ -12,6 +12,7 @@ import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.activity.BaseActivity;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_MERCHANT;
+import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
 import cn.com.hyrt.carserverseller.base.helper.FileHelper;
 import cn.com.hyrt.carserverseller.base.helper.LogHelper;
 import cn.com.hyrt.carserverseller.base.helper.PhotoHelper;
@@ -64,11 +65,20 @@ public class ChangeShopActivity extends BaseActivity{
 	}
 	
 	private void addPhoto(){
-		if(faceUri == null){
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+				faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+			}
+			mPhotoHelper = new PhotoHelper(this, faceUri, 50);
+			mPhotoHelper.getPhoto();
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+		/*if(faceUri == null){
 			faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
 		}
 		mPhotoHelper = new PhotoHelper(this, faceUri, 50);
-		mPhotoHelper.getPhoto();
+		mPhotoHelper.getPhoto();*/
 	}
 	
 	@Override
@@ -101,13 +111,24 @@ public class ChangeShopActivity extends BaseActivity{
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
-            if(mPhotoHelper == null){
+        	if (FileHelper.sdCardExist()) {
+        		if(mPhotoHelper == null){
+                    if(faceUri == null){
+                        faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+                    }
+                    mPhotoHelper = new PhotoHelper(ChangeShopActivity.this, faceUri, 50);
+                }
+                mPhotoHelper.startPhotoZoom(faceUri, 50);
+			}else{
+				AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+			}
+            /*if(mPhotoHelper == null){
                 if(faceUri == null){
                     faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
                 }
                 mPhotoHelper = new PhotoHelper(ChangeShopActivity.this, faceUri, 50);
             }
-            mPhotoHelper.startPhotoZoom(faceUri, 50);
+            mPhotoHelper.startPhotoZoom(faceUri, 50);*/
         }
 	}
 	

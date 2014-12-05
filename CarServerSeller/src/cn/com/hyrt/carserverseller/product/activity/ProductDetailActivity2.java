@@ -13,6 +13,7 @@ import cn.com.hyrt.carserverseller.base.baseFunction.Define;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
 import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserverseller.base.helper.LogHelper;
 import cn.com.hyrt.carserverseller.base.helper.StringHelper;
 import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverseller.base.view.ImageLoaderView;
@@ -64,6 +65,7 @@ public class ProductDetailActivity2 extends BaseActivity{
 	}
 	
 	private void loadData(){
+		LogHelper.i("tag", "loadData");
 		WebServiceHelper infoWebServiceHelper = new WebServiceHelper(
 				new BaseWebServiceHelper.RequestCallback<Define.INFO_PRODUCT_LIST.CDATA>() {
 
@@ -83,7 +85,7 @@ public class ProductDetailActivity2 extends BaseActivity{
 						tv_pro_discountprice.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG );
 						tv_pro_discountprice.setText(String.format(getString(R.string.pro_discount), result.discount));
 						tv_pro_content.setText(result.sptitle);
-						iv_user_img.setImageUrl(result.attacpath0);
+						iv_user_img.setImageUrl(result.imagepath0);
 					}
 		}, this);
 		infoWebServiceHelper.getProduct(id);

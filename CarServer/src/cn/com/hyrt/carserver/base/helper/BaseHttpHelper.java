@@ -31,12 +31,18 @@ public class BaseHttpHelper {
 		this.mCallback = mCallback;
 		this.mGson = new Gson();
 	}
+	
+	public BaseHttpHelper() {
+		super();
+		this.mGson = new Gson();
+	}
 
 	protected void get(String url, Class<?> clazz){
 		get(url, null, clazz);
 	}
 	
 	protected void get(String url, AjaxParams params, Class<?> clazz){
+		LogHelper.i("tag", url+"-----------------");
 		this.clazz = clazz;
 		createFinalHttp();
 		if(mAjaxCallback == null){
