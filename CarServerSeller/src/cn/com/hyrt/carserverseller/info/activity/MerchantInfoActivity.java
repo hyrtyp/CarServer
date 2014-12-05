@@ -452,11 +452,20 @@ public class MerchantInfoActivity extends BaseActivity{
 	}
 	
 	private void addPhoto(){
-		if(faceUri == null){
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+				faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+			}
+			mPhotoHelper = new PhotoHelper(MerchantInfoActivity.this, faceUri, 50);
+			mPhotoHelper.getPhoto();
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+		/*if(faceUri == null){
 			faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
 		}
 		mPhotoHelper = new PhotoHelper(MerchantInfoActivity.this, faceUri, 50);
-		mPhotoHelper.getPhoto();
+		mPhotoHelper.getPhoto();*/
 	}
 	
 	private void showBrand(){
@@ -861,10 +870,18 @@ public class MerchantInfoActivity extends BaseActivity{
 	}
 	
 	private void beginCrop(Uri source) {
-		if(faceUri == null){
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+	            faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+	        }
+	        new Crop(source).output(faceUri).asSquare().start(this);	
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+		/*if(faceUri == null){
             faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
         }
-        new Crop(source).output(faceUri).asSquare().start(this);
+        new Crop(source).output(faceUri).asSquare().start(this);*/
     }
 
     private void handleCrop(int resultCode, Intent result) {

@@ -9,9 +9,13 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.activity.BaseActivity;
+import cn.com.hyrt.carserver.base.activity.WebActivity;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.COMMENT_EXPERT;
+import cn.com.hyrt.carserver.base.baseFunction.Define.COMMENT_ID;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
+import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserver.base.helper.HttpHelper;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 
@@ -38,7 +42,7 @@ public class CommentExpertActivity extends BaseActivity{
 	}
 	
 	public void commit(View view){
-		Define.COMMENT_EXPERT commentExpert = new Define.COMMENT_EXPERT();
+		final Define.COMMENT_EXPERT commentExpert = new Define.COMMENT_EXPERT();
 		commentExpert.seekid = replyId;
 		commentExpert.level = (int)rbScore.getRating()+"";
 		if(!"".equals(etContent.getText().toString())){
@@ -46,12 +50,25 @@ public class CommentExpertActivity extends BaseActivity{
 		}
 		
 		if(mWebServiceHelper == null){
-			mWebServiceHelper = new WebServiceHelper(this);
+			mWebServiceHelper = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.COMMENT_ID>() {
+				
+				@Override
+				public void onSuccess(COMMENT_ID result) {
+					
+					AlertHelper.getInstance(CommentExpertActivity.this)
+					.showCenterToast(R.string.comment_success);
+					HttpHelper mHttpHelper = new HttpHelper();
+					mHttpHelper.commentSucess(result.keyurl);
+					finish();
+				}
+
+				@Override
+				public void onFailure(int errorNo, String errorMsg) {
+					AlertHelper.getInstance(CommentExpertActivity.this)
+					.showCenterToast(R.string.comment_fail);
+				}
+			}, this);
 		}
 		mWebServiceHelper.commentExpert(commentExpert);
-		AlertHelper.getInstance(CommentExpertActivity.this)
-		.showCenterToast(R.string.comment_success);
-		setResult(101);
-		finish();
 	}
 }

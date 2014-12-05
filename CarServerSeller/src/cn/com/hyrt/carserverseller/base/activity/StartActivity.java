@@ -48,7 +48,7 @@ public class StartActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_start);
 		
-		SharedPreferences pref=getSharedPreferences("3ispush", MODE_PRIVATE); 
+		SharedPreferences pref = getSharedPreferences("3ispush", MODE_PRIVATE); 
         pref.edit().putString("sender_id", SENDER_ID).commit(); 
         pref.edit().putLong("app_id", APP_ID).commit();
         Intent iiis=new Intent(this, IIIService.class);

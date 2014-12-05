@@ -13,6 +13,7 @@ import cn.com.hyrt.carserverseller.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_PRODUCT_LIST.CDATA;
 import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
 import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserverseller.base.helper.LogHelper;
 import cn.com.hyrt.carserverseller.base.helper.StringHelper;
 import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverseller.base.view.ImageLoaderView;

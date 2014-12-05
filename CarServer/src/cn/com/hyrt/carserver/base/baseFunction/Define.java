@@ -476,4 +476,8 @@ public class Define {
 		public String id;
 	}
 	
+	public static class COMMENT_ID extends BASE {
+		public String keyurl;
+	}
+	
 }

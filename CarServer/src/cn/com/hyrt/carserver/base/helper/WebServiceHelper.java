@@ -508,7 +508,7 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		String params = gson.toJson(comment);
 		get(
 			getString(R.string.method_comment_expert),
-			params, Define.BASE.class);
+			params, Define.COMMENT_ID.class);
 	}
 	
 	/**
