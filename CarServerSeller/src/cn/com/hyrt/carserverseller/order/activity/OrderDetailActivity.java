@@ -28,6 +28,7 @@ public class OrderDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.tv_marktime) TextView tvMarkTime;
 	@ViewInject(id=R.id.tv_arrivetime) TextView tvArriveTime;
 	@ViewInject(id=R.id.tv_remark) TextView tvRemark;
+	@ViewInject(id=R.id.tv_remark) TextView tv_content;//订单详情
 	@ViewInject(id=R.id.layout_control) LinearLayout layoutControl;
 	@ViewInject(id=R.id.btn_refusal,click="refusal") Button btnRefusal;
 	@ViewInject(id=R.id.btn_accept,click="accept") Button btnAccept;

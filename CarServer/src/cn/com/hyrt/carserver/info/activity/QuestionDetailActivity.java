@@ -208,7 +208,12 @@ public class QuestionDetailActivity extends BaseActivity{
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
             if(mPhotoHelper == null){
                 if(faceUri == null){
-                    faceUri = Uri.fromFile(FileHelper.createFile(imageName));
+                	if (FileHelper.sdCardExist()) {
+                		faceUri = Uri.fromFile(FileHelper.createFile1(imageName));
+                	}else{
+                		AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+                	}
+                   // faceUri = Uri.fromFile(FileHelper.createFile(imageName));
                 }
                 mPhotoHelper = new PhotoHelper(QuestionDetailActivity.this, faceUri, 50);
             }
@@ -227,7 +232,12 @@ public class QuestionDetailActivity extends BaseActivity{
 			return;
 		}
 		if(faceUri == null){
-			faceUri = Uri.fromFile(FileHelper.createFile(imageName));
+			if (FileHelper.sdCardExist()) {
+				faceUri = Uri.fromFile(FileHelper.createFile1(imageName));
+			}else{
+				AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+			}
+			//faceUri = Uri.fromFile(FileHelper.createFile(imageName));
 		}
 		if(mPhotoHelper == null){
 			mPhotoHelper = new PhotoHelper(this, faceUri, 50);

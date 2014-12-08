@@ -193,7 +193,13 @@ public class CrashHandler implements UncaughtExceptionHandler{
     }
     
     private void writeErrorLog(String info){
-		File file = FileHelper.createFile("crash.log");
+    	File file = null;
+    	if (FileHelper.sdCardExist()) {
+    		file = FileHelper.createFile1("crash.log");
+		}else{
+			return;
+		}
+		//File file = FileHelper.createFile("crash.log");
 		if(file == null){
 			return;
 		}

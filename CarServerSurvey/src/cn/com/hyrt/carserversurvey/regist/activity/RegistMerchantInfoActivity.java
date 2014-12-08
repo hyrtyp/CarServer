@@ -604,11 +604,21 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 	}
 	
 	private void addPhoto(){
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+				faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+			}
+			mPhotoHelper = new PhotoHelper(RegistMerchantInfoActivity.this, faceUri, 50);
+			mPhotoHelper.getPhoto();
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast(getString(R.string.no_sdcard));
+		}
+		/*
 		if(faceUri == null){
 			faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
 		}
 		mPhotoHelper = new PhotoHelper(RegistMerchantInfoActivity.this, faceUri, 50);
-		mPhotoHelper.getPhoto();
+		mPhotoHelper.getPhoto();*/
 	}
 	
 	@Override
@@ -645,13 +655,25 @@ public class RegistMerchantInfoActivity extends BaseActivity{
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
+        	if (FileHelper.sdCardExist()) {
+        		if(mPhotoHelper == null){
+                    if(faceUri == null){
+                        faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+                    }
+                    mPhotoHelper = new PhotoHelper(RegistMerchantInfoActivity.this, faceUri, 50);
+                }
+                mPhotoHelper.startPhotoZoom(faceUri, 50);
+        	}else{
+        		AlertHelper.getInstance(getApplicationContext()).showCenterToast(getString(R.string.no_sdcard));
+        	}
+        	/*
             if(mPhotoHelper == null){
                 if(faceUri == null){
                     faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
                 }
                 mPhotoHelper = new PhotoHelper(RegistMerchantInfoActivity.this, faceUri, 50);
             }
-            mPhotoHelper.startPhotoZoom(faceUri, 50);
+            mPhotoHelper.startPhotoZoom(faceUri, 50);*/
         }
 	}
 	

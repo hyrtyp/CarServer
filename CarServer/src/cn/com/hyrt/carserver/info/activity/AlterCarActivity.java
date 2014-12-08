@@ -284,13 +284,24 @@ public class AlterCarActivity extends BaseActivity{
 	}
 	
 	public void addPhoto(View view){
-		if(mPhotoHelper == null){
+		if (FileHelper.sdCardExist()) {
+			if(mPhotoHelper == null){
+				if(faceUri == null){
+					faceUri = Uri.fromFile(FileHelper.createFile1(imageName));
+				}
+				mPhotoHelper = new PhotoHelper(this, faceUri, 247, 103);
+			}
+			mPhotoHelper.getPhoto();
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+		/*if(mPhotoHelper == null){
 			if(faceUri == null){
 				faceUri = Uri.fromFile(FileHelper.createFile(imageName));
 			}
 			mPhotoHelper = new PhotoHelper(this, faceUri, 247, 103);
 		}
-		mPhotoHelper.getPhoto();
+		mPhotoHelper.getPhoto();*/
 	}
 	
 	public void addCar(View view){
@@ -375,13 +386,24 @@ public class AlterCarActivity extends BaseActivity{
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
-            if(mPhotoHelper == null){
+        	if (FileHelper.sdCardExist()) {
+        		if(mPhotoHelper == null){
+                    if(faceUri == null){
+                        faceUri = Uri.fromFile(FileHelper.createFile1(imageName));
+                    }
+                    mPhotoHelper = new PhotoHelper(AlterCarActivity.this, faceUri, 247, 103);
+                }
+                mPhotoHelper.startPhotoZoom(faceUri, 247, 103);
+        	}else{
+        		AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+        	}
+            /*if(mPhotoHelper == null){
                 if(faceUri == null){
                     faceUri = Uri.fromFile(FileHelper.createFile(imageName));
                 }
                 mPhotoHelper = new PhotoHelper(AlterCarActivity.this, faceUri, 247, 103);
             }
-            mPhotoHelper.startPhotoZoom(faceUri, 247, 103);
+            mPhotoHelper.startPhotoZoom(faceUri, 247, 103);*/
         }
 	}
 	

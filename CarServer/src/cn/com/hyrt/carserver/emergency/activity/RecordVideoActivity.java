@@ -70,9 +70,14 @@ public class RecordVideoActivity extends FinalActivity implements SurfaceHolder.
         mediarecorder.setVideoFrameRate(20);  
         mediarecorder.setPreviewDisplay(surfaceHolder.getSurface());  
         // 设置视频文件输出的路径  
-        
-        File mFile = FileHelper.createFile("video.mp4");
-        mediarecorder.setOutputFile(mFile.getAbsolutePath());  
+        if (FileHelper.sdCardExist()) {
+        	 File mFile = FileHelper.createFile1("video.mp4");
+             mediarecorder.setOutputFile(mFile.getAbsolutePath());
+    	}else{
+    		AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+    	}
+        //File mFile = FileHelper.createFile("video.mp4");
+        //mediarecorder.setOutputFile(mFile.getAbsolutePath());  
         try {  
             // 准备录制  
             mediarecorder.prepare();  

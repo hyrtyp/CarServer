@@ -87,4 +87,7 @@
 	<string name="pro_discount">¥%s</string>
 	<string name="change_success">修改成功</string>
 	
+	<!-- filehelper -->
+	<string name="no_sdcard">sd卡不存在</string>
+	
 </resources>

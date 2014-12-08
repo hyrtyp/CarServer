@@ -198,7 +198,27 @@ public class CrashHandler implements UncaughtExceptionHandler{
     }
     
     private void writeErrorLog(String info){
-		File file = FileHelper.createFile("crash.log");
+    	if(FileHelper.sdCardExist()){
+    		File file = FileHelper.createFile1("crash.log");
+    		if(file == null){
+    			return;
+    		}
+    		if(file.exists()){
+    			file.delete();
+    		}
+    		try {
+    			FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+    			fileOutputStream.write(info.getBytes());
+    			fileOutputStream.close();
+    		} catch (FileNotFoundException e) {
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			 e.printStackTrace();
+    		  }
+    	}else{
+    		return;
+    	}
+		/*File file = FileHelper.createFile("crash.log");
 		if(file == null){
 			return;
 		}
@@ -213,7 +233,7 @@ public class CrashHandler implements UncaughtExceptionHandler{
 			e.printStackTrace();
 		} catch (IOException e) {
 			 e.printStackTrace();
-		  }
+		  }*/
 	}
       
     /** 

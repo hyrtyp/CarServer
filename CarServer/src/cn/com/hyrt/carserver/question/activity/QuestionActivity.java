@@ -103,7 +103,12 @@ public class QuestionActivity extends BaseActivity {
 
 	public void updataImg() {
 		if (questionUri == null) {
-			questionUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
+			if (FileHelper.sdCardExist()) {
+				questionUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+			}else{
+				AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+			}
+			//questionUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
 		}
 		mPhotoHelper = new PhotoHelper(this, questionUri, 50);
 		mPhotoHelper.getPhoto();
@@ -137,8 +142,12 @@ public class QuestionActivity extends BaseActivity {
 		} else if (requestCode == PhotoHelper.FROM_CAMERA) {
 			if (mPhotoHelper == null) {
 				if (questionUri == null) {
-					questionUri = Uri.fromFile(FileHelper
-							.createFile("question.jpg"));
+					if (FileHelper.sdCardExist()) {
+						questionUri = Uri.fromFile(FileHelper.createFile1("question.jpg"));
+					}else{
+						AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+					}
+					//questionUri = Uri.fromFile(FileHelper.createFile("question.jpg"));
 				}
 				mPhotoHelper = new PhotoHelper(QuestionActivity.this,
 						questionUri, 50);

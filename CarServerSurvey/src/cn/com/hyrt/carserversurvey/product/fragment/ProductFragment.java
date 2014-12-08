@@ -108,11 +108,22 @@ public class ProductFragment extends Fragment{
 	}
 	
 	private void addPhoto(){
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+				faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+			}
+			mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 50);
+			mPhotoHelper.getPhoto();
+		}else{
+			AlertHelper.getInstance(getActivity()).showCenterToast(getString(R.string.no_sdcard));
+		}
+		/*
 		if(faceUri == null){
 			faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
 		}
 		mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 50);
 		mPhotoHelper.getPhoto();
+		*/
 	}
 	
 	private void delPhoto(final int position){
@@ -153,13 +164,25 @@ public class ProductFragment extends Fragment{
             }
 
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
+        	if (FileHelper.sdCardExist()) {
+        		if(mPhotoHelper == null){
+                    if(faceUri == null){
+                        faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+                    }
+                    mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 50);
+                }
+                mPhotoHelper.startPhotoZoom(faceUri, 50);
+        	}else{
+        		AlertHelper.getInstance(getActivity()).showCenterToast(getString(R.string.no_sdcard));
+        	}
+        	/*
             if(mPhotoHelper == null){
                 if(faceUri == null){
                     faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
                 }
                 mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 50);
             }
-            mPhotoHelper.startPhotoZoom(faceUri, 50);
+            mPhotoHelper.startPhotoZoom(faceUri, 50);*/
         }
 	}
 	

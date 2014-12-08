@@ -565,7 +565,12 @@ public class InfoDetailActivity extends BaseActivity{
 	
 	private void addPhoto(){
 		if(faceUri == null){
-			faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
+			if (FileHelper.sdCardExist()) {
+				faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+			}else{
+				AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+			}
+			//faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
 		}
 		mPhotoHelper = new PhotoHelper(InfoDetailActivity.this, faceUri, 50);
 		mPhotoHelper.getPhoto();
@@ -588,7 +593,12 @@ public class InfoDetailActivity extends BaseActivity{
 	
 	private void beginCrop(Uri source) {
 		if(faceUri == null){
-            faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
+			if (FileHelper.sdCardExist()) {
+				faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+			}else{
+				AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+			}
+            //faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
         }
         new Crop(source).output(faceUri).asSquare().start(this);
     }

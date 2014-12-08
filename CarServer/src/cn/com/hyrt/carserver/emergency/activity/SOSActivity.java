@@ -75,11 +75,20 @@ public class SOSActivity extends BaseActivity{
 	}
 	
 	public void camera(View view){
-		if(faceUri == null){
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+				faceUri = Uri.fromFile(FileHelper.createFile1("sos.jpg"));
+			}
+			PhotoHelper mPhotoHelper = new PhotoHelper(this, faceUri, 50);
+			mPhotoHelper.getFromCamera();
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+		/*if(faceUri == null){
 			faceUri = Uri.fromFile(FileHelper.createFile("sos.jpg"));
 		}
 		PhotoHelper mPhotoHelper = new PhotoHelper(this, faceUri, 50);
-		mPhotoHelper.getFromCamera();
+		mPhotoHelper.getFromCamera();*/
 	}
 	
 	public void video(View view){

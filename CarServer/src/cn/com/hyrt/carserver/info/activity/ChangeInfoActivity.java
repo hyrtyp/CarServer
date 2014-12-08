@@ -259,11 +259,20 @@ public class ChangeInfoActivity extends BaseActivity{
 	}
 	
 	public void changeFace(View view){
-		if(faceUri == null){
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+				faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+			}
+			mPhotoHelper = new PhotoHelper(this, faceUri, 50);
+			mPhotoHelper.getPhoto();
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+		/*if(faceUri == null){
 			faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
 		}
 		mPhotoHelper = new PhotoHelper(this, faceUri, 50);
-		mPhotoHelper.getPhoto();
+		mPhotoHelper.getPhoto();*/
 	}
 	
 	@Override
@@ -288,7 +297,12 @@ public class ChangeInfoActivity extends BaseActivity{
         }else if (requestCode == PhotoHelper.FROM_CAMERA) {
             if(mPhotoHelper == null){
                 if(faceUri == null){
-                    faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
+                	if (FileHelper.sdCardExist()) {
+                		faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+                	}else{
+                		AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+                	}
+                    //faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
                 }
                 mPhotoHelper = new PhotoHelper(ChangeInfoActivity.this, faceUri, 50);
             }
