@@ -66,28 +66,28 @@
                 android:text="登录"
                 android:textColor="@color/login_blue"
                 android:textSize="30sp" />
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/view_margin"
-                android:layout_weight="1"
-                android:background="#0d82e1"
-                android:orientation="vertical" >
-
-                <Button
-                    android:id="@+id/btn_regist"
-                    android:layout_width="fill_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="45dp"
-                    android:layout_marginRight="45dp"
-                    android:layout_marginTop="@dimen/view_margin"
-                    android:background="@drawable/bg_rec_white"
-                    android:text="注册"
-                    android:textColor="#fff"
-                    android:textSize="21sp" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/view_margin"
+        android:layout_weight="1"
+        android:background="#0d82e1"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_regist"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_marginTop="@dimen/view_margin"
+            android:background="@drawable/bg_rec_white"
+            android:text="注册"
+            android:textColor="#fff"
+            android:textSize="21sp" />
+    </LinearLayout>
 
 </LinearLayout>
