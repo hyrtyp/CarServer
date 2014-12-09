@@ -27,7 +27,7 @@ public class InfoSpecialtyAdapter extends BaseAdapter{
 		this.mData = mData;
 		this.mContext = mContext;
 	}
-
+	
 	@Override
 	public int getCount() {
 		return mData.size();
@@ -69,8 +69,6 @@ public class InfoSpecialtyAdapter extends BaseAdapter{
 				}
 			}
 		});
-		
-		
 		return convertView;
 	}
 	

@@ -28,6 +28,7 @@ public class BaseWebServiceHelper {
 
 //	private static final String END_POINT = "http://192.168.10.135:8080/CSPInterface/services/CspInterface?wsdl";
 	private static final String END_POINT = "http://192.168.10.238:8080/CSPInterface/services/CspInterface?wsdl";
+//	private static final String END_POINT = "http://121.42.43.20:82/CSPSJInterface/services/CspSjInterface?wsdl";
 //	private static final String END_POINT = "http://61.233.18.68:8080/CSPInterface/services/CspInterface?wsdl";
 //	private static final String END_POINT = "http://42.121.127.121:8080/CSPInterface/services/CspInterface?wsdl";
 //	private static final String END_POINT = "http://121.42.43.20:82/CSPInterface/services/CspInterface?wsdl";
@@ -83,6 +84,8 @@ public class BaseWebServiceHelper {
 		Thread mThread = new Thread(){
 			public void run() {
 				SoapObject soapObject = new SoapObject(NAME_SPACE, method);
+				
+				// 请求数据的参数与方法名
 				LogHelper.i("tag", "params:"+params+" method:"+method);
 				if(params != null){
 					soapObject.addProperty("jsonstr", params);
@@ -98,6 +101,8 @@ public class BaseWebServiceHelper {
 				try {
 					ht.call("urn:"+method, envelope);
 					final String result = envelope.getResponse().toString();
+					
+					//网络请求到的数据
 					LogHelper.i("tag", "result:"+result);
 					if(result != null && mContext != null){
 						((Activity)mContext).runOnUiThread(new Runnable() {

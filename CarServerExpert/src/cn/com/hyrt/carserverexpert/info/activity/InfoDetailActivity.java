@@ -533,8 +533,14 @@ public class InfoDetailActivity extends BaseActivity{
 	}
 	
 	public void selectAll(boolean checked){
-		needSelectAll = false;
-		cbSelectAll.setChecked(checked);
+		if (cbSelectAll.isChecked()!=checked) {
+			needSelectAll = false;
+			cbSelectAll.setChecked(checked);
+		}
+		//全选被选中才会将needSelectAll = false ，将cbSelectAll状态改变
+		//onCheckedChanged被执行 needSelectAll再次置为true
+		//needSelectAll = false;
+		//cbSelectAll.setChecked(checked);
 		
 	}
 	
@@ -564,16 +570,15 @@ public class InfoDetailActivity extends BaseActivity{
 	}
 	
 	private void addPhoto(){
-		if(faceUri == null){
-			if (FileHelper.sdCardExist()) {
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
 				faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
-			}else{
-				AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
 			}
-			//faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
+			mPhotoHelper = new PhotoHelper(InfoDetailActivity.this, faceUri, 50);
+			mPhotoHelper.getPhoto();
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
 		}
-		mPhotoHelper = new PhotoHelper(InfoDetailActivity.this, faceUri, 50);
-		mPhotoHelper.getPhoto();
 	}
 	
 	@Override

@@ -31,6 +31,7 @@ public class BaseWebServiceHelper {
 	public static String NAME_SPACE = "http://webservice.zj.csp.hyrt.com";
 
 	private static final String END_POINT = "http://192.168.10.238:8080/CSPZJInterface/services/CspZJInterface?wsdl";
+//	private static final String END_POINT = "http://121.42.43.20:82/CSPSJInterface/services/CspSjInterface?wsdl";
 //	private static final String END_POINT = "http://192.168.10.135:8080/CSPZJInterface/services/CspZJInterface?wsdl";
 	
 	private static final int TIMEOUT = 20*1000;

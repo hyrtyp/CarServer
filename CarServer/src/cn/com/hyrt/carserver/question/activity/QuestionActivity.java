@@ -102,16 +102,15 @@ public class QuestionActivity extends BaseActivity {
 	}
 
 	public void updataImg() {
-		if (questionUri == null) {
-			if (FileHelper.sdCardExist()) {
+		if (FileHelper.sdCardExist()) {
+			if (questionUri == null) {
 				questionUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
-			}else{
-				AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
 			}
-			//questionUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
+			mPhotoHelper = new PhotoHelper(this, questionUri, 50);
+			mPhotoHelper.getPhoto();
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
 		}
-		mPhotoHelper = new PhotoHelper(this, questionUri, 50);
-		mPhotoHelper.getPhoto();
 	}
 
 	@Override
@@ -149,8 +148,7 @@ public class QuestionActivity extends BaseActivity {
 					}
 					//questionUri = Uri.fromFile(FileHelper.createFile("question.jpg"));
 				}
-				mPhotoHelper = new PhotoHelper(QuestionActivity.this,
-						questionUri, 50);
+				mPhotoHelper = new PhotoHelper(QuestionActivity.this,questionUri, 50);
 			}
 			mPhotoHelper.startPhotoZoom(questionUri, 50);
 		} else if (resultCode == Define.RESULT_FROM_ALTER_CAR) {
@@ -292,7 +290,7 @@ public class QuestionActivity extends BaseActivity {
 			@Override
 			public void onSuccess(String result) {
 				ClassifyJsonParser mClassifyJsonParser = new ClassifyJsonParser();
-				mClassifyJsonParser.parse(result);
+				mClassifyJsonParser.parse(result); 
 				List<Map<String, String>> oneList = mClassifyJsonParser.getOneList();
 				List<List<Map<String, String>>> twoList
 				= mClassifyJsonParser.getTwoList();

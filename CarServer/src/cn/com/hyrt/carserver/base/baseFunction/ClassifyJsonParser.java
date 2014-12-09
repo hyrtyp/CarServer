@@ -67,6 +67,7 @@ public class ClassifyJsonParser {
 			JSONArray twoArray = mJsonArray.getJSONArray(1);
 			
 			LogHelper.i("tag", "test:"+oneArray);
+			LogHelper.i("tag", "test:"+twoArray);
 			for(int i=0,j=oneArray.length(); i<j; i++){
 				JSONObject cJsonObject = oneArray.getJSONObject(i);
 				Map<String, String> map = new HashMap<String, String>();
