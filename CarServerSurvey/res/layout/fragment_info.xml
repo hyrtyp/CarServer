@@ -3,8 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
-    <LinearLayout
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -13,9 +17,7 @@
                 android:id="@+id/layout_info"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#fff" 
-                
-                
+                android:background="#fff"
                 android:orientation="horizontal"
                 android:paddingBottom="11dp"
                 android:paddingLeft="@dimen/view_margin"
@@ -28,8 +30,8 @@
                     android:layout_height="@dimen/face_img_size"
                     android:background="@drawable/face_img_border"
                     android:padding="1dp"
-                    android:src="@drawable/bg_img_default" 
-                    android:scaleType="centerCrop"/>
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/bg_img_default" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -42,78 +44,80 @@
                         android:id="@+id/usercode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#242323"
-                        android:textSize="@dimen/text_size"
+                        android:ellipsize="end"
                         android:maxLines="2"
                         android:text="@string/usercode"
-                        android:ellipsize="end"
-                         />
+                        android:textColor="#242323"
+                        android:textSize="@dimen/text_size" />
+
                     <TextView
                         android:id="@+id/regrecode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/view_margin"
-                        android:textColor="#242323"
-                        android:textSize="@dimen/text_size"
-                        android:text="@string/regrecode"
+                        android:ellipsize="end"
                         android:singleLine="true"
-                        android:ellipsize="end" />
+                        android:text="@string/regrecode"
+                        android:textColor="#242323"
+                        android:textSize="@dimen/text_size" />
 
                     <TextView
                         android:id="@+id/curlogin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#242323"
-                        android:textSize="@dimen/text_size"
-                        android:maxLines="2"
                         android:ellipsize="end"
+                        android:maxLines="2"
                         android:text="@string/curlogin"
-                         />
+                        android:textColor="#242323"
+                        android:textSize="@dimen/text_size" />
                 </LinearLayout>
             </LinearLayout>
+
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_line" />
+
             <Button
-	        android:id="@+id/btn_regrecode"
-	        android:background="#299fff"
-	        android:layout_width="match_parent"
-	        android:layout_height="60dp"
-	        android:layout_marginLeft="20dp"
-	    	android:layout_marginRight="20dp"
-	        android:layout_gravity="center_horizontal"
-	        android:textColor="#ffffff"
-	        android:layout_marginTop="30dp"
-	        android:textSize="24sp"
-	        android:text="@string/chinfophoto" />
+                android:id="@+id/btn_regrecode"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:background="#299fff"
+                android:text="@string/chinfophoto"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+
             <Button
-	        android:id="@+id/btn_editpassword"
-	        android:background="#299fff"
-	        android:layout_width="match_parent"
-	        android:layout_height="60dp"
-	        android:layout_marginLeft="20dp"
-	    	android:layout_marginRight="20dp"
-	        android:layout_gravity="center_horizontal"
-	        android:textColor="#ffffff"
-	        android:layout_marginTop="30dp"
-	        android:textSize="24sp"
-	        android:text="@string/updatepassword" />
-            
+                android:id="@+id/btn_editpassword"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:background="#299fff"
+                android:text="@string/updatepassword"
+                android:textColor="#ffffff"
+                android:textSize="24sp" />
+
             <Button
-	        android:id="@+id/btn_loginout"
-	        android:layout_width="match_parent"
-	        android:layout_height="60dp"
-	        android:background="@drawable/buttonstyle"
-	        android:layout_marginLeft="20dp"
-	    	android:layout_marginRight="20dp"
-	        android:layout_gravity="center_horizontal"
-	        android:textColor="#299fff"
-	        android:layout_marginTop="60dp"
-	        android:textSize="24sp"
-	        android:text="@string/loginout" />
-            
-            
-	</LinearLayout>
+                android:id="@+id/btn_loginout"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="60dp"
+                android:background="@drawable/buttonstyle"
+                android:text="@string/loginout"
+                android:textColor="#299fff"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

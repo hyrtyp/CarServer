@@ -333,4 +333,11 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				getString(R.string.method_saveMerchantQualificStatus),
 				params, Define.BASE.class);	
 	}
+	
+	/**
+	 * 获取版本号
+	 */
+	public void getVersionInfoList(){
+		get("getVersionInfoList",null,Define.VS_INFO_LIST.class);
+	}
 }

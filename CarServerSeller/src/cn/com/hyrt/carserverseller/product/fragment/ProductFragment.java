@@ -111,6 +111,7 @@ public class ProductFragment extends Fragment{
 				return true;
 			}
 		});
+		
 //		productAdapter.setCallback(new AddPhotoGridAdapter.PhotoGridCallback() {
 //			
 //			@Override
@@ -145,9 +146,9 @@ public class ProductFragment extends Fragment{
 			if (FileHelper.sdCardExist()) {
 				if(faceUri == null){
 					faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
-					mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 400);
-					mPhotoHelper.getPhoto();
 				}
+				mPhotoHelper = new PhotoHelper(getActivity(), faceUri, 400);
+				mPhotoHelper.getPhoto();
 			}else{
 				AlertHelper.getInstance(getActivity()).showCenterToast("sd卡不存在");
 			}

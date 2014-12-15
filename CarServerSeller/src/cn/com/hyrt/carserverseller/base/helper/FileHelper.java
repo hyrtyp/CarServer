@@ -6,7 +6,7 @@ import android.os.Environment;
 
 public class FileHelper {
 	
-	/*public static File createFile(String fileName )
+	public static File createFile(String fileName )
 	{
 		String folderPath = "carserver";
         boolean sdCardExist = sdCardExist();
@@ -22,7 +22,7 @@ public class FileHelper {
         }else{
             return null;
         }
-	}*/
+	}
 	
 	public static File createFile1(String fileName ){
 		String folderPath = "carserver";

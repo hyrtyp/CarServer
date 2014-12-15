@@ -88,6 +88,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 		if(viewId == layoutVersion.getId()){
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), VersionInfoActivity.class);
+			intent.putExtra("vc", "sj");
 			startActivity(intent);
 		}else if(viewId == layoutFace.getId()){
 			if(mData == null){
