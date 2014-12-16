@@ -17,6 +17,8 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -32,14 +34,38 @@ import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
 import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserverseller.base.helper.FileHelper;
 import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserverseller.base.view.RoundProgressBar;
 
 public class VersionInfoActivity extends BaseActivity{
 	@ViewInject(id=R.id.bt_updateversion,click="update") Button btnUpdate;
+	@ViewInject(id=R.id.roundProgressBar) RoundProgressBar roundProgressBar;
+	@ViewInject(id=R.id.ll_loading) LinearLayout ll_loading;
+	@ViewInject(id=R.id.ll_upload) LinearLayout ll_upload;
 	private List<VS_INFO_LIST.VS_INFO> mVsInfos;
 	private VS_INFO_LIST.VS_INFO mVsInfo;
-	//private String apkurl = "http://192.168.56.1:8080/CarServerSeller.apk";
+	private String apkurl = "http://192.168.13.124:8080/CarServerSeller.apk";
 	private String versionClassi;
+	private int maxLength = 0;
+	private int progress = 0;
 	
+	private Handler handler = new Handler(){
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case 0:
+				ll_loading.setVisibility(View.VISIBLE);
+				ll_upload.setVisibility(View.GONE);
+				//roundProgressBar.setMax(maxLength);
+				roundProgressBar.setProgress(progress);
+				break;
+
+			case 1:
+				ll_loading.setVisibility(View.GONE);
+				ll_upload.setVisibility(View.VISIBLE);
+				AlertHelper.getInstance(getApplicationContext()).showCenterToast("下载完成");
+				break;
+			}
+		};
+	};
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_version_info);
@@ -47,7 +73,7 @@ public class VersionInfoActivity extends BaseActivity{
 		versionClassi = intent.getStringExtra("vc");
 	}
 	
-	public void update(View view){
+	public void update(View view){/*
 		WebServiceHelper VersionInfoListHelper = new WebServiceHelper(
 				new BaseWebServiceHelper.RequestCallback<Define.VS_INFO_LIST>() {
 					@Override
@@ -80,11 +106,11 @@ public class VersionInfoActivity extends BaseActivity{
 						}
 					}
 				}, this);
-		VersionInfoListHelper.getVersionInfoList();
-		//updateVersion();
+		VersionInfoListHelper.getVersionInfoList();*/
+		updateVersion();
 	}
-	public void updateVersion(String packName,final String apkurl){
-//	public void updateVersion(){
+	//public void updateVersion(String packName,final String apkurl){
+	public void updateVersion(){
 		AlertDialog.Builder builder = new Builder(this);
 		builder.setTitle("新版本");
 		builder.setOnCancelListener(new OnCancelListener() {
@@ -102,9 +128,8 @@ public class VersionInfoActivity extends BaseActivity{
 					// 下载APK 覆盖安装
 					FinalHttp finalHttp = new FinalHttp();
 					finalHttp.download(apkurl, Environment.getExternalStorageDirectory()
-							+ "/packName", 
+							+ "/CarServerSeller.apk", 
 							new AjaxCallBack<File>() {
-
 						@Override
 						public void onFailure(Throwable t, int errorNo,
 								String strMsg) {
@@ -116,13 +141,18 @@ public class VersionInfoActivity extends BaseActivity{
 
 						@Override
 						public void onLoading(long count, long current) {
-							int progress = (int) (current * 100 / count);
-							AlertHelper.getInstance(getApplicationContext()).showLoading("正在玩命下载中...");
+							Message msg = Message.obtain();
+							progress = (int) (current * 100 / count);
+							msg.what = 0;
+							handler.sendMessage(msg);
 							super.onLoading(count, current);
 						}
 
 						@Override
 						public void onSuccess(File t) {
+							Message msg1 = Message.obtain();
+							msg1.what = 1;
+							handler.sendMessage(msg1);
 							installApk(t);
 							super.onSuccess(t);
 						}

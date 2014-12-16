@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android_custom="http://schemas.android.com/apk/res/cn.com.hyrt.carserverseller"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical" >
-
+   
+     <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+         
+    
+   
     <LinearLayout
+            android:id="@+id/ll_upload"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:visibility="visible" >
+            <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="100dp"
         android:background="#f6f6f6"
@@ -73,4 +86,33 @@
         android:layout_marginTop="@dimen/view_margin_big"
         android:text="健康中心，记录你每一天的改变\n健康中心，记录你每一天的改变\n健康中心，记录你每一天的改变"
         android:lineSpacingExtra="20dp"/>
+    </LinearLayout>
+    
+     <LinearLayout
+            android:id="@+id/ll_loading"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:visibility="gone" >
+
+      <cn.com.hyrt.carserverseller.base.view.RoundProgressBar
+        android:id="@+id/roundProgressBar"
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:layout_marginTop="200dp"
+        android_custom:roundColor="#D1D1D1"
+        android_custom:roundProgressColor="@android:color/black"
+        android_custom:textColor="#9A32CD"
+        android_custom:roundWidth="10dip"
+        android_custom:textSize="18sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textSize="15sp"
+                android:text="正在下载新版本" />
+        </LinearLayout>
+        </FrameLayout>
 </LinearLayout>
