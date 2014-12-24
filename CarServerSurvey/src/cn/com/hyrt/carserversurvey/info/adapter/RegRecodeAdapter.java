@@ -1,8 +1,11 @@
 package cn.com.hyrt.carserversurvey.info.adapter;
 
+import java.util.List;
+
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.REGRECODE;
+import cn.com.hyrt.carserversurvey.base.baseFunction.Define.REGRECODE.CDATA;
 import cn.com.hyrt.carserversurvey.base.helper.StringHelper;
 import cn.com.hyrt.carserversurvey.base.view.ImageLoaderView;
 import android.content.Context;
@@ -15,25 +18,25 @@ import android.widget.TextView;
 public class RegRecodeAdapter extends BaseAdapter {
 
 
-	private Define.REGRECODE ic;
+	private List<Define.REGRECODE.CDATA> iccs;
 	private Context mContext;
 	
-	public RegRecodeAdapter(REGRECODE ic, Context mContext) {
+	public RegRecodeAdapter(List<CDATA> iccs, Context mContext) {
 		super();
-		this.ic = ic;
+		this.iccs = iccs;
 		this.mContext = mContext;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return ic.data.size();
+		return iccs.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return ic.data.get(arg0);
+		return iccs.get(arg0);
 	}
 
 	@Override
@@ -53,7 +56,7 @@ public class RegRecodeAdapter extends BaseAdapter {
 		final TextView regdate =(TextView)convertView.findViewById(R.id.tv_recode_regdata); 
 
 		
-		Define.REGRECODE.CDATA icc = ic.data.get(position);
+		Define.REGRECODE.CDATA icc = iccs.get(position);
 		ivFaceImg.setImageUrl(icc.imagepath);
 		regname.setText(icc.sjname);
 		regadd.setText("地址："+icc.sjaddress);

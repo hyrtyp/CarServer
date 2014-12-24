@@ -111,6 +111,19 @@ public class Define {
 		public String replycontent;
 		public String sjname;
 		public String levelname;
+		public String answersimage;
+		@Override
+		public String toString() {
+			return "INFO_QUESTION_DETAIL [id=" + id + ", userterminalid="
+					+ userterminalid + ", username=" + username
+					+ ", replytype=" + replytype + ", contenttime="
+					+ contenttime + ", attacpathname=" + attacpathname
+					+ ", attacpath=" + attacpath + ", zcname=" + zcname
+					+ ", replycontent=" + replycontent + ", sjname=" + sjname
+					+ ", levelname=" + levelname + ", answersimage="
+					+ answersimage + "]";
+		}
+		
 	}
 	
 	/**

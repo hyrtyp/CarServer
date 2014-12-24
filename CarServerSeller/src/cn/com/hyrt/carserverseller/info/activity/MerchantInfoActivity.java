@@ -254,6 +254,9 @@ public class MerchantInfoActivity extends BaseActivity{
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
+						if (errorNo == 207) {
+							AlertHelper.getInstance(MerchantInfoActivity.this).showCenterToast("商家全称有重复");
+						}
 						AlertHelper.getInstance(MerchantInfoActivity.this).hideLoading();
 						AlertHelper.getInstance(MerchantInfoActivity.this).showCenterToast("保存失败");
 						

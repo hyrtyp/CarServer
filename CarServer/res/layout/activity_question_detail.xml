@@ -44,7 +44,16 @@
                     android:textColor="#5c5c5c"
                     android:textSize="13sp"
                     android:text="@string/info_question_detail_prompt" />
-                
+                <TextView
+                    android:id="@+id/tv_comments_detail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/view_margin"
+                    android:padding="@dimen/main_top_margin"
+                    android:textColor="#5c5c5c"
+                    android:textSize="13sp"
+                    android:text="@string/info_comments_detail"
+                    android:visibility="gone"/>
                 <TextView
                     android:id="@+id/tv_prompt_three"
                     android:layout_width="fill_parent"

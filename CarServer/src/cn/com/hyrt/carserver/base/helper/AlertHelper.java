@@ -100,6 +100,14 @@ public class AlertHelper {
 			mProgressDialog = null;
 		}
 	}
+	public void dismissLoading2(){
+		if(mProgressDialog != null 
+				&& mContext != null 
+				&& ((Activity)mContext).isFinishing()){
+			mProgressDialog.dismiss();
+			mProgressDialog = null;
+		}
+	}
 	
 	private class MyProgressDialog extends ProgressDialog{
 		

@@ -1,5 +1,8 @@
 package cn.com.hyrt.carserversurvey.info.fragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.tsz.afinal.annotation.view.ViewInject;
 import cn.com.hyrt.carserversurvey.R;
 import cn.com.hyrt.carserversurvey.base.application.CarServerApplication;
@@ -29,29 +32,30 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class RegistRecordFragment extends Fragment{
+public class RegistRecordFragment extends Fragment {
 
 	private View rootView;
 	private FullListView lvclaim;
 	private PullToRefreshView ptrv;
 	private TextView tvNoData;
 
-	private Define.REGRECODE recode ; 
+	private List<Define.REGRECODE.CDATA> recode = new ArrayList<Define.REGRECODE.CDATA>();
 	private RegRecodeAdapter recodeAdapter;
-	private WebServiceHelper mwebserviceHelper;
 	private int pageNo = 1;
 	private boolean isLoadMore = false;
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		rootView = inflater.inflate(R.layout.activity_regrecode, null);
 		findView();
 		isLoadMore = false;
+		recodeAdapter = null;
 		loadData();
 		setListener();
 		return rootView;
 	}
+
 	private void setListener() {
 		ptrv.setOnHeaderRefreshListener(new PullToRefreshView.OnHeaderRefreshListener() {
 			@Override
@@ -69,26 +73,26 @@ public class RegistRecordFragment extends Fragment{
 				loadData();
 			}
 		});
-		
+
 		lvclaim.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
 			private Dialog mSelectInfoDialog;
 
 			@Override
-			public void onItemClick(AdapterView<?> arg0, View arg1, final int position,
-					long arg3) {
-				LogHelper.i("tag", "lvclaim:"+position);
-//				Intent intent = new Intent();
-//				intent.setClass(getActivity(), MerchantInfoActivity.class);
-//				intent.putExtra("id", recode.data.get(position).id);
-//				startActivity(intent);
-				
+			public void onItemClick(AdapterView<?> arg0, View arg1,
+					final int position, long arg3) {
+				LogHelper.i("tag", "lvclaim:" + position);
+				// Intent intent = new Intent();
+				// intent.setClass(getActivity(), MerchantInfoActivity.class);
+				// intent.putExtra("id", recode.data.get(position).id);
+				// startActivity(intent);
+
 				mSelectInfoDialog = new Dialog(getActivity(), R.style.MyDialog);
 				mSelectInfoDialog.setContentView(R.layout.layout_select_info);
 				mSelectInfoDialog.getWindow().setLayout(
-						 RelativeLayout.LayoutParams.MATCH_PARENT,
-						 RelativeLayout.LayoutParams.MATCH_PARENT);
-				
+						RelativeLayout.LayoutParams.MATCH_PARENT,
+						RelativeLayout.LayoutParams.MATCH_PARENT);
+
 				final Button btnProductIndex = (Button) mSelectInfoDialog
 						.findViewById(R.id.btn_product_index);
 				final Button btnSjProduct = (Button) mSelectInfoDialog
@@ -98,35 +102,39 @@ public class RegistRecordFragment extends Fragment{
 				final Button btnCancle = (Button) mSelectInfoDialog
 						.findViewById(R.id.btn_cancle);
 				final View bg = mSelectInfoDialog.findViewById(R.id.bg);
-				final LinearLayout layout_select 
-				= (LinearLayout) mSelectInfoDialog.findViewById(R.id.layout_select);
-				
+				final LinearLayout layout_select = (LinearLayout) mSelectInfoDialog
+						.findViewById(R.id.layout_select);
+
 				View.OnClickListener mClickListener = new View.OnClickListener() {
-					
+
 					@Override
 					public void onClick(View view) {
 						int id = view.getId();
 						boolean needDismiss = true;
-						
-						if(id == btnProductIndex.getId()){
+
+						if (id == btnProductIndex.getId()) {
 							Intent intent = new Intent();
 							intent.setClass(getActivity(), ShopActivity.class);
-							intent.putExtra("shId", recode.data.get(position).id);
+							intent.putExtra("shId",
+									recode.get(position).id);
 							startActivity(intent);
-						}else if(id == btnSjProduct.getId()){
+						} else if (id == btnSjProduct.getId()) {
 							Intent intent = new Intent();
-							intent.setClass(getActivity(), ProductActivity.class);
-							intent.putExtra("shId", recode.data.get(position).id);
+							intent.setClass(getActivity(),
+									ProductActivity.class);
+							intent.putExtra("shId",
+									recode.get(position).id);
 							startActivity(intent);
-						}else if(id == btnRegRecord.getId()){
+						} else if (id == btnRegRecord.getId()) {
 							Intent intent = new Intent();
-							intent.setClass(getActivity(), MerchantInfoActivity.class);
-							intent.putExtra("id", recode.data.get(position).id);
+							intent.setClass(getActivity(),
+									MerchantInfoActivity.class);
+							intent.putExtra("id", recode.get(position).id);
 							startActivity(intent);
-						}else if(id == layout_select.getId()){
+						} else if (id == layout_select.getId()) {
 							needDismiss = false;
 						}
-						if(needDismiss){
+						if (needDismiss) {
 							mSelectInfoDialog.dismiss();
 							mSelectInfoDialog = null;
 						}
@@ -138,72 +146,87 @@ public class RegistRecordFragment extends Fragment{
 				btnCancle.setOnClickListener(mClickListener);
 				bg.setOnClickListener(mClickListener);
 				layout_select.setOnClickListener(mClickListener);
-				
+
 				mSelectInfoDialog.show();
 			}
-			
+
 		});
 	}
-	
-	public void loadData(){
-		AlertHelper.getInstance(getActivity()).showLoading(getString(R.string.loading_msg));
-		String id = ((CarServerApplication)getActivity().getApplicationContext()).getLoginInfo().id;
-		if(mwebserviceHelper == null){
-			mwebserviceHelper = new WebServiceHelper(
-					new WebServiceHelper.RequestCallback<Define.REGRECODE>() {
 
-						@Override
-						public void onSuccess(REGRECODE result) {
-							ptrv.onHeaderRefreshComplete();
-							LogHelper.i("tag", "result:"+result.data.size());
-							AlertHelper.getInstance(getActivity()).hideLoading();	
-							if(result == null || result.data.size() <= 0){
+	public void loadData() {
+//		AlertHelper.getInstance(getActivity()).showLoading(getString(R.string.loading_msg));
+		String id = ((CarServerApplication) getActivity().getApplicationContext()).getLoginInfo().id;
+		WebServiceHelper mwebserviceHelper = new WebServiceHelper(
+				new WebServiceHelper.RequestCallback<Define.REGRECODE>() {
+
+					@Override
+					public void onSuccess(REGRECODE result) {
+						LogHelper.i("tag", "result:" + result.data.size());
+						if (result == null || result.data.size() <= 0) {
+							if (recode.size()>0) {
+								if (isLoadMore) {
+									AlertHelper.getInstance(getActivity()).showCenterToast("已加载全部...");
+								} else {
+									AlertHelper.getInstance(getActivity()).showCenterToast("刷新失败...");
+								}
+							}else{
 								tvNoData.setVisibility(View.VISIBLE);
 								lvclaim.setVisibility(View.GONE);
-							}else{
-								tvNoData.setVisibility(View.GONE);
-								lvclaim.setVisibility(View.VISIBLE);
 							}
-							recode = result;		
-//							if(recodeAdapter == null){
-								recodeAdapter = new RegRecodeAdapter(recode, getActivity());
-								lvclaim.setAdapter(recodeAdapter);
-//							}else{
-////								lvclaim.setAdapter(recodeAdapter);
-////								recodeAdapter.notifyDataSetChanged();
-//								recodeAdapter = new RegRecodeAdapter(recode, getActivity());
-//								lvclaim.setAdapter(recodeAdapter);
-//							}
 						}
+							
+						if (!isLoadMore) {
+							recode.clear();
+						}
+						recode.addAll(result.data);
+						
+						if(recodeAdapter == null){
+							recodeAdapter = new RegRecodeAdapter(recode,getActivity());
+							lvclaim.setAdapter(recodeAdapter);
+						}else{
+							recodeAdapter.notifyDataSetChanged();
+						}
+						ptrv.onHeaderRefreshComplete();
+						ptrv.onFooterRefreshComplete();
+						AlertHelper.getInstance(getActivity()).hideLoading();
+					}
 
 						@Override
 						public void onFailure(int errorNo, String errorMsg) {
+							if (recode.size()>0) {
+								if (isLoadMore) {
+									AlertHelper.getInstance(getActivity()).showCenterToast("已加载全部...");
+								} else {
+									AlertHelper.getInstance(getActivity()).showCenterToast("刷新失败...");
+								}
+							}else{
+								tvNoData.setVisibility(View.VISIBLE);
+//								lvclaim.setVisibility(View.GONE);
+							}
 							ptrv.onHeaderRefreshComplete();
+							ptrv.onFooterRefreshComplete();
 							AlertHelper.getInstance(getActivity()).hideLoading();
-							tvNoData.setVisibility(View.VISIBLE);
-							lvclaim.setVisibility(View.GONE);
 						}
-			}, getActivity());
-		}
-		
+					}, getActivity());
+
 		if (isLoadMore) {
 			pageNo++;
 		} else {
 			pageNo = 1;
 		}
-		mwebserviceHelper.getRegRecode(id,pageNo);
-		
+		mwebserviceHelper.getRegRecode(id, pageNo);
+
 	}
-	
+
 	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-//		if(resultCode == Define.RESULT_FROM_ALTER_CAR){
-//			loadData();
-//		}
+		// if(resultCode == Define.RESULT_FROM_ALTER_CAR){
+		// loadData();
+		// }
 	}
-	
-	private void findView(){
+
+	private void findView() {
 		lvclaim = (FullListView) rootView.findViewById(R.id.lv_insuranceclaim);
 		ptrv = (PullToRefreshView) rootView.findViewById(R.id.ptrv);
 		tvNoData = (TextView) rootView.findViewById(R.id.tv_noData);

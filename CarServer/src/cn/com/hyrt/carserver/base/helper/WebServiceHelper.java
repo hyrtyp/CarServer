@@ -578,4 +578,13 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				imageName, imageByte.length+"", imageType, getUserId(), id);
 		uploadImage(getString(R.string.method_saveImageWithByte), params, imageBuffer, Define.BASE.class);
 	}
+	/**
+	 * 问题详细－显示评论内容
+	 * @param id
+	 */
+	public void getMwpmSysTerminalReviewInfo(String id) {
+		String params = 
+				String.format("{\"id\":\"%s\"}",id);
+		get(getString(R.string.method_getmwpmmysmerminalmeviewmnfo), params, Define.COMMENTS.class);
+	}
 }

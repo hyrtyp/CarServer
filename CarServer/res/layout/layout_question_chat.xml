@@ -2,90 +2,92 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical" 
-    android:paddingTop="@dimen/main_top_margin">
-    
-    <LinearLayout 
+    android:orientation="vertical"
+    android:paddingTop="@dimen/main_top_margin" >
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        	<ImageView 
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    android:src="@drawable/ic_time"/>
-        	<TextView 
-        	    android:id="@+id/tv_time"
-        	    android:layout_width="wrap_content"
-        	    android:layout_height="wrap_content"
-        	    android:text="2014-06-24"
-        	    android:layout_marginLeft="@dimen/view_margin_small"/>
-        </LinearLayout>
-<RelativeLayout 
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:layout_marginRight="@dimen/tab_text_buttom_padding"
-    android:layout_marginTop="@dimen/view_margin">
-    
-    <LinearLayout
-        android:id="@+id/layout_face"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_time" />
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/view_margin_small"
+            android:text="2014-06-24" />
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_alignParentRight="true">
-        <cn.com.hyrt.carserver.base.view.ImageLoaderView 
-        android:id="@+id/iv_face"
-        android:layout_width="@dimen/face_img_size_small"
-        android:layout_height="@dimen/face_img_size_small"
-        android:src="@drawable/img_car_default"
-        android:background="@drawable/face_img_border_not_click"
-        android:padding="1dp"
-        android:scaleType="centerCrop"/>
-        <TextView 
-            android:id="@+id/tv_name"
+        android:layout_marginRight="@dimen/tab_text_buttom_padding"
+        android:layout_marginTop="@dimen/view_margin"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/layout_face"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="王立亮"
-            android:textColor="#000"
-            android:textSize="@dimen/text_size_small"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="4dp"/>
-        <TextView 
-            android:id="@+id/tv_replytype"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="高级技工"
-            android:textColor="#000"
-            android:textSize="@dimen/text_size_small"
-            android:layout_gravity="center_horizontal"/>
-    </LinearLayout>	
-    
-    <LinearLayout 
-           android:layout_width="239dp"
-           android:layout_height="wrap_content"
-           android:orientation="vertical"
-           android:layout_marginRight="@dimen/view_margin_small"
-           android:layout_toLeftOf="@id/layout_face">
-        <TextView
-            android:id="@+id/tv_content"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical" >
+
+            <cn.com.hyrt.carserver.base.view.ImageLoaderView
+                android:id="@+id/iv_face"
+                android:layout_width="@dimen/face_img_size_small"
+                android:layout_height="@dimen/face_img_size_small"
+                android:background="@drawable/face_img_border_not_click"
+                android:padding="1dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_car_default" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="王立亮"
+                android:textColor="#000"
+                android:textSize="@dimen/text_size_small" />
+
+            <TextView
+                android:id="@+id/tv_replytype"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="高级技工"
+                android:textColor="#000"
+                android:textSize="@dimen/text_size_small" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="239dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_chat" 
-            />
-        <cn.com.hyrt.carserver.base.view.ImageLoaderView 
+            android:layout_marginRight="@dimen/view_margin_small"
+            android:layout_toLeftOf="@id/layout_face"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tv_content"
+                android:layout_width="239dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chat" />
+
+            <cn.com.hyrt.carserver.base.view.ImageLoaderView
                 android:id="@+id/iv_photo"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:layout_marginLeft="@dimen/view_margin"
                 android:layout_marginTop="@dimen/view_margin_small"
-                android:scaleType="centerCrop"
-                android:layout_marginLeft="@dimen/view_margin"/>
+                android:scaleType="centerCrop" />
         </LinearLayout>
-        	
-    
+    </RelativeLayout>
 
-
-        
-
-</RelativeLayout>
 </LinearLayout>

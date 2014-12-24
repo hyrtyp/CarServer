@@ -171,6 +171,7 @@ public class MainActivity extends BaseActivity {
 					(RegistRecordFragment) getSupportFragmentManager()
 					.findFragmentByTag(mTabHost.getCurrentTabTag());
 			if(mInfoFragment != null){
+				System.out.println("the first ___________________________");
 				mInfoFragment.loadData();
 			}
 		}else if(curIndex == 2){

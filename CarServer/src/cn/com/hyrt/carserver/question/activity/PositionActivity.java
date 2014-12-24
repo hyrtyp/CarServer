@@ -103,4 +103,9 @@ public class PositionActivity extends Activity{
 
 		mCarInfoServiceHelper.getPoisition();
 	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		AlertHelper.getInstance(PositionActivity.this).dismissLoading();
+	}
 }

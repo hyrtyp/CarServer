@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/full_bg"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/main_top_margin" >
+
+    			<TextView
+                    android:id="@+id/tv_comments"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/main_top_margin"
+                    android:background="#fff"
+                    android:padding="@dimen/main_top_margin"
+                    android:textColor="#5c5c5c"
+                    android:textSize="13sp"
+                    android:text="@string/info_question_detail_prompt" />
+
+
+</LinearLayout>

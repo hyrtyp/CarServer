@@ -1,7 +1,10 @@
 package cn.com.hyrt.carserversurvey.base.helper;
 
+import com.soundcloud.android.crop.Crop;
+
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,6 +12,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import cn.com.hyrt.carserversurvey.R;
 
 /**
@@ -93,11 +97,23 @@ public class PhotoHelper {
 	    public void getFromLocal(int cropSize){
 	    	getFromLocal(cropSize, cropSize);
 	    }
-	 
+	  /**
+	   * 获取本地图片，并剪切,需要在activity中监听onActivityResult方法
+	   */
+	  public void getFromLocal(int cropWidth, int cropHeight){
+		  Intent intent = new Intent(Intent.ACTION_GET_CONTENT).setType("image/*");
+	        try {
+	        	((Activity) context).startActivityForResult(intent, Crop.REQUEST_PICK);
+	        } catch (ActivityNotFoundException e) {
+	            Toast.makeText(context, "没有可用的照片", Toast.LENGTH_SHORT).show();
+	        }
+	  }
+	    
+	    
 	/**
      * 获取本地图片，并剪切,需要在activity中监听onActivityResult方法
      */
-    public void getFromLocal(int cropWidth, int cropHeight){
+    public void getFromLocal1(int cropWidth, int cropHeight){
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT, null);
         intent.setType("image/*");
         if(cropWidth != -1 && cropHeight != -1){

@@ -33,7 +33,7 @@
     <application
         android:name=".base.application.CarServerApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_logo"
+        android:icon="@drawable/app_icon"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         
@@ -172,11 +172,15 @@
 		<activity
 		    android:name=".emergency.activity.SOSActivity"
 		    android:label="@string/eme_sos_label"/>
+		<activity
+		    android:name=".info.activity.CommentedDetialActivity"
+		    android:label="@string/comments_detial_label"/>
 		
 		<activity 
 		    android:name=".emergency.activity.RecordVideoActivity"
 		    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 		    android:screenOrientation="landscape"/>
+		<activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
 		
     </application>
 

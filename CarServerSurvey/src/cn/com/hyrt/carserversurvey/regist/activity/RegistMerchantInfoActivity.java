@@ -1,12 +1,17 @@
 package cn.com.hyrt.carserversurvey.regist.activity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.kobjects.base64.Base64;
 
+import com.soundcloud.android.crop.Crop;
+
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.AlertDialog.Builder;
@@ -15,6 +20,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -627,6 +633,63 @@ public class RegistMerchantInfoActivity extends BaseActivity{
 		if (resultCode == 0) {
 			return;
 		}
+		if (requestCode == Crop.REQUEST_PICK && resultCode == Activity.RESULT_OK) {
+			beginCrop(data.getData());
+		} else if (requestCode == Crop.REQUEST_CROP) {
+			handleCrop(resultCode, data);
+		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
+			beginCrop(faceUri);
+        }
+	}
+	
+	private void beginCrop(Uri source) {
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+	            faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+	        }
+	        new Crop(source).output(faceUri).asSquare().start(this);
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == Activity.RESULT_OK) {
+        	Bitmap bitmap;
+			try {
+				bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Crop.getOutput(result));
+				if(isMerchantSelect){
+//                	merchantPhotos.add(bitmap);
+//                	merchantAdapter.notifyDataSetChanged();
+                	tvMerchantPhoto.setVisibility(View.GONE);
+                	merchantBitmap = bitmap;
+                	merchantImgUrl = null;
+                	ivMerchantPhoto.setImageBitmap(bitmap);
+                }else{
+                	tvLicensePhoto.setVisibility(View.GONE);
+                	licenseBitmap = bitmap;
+                	licenseImgUrl = null;
+                	ivLicensePhoto.setImageBitmap(bitmap);
+//                	licensePhoto.add(bitmap);
+//                	licenseAdapter.notifyDataSetChanged();
+                }
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            AlertHelper.getInstance(this).showCenterToast(Crop.getError(result).getMessage());
+        }
+    }
+	/*@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 0) {
+			return;
+		}
 		
         if (requestCode == PhotoHelper.PHOTO_ZOOM && data != null) {
             //保存剪切好的图片
@@ -666,16 +729,8 @@ public class RegistMerchantInfoActivity extends BaseActivity{
         	}else{
         		AlertHelper.getInstance(getApplicationContext()).showCenterToast(getString(R.string.no_sdcard));
         	}
-        	/*
-            if(mPhotoHelper == null){
-                if(faceUri == null){
-                    faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
-                }
-                mPhotoHelper = new PhotoHelper(RegistMerchantInfoActivity.this, faceUri, 50);
-            }
-            mPhotoHelper.startPhotoZoom(faceUri, 50);*/
         }
-	}
+	}*/
 	
 	private void showBrand(){
 		if(mBrandDialog != null){

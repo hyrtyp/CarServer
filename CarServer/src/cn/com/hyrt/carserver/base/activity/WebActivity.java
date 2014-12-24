@@ -137,6 +137,10 @@ public class WebActivity extends BaseActivity{
 			
 			
 		});
-		
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		AlertHelper.getInstance(this).dismissLoading();
 	}
 }

@@ -26,5 +26,7 @@
     
     <dimen name="title_text">20sp</dimen>
     <dimen name="title_text_big">30sp</dimen>
+    
+    <dimen name="crop__bar_height">48dp</dimen>
 
 </resources>

@@ -1,6 +1,8 @@
 package cn.com.hyrt.carserver.info.activity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -10,7 +12,10 @@ import java.util.Map;
 
 import org.kobjects.base64.Base64;
 
+import com.soundcloud.android.crop.Crop;
+
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +23,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.InputType;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
@@ -364,6 +370,51 @@ public class AlterCarActivity extends BaseActivity{
 	}
 	
 	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 0) {
+			return;
+		}
+		if (requestCode == Crop.REQUEST_PICK && resultCode == Activity.RESULT_OK) {
+			beginCrop(data.getData());
+		} else if (requestCode == Crop.REQUEST_CROP) {
+			handleCrop(resultCode, data);
+		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
+			beginCrop(faceUri);
+        }
+	}
+	
+	private void beginCrop(Uri source) {
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+	            faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+	        }
+	        new Crop(source).output(faceUri).asSquare().start(this);
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == Activity.RESULT_OK) {
+        	Bitmap bitmap;
+			try {
+				bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Crop.getOutput(result));
+				imgBitmap = bitmap;
+				iv_car_img.setImageBitmap(imgBitmap);
+	            btnAddPhoto.setText("");
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            AlertHelper.getInstance(this).showCenterToast(Crop.getError(result).getMessage());
+        }
+    }
+	/*@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		LogHelper.i("tag", "requestCode:"+requestCode+" data:"+data);
@@ -397,15 +448,8 @@ public class AlterCarActivity extends BaseActivity{
         	}else{
         		AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
         	}
-            /*if(mPhotoHelper == null){
-                if(faceUri == null){
-                    faceUri = Uri.fromFile(FileHelper.createFile(imageName));
-                }
-                mPhotoHelper = new PhotoHelper(AlterCarActivity.this, faceUri, 247, 103);
-            }
-            mPhotoHelper.startPhotoZoom(faceUri, 247, 103);*/
         }
-	}
+	}*/
 	
 	private void setListener() {
          

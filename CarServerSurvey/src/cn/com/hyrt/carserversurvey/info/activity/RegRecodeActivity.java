@@ -1,5 +1,8 @@
 package cn.com.hyrt.carserversurvey.info.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,9 +32,8 @@ public class RegRecodeActivity  extends BaseActivity{
 	@ViewInject(id=R.id.ptrv) PullToRefreshView ptrv;
 	@ViewInject(id=R.id.tv_noData) TextView tvNoData;
 
-	private Define.REGRECODE recode ; 
+	private List<Define.REGRECODE.CDATA> recodes = new ArrayList<Define.REGRECODE.CDATA>();
 	private RegRecodeAdapter recodeAdapter;
-	private WebServiceHelper mwebserviceHelper;
 	private int pageNo = 1;
 	private boolean isLoadMore = false;
 	
@@ -39,6 +41,8 @@ public class RegRecodeActivity  extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_regrecode);
+		isLoadMore = false;
+		recodeAdapter = null;
 		loadData();
 		setListener();
 	}
@@ -69,7 +73,7 @@ public class RegRecodeActivity  extends BaseActivity{
 				LogHelper.i("tag", "lvclaim:"+position);
 				Intent intent = new Intent();
 				intent.setClass(RegRecodeActivity.this, MerchantInfoActivity.class);
-				intent.putExtra("id", recode.data.get(position).id);
+				intent.putExtra("id", recodes.get(position).id);
 				startActivity(intent);
 			}
 			
@@ -79,25 +83,34 @@ public class RegRecodeActivity  extends BaseActivity{
 	private void loadData(){
 		AlertHelper.getInstance(this).showLoading(getString(R.string.loading_msg));
 		String id = ((CarServerApplication)getApplicationContext()).getLoginInfo().id;
-		if(mwebserviceHelper == null){
-			mwebserviceHelper = new WebServiceHelper(
+		WebServiceHelper mwebserviceHelper = new WebServiceHelper(
 					new WebServiceHelper.RequestCallback<Define.REGRECODE>() {
 
 						@Override
 						public void onSuccess(REGRECODE result) {
 							ptrv.onHeaderRefreshComplete();
+							ptrv.onFooterRefreshComplete();
 							LogHelper.i("tag", "result:"+result.data.size());
 							AlertHelper.getInstance(RegRecodeActivity.this).hideLoading();	
 							if(result == null || result.data.size() <= 0){
-								tvNoData.setVisibility(View.VISIBLE);
-								lvclaim.setVisibility(View.GONE);
-							}else{
-								tvNoData.setVisibility(View.GONE);
-								lvclaim.setVisibility(View.VISIBLE);
+								if (recodes.size()>0) {
+									if (isLoadMore) {
+										AlertHelper.getInstance(getApplicationContext()).showCenterToast("已加载全部...");
+									} else {
+										AlertHelper.getInstance(getApplicationContext()).showCenterToast("刷新失败...");
+									}
+								}else{
+									tvNoData.setVisibility(View.VISIBLE);
+									lvclaim.setVisibility(View.GONE);
+								}
 							}
-							recode = result;		
+							if (!isLoadMore) {
+								recodes.clear();
+							}
+							recodes.addAll(result.data);
+							LogHelper.i("tag", "results:"+recodes.size()+"__"+recodes);
 							if(recodeAdapter == null){
-								recodeAdapter = new RegRecodeAdapter(recode, RegRecodeActivity.this);
+								recodeAdapter = new RegRecodeAdapter(recodes, RegRecodeActivity.this);
 								lvclaim.setAdapter(recodeAdapter);
 							}else{
 								recodeAdapter.notifyDataSetChanged();
@@ -106,13 +119,21 @@ public class RegRecodeActivity  extends BaseActivity{
 
 						@Override
 						public void onFailure(int errorNo, String errorMsg) {
+							if (recodes.size()>0) {
+								if (isLoadMore) {
+									AlertHelper.getInstance(getApplicationContext()).showCenterToast("已加载全部...");
+								} else {
+									AlertHelper.getInstance(getApplicationContext()).showCenterToast("刷新失败...");
+								}
+							}else{
+								tvNoData.setVisibility(View.VISIBLE);
+								lvclaim.setVisibility(View.GONE);
+							}
 							ptrv.onHeaderRefreshComplete();
+							ptrv.onFooterRefreshComplete();
 							AlertHelper.getInstance(RegRecodeActivity.this).hideLoading();
-							tvNoData.setVisibility(View.VISIBLE);
-							lvclaim.setVisibility(View.GONE);
 						}
 			}, this);
-		}
 		
 		if (isLoadMore) {
 			pageNo++;
@@ -120,7 +141,6 @@ public class RegRecodeActivity  extends BaseActivity{
 			pageNo = 1;
 		}
 		mwebserviceHelper.getRegRecode(id,pageNo);
-		
 	}
 	
 	@Override

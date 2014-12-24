@@ -66,7 +66,8 @@
                 android:text="登录"
                 android:textColor="@color/login_blue"
                 android:textSize="30sp" />
-
+ </LinearLayout>
+    </ScrollView>
             <RelativeLayout
                 android:layout_width="fill_parent"
                 android:layout_height="120dp"
@@ -84,7 +85,4 @@
                     android:text="新用户注册"
                     android:textColor="#fff"/>
             </RelativeLayout>
-        </LinearLayout>
-    </ScrollView>
-
 </LinearLayout>

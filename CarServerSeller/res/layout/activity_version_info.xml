@@ -97,22 +97,22 @@
             android:visibility="gone" >
 
       <cn.com.hyrt.carserverseller.base.view.RoundProgressBar
-        android:id="@+id/roundProgressBar"
-        android:layout_width="80dip"
-        android:layout_height="80dip"
-        android:layout_marginTop="200dp"
-        android_custom:roundColor="#D1D1D1"
-        android_custom:roundProgressColor="@android:color/black"
-        android_custom:textColor="#9A32CD"
-        android_custom:roundWidth="10dip"
-        android_custom:textSize="18sp"/>
+        	android:id="@+id/roundProgressBar"
+       	    android:layout_width="80dip"
+        	android:layout_height="80dip"
+        	android:layout_marginTop="200dp"
+        	android_custom:roundColor="#D1D1D1"
+        	android_custom:roundProgressColor="@android:color/black"
+        	android_custom:textColor="#9A32CD"
+        	android_custom:roundWidth="10dip"
+        	android_custom:textSize="18sp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:textSize="15sp"
-                android:text="正在下载新版本" />
+      <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#000000"
+            android:textSize="15sp"
+            android:text="正在下载新版本" />
         </LinearLayout>
-        </FrameLayout>
+    </FrameLayout>
 </LinearLayout>

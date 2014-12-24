@@ -207,4 +207,10 @@ public class BySpecialityActivity extends BaseActivity {
 			}
 		});
 	}
+	
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		AlertHelper.getInstance(BySpecialityActivity.this).dismissLoading();
+	}
 }

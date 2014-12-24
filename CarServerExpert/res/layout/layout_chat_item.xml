@@ -58,6 +58,14 @@
                 android:padding="@dimen/view_margin"
                 android:text="三大打算打算打算打算打算打算打算"
                 android:textColor="#646263" />
+            <cn.com.hyrt.carserverexpert.base.view.ImageLoaderView
+                android:id="@+id/iv_answersimage"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/view_margin"
+                android:layout_marginTop="@dimen/view_margin_small"
+                android:scaleType="centerCrop" />
         </LinearLayout>
     </LinearLayout>
 

@@ -8,7 +8,6 @@ import cn.com.hyrt.carserversurvey.base.baseFunction.Define;
 import cn.com.hyrt.carserversurvey.base.baseFunction.Define.INFO_PRODUCT_LIST;
 import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.BaseWebServiceHelper;
-import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 import cn.com.hyrt.carserversurvey.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserversurvey.base.view.PullToRefreshView;
 import cn.com.hyrt.carserversurvey.product.activity.ProductDetailActivity;
@@ -92,7 +91,7 @@ public class ProductListFragment extends Fragment{
 	public void loadData(boolean loadMore){
 		AlertHelper.getInstance(getActivity()).showLoading(null);
 		isLoadMore = loadMore;
-		if(mWebServiceHelper == null){
+		//if(mWebServiceHelper == null){
 			mWebServiceHelper = new WebServiceHelper(
 					new BaseWebServiceHelper.RequestCallback<Define.INFO_PRODUCT_LIST>() {
 						
@@ -129,9 +128,6 @@ public class ProductListFragment extends Fragment{
 						
 						@Override
 						public void onFailure(int errorNo, String errorMsg) {
-							ptrv.onHeaderRefreshComplete();
-							ptrv.onFooterRefreshComplete();
-							AlertHelper.getInstance(getActivity()).hideLoading();
 							if(!isLoadMore){
 								products.clear();
 								if(mProductListAdapter == null){
@@ -146,9 +142,12 @@ public class ProductListFragment extends Fragment{
 								AlertHelper.getInstance(getActivity())
 								.showCenterToast(R.string.load_done);
 							}
+							ptrv.onHeaderRefreshComplete();
+							ptrv.onFooterRefreshComplete();
+							AlertHelper.getInstance(getActivity()).hideLoading();
 						}
 					}, getActivity());
-		}
+		//}
 		//getActivity().getIntent().getStringExtra("id")
 		if(isLoadMore){
 			pageNo++;

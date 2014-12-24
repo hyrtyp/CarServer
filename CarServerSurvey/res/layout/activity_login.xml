@@ -5,58 +5,68 @@
     android:background="@color/login_blue"
     android:orientation="vertical" >
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal" 
-        android:src="@drawable/ic_login_logo"
-        android:layout_marginTop="70dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/tv_username"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="80dp"
-        android:background="@drawable/bg_textview_white"
-        android:gravity="center"
-        android:hint="@string/username_hint"
-        android:textColorHint="@android:color/white"
-        android:textColor="@color/login_blue"
-        android:textSize="21sp" 
-        android:textCursorDrawable="@null"
-        android:singleLine="true"/>
-    
-    <EditText
-        android:id="@+id/tv_pwd"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_marginLeft="45dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginTop="@dimen/view_margin_big"
-        android:background="@drawable/bg_textview_white"
-        android:gravity="center"
-        android:hint="@string/pwd_hint"
-        android:textColorHint="@android:color/white"
-        android:textColor="#298fff" 
-        android:textSize="21sp" 
-        android:textCursorDrawable="@null"
-        android:singleLine="true"
-        android:inputType="textPassword"/>
-    
-    <Button 
-        android:id="@+id/btn_submit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_login_submit"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="55dp"
-        android:textSize="30sp"
-        android:textColor="@color/login_blue"
-        android:text="登录"
-        android:gravity="center"
-        android:paddingBottom="7dp"/>
-    
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="70dp"
+                android:src="@drawable/ic_login_logo" />
+
+            <EditText
+                android:id="@+id/tv_username"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="80dp"
+                android:background="@drawable/bg_textview_white"
+                android:gravity="center"
+                android:hint="@string/username_hint"
+                android:singleLine="true"
+                android:textColor="@color/login_blue"
+                android:textColorHint="@android:color/white"
+                android:textCursorDrawable="@null"
+                android:textSize="21sp" />
+
+            <EditText
+                android:id="@+id/tv_pwd"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="45dp"
+                android:layout_marginRight="45dp"
+                android:layout_marginTop="@dimen/view_margin_big"
+                android:background="@drawable/bg_textview_white"
+                android:gravity="center"
+                android:hint="@string/pwd_hint"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="#298fff"
+                android:textColorHint="@android:color/white"
+                android:textCursorDrawable="@null"
+                android:textSize="21sp" />
+
+            <Button
+                android:id="@+id/btn_submit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="55dp"
+                android:background="@drawable/bg_login_submit"
+                android:gravity="center"
+                android:paddingBottom="7dp"
+                android:text="登录"
+                android:textColor="@color/login_blue"
+                android:textSize="30sp" />
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

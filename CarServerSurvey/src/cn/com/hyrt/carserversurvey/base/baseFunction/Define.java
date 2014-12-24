@@ -3,6 +3,7 @@ package cn.com.hyrt.carserversurvey.base.baseFunction;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+
 /**
  * 全局定义
  * 
@@ -124,13 +125,24 @@ public class Define {
 
 		public ArrayList<CDATA> data;
 
-		public class CDATA {
+		public static class CDATA extends BASE implements Serializable {
 			public String id;// ID
 			public String imagepath;// 图片地址
 			public String sjname;// 商家名称
 			public String sjaddress; // 详细地址
 			public String peopledate;// 采集时间
-
+			/*//我自己加的
+			public String sjtel;
+			public String sjmanager;
+			public String phonenum;
+			@Override
+			public String toString() {
+				return "CDATA [id=" + id + ", imagepath=" + imagepath
+						+ ", sjname=" + sjname + ", sjaddress=" + sjaddress
+						+ ", peopledate=" + peopledate + ", sjtel=" + sjtel
+						+ ", sjmanager=" + sjmanager + ", phonenum=" + phonenum
+						+ "]";
+			}*/
 		}
 	}
 

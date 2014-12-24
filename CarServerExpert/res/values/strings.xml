@@ -91,8 +91,8 @@
 	<string name="crop__saving">Saving picture…</string>
     <string name="crop__wait">Please wait…</string>
     <string name="crop__pick_error">No image sources available</string>
-    <string name="crop__done">DONE</string>
-    <string name="crop__cancel" tools:ignore="ButtonCase">CANCEL</string>
+    <string name="crop__done">确定</string>
+    <string name="crop__cancel" tools:ignore="ButtonCase">取消</string>
     <string name="my_integration_label">我的积分</string>
     <string name="question_detail_label">问题详情</string>
     <string name="welfare_signup_title">点击签到领取%d个金币！可以换取免费服务哦！</string>

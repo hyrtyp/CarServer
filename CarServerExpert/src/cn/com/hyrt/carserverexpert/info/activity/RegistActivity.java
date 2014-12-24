@@ -62,6 +62,7 @@ public class RegistActivity extends BaseActivity{
 				loginInfo.name = result.name;
 				Intent intent = new Intent();
 				intent.setClass(RegistActivity.this, MainActivity.class);
+				intent.putExtra("regist", true);
 				startActivity(intent);
 				((CarServerApplication)getApplicationContext()).setLoginInfo(loginInfo);
 				((LoginActivity)LoginActivity.getMeContext()).finish();

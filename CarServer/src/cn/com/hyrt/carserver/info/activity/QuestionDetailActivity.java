@@ -1,20 +1,27 @@
 package cn.com.hyrt.carserver.info.activity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.kobjects.base64.Base64;
 
+import com.soundcloud.android.crop.Crop;
+
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -51,6 +58,7 @@ public class QuestionDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.btn_reply,click="reply") Button btnReply;
 	@ViewInject(id=R.id.layout_reply) LinearLayout layoutReply;
 	@ViewInject(id=R.id.tv_prompt_three) TextView tvPromptThree;
+	@ViewInject(id=R.id.tv_comments_detail) TextView tv_comments_detail;
 	
 	private List<Define.REPLY_DETAIL.CDATA> datas 
 	= new ArrayList<Define.REPLY_DETAIL.CDATA>();
@@ -84,6 +92,18 @@ public class QuestionDetailActivity extends BaseActivity{
 			tvPromptTwo.setVisibility(View.GONE);
 			layoutReply.setVisibility(View.GONE);
 			tvPromptThree.setVisibility(View.VISIBLE);
+			tv_comments_detail.setVisibility(View.VISIBLE);
+			tv_comments_detail.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					intent.setClass(QuestionDetailActivity.this, CommentedDetialActivity.class);
+					intent.putExtra("questionId", replyId);
+					startActivity(intent);
+//					startActivityForResult(intent, 101);
+				}
+			});
 		}else{
 			tvPromptThree.setVisibility(View.GONE);
 			tvPromptOne.setVisibility(View.VISIBLE);
@@ -186,6 +206,75 @@ public class QuestionDetailActivity extends BaseActivity{
 		});
 	}
 	
+	
+	
+	//上传照片
+	public void uploadPhoto(View view){
+		if(imgBitmap != null){
+			imgBitmap = null;
+			ivPhoto.setImageResource(R.drawable.ic_question_camera);
+			return;
+		}
+		if(faceUri == null){
+			if (FileHelper.sdCardExist()) {
+				faceUri = Uri.fromFile(FileHelper.createFile1(imageName));
+			}else{
+				AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+			}
+			//faceUri = Uri.fromFile(FileHelper.createFile(imageName));
+		}
+		if(mPhotoHelper == null){
+			mPhotoHelper = new PhotoHelper(this, faceUri, 50);
+		}
+		
+		mPhotoHelper.getPhoto();
+	}
+	
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 0) {
+			return;
+		}
+		if (requestCode == Crop.REQUEST_PICK && resultCode == Activity.RESULT_OK) {
+			beginCrop(data.getData());
+		} else if (requestCode == Crop.REQUEST_CROP) {
+			handleCrop(resultCode, data);
+		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
+			beginCrop(faceUri);
+        }
+	}
+	
+	private void beginCrop(Uri source) {
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+	            faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+	        }
+	        new Crop(source).output(faceUri).asSquare().start(this);
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == Activity.RESULT_OK) {
+        	Bitmap bitmap;
+			try {
+				bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Crop.getOutput(result));
+				imgBitmap = bitmap;
+				ivPhoto.setImageBitmap(imgBitmap);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            AlertHelper.getInstance(this).showCenterToast(Crop.getError(result).getMessage());
+        }
+    }
+	/*
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -222,30 +311,7 @@ public class QuestionDetailActivity extends BaseActivity{
         	setResult(0);
         	finish();
         }
-	}
-	
-	//上传照片
-	public void uploadPhoto(View view){
-		if(imgBitmap != null){
-			imgBitmap = null;
-			ivPhoto.setImageResource(R.drawable.ic_question_camera);
-			return;
-		}
-		if(faceUri == null){
-			if (FileHelper.sdCardExist()) {
-				faceUri = Uri.fromFile(FileHelper.createFile1(imageName));
-			}else{
-				AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
-			}
-			//faceUri = Uri.fromFile(FileHelper.createFile(imageName));
-		}
-		if(mPhotoHelper == null){
-			mPhotoHelper = new PhotoHelper(this, faceUri, 50);
-		}
-		
-		mPhotoHelper.getPhoto();
-	}
-	
+	}*/
 	//回复
 	public void reply(View view){
 		if(replyId == null){
@@ -340,6 +406,7 @@ public class QuestionDetailActivity extends BaseActivity{
 	protected void onDestroy() {
 		super.onDestroy();
 		PhotoPopupHelper.hidePop();
+		AlertHelper.getInstance(this).dismissLoading();
 	}
 	
 }

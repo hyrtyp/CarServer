@@ -44,6 +44,7 @@ public class VersionInfoActivity extends BaseActivity{
 	private List<VS_INFO_LIST.VS_INFO> mVsInfos;
 	private VS_INFO_LIST.VS_INFO mVsInfo;
 	private String apkurl = "http://192.168.13.124:8080/CarServerSeller.apk";
+	//private String apkurl = "http://192.168.56.1:8080/CarServerSeller.apk";
 	private String versionClassi;
 	private int maxLength = 0;
 	private int progress = 0;

@@ -43,13 +43,13 @@
         <ListView 
             android:id="@+id/listview"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="fill_parent"/>
         <TextView 
             android:id="@+id/tv_nodata"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:text="暂无数据"
-            android:layout_gravity="center"
+            android:gravity="center"
             android:visibility="gone"/>
     </cn.com.hyrt.carserverexpert.base.view.PullToRefreshView>
 

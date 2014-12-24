@@ -37,6 +37,7 @@
      <string name="method_question_reply">saveMwpmSysTerminalSeekReply</string>
      <string name="method_comment_expert">saveMwpmSysTerminalReview</string>
      <string name="method_saveImageWithByte">saveImageWithByte</string>
+     <string name="method_getmwpmmysmerminalmeviewmnfo">getMwpmSysTerminalReviewInfo</string>
      
      <!-- 福利中心 -->
      <string name="method_get_cap_sys_user_search">getCapSysUserSearch</string>
@@ -56,7 +57,7 @@
 	
     <!-- 汽车服务HTML地址 -->
     <!--  <string name="method_weburl">http://192.168.10.135:8083</string> -->
-    <!--  <string name="method_weburl">http://192.168.10.238:8083</string>-->
+    <string name="method_weburl">http://192.168.10.238:8083</string>
     <!--  <string name="method_weburl">http://42.121.127.121:8083</string> -->
-<string name="method_weburl">http://121.42.43.20:84</string> 
+<!-- <string name="method_weburl">http://121.42.43.20:84</string>  -->
 </resources>

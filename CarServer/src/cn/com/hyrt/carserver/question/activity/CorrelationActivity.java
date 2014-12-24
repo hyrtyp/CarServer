@@ -179,4 +179,9 @@ public class CorrelationActivity extends BaseActivity {
 			mCarInfoServiceHelper.getCorrelation(id, pageNo);
 		}
 	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		AlertHelper.getInstance(CorrelationActivity.this).dismissLoading();
+	}
 }

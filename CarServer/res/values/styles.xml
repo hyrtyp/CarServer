@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -15,12 +15,12 @@
     
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:actionBarStyle">@style/my_actionbar_style</item>   
+        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/my_actionbar_style</item>   
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="@android:attr/actionBarSize">65dp</item>
+        <item name="@android:attr/actionBarSize" tools:ignore="NewApi">65dp</item>
     </style>
     
-     <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">  
+     <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar" tools:ignore="NewApi">  
         <item name="android:background">#ffffff</item>  
         
     </style>  
@@ -40,5 +40,46 @@
          <item name="android:windowIsTranslucent">true</item>
          <item name="android:windowAnimationStyle">@+android:style/Animation.Translucent</item>
      </style>
+     
+     <style name="Crop"></style>
+    <style name="Crop.DoneCancelBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/crop__bar_height</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:divider">@drawable/crop__divider</item>
+        <item name="android:showDividers" tools:ignore="NewApi">middle</item>
+        <item name="android:dividerPadding" tools:ignore="NewApi">12dp</item>
+        <item name="android:background">@color/crop__button_bar</item>
+    </style>
+
+    <style name="Crop.ActionButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/crop__selectable_background</item>
+    </style>
+
+    <style name="Crop.ActionButtonText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingRight">20dp</item>
+ <!-- Offsets left drawable -->
+        <item name="android:drawablePadding">8dp</item>
+        <item name="android:textColor">@color/crop__button_text</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="Crop.ActionButtonText.Done">
+        <item name="android:drawableLeft">@drawable/crop__ic_done</item>
+        <item name="android:text">@string/crop__done</item>
+    </style>
+
+    <style name="Crop.ActionButtonText.Cancel">
+        <item name="android:drawableLeft">@drawable/crop__ic_cancel</item>
+        <item name="android:text">@string/crop__cancel</item>
+    </style>
      
 </resources>

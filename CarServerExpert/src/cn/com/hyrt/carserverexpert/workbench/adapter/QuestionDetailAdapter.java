@@ -6,6 +6,7 @@ import cn.com.hyrt.carserverexpert.R;
 import cn.com.hyrt.carserverexpert.base.activity.StartActivity;
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define;
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define.INFO_QUESTION_DETAIL;
+import cn.com.hyrt.carserverexpert.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserverexpert.base.helper.StringHelper;
 import cn.com.hyrt.carserverexpert.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverexpert.base.view.ImageLoaderView;
@@ -17,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -64,6 +66,8 @@ public class QuestionDetailAdapter extends BaseAdapter{
 					.findViewById(R.id.tv_time_left);
 			mHolder.tvContentLeft = (TextView) convertView
 					.findViewById(R.id.tv_content_left);
+			mHolder.iv_answersimage = (ImageLoaderView) convertView
+					.findViewById(R.id.iv_answersimage);
 			mHolder.layoutChatRight = (LinearLayout) convertView
 					.findViewById(R.id.layout_chat_right);
 			mHolder.ivFaceRight = (ImageLoaderView) convertView
@@ -88,6 +92,20 @@ public class QuestionDetailAdapter extends BaseAdapter{
 			mHolder.layoutChatLeft.setVisibility(View.VISIBLE);
 			mHolder.layoutChatRight.setVisibility(View.GONE);
 			mHolder.ivFaceLeft.setImageUrl(questionDetail.attacpath);
+			//awen
+			if ("".equals(questionDetail.answersimage) || questionDetail.answersimage == null) {
+				mHolder.iv_answersimage.setVisibility(View.GONE);
+			}else{
+				mHolder.iv_answersimage.setVisibility(View.VISIBLE);
+				mHolder.iv_answersimage.setImageUrl(questionDetail.answersimage);//
+				mHolder.iv_answersimage.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View arg0) {
+						PhotoPopupHelper.showPop(questionDetail.answersimage, mContext);
+					}
+				});
+			}//
 			mHolder.tvTimeLeft.setText(StringHelper.formatDate(questionDetail.contenttime));
 			mHolder.tvContentLeft.setText(questionDetail.replycontent);
 			if(WebServiceHelper.QUESTION_TYPE_HIS.equals(type)){
@@ -112,6 +130,7 @@ public class QuestionDetailAdapter extends BaseAdapter{
 		public ImageLoaderView ivFaceLeft;
 		public TextView tvTimeLeft;
 		public TextView tvContentLeft;
+		public ImageLoaderView iv_answersimage;
 		public LinearLayout layoutChatRight;
 		public ImageLoaderView ivFaceRight;
 		public TextView tvTimeRight;

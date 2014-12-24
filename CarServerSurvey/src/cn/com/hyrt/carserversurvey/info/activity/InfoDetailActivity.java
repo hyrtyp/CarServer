@@ -1,14 +1,20 @@
 package cn.com.hyrt.carserversurvey.info.activity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import org.kobjects.base64.Base64;
 
+import com.soundcloud.android.crop.Crop;
+
 import net.tsz.afinal.annotation.view.ViewInject;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Html;
 import android.view.View;
 import android.widget.Button;
@@ -65,8 +71,55 @@ public class InfoDetailActivity extends BaseActivity{
 		mPhotoHelper.getPhoto();
 		*/
 	}
-	
 	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 0) {
+			return;
+		}
+		if (requestCode == Crop.REQUEST_PICK && resultCode == Activity.RESULT_OK) {
+			beginCrop(data.getData());
+		} else if (requestCode == Crop.REQUEST_CROP) {
+			handleCrop(resultCode, data);
+		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
+			beginCrop(faceUri);
+        }else if(resultCode == Define.RESULT_FROM_ALTER_CAR){
+        	AlertHelper.getInstance(this).showLoading(null);
+        	loadData();
+        }
+	}
+	
+	private void beginCrop(Uri source) {
+		if (FileHelper.sdCardExist()) {
+			if(faceUri == null){
+	            faceUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+	        }
+	        new Crop(source).output(faceUri).asSquare().start(this);
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == Activity.RESULT_OK) {
+        	//Bitmap bitmap;
+			try {
+				bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Crop.getOutput(result));
+				 iv_user_img.setImageBitmap(bitmap);
+				 savePhoto();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            AlertHelper.getInstance(this).showCenterToast(Crop.getError(result).getMessage());
+        }
+    }
+	
+	/*@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_CANCELED) {
@@ -98,18 +151,11 @@ public class InfoDetailActivity extends BaseActivity{
         	}else{
         		AlertHelper.getInstance(getApplicationContext()).showCenterToast(getString(R.string.no_sdcard));
         	}
-            /*if(mPhotoHelper == null){
-                if(faceUri == null){
-                    faceUri = Uri.fromFile(FileHelper.createFile("face.jpg"));
-                }
-                mPhotoHelper = new PhotoHelper(InfoDetailActivity.this, faceUri, 50);
-            }
-            mPhotoHelper.startPhotoZoom(faceUri, 50);*/
         }else if(resultCode == Define.RESULT_FROM_ALTER_CAR){
         	AlertHelper.getInstance(this).showLoading(null);
         	loadData();
         }
-	}
+	}*/
 	
 	private void loadData(){
 		LogHelper.i("tag", "调我一次");

@@ -19,4 +19,10 @@
     <color name="black">#000000</color>
     <color name="blue_1">#82e2f4</color>
     <color name="classification_normal_color">#454545</color>
+    
+    <!-- crop -->
+    <color name="crop__button_bar">#f3f3f3</color>
+    <color name="crop__button_text">#666666</color>
+    <color name="crop__selector_pressed">#1a000000</color>
+    <color name="crop__selector_focused">#77000000</color>
 </resources>

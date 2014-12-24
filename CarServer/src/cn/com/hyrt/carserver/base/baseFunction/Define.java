@@ -480,4 +480,17 @@ public class Define {
 		public String keyurl;
 	}
 	
+	public static class COMMENTS  extends BASE {
+//		{"content":"评论内容","level":"评论级别","pltime":"2014-12-24 10:28:52.0","code":"200"}
+		public String content;
+		public String level;
+		public String pltime;
+		@Override
+		public String toString() {
+			return "COMMENTS [content=" + content + ", level=" + level
+					+ ", pltime=" + pltime + "]";
+		}
+		
+	}
+	
 }

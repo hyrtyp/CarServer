@@ -45,12 +45,13 @@ public class MyIntegrationActivity extends BaseActivity{
 		}else{
 			page = 1;
 		}
-		new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.INFO_INTEGRATION>() {
+		WebServiceHelper webServiceHelper = new WebServiceHelper(new BaseWebServiceHelper.RequestCallback<Define.INFO_INTEGRATION>() {
 
 			@Override
 			public void onSuccess(INFO_INTEGRATION result) {
 				ptrv.onHeaderRefreshComplete();
 				ptrv.onFooterRefreshComplete();
+				AlertHelper.getInstance(MyIntegrationActivity.this).hideLoading();
 				if(mData.size() > 0){
 					if(isMore){
 						if(result.data.size() <= 0){
@@ -61,7 +62,7 @@ public class MyIntegrationActivity extends BaseActivity{
 						mData.clear();
 						if(result.data.size() <= 0){
 							AlertHelper.getInstance(MyIntegrationActivity.this)
-							.showCenterToast("加载失败");
+							.showCenterToast("未查询到数据");
 							listview.setVisibility(View.GONE);
 							return;
 						}
@@ -88,29 +89,35 @@ public class MyIntegrationActivity extends BaseActivity{
 			public void onFailure(int errorNo, String errorMsg) {
 				ptrv.onHeaderRefreshComplete();
 				ptrv.onFooterRefreshComplete();
+				AlertHelper.getInstance(MyIntegrationActivity.this).hideLoading();
 				if(isMore){
 					if(mData.size() >= 0){
 						AlertHelper.getInstance(MyIntegrationActivity.this)
 						.showCenterToast("已经加载全部");
 					}else{
 						AlertHelper.getInstance(MyIntegrationActivity.this)
-						.showCenterToast("加载失败");
+						.showCenterToast("未查询到数据");
 						tvNoData.setVisibility(View.VISIBLE);
 						listview.setVisibility(View.GONE);
 						return;
 					}
 				}else{
-					mData.clear();
+					//mData.clear();
 					if(mData.size() <= 0){
 						AlertHelper.getInstance(MyIntegrationActivity.this)
-						.showCenterToast("加载失败");
+						.showCenterToast("未查询到数据");
 						tvNoData.setVisibility(View.VISIBLE);
 						listview.setVisibility(View.GONE);
 						return;
+					}else{
+						AlertHelper.getInstance(MyIntegrationActivity.this)
+						.showCenterToast("刷新失败！");
 					}
 				}
 			}
-		}, this).getIntegration(page);
+		}, this);
+		AlertHelper.getInstance(MyIntegrationActivity.this).showLoading(null);
+		webServiceHelper.getIntegration(page);
 	}
 	
 	private void setListener(){

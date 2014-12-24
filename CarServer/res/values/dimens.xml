@@ -29,5 +29,6 @@
     
     <dimen name="cosmetology_title_text">25sp</dimen>
     <dimen name="cosmetology_content_text">20sp</dimen>
-    
+    <!-- crop -->
+     <dimen name="crop__bar_height">48dp</dimen>
 </resources>

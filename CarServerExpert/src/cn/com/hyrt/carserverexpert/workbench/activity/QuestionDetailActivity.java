@@ -12,6 +12,7 @@ import cn.com.hyrt.carserverexpert.base.baseFunction.Define.INFO_QUESTION_DETAIL
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define.INFO_REPLY;
 import cn.com.hyrt.carserverexpert.base.helper.AlertHelper;
 import cn.com.hyrt.carserverexpert.base.helper.BaseWebServiceHelper;
+import cn.com.hyrt.carserverexpert.base.helper.LogHelper;
 import cn.com.hyrt.carserverexpert.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverexpert.base.view.PullToRefreshView;
 import cn.com.hyrt.carserverexpert.workbench.adapter.QuestionDetailAdapter;
@@ -100,6 +101,7 @@ public class QuestionDetailActivity extends BaseActivity{
 				AlertHelper.getInstance(QuestionDetailActivity.this).hideLoading();
 				mData.clear();
 				mData.addAll(result.data);
+				LogHelper.i("tag", mData.toString());
 				if(mAdapter == null){
 					mAdapter = new QuestionDetailAdapter(mData, QuestionDetailActivity.this, type);
 					listview.setAdapter(mAdapter);

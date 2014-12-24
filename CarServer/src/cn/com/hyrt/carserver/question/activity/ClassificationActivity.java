@@ -360,4 +360,9 @@ public class ClassificationActivity extends BaseActivity {
 			}
 		});
 	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		AlertHelper.getInstance(ClassificationActivity.this).dismissLoading();
+	}
 }

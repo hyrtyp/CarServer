@@ -87,6 +87,8 @@ public class MainActivity extends BaseActivity {
 		setContentView(R.layout.activity_main);
 		showActionBar(false);
 		meContext = this;
+		Intent intent = getIntent();
+		boolean regist = intent.getBooleanExtra("regist", false);
 		initView();
 		LogHelper.i("tag", "sp:" + ScreenHelper.px2sp(this, 24) + " dp:"
 				+ ScreenHelper.px2dip(this, 24));

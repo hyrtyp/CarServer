@@ -1,6 +1,8 @@
 package cn.com.hyrt.carserver.question.activity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,12 +12,16 @@ import net.tsz.afinal.annotation.view.ViewInject;
 
 import org.kobjects.base64.Base64;
 
+import com.soundcloud.android.crop.Crop;
+
 import android.R.array;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.DisplayMetrics;
@@ -114,6 +120,55 @@ public class QuestionActivity extends BaseActivity {
 	}
 
 	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == 0) {
+			return;
+		}
+		if (requestCode == Crop.REQUEST_PICK && resultCode == Activity.RESULT_OK) {
+			beginCrop(data.getData());
+		} else if (requestCode == Crop.REQUEST_CROP) {
+			handleCrop(resultCode, data);
+		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
+			beginCrop(questionUri);
+        }
+	}
+	
+	private void beginCrop(Uri source) {
+		if (FileHelper.sdCardExist()) {
+			if(questionUri == null){
+				questionUri = Uri.fromFile(FileHelper.createFile1("face.jpg"));
+	        }
+	        new Crop(source).output(questionUri).asSquare().start(this);
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sd卡不存在");
+		}
+    }
+
+    private void handleCrop(int resultCode, Intent result) {
+        if (resultCode == Activity.RESULT_OK) {
+        	Bitmap bitmap;
+			try {
+				bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Crop.getOutput(result));
+				imgBitmap = bitmap;
+				ivFaceImg.setVisibility(View.VISIBLE);
+				imageTxt.setVisibility(View.GONE);
+				camer.setVisibility(View.GONE);
+				ivFaceImg.setImageBitmap(imgBitmap);
+				flag1 = 1;
+				sysimage.setBackgroundResource(R.drawable.position_close);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        } else if (resultCode == Crop.RESULT_ERROR) {
+            AlertHelper.getInstance(this).showCenterToast(Crop.getError(result).getMessage());
+        }
+    }
+	/*@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_CANCELED) {
@@ -154,7 +209,7 @@ public class QuestionActivity extends BaseActivity {
 		} else if (resultCode == Define.RESULT_FROM_ALTER_CAR) {
 			AlertHelper.getInstance(this).showLoading(null);
 		}
-	}
+	}*/
 
 	private void initView() {
 		contentText = (EditText) findViewById(R.id.content);
@@ -513,5 +568,10 @@ public class QuestionActivity extends BaseActivity {
 				WebServiceHelper.IMAGE_TYPE_QUESTION,
 				uid);
 
+	}
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		AlertHelper.getInstance(QuestionActivity.this).dismissLoading();
 	}
 }

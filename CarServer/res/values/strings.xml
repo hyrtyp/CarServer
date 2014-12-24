@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <string name="app_name">汽车服务</string>
 	<string name="pull_to_refresh_release_label">下拉刷新&#8230;</string>
@@ -203,6 +203,8 @@
 	<string name="info_question_detail_prompt">专家是利用休息时间为您解答问题，如未及时回复请谅解。\n专家的回复仅为参考，具体车辆问题请前往修理厂。</string>
 	<string name="info_question_detail_prompt_one">如专家已解决您的问题，请点击评论>></string>
 	<string name="info_question_detail_prompt_three">感谢您的使用>></string>
+	<!-- awen -->
+	<string name="info_comments_detail">查看评论详情>></string>
 	<string name="info_question_detail_nodata">暂无聊天记录</string>
 	<string name="spinner_default_label">请选择</string>
 	<string name="info_brand_not_selected">请选择品牌</string>
@@ -242,6 +244,7 @@
 	<string name="eme_sos_record_label">语音</string>
 	<string name="commit_question">提交问题</string>
 	<string name="eme_sos_label">快速求助</string>
+	<string name="comments_detial_label">评论详情</string>
 	<string name="eme_sos_content_nodata">请输入描述信息</string>
 	<string name="send_success">发送成功</string>
 	<string name="eme_recording">正在录音</string>
@@ -257,6 +260,12 @@
 	<string name="signup_fail">签到失败...</string>
 	<string name="signup_load_msg">签到中...</string>
 	
+	<!-- crop -->
+	<string name="crop__saving">Saving picture…</string>
+    <string name="crop__wait">Please wait…</string>
+    <string name="crop__pick_error">No image sources available</string>
+    <string name="crop__done">确定</string>
+    <string name="crop__cancel" tools:ignore="ButtonCase">取消</string>
 </resources>
 
    

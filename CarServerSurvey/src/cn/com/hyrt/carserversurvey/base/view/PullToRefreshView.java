@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import cn.com.hyrt.carserversurvey.R;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.AttributeSet;
@@ -19,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import cn.com.hyrt.carserversurvey.R;
 
 
 public class PullToRefreshView extends LinearLayout {
