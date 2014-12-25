@@ -156,11 +156,13 @@
                         android:text="订单详情："
                         android:textColor="#000"
                         android:textSize="18sp" />
-
-                    <TextView
+					<!-- awen -->
+                    <cn.com.hyrt.carserverseller.base.view.FocusedTextView
                         android:id="@+id/tv_content"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
                         android:textColor="#646363"
                         android:textSize="15sp" />
                 </TableRow>

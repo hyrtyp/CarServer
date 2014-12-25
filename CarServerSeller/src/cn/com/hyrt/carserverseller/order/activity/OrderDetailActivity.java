@@ -28,7 +28,7 @@ public class OrderDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.tv_marktime) TextView tvMarkTime;
 	@ViewInject(id=R.id.tv_arrivetime) TextView tvArriveTime;
 	@ViewInject(id=R.id.tv_remark) TextView tvRemark;
-	@ViewInject(id=R.id.tv_remark) TextView tv_content;//订单详情
+	@ViewInject(id=R.id.tv_content) TextView tv_content;//订单详情
 	@ViewInject(id=R.id.layout_control) LinearLayout layoutControl;
 	@ViewInject(id=R.id.btn_refusal,click="refusal") Button btnRefusal;
 	@ViewInject(id=R.id.btn_accept,click="accept") Button btnAccept;
@@ -65,6 +65,7 @@ public class OrderDetailActivity extends BaseActivity{
 	private void initView(){
 		tvTitle.setText(orderInfo.spname);
 		tvCustomer.setText(orderInfo.phone);
+		tv_content.setText(orderInfo.content);
 		tvCreateTime.setText(StringHelper.formatDate(orderInfo.createtime));
 		tvMarkTime.setText(StringHelper.formatDate(orderInfo.makedate));
 		if(WebServiceHelper.ORDER_TYPE_AND.equals(type)){
