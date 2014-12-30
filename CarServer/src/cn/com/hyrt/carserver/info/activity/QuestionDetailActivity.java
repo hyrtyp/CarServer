@@ -123,6 +123,7 @@ public class QuestionDetailActivity extends BaseActivity{
 		loadData();
 	}
 	
+	
 	private void loadData(){
 //		if(type == QuestionActivity.TYPE_HISTORY){
 //			mWebServiceHelper.getReplyDetail(replyId, WebServiceHelper.REPLY_DETAIL_HISTORY);
@@ -243,6 +244,11 @@ public class QuestionDetailActivity extends BaseActivity{
 		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
 			beginCrop(faceUri);
         }
+		//评论成功时直接关闭当前页面。
+		if (resultCode == 101) {
+			setResult(0);
+			finish();
+		}
 	}
 	
 	private void beginCrop(Uri source) {

@@ -45,6 +45,8 @@ public class QuestionActivity extends BaseActivity{
 	
 	private int loadStatus;
 	
+	private SEEK_REPLY_LIST results;
+	
 	private int STATUS_REFRESH = 2;
 	private int STATUS_LOAD_MORE = 3;
 	
@@ -93,6 +95,7 @@ public class QuestionActivity extends BaseActivity{
 			new WebServiceHelper.RequestCallback<Define.SEEK_REPLY_LIST>() {
 				@Override
 				public void onSuccess(SEEK_REPLY_LIST result) {
+					results = result;
 					setData(result);
 				}
 
@@ -127,7 +130,7 @@ public class QuestionActivity extends BaseActivity{
 			}else{
 				datas.clear();
 				tvNoData.setVisibility(View.VISIBLE);
-//				lvQuestion.setVisibility(View.INVISIBLE);
+				lvQuestion.setVisibility(View.GONE);
 			}
 		}else{
 			tvNoData.setVisibility(View.GONE);
@@ -211,7 +214,17 @@ public class QuestionActivity extends BaseActivity{
 		super.onActivityResult(arg0, resultCode, arg2);
 		if(resultCode == 0){
 			AlertHelper.getInstance(QuestionActivity.this).showLoading(null);
-			loadData(false);
+			refresh();
+//			loadData(false);
 		}
 	}
+	
+	/** 
+     * 刷新 Activity
+     */  
+    private void refresh() {  
+        finish();  
+        Intent intent = new Intent(this, QuestionActivity.class);  
+        startActivity(intent);  
+    }  
 }

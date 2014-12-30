@@ -20,7 +20,8 @@ public class Define {
 
 	public static int RESULT_FROM_ALTER_CAR = 101;
 	public static int RESULT_FROM_CHANGE_INFO = 102;
-
+	
+	public static int RESULT_FROM_QUESTION = 103;
 	public static class BASE {
 		public String code;
 		public String message;

@@ -1,5 +1,8 @@
 package cn.com.hyrt.carserver.info.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
 import android.os.Bundle;
@@ -31,7 +34,8 @@ public class MyCarActivity extends BaseActivity{
 	@ViewInject(id=R.id.btn_add_car,click="addCar") ImageView btnAddCar;
 	
 	private MyCarAdapter mAdapter;
-	private Define.INFO_CAR_LIST cars;
+	private List<Define.INFO_CAR_LIST.CDATA> cars
+	= new ArrayList<Define.INFO_CAR_LIST.CDATA>();
 	private WebServiceHelper mWebServiceHelper;
 	
 	private boolean isMyCar = true;
@@ -73,8 +77,10 @@ public class MyCarActivity extends BaseActivity{
 								tvNoData.setVisibility(View.GONE);
 								lvMyCar.setVisibility(View.VISIBLE);
 							}
-							
-							cars = result;
+							if (cars!=null) {
+								cars.clear();
+							}
+							cars.addAll(result.data) ;
 							if(mAdapter == null){
 								mAdapter = new MyCarAdapter(cars, MyCarActivity.this);
 								lvMyCar.setAdapter(mAdapter);

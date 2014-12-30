@@ -1,8 +1,11 @@
 package cn.com.hyrt.carserver.info.adapter;
 
+import java.util.List;
+
 import cn.com.hyrt.carserver.R;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR_LIST;
+import cn.com.hyrt.carserver.base.baseFunction.Define.INFO_CAR_LIST.CDATA;
 import cn.com.hyrt.carserver.base.helper.LogHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
 import android.content.Context;
@@ -15,11 +18,11 @@ import android.widget.TextView;
 
 public class MyCarAdapter extends BaseAdapter{
 
-	private Define.INFO_CAR_LIST cars;
+	private List<Define.INFO_CAR_LIST.CDATA> cars;
 	private Context mContext;
 	private MyCarOnClickListener mListener;
 	
-	public MyCarAdapter(INFO_CAR_LIST cars, Context mContext) {
+	public MyCarAdapter(List<CDATA> cars, Context mContext) {
 		super();
 		this.cars = cars;
 		this.mContext = mContext;
@@ -28,13 +31,13 @@ public class MyCarAdapter extends BaseAdapter{
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return cars.data.size();
+		return cars.size();
 	}
 
 	@Override
 	public Object getItem(int arg0) {
 		// TODO Auto-generated method stub
-		return cars.data.get(arg0);
+		return cars.get(arg0);
 	}
 
 	@Override
@@ -51,7 +54,7 @@ public class MyCarAdapter extends BaseAdapter{
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_my_car_item, null);
 		}
 		
-		final Define.INFO_CAR_LIST.CDATA car = cars.data.get(position);
+		final Define.INFO_CAR_LIST.CDATA car = cars.get(position);
 		convertView.setTag(car.id);
 		
 		final ImageLoaderView ivFaceImg = (ImageLoaderView) convertView.findViewById(R.id.iv_face_img);

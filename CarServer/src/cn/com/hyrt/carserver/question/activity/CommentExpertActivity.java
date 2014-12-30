@@ -59,6 +59,7 @@ public class CommentExpertActivity extends BaseActivity{
 					.showCenterToast(R.string.comment_success);
 					HttpHelper mHttpHelper = new HttpHelper();
 					mHttpHelper.commentSucess(result.keyurl);
+					setResult(101);
 					finish();
 				}
 

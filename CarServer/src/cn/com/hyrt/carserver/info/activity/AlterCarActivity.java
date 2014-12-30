@@ -31,6 +31,7 @@ import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -68,7 +69,7 @@ public class AlterCarActivity extends BaseActivity{
 	@ViewInject(id=R.id.et_insurancetype) EditText etInsuranceType;
 	@ViewInject(id=R.id.et_insurancenum) EditText etInsuranceNum;
 	@ViewInject(id=R.id.et_insurancecompany) EditText etInsuranceCompany;
-	@ViewInject(id=R.id.btn_confirm_add,click="addCar") TextView btn_confirm_add;
+	@ViewInject(id=R.id.btn_confirm_add,click="addCar") Button btn_confirm_add;
 	@ViewInject(id=R.id.iv_car_img) ImageLoaderView iv_car_img;
 	
 	private boolean isAdd = true;
@@ -310,63 +311,69 @@ public class AlterCarActivity extends BaseActivity{
 		mPhotoHelper.getPhoto();*/
 	}
 	
+	boolean isSave = true;
 	public void addCar(View view){
-		Define.INFO_CAR car = new Define.INFO_CAR();
-		if(!isAdd){
-			car.carid = carId;
-		}
-		car.carnumber = etCarNumber.getText().toString();
-//		car.brand = etBrand.getText().toString();
-//		car.model = etModel.getText().toString();
-//		car.submodel = etSubModel.getText().toString();
-		if(spinnerBrand.getSelectedItemPosition() <= 0){
-			AlertHelper.getInstance(this).showCenterToast(R.string.info_brand_not_selected);
-			return;
-		}else if(spinnerModel.getSelectedItemPosition() <= 0){
-			AlertHelper.getInstance(this).showCenterToast(R.string.info_model_not_selected);
-			return;
-		}else{
-			car.brand = brandName.get(spinnerBrand.getSelectedItemPosition());
-			car.model = modelName.get(spinnerModel.getSelectedItemPosition());
-		}
-		
-		car.cartype = etCarType.getText().toString();
-		car.mileage = etMileage.getText().toString();
-		car.yearcheckdate = yearcheckDate;
-		car.manufacturer = etManuFacturer.getText().toString();
-		car.insurancedate = insuranceData;
-		car.insurancetype = etInsuranceType.getText().toString();
-		car.insurancenum = etInsuranceNum.getText().toString();
-		car.insurancecompany = etInsuranceCompany.getText().toString();
-		car.checkdate = StringHelper.getNowTime();
-//		car.imagepath = imgBuffer;
-		car.imagename = imageName;
-		
-		if(mWebServiceHelper == null){
-			mWebServiceHelper = new WebServiceHelper(new WebServiceHelper.RequestCallback<Define.INFO_CAR>() {
+		if (isSave) {
+			isSave = false;
+			Define.INFO_CAR car = new Define.INFO_CAR();
+			if(!isAdd){
+				car.carid = carId;
+			}
+			car.carnumber = etCarNumber.getText().toString();
+//			car.brand = etBrand.getText().toString();
+//			car.model = etModel.getText().toString();
+//			car.submodel = etSubModel.getText().toString();
+			if(spinnerBrand.getSelectedItemPosition() <= 0){
+				AlertHelper.getInstance(this).showCenterToast(R.string.info_brand_not_selected);
+				return;
+			}else if(spinnerModel.getSelectedItemPosition() <= 0){
+				AlertHelper.getInstance(this).showCenterToast(R.string.info_model_not_selected);
+				return;
+			}else{
+				car.brand = brandName.get(spinnerBrand.getSelectedItemPosition());
+				car.model = modelName.get(spinnerModel.getSelectedItemPosition());
+			}
+			
+			car.cartype = etCarType.getText().toString();
+			car.mileage = etMileage.getText().toString();
+			car.yearcheckdate = yearcheckDate;
+			car.manufacturer = etManuFacturer.getText().toString();
+			car.insurancedate = insuranceData;
+			car.insurancetype = etInsuranceType.getText().toString();
+			car.insurancenum = etInsuranceNum.getText().toString();
+			car.insurancecompany = etInsuranceCompany.getText().toString();
+			car.checkdate = StringHelper.getNowTime();
+//			car.imagepath = imgBuffer;
+			car.imagename = imageName;
+			
+			if(mWebServiceHelper == null){
+				mWebServiceHelper = new WebServiceHelper(new WebServiceHelper.RequestCallback<Define.INFO_CAR>() {
 
-				@Override
-				public void onSuccess(Define.INFO_CAR result) {
-					if(!isAdd){
-						uploadImg(carId);
-					}else{
-						uploadImg(result.id);
+					@Override
+					public void onSuccess(Define.INFO_CAR result) {
+						if(!isAdd){
+							uploadImg(carId);
+						}else{
+							uploadImg(result.id);
+						}
+
+//						setResult(Define.RESULT_FROM_ALTER_CAR);
+//						finish();
 					}
 
-//					setResult(Define.RESULT_FROM_ALTER_CAR);
-//					finish();
-				}
-
-				@Override
-				public void onFailure(int errorNo, String errorMsg) {
-					AlertHelper.getInstance(AlterCarActivity.this).showCenterToast("保存失败");
-					LogHelper.i("tag", "errorMsg:"+errorMsg);
-					
-				}
-			}, this);
+					@Override
+					public void onFailure(int errorNo, String errorMsg) {
+						isSave = true;
+						AlertHelper.getInstance(AlterCarActivity.this).showCenterToast("保存失败");
+						LogHelper.i("tag", "errorMsg:"+errorMsg);
+						
+					}
+				}, this);
+			}
+			mWebServiceHelper.alterCar(car);
+		}else{
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("不能重复提交");
 		}
-		mWebServiceHelper.alterCar(car);
-		
 	}
 	
 	@Override
@@ -555,6 +562,7 @@ public class AlterCarActivity extends BaseActivity{
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
+						isSave = true;
 						AlertHelper.getInstance(AlterCarActivity.this).showCenterToast("保存失败");
 						LogHelper.i("tag", "errorMsg:"+errorMsg);
 					}
