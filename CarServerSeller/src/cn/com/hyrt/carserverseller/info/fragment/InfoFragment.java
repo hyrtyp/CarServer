@@ -66,7 +66,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
-						
+						AlertHelper.getInstance(getActivity()).showCenterToast("");
 					}
 				}, getActivity());
 		mGetInfoHelper.getMerchantInfo();

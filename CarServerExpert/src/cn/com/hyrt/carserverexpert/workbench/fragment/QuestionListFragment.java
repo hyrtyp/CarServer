@@ -91,6 +91,7 @@ public class QuestionListFragment extends Fragment{
 						}
 					}
 				}else{
+					mData.clear();
 					if(result.data.size() <= 0){
 						AlertHelper.getInstance(getActivity())
 						.showCenterToast("加载失败");
