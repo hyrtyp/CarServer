@@ -319,7 +319,11 @@ public class InfoDetailActivity extends BaseActivity{
 						loginInfo.status = "wsh";
 						((CarServerApplication)getApplication()).setLoginInfo(loginInfo);
 					}
+					Intent intent = new Intent();
+					intent.setClass(InfoDetailActivity.this, MainActivity.class);
+					startActivity(intent);
 					finish();
+					return;
 				}else{
 					if(faceBitmap != null){
 						uploadImage(faceBitmap, "facePhoto.jpeg", false);
@@ -682,6 +686,9 @@ public class InfoDetailActivity extends BaseActivity{
 						loginInfo.status = "wsh";
 						((CarServerApplication)getApplication()).setLoginInfo(loginInfo);
 					}
+					Intent intent = new Intent();
+					intent.setClass(InfoDetailActivity.this, MainActivity.class);
+					startActivity(intent);
 					finish();
 				}else if(photoUploadDone){
 					photoUploadDone = false;
@@ -692,6 +699,9 @@ public class InfoDetailActivity extends BaseActivity{
 						loginInfo.status = "wsh";
 						((CarServerApplication)getApplication()).setLoginInfo(loginInfo);
 					}
+					Intent intent = new Intent();
+					intent.setClass(InfoDetailActivity.this, MainActivity.class);
+					startActivity(intent);
 					finish();
 				}else{
 					photoUploadDone = true;
