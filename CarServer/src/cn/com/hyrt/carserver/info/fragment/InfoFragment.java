@@ -149,8 +149,10 @@ public class InfoFragment extends Fragment{
 				intent.putExtra(
 						"url",
 						getString(R.string.method_weburl)
-						+"/cspportal/appoint/list?userId="
+//						+"/cspportal/appoint/list?userId="
+						+"/appoint/list?userId="
 								+CarServerApplication.loginInfo.id);
+				LogHelper.i("tag", getString(R.string.method_weburl)+"/appoint/list?userId="+CarServerApplication.loginInfo.id);
 				break;
 			case 3:
 				//我的专家
@@ -158,8 +160,10 @@ public class InfoFragment extends Fragment{
 				intent.putExtra(
 						"url",
 						getString(R.string.method_weburl)
-						+"/cspportal/expert/list?userId="
+//						+"/cspportal/expert/list?userId="
+						+"/expert/list?userId="
 								+CarServerApplication.loginInfo.id);
+				LogHelper.i("tag", getString(R.string.method_weburl)+"/expert/list?userId="+CarServerApplication.loginInfo.id);
 				break;
 			case 4:
 				//车辆状况

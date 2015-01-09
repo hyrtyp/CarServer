@@ -56,13 +56,13 @@ public class QuestionListFragment extends Fragment{
 		rootView = inflater.inflate(R.layout.fragment_question_list, null);
 		searchText = "";
 		findView();
+		AlertHelper.getInstance(getActivity()).showLoading(null);
 		loadData(false);
 		setListener();
 		return rootView;
 	}
 	
 	public void loadData(final boolean isMore){
-		AlertHelper.getInstance(getActivity()).showLoading(null);
 		if(isMore){
 			page++;
 		}else{
@@ -75,31 +75,12 @@ public class QuestionListFragment extends Fragment{
 				AlertHelper.getInstance(getActivity()).hideLoading();
 				ptrv.onHeaderRefreshComplete();
 				ptrv.onFooterRefreshComplete();
-				if(mData.size() > 0){
-					if(isMore){
-						if(result.data.size() <= 0){
-							AlertHelper.getInstance(getActivity())
-							.showCenterToast("已经加载全部");
-						}
-					}else{
-						mData.clear();
-						if(result.data.size() <= 0){
-							AlertHelper.getInstance(getActivity())
-							.showCenterToast("加载失败");
-							listview.setVisibility(View.GONE);
-							return;
-						}
-					}
-				}else{
-					mData.clear();
-					if(result.data.size() <= 0){
-						AlertHelper.getInstance(getActivity())
-						.showCenterToast("加载失败");
-						listview.setVisibility(View.GONE);
-						return;
-					}
-				}
+				//TODO
+				tvNoData.setVisibility(View.GONE);
 				listview.setVisibility(View.VISIBLE);
+				if (!isMore) {
+					mData.clear();
+				}
 				mData.addAll(result.data);
 				if(mAdapter == null){
 					mAdapter = new QuestionAdapter(mData, getActivity(), type);
@@ -114,20 +95,19 @@ public class QuestionListFragment extends Fragment{
 				AlertHelper.getInstance(getActivity()).hideLoading();
 				ptrv.onHeaderRefreshComplete();
 				ptrv.onFooterRefreshComplete();
-				if(isMore){
-					if(mData.size() <= 0){
-						AlertHelper.getInstance(getActivity())
-						.showCenterToast("已经加载全部");
+				if(mData.size() > 0){
+					if(isMore){
+						if (204==errorNo) {
+							AlertHelper.getInstance(getActivity()).showCenterToast("已加载全部...");
+						}else{
+							AlertHelper.getInstance(getActivity()).showCenterToast("获取数据失败...");
+						}
+					}else{
+						AlertHelper.getInstance(getActivity()).showCenterToast("获取数据失败...");
 					}
 				}else{
-					mData.clear();
-					if(mData.size() <= 0){
-//						AlertHelper.getInstance(getActivity())
-//						.showCenterToast("加载失败");
-						tvNoData.setVisibility(View.VISIBLE);
-						listview.setVisibility(View.GONE);
-						return;
-					}
+					tvNoData.setVisibility(View.VISIBLE);
+					listview.setVisibility(View.GONE);
 				}
 			}
 		}, getActivity()).getQuestionInfoList(type, page, searchText);
@@ -138,6 +118,7 @@ public class QuestionListFragment extends Fragment{
 			
 			@Override
 			public void onHeaderRefresh(PullToRefreshView view) {
+				AlertHelper.getInstance(getActivity()).showLoading("正在刷新");
 				loadData(false);
 			}
 		});
@@ -146,6 +127,7 @@ public class QuestionListFragment extends Fragment{
 			
 			@Override
 			public void onFooterRefresh(PullToRefreshView view) {
+				AlertHelper.getInstance(getActivity()).showLoading(null);
 				loadData(true);
 			}
 		});

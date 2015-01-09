@@ -8,26 +8,61 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
-
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
-            <android.support.v4.view.ViewPager
+			<!-- 放置轮播图片位置 -->
+        <LinearLayout
+            android:id="@+id/top_news_viewpager"
+            android:layout_width="fill_parent"
+            android:layout_height="152dp"
+            android:scaleType="centerCrop"
+            android:orientation="horizontal" />
+	
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentBottom="true"
+            android:background="#88000000"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+			<!-- 放置图片标题的位置 -->
+            <TextView
+                android:id="@+id/top_news_title"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="图片标题"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="5dp"
+                android:singleLine="true"
+                android:textColor="#F6F6F6"
+                />
+			<!-- 放置图片中选中点的位置 -->
+            <LinearLayout
+                android:id="@+id/dots_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                 />
+        </LinearLayout>
+            <!-- <android.support.v4.view.ViewPager
                 android:id="@+id/bannerPager"
                 android:layout_width="fill_parent"
                 android:layout_height="152dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_question_banner" />
-
+    -->
             <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/main_top_margin"
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_line" />
-
+ 
             <include layout="@layout/layout_line" />
 
             <LinearLayout

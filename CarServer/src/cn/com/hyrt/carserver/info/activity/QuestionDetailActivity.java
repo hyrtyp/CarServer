@@ -114,7 +114,7 @@ public class QuestionDetailActivity extends BaseActivity{
 				@Override
 				public void onClick(View arg0) {
 					Intent intent = new Intent();
-					intent.setClass(QuestionDetailActivity.this, CommentExpertActivity.class);
+					intent.setClass(QuestionDetailActivity.this, CommentExpertActivity.class);  //TODO
 					intent.putExtra("replyId", replyId);
 					startActivityForResult(intent, 101);
 				}
@@ -244,7 +244,8 @@ public class QuestionDetailActivity extends BaseActivity{
 		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
 			beginCrop(faceUri);
         }
-		//评论成功时直接关闭当前页面。
+		// TODO 评论成功时直接关闭当前页面。
+		
 		if (resultCode == 101) {
 			setResult(0);
 			finish();

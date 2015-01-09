@@ -105,7 +105,8 @@ public class WelfareCenterFragment extends Fragment{
 			}
 			LogHelper.i("tag", "position:"+position);
 			if(position > 0){
-				String url = getString(R.string.method_weburl)+"/cspportal/knowledge/fulilist?id=%s";
+//				String url = getString(R.string.method_weburl)+"/cspportal/knowledge/fulilist?id=%s";
+				String url = getString(R.string.method_weburl)+"/knowledge/fulilist?id=%s";
 				String id = topItemId.get(position-1);
 				LogHelper.i("tag", "id:"+id);
 				mWebFragment.setUrl(String.format(url, id));

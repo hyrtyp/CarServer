@@ -141,7 +141,8 @@ public class ClassifyFragment extends Fragment{
 		//找服务http://192.168.10.238:8083/cspportal/goods/search?areaname=城市名称（北京 需要经行编码UTF-8）&coorx=经度坐标&coory=纬度坐标
 		case 0:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?");
+			path.append(getString(R.string.method_weburl)+"/goods/search?");
+//			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?");
 //			gvFoundintent.putExtra("url", getString(R.string.method_weburl)+"/cspportal/goods/search?areaname=");
 		    break;
 		case 1:
@@ -149,22 +150,26 @@ public class ClassifyFragment extends Fragment{
 			if(CarServerApplication.loginInfo == null){
 				CarServerApplication.loginInfo = StorageHelper.getInstance(getActivity()).getLoginInfo();
 			}
-			path.append(getString(R.string.method_weburl)+"/cspportal/merchant/typelist?userid="+CarServerApplication.loginInfo.id+"&");
+			path.append(getString(R.string.method_weburl)+"/merchant/typelist?userid="+CarServerApplication.loginInfo.id+"&");
+//			path.append(getString(R.string.method_weburl)+"/cspportal/merchant/typelist?userid="+CarServerApplication.loginInfo.id+"&");
 		    break;
 		  //维修保养
 		case 2:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000016&");
+			path.append(getString(R.string.method_weburl)+"/goods/search?flid=000016&");
+//			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000016&");
 		    break;
 		//配件改装
 		case 3:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000017&");
+			path.append(getString(R.string.method_weburl)+"/goods/search?flid=000017&");
+//			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000017&");
 		    break;
 		//内外装饰
 		case 4:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000015&");
+			path.append(getString(R.string.method_weburl)+"/goods/search?flid=000015&");
+//			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000015&");
 		    break;
 		//代驾服务
 		case 5:
@@ -174,12 +179,14 @@ public class ClassifyFragment extends Fragment{
 		//保险优惠
 		case 6:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000019&");
+			path.append(getString(R.string.method_weburl)+"/goods/search?flid=000019&");
+//			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000019&");
 		    break;    
 		//洗车美容
 		case 7:
 			gvFoundintent.setClass(getActivity(), WebActivity.class);
-			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000018&");
+			path.append(getString(R.string.method_weburl)+"/goods/search?flid=000018&");
+//			path.append(getString(R.string.method_weburl)+"/cspportal/goods/search?flid=000018&");
 		    break;  
 		default:
 			return;

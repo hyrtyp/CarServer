@@ -203,7 +203,12 @@ public class QuestionActivity extends BaseActivity{
 				intent.putExtra("type", type);
 				String replyId = (String) datas.get(position).get("consultationid");
 				intent.putExtra("replyId", replyId);
-				startActivityForResult(intent, 0);
+				//TODO  判断是新问题还是历史问题
+				if (type == 0) {
+					startActivityForResult(intent, 0);
+				}else{
+					startActivity(intent);
+				}
 			}
 			
 		});
@@ -224,7 +229,8 @@ public class QuestionActivity extends BaseActivity{
      */  
     private void refresh() {  
         finish();  
-        Intent intent = new Intent(this, QuestionActivity.class);  
+        Intent intent = new Intent(this, QuestionActivity.class);
+        intent.putExtra("type", QuestionActivity.TYPE_NEW);
         startActivity(intent);  
     }  
 }
