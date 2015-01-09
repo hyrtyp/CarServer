@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.application.CarServerApplication;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define;
+import cn.com.hyrt.carserverseller.base.baseFunction.Define.ZZVERTIFICATION_DETITAL_LIST;
 
 import com.google.gson.Gson;
 
@@ -52,11 +53,6 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	/**
 	 * 获取 用户基本信息-专业类型 编码表
 	 */
-	/*public void getTerminalUserinfoOccupationCode() {
-		String params = "{\"type\":\"TERMINAL_USERINFO_OCCUPATION\"}";
-		get(getString(R.string.method_getcode), params, Define.CODE.class);
-	}*/
-	
 	public void saveImage(Bitmap image, String imageName, String imageType, String id){
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -67,6 +63,30 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				"\"type\":\"%s\",\"userid\":\"%s\",\"id\":\"%s\"}",
 				imageName, imageByte.length+"", imageType, getUserId(), id);
 		uploadImage(getString(R.string.method_saveImageWithByte), params, imageBuffer, Define.BASE.class);
+	}
+	/**
+	 * 上传多张图片
+	 */
+	public void saveImageMonWithByte(Bitmap image, String imageName, String imageType, String id){
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        image.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageByte = baos.toByteArray();
+        String imageBuffer = new String(Base64.encode(imageByte));
+		String params = String.format(
+				"{\"imagename\":\"%s\",\"length\":\"%s\"," +
+				"\"type\":\"%s\",\"userid\":\"%s\",\"id\":\"%s\"}",
+				imageName, imageByte.length+"", imageType, getUserId(), id);
+		uploadImage(getString(R.string.method_saveImageMonWithByte), params, imageBuffer, Define.BASE.class);
+	}
+	
+	/**
+	 * 上传资质时先删除旧图片
+	 */
+	public void deleteOldImage(String id,String imageType){
+		String params = String.format(
+				"{\"id\":\"%s\",\"type\":\"%s\"}",
+				id,imageType);
+		get(getString(R.string.method_saveAttacdel), params,Define.BASE.class);
 	}
 	
 	/**
@@ -163,6 +183,15 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	 */
 	public void getFwClassList(){
 		get(getString(R.string.method_getFwClassList), null, Define.BASE.class);
+	}
+	/**
+	 * 获取服务类型
+	 */
+	public void getFwSpClassList(String type){
+		String params = String.format(//TODO
+				"{\"type\":\"%s\",\"sjid\":\"%s\"}",
+				type, getServiceId());
+		get(getString(R.string.method_getFwSpClassList), params, Define.BASE.class);
 	}
 	
 	/**
@@ -331,7 +360,30 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				zztype, level, qualificimageid);
 		get(
 				getString(R.string.method_saveMerchantQualificStatus),
-				params, Define.BASE.class);	
+				params, Define.ZZQUALIFICIMAGE_ID.class);	
+	}
+	
+	/**
+	 * 取得申请资质列表
+	 */
+	public void getMerchantQualificList(){
+		String params = String.format(
+				"{\"merchantid\":\"%s\"}",
+				getServiceId());
+		get(
+				getString(R.string.method_getMerchantQualificList),
+				params, Define.ZZVERTIFICATION_LIST.class);	
+	}
+	
+	/**
+	 * 取得申请资质详细
+	 */
+	public void getMerchantQualificInfo(String typeid){
+		String params = String.format(
+				"{\"typeid\":\"%s\"}",typeid);
+		get(
+				getString(R.string.method_getMerchantQualificInfo),
+				params, ZZVERTIFICATION_DETITAL_LIST.class);	
 	}
 	
 	/**

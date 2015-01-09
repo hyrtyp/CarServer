@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+	<RelativeLayout
+	    android:id="@+id/rl_content_item"
+         android:layout_margin="@dimen/view_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+       <!--  <ImageView
+            android:id="@+id/iv_pass"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/bg_img_default" /> -->
+		<LinearLayout
+            android:id="@+id/ll_3"
+            android:layout_margin="@dimen/view_margin"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="认证状态"
+                android:textColor="#ff7a7a7a"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_zzstatus1"
+                android:paddingLeft="@dimen/view_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="通过"
+                android:textColor="#ff7a7a7a"
+                android:textSize="12dp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:paddingTop="@dimen/view_margin_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="资质类型："
+                android:textColor="#ff7a7a7a"
+                android:textSize="12dp" />
+
+            <TextView
+                android:id="@+id/tv_zztype1"
+                android:paddingLeft="@dimen/view_margin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="zzz"
+                android:textColor="#ff7a7a7a"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_below="@id/ll_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/view_margin_small"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:text="审核级别："
+                android:textColor="#ff7a7a7a"
+                android:textSize="12dp" />
+
+             <RatingBar
+                 android:layout_marginLeft="@dimen/view_margin"
+                android:id="@+id/item_rating1"
+                android:numStars="5"
+                android:layout_width="wrap_content"
+                android:layout_height="14dp"
+                android:layout_marginBottom="2dp"
+                android:layout_marginTop="2dp"
+                android:isIndicator="true"
+                android:progressDrawable="@drawable/ratingbar_small"
+                android:rating="2.5" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

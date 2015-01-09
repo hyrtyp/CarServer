@@ -15,16 +15,16 @@
     
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:actionBarStyle">@style/my_actionbar_style</item>   
+        <item name="android:actionBarStyle" tools:ignore="NewApi">@style/my_actionbar_style</item>   
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="@android:attr/actionBarSize">65dp</item>
+        <item name="@android:attr/actionBarSize" tools:ignore="NewApi">65dp</item>
     </style>
     
      <style name="NoTitleAppTheme" parent="AppBaseTheme">
         <item name="android:windowNoTitle">true</item>
     </style>
     
-     <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">  
+     <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar" tools:ignore="NewApi">  
         <item name="android:background">@color/login_blue</item>  
         
     </style>  
@@ -98,6 +98,15 @@
     <style name="Crop.ActionButtonText.Cancel">
         <item name="android:drawableLeft">@drawable/crop__ic_cancel</item>
         <item name="android:text">@string/crop__cancel</item>
+    </style>
+    
+    <style name="MyDialog1" parent="@android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@color/dialog_bg</item>
     </style>
      
 </resources>

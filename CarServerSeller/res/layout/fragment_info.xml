@@ -143,6 +143,27 @@
                     android:textColor="#000"
                     android:textSize="15sp" />
             </LinearLayout>
+            <include layout="@layout/layout_line_small" />
+            <LinearLayout
+                android:id="@+id/layout_verification_result"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/view_margin" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_verification" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/view_margin"
+                    android:text="我的认证"
+                    android:textColor="#000"
+                    android:textSize="15sp" />
+            </LinearLayout>
 
             <include layout="@layout/layout_line_small" />
 

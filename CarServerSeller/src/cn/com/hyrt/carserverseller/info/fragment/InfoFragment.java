@@ -16,6 +16,7 @@ import cn.com.hyrt.carserverseller.info.activity.ChangeShopActivity;
 import cn.com.hyrt.carserverseller.info.activity.InfoActivity;
 import cn.com.hyrt.carserverseller.info.activity.LoginActivity;
 import cn.com.hyrt.carserverseller.info.activity.VerificationActivity;
+import cn.com.hyrt.carserverseller.info.activity.VerificationResultActivity;
 import cn.com.hyrt.carserverseller.info.activity.VersionInfoActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 	private RelativeLayout layoutFace;
 	private LinearLayout layoutAlterPwd;
 	private LinearLayout layoutVerification;
+	private LinearLayout layout_verification_result;
 	private LinearLayout layoutAbout;
 	private LinearLayout layoutAuditList;
 	private ImageLoaderView ivFace;
@@ -77,6 +79,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 		layoutFace.setOnClickListener(this);
 		layoutAlterPwd.setOnClickListener(this);
 		layoutVerification.setOnClickListener(this);
+		layout_verification_result.setOnClickListener(this);
 		layoutAbout.setOnClickListener(this);
 		btnLogout.setOnClickListener(this);
 		layoutAuditList.setOnClickListener(this);
@@ -118,6 +121,15 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), VerificationActivity.class);
 			startActivity(intent);
+		}else if(viewId == layout_verification_result.getId()){
+			if(mData == null){
+				AlertHelper.getInstance(getActivity())
+				.showCenterToast("商户信息获取失败");
+				return;
+			}
+			Intent intent = new Intent();
+			intent.setClass(getActivity(), VerificationResultActivity.class);
+			startActivity(intent);
 		}else if(viewId == layoutAbout.getId()){
 			Intent intent = new Intent();
 			intent.setClass(getActivity(), AboutActivity.class);
@@ -146,6 +158,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener{
 		layoutFace = (RelativeLayout) rootView.findViewById(R.id.layout_face);
 		layoutAlterPwd = (LinearLayout) rootView.findViewById(R.id.layout_alter_pwd);
 		layoutVerification = (LinearLayout) rootView.findViewById(R.id.layout_verification);
+		layout_verification_result = (LinearLayout) rootView.findViewById(R.id.layout_verification_result);
 		layoutAbout = (LinearLayout) rootView.findViewById(R.id.layout_about);
 		ivFace = (ImageLoaderView) rootView.findViewById(R.id.iv_face);
 		tvPhonenum = (TextView) rootView.findViewById(R.id.tv_phonenum);

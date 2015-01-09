@@ -19,7 +19,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -31,6 +33,7 @@ import cn.com.hyrt.carserverseller.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_LOGIN;
+import cn.com.hyrt.carserverseller.base.baseFunction.Define.ZZQUALIFICIMAGE_ID;
 import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
 import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserverseller.base.helper.FileHelper;
@@ -71,6 +74,8 @@ public class VerificationActivity extends BaseActivity{
 	private List<String> twoLevel = new ArrayList<String>();
 	private ArrayAdapter<String> oneAdapter;
 	private ArrayAdapter<String> twoAdapter;
+	
+	private String qualificimageid;
 	
 
 	@Override
@@ -330,10 +335,8 @@ public class VerificationActivity extends BaseActivity{
 					ivPhoto2.setImageBitmap(bitmap);
 				}
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         } else if (resultCode == Crop.RESULT_ERROR) {
@@ -348,28 +351,47 @@ public class VerificationActivity extends BaseActivity{
 		}else{
 			AlertHelper.getInstance(this).showLoading(null);
 			new WebServiceHelper(
-					new BaseWebServiceHelper.RequestCallback<Define.BASE>() {
+					new BaseWebServiceHelper.RequestCallback<Define.ZZQUALIFICIMAGE_ID>() {
 
 						@Override
-						public void onSuccess(BASE result) {
-							if(merchantBitmap != null){
-								uploadImage(merchantBitmap, "photo1.jpeg", false);
-							}
-							if(licenseBitmap != null){
-								uploadImage(licenseBitmap, "photo2.jpeg", true);
-							}
+						public void onSuccess(ZZQUALIFICIMAGE_ID result) {
+							qualificimageid = result.id;
+							System.out.println(result.toString());//TODO
+							deleteOldImage(qualificimageid);
+//							if(merchantBitmap != null){
+//								uploadImage(merchantBitmap, "photo1.jpeg", false);
+//							}
+//							if(licenseBitmap != null){
+//								uploadImage(licenseBitmap, "photo2.jpeg", true);
+//							}
 						}
 
 						@Override
 						public void onFailure(int errorNo, String errorMsg) {
-							// TODO Auto-generated method stub
-							
 						}
 			}, this).saveVerification(
 					oneIds.get(spZzType.getSelectedItemPosition()),
 					twoLevel.get(spZzLevel.getSelectedItemPosition()),
 					twoIds.get(spZzLevel.getSelectedItemPosition()));
 		}
+	}
+	
+	public void deleteOldImage(String qualificimageid){
+		WebServiceHelper mUploadImage = new WebServiceHelper(new BaseWebServiceHelper.OnSuccessListener() {
+			
+			@Override
+			public void onSuccess(String result) {
+				if(merchantBitmap != null){
+					uploadImage(merchantBitmap, "photo1.jpeg", false);
+				}
+				if(licenseBitmap != null){
+					uploadImage(licenseBitmap, "photo2.jpeg", true);
+				}
+			}
+		}, VerificationActivity.this);
+		
+//		mUploadImage.deleteOldImage("sjrz", twoIds.get(spZzLevel.getSelectedItemPosition())); //TODO
+		mUploadImage.deleteOldImage(qualificimageid,"sjrz");
 	}
 	
 	public void uploadImage(Bitmap bitmap, String imageName, boolean isZZ){
@@ -400,7 +422,7 @@ public class VerificationActivity extends BaseActivity{
 			}
 		}, VerificationActivity.this);
 		AlertHelper.getInstance(VerificationActivity.this).showLoading("提交中...");
-		mUploadImage.saveImage(
-				bitmap, imageName, "sjrz", ((CarServerApplication)getApplication()).getLoginInfo().serviceid);
+		mUploadImage.saveImageMonWithByte(
+				bitmap, imageName, "sjrz", qualificimageid);
 	}
 }

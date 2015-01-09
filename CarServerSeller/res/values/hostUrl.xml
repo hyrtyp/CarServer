@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="method_saveImageWithByte">saveImageWithByte</string>
+    <string name="method_saveImageMonWithByte">saveImageMonWithByte</string>
+    <string name="method_saveAttacdel">saveAttacdel</string>
     <string name="method_saveMerchantComm">saveMerchantComm</string>
     <string name="method_login">getSjLogininfo</string>
     <string name="method_regist">saveUserinfo</string>
@@ -9,6 +11,7 @@
     <string name="method_getCodingArea">getCodingArea</string>
     <string name="method_getCLWDfl">getCLWDfl</string>
     <string name="method_getFwClassList">getFwClassList</string>
+    <string name="method_getFwSpClassList">getFwSpClassList</string>
     <string name="method_saveMerchant">saveMerchant</string>
     <string name="method_getMerchantInfo">getMerchantInfo</string>
     <string name="method_getMerchantUserinfo">getMerchantUserinfo</string>
@@ -21,6 +24,8 @@
     <string name="method_saveMwpmSysCarKnowInfo">saveMwpmSysCarKnowInfo</string>
     <string name="method_getWorkflowbhList">getWorkflowbhList</string>
     <string name="method_getMerchantQualificImage">getMerchantQualificImage</string>
+    <string name="method_getMerchantQualificList">getMerchantQualificList</string>
+    <string name="method_getMerchantQualificInfo">getMerchantQualificInfo</string>
     <string name="method_saveMerchantQualificStatus">saveMerchantQualificStatus</string>
     <!-- 分类查询ID -->
     <string name="flid_brand">000021</string>

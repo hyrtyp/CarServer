@@ -69,7 +69,8 @@
         
         <activity
             android:name="cn.com.hyrt.carserverseller.base.activity.MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name" 
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -104,6 +105,10 @@
         <activity 
             android:name=".info.activity.RegistActivity"
             android:label="@string/regist_label"/>
+        <!-- <activity 
+            android:name=".base.activity.BaseActivity" 
+            android:windowSoftInputMode="stateHidden|adjustPan"
+           	 /> -->
         <activity 
             android:name=".info.activity.VersionInfoActivity"
             android:label="@string/version_label"/>
@@ -142,6 +147,12 @@
         <activity 
             android:name=".info.activity.VerificationActivity"
             android:label="@string/verification_activity_label"/>
+        <activity 
+            android:name=".info.activity.VerificationResultActivity"
+            android:label="@string/verification_result_activity_label"/>
+         <activity 
+            android:name=".info.activity.VerificationDetitalActivity"
+            android:label="@string/verification_detital_activity_label"/>
         
         <activity 
             android:name="com.soundcloud.android.crop.CropImageActivity"/>

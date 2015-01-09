@@ -7,7 +7,7 @@ import cn.com.hyrt.carserverseller.base.helper.StorageHelper;
 public class CarServerApplication extends Application{
 	
 	public static Define.INFO_LOGIN mLoginInfo;
-	
+//	private static String merchantId;//当前商户ID
 	@Override
 	public void onCreate() {
 		super.onCreate();

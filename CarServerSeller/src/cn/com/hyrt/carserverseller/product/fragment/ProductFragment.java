@@ -1,13 +1,17 @@
 package cn.com.hyrt.carserverseller.product.fragment;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.soundcloud.android.crop.Crop;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,16 +23,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.activity.MainActivity;
+import cn.com.hyrt.carserverseller.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.BASE;
-import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_PRODUCT;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.SINGLE_ID;
 import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
 import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
@@ -39,7 +48,6 @@ import cn.com.hyrt.carserverseller.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserverseller.base.helper.StringHelper;
 import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverseller.base.view.ImageLoaderView;
-import cn.com.hyrt.carserverseller.product.activity.ProductDetailActivity;
 import cn.com.hyrt.carserverseller.product.activity.ProductDetailActivity2;
 
 public class ProductFragment extends Fragment{
@@ -61,7 +69,18 @@ public class ProductFragment extends Fragment{
 	private TextView tvProductPhoto;
 	private Bitmap productBitmap;
 	private String productImgUrl;
+	private String istype="sp";
 	
+	private RelativeLayout rl_setvicetype;
+	private TextView tv_setvicetype;
+	private List<String> spotIdOne = new ArrayList<String>();
+	private List<String> spotNameOne = new ArrayList<String>();
+	private Map<String, List<String>> spotIdTwo = new HashMap<String, List<String>>();
+	private Map<String, List<String>> spotNameTwo = new HashMap<String, List<String>>();
+	private Dialog mSpotDialogOne;
+	private ListView ls_correlation;
+	private ArrayAdapter<String> correAdapter;
+	private String positionId = "";
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -84,6 +103,29 @@ public class ProductFragment extends Fragment{
 	}
 	
 	private void setListener(){
+		//RadioGroup checked 监听
+		isproductservice.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				String issp = String.valueOf(isproductservice.getCheckedRadioButtonId()); 
+				if(issp.equals(String.valueOf(rb_product.getId()))){
+					istype="sp";
+				}
+				if (issp.equals(String.valueOf(rb_service.getId()))) {
+					istype="fw";
+				}
+				LogHelper.i("tag", istype+"------");
+			}
+		});
+		
+		//TODO  商品分类
+		rl_setvicetype.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				loadSpot();
+			}
+		});
+		
 		ivProductPhoto.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -268,7 +310,6 @@ public class ProductFragment extends Fragment{
 				productImgUrl = null;
 				ivProductPhoto.setImageBitmap(bitmap);
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -292,7 +333,6 @@ public class ProductFragment extends Fragment{
 		String curpirce = et_proPrice.getText().toString();
 		String discountprice = et_proDisPrice.getText().toString();
 		String productdec = et_proDec.getText().toString();
-		String istype="";
 		if("".equals(productname) || productname == null){
 			AlertHelper.getInstance(getActivity()).showCenterToast(String.format(getString(R.string.text_not_null), "商品名称"));
 			return;
@@ -311,13 +351,6 @@ public class ProductFragment extends Fragment{
 				AlertHelper.getInstance(getActivity()).showCenterToast(String.format(getString(R.string.text_not_null), "折扣价格必须为数字"));
 				return;
 			}
-		}
-		String issp = String.valueOf(isproductservice.getCheckedRadioButtonId()); 
-
-		if(issp.equals(String.valueOf(rb_product.getId()))){
-			istype="sp";
-		}else{
-			istype="fw";
 		}
 		
 //		StringBuffer pdPhoto = new StringBuffer("");
@@ -355,6 +388,7 @@ public class ProductFragment extends Fragment{
 		mProductInfo.discount=discountprice;
 		mProductInfo.sptitle=productdec;
 		mProductInfo.type=istype;
+		mProductInfo.setvicetype = positionId;
 //		mProductInfo.image=pdPhoto;
 //		mProductInfo.imagename=pdPhotoName;
 
@@ -442,9 +476,105 @@ public class ProductFragment extends Fragment{
 		btnSubmit =(Button)rootView.findViewById(R.id.btn_prodectsubmit);
 		ivProductPhoto = (ImageLoaderView) rootView.findViewById(R.id.iv_product_photo);
 		tvProductPhoto = (TextView) rootView.findViewById(R.id.tv_product_photo);
-//		if(productAdapter == null){
-//			productAdapter = new AddPhotoGridAdapter(productPhotos, getActivity());
-//		}
-//		gvProductPhoto.setAdapter(productAdapter);
+		
+		tv_setvicetype = (TextView) rootView.findViewById(R.id.tv_setvicetype);
+		rl_setvicetype = (RelativeLayout) rootView.findViewById(R.id.rl_setvicetype);
+	}
+	
+	private void loadSpot(){
+		//防止数据重复
+		spotIdOne.clear();
+		spotNameOne.clear();
+		spotIdTwo.clear();
+		spotNameTwo.clear();
+		
+		WebServiceHelper mSpotServiceHelper = new WebServiceHelper(
+				new WebServiceHelper.OnSuccessListener() {
+			@Override
+			public void onSuccess(String result) {
+				ClassifyJsonParser mClassifyJsonParser = new ClassifyJsonParser();
+				mClassifyJsonParser.parse(result); 
+				List<Map<String, String>> oneList = mClassifyJsonParser.getOneList();
+				List<List<Map<String, String>>> twoList
+				= mClassifyJsonParser.getTwoList();
+				
+				
+				for(int i=0,j=oneList.size(); i<j; i++){
+					spotIdOne.add(oneList.get(i).get("id"));
+					spotNameOne.add(oneList.get(i).get("name"));
+					List<String> ids = new ArrayList<String>();
+					List<String> names = new ArrayList<String>();
+					List<Map<String, String>> cList = twoList.get(i);
+					for(int a=0,b=cList.size(); a<b; a++){
+						ids.add(cList.get(a).get("id"));
+						names.add(cList.get(a).get("name"));
+					}
+					spotIdTwo.put(oneList.get(i).get("id"), ids);
+					spotNameTwo.put(oneList.get(i).get("id"), names);
+				}
+				getPosition(null);
+			}
+		}, getActivity());
+		mSpotServiceHelper.getFwSpClassList(istype);
+	}
+	
+	/**
+	 * 选择部位
+	 */
+	public void getPosition(final String spotId) {
+		if(mSpotDialogOne == null){
+			mSpotDialogOne = new Dialog(getActivity(), R.style.MyDialog1);
+			mSpotDialogOne.setContentView(R.layout.layout_question_position);
+			mSpotDialogOne.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT,
+					RelativeLayout.LayoutParams.MATCH_PARENT);
+			ls_correlation = (ListView) mSpotDialogOne.findViewById(R.id.ls_correlation);
+			
+		}
+		if(spotId != null){
+			correAdapter = new ArrayAdapter<String>(
+					getActivity(),
+					R.layout.layout_question_position_item,
+					R.id.tv_name, spotNameTwo.get(spotId));
+			ls_correlation.setAdapter(correAdapter);
+			((TextView)mSpotDialogOne.findViewById(R.id.text1)).setText("返回");
+		}else{
+			correAdapter = new ArrayAdapter<String>(
+					getActivity(),
+					R.layout.layout_question_position_item,
+					R.id.tv_name, spotNameOne);
+			ls_correlation.setAdapter(correAdapter);
+			((TextView)mSpotDialogOne.findViewById(R.id.text1)).setText(R.string.cancle);
+		}
+		
+		View.OnClickListener mClickListener = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				if(spotId != null){
+					getPosition(null);
+					return;
+				}
+				mSpotDialogOne.dismiss();
+			}
+		};
+		mSpotDialogOne.findViewById(R.id.rl10).setOnClickListener(mClickListener);
+		
+		((ListView) ls_correlation).setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						if(spotId == null){
+							getPosition(spotIdOne.get(position));
+							return;
+						}
+						//TODO 取得选择分类ID
+						positionId = spotIdTwo.get(spotId).get(position); 
+						tv_setvicetype.setText(spotNameTwo.get(spotId).get(position));
+						mSpotDialogOne.dismiss();
+					}
+				});
+		if(!mSpotDialogOne.isShowing()){
+			mSpotDialogOne.show();
+		}
 	}
 }

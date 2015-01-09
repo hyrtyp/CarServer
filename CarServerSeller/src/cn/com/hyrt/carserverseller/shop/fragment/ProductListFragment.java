@@ -46,6 +46,7 @@ public class ProductListFragment extends Fragment{
 		rootView = inflater.inflate(R.layout.fragment_product_list, null);
 		findView();
 		setListener();
+		AlertHelper.getInstance(getActivity()).showLoading(null);
 		loadData(false);
 		return rootView;
 	}
@@ -61,18 +62,8 @@ public class ProductListFragment extends Fragment{
 
 					@Override
 					public void onSuccess(INFO_PRODUCT_LIST result) {
-						if(result.data.size() <= 0){
-							if(mData.size() > 0){
-								if(isMore){
-									AlertHelper.getInstance(getActivity()).showCenterToast("已加载全部...");
-								}else{
-									AlertHelper.getInstance(getActivity()).showCenterToast("刷新失败...");
-								}
-							}else{
-								tvNodata.setVisibility(View.VISIBLE);
-								listview.setVisibility(View.GONE);
-							}
-						}
+						tvNodata.setVisibility(View.GONE);
+						listview.setVisibility(View.VISIBLE);
 						if(!isMore){
 							mData.clear();
 						}
@@ -94,9 +85,13 @@ public class ProductListFragment extends Fragment{
 						AlertHelper.getInstance(getActivity()).hideLoading();
 						if(mData.size() > 0){
 							if(isMore){
-								AlertHelper.getInstance(getActivity()).showCenterToast("已加载全部...");
+								if (204==errorNo) {
+									AlertHelper.getInstance(getActivity()).showCenterToast("已加载全部...");
+								}else{
+									AlertHelper.getInstance(getActivity()).showCenterToast("获取数据失败...");
+								}
 							}else{
-								AlertHelper.getInstance(getActivity()).showCenterToast("刷新失败...");
+								AlertHelper.getInstance(getActivity()).showCenterToast("获取数据失败...");
 							}
 						}else{
 							tvNodata.setVisibility(View.VISIBLE);
@@ -106,7 +101,7 @@ public class ProductListFragment extends Fragment{
 						ptrv.onFooterRefreshComplete();
 					}
 		}, getActivity());
-		AlertHelper.getInstance(getActivity()).showLoading(null);
+//		AlertHelper.getInstance(getActivity()).showLoading(null);
 		if(isFw){
 			mProductListWebServiceHelper.getProductInfoList(
 					WebServiceHelper.PRODUCT_TYPE_FW, page);
@@ -121,6 +116,7 @@ public class ProductListFragment extends Fragment{
 			
 			@Override
 			public void onHeaderRefresh(PullToRefreshView view) {
+				AlertHelper.getInstance(getActivity()).showLoading("正在刷新...");
 				loadData(false);
 			}
 		});
@@ -129,6 +125,7 @@ public class ProductListFragment extends Fragment{
 			
 			@Override
 			public void onFooterRefresh(PullToRefreshView view) {
+				AlertHelper.getInstance(getActivity()).showLoading(null);
 				loadData(true);
 			}
 		});
@@ -152,6 +149,7 @@ public class ProductListFragment extends Fragment{
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if(resultCode == 101){
+			AlertHelper.getInstance(getActivity()).showLoading(null);
 			loadData(false);
 		}
 	}

@@ -5,7 +5,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical" >
 
         <RadioGroup
@@ -77,6 +77,50 @@
                 android:verticalSpacing="10dp" /> -->
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/main_top_margin"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="所属分类"
+                android:textColor="#302f2f"
+                android:textSize="19sp" />
+			<RelativeLayout 
+			    android:id="@+id/rl_setvicetype"
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:orientation="horizontal">
+           <TextView
+                android:id="@+id/tv_setvicetype"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:background="@drawable/bg_textview_gray"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:singleLine="true"
+                android:gravity="center_vertical"
+                android:textColor="#000"
+                android:textSize="@dimen/text_size_17" />
+            <ImageView 
+                android:layout_width="wrap_content"
+                android:layout_height="33dp"
+                android:background="@color/login_blue"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:layout_marginRight="@dimen/view_margin"
+                android:paddingLeft="@dimen/main_top_margin"
+                android:paddingRight="@dimen/main_top_margin"
+                android:src="@drawable/ic_spinner"
+                android:layout_alignParentRight="true"
+                android:layout_alignRight="@id/tv_setvicetype"/>
+            </RelativeLayout>
+        </LinearLayout>
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
