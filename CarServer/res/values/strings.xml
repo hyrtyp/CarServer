@@ -261,9 +261,9 @@
 	<string name="signup_load_msg">签到中...</string>
 	
 	<!-- crop -->
-	<string name="crop__saving">Saving picture…</string>
-    <string name="crop__wait">Please wait…</string>
-    <string name="crop__pick_error">No image sources available</string>
+	<string name="crop__saving">正在保存…</string>
+    <string name="crop__wait">请等待…</string>
+    <string name="crop__pick_error">没有可用图片资源</string>
     <string name="crop__done">确定</string>
     <string name="crop__cancel" tools:ignore="ButtonCase">取消</string>
 </resources>
