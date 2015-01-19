@@ -1,6 +1,5 @@
 package cn.com.hyrt.carserverseller.product.activity;
 
-import java.util.regex.Pattern;
 
 import com.nineoldandroids.animation.Animator;
 import com.nineoldandroids.animation.ValueAnimator;
@@ -8,7 +7,11 @@ import com.nineoldandroids.animation.Animator.AnimatorListener;
 
 import net.tsz.afinal.annotation.view.ViewInject;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.MeasureSpec;
@@ -18,7 +21,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import cn.com.hyrt.carserverseller.R;
@@ -28,7 +30,6 @@ import cn.com.hyrt.carserverseller.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_PRODUCT_LIST.CDATA;
 import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
 import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
-import cn.com.hyrt.carserverseller.base.helper.LogHelper;
 import cn.com.hyrt.carserverseller.base.helper.StringHelper;
 import cn.com.hyrt.carserverseller.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverseller.base.view.ImageLoaderView;
@@ -37,22 +38,23 @@ import cn.com.hyrt.carserverseller.product.adapter.SHYJAdapter;
 public class ProductDetailActivity extends BaseActivity{
 
 	private boolean isProduct = true;
-	@ViewInject(id=R.id.tv_title) TextView tvTitle;
+	@ViewInject(id=R.id.tv_title_p) TextView tvTitle;
 	@ViewInject(id=R.id.iv_photo) ImageLoaderView ivPhoto;
 	@ViewInject(id=R.id.tv_price) TextView tvPrice;
 	@ViewInject(id=R.id.tv_preferential) TextView tvPreferential;
-	@ViewInject(id=R.id.btn_change) Button btnChange;
-	@ViewInject(id=R.id.tv_desc) TextView tvDesc;
-	@ViewInject(id=R.id.iv_face) ImageLoaderView ivFace;
+	@ViewInject(id=R.id.btn_change_p) Button btnChange;
+	@ViewInject(id=R.id.tv_desc1) TextView tvDesc;
+	@ViewInject(id=R.id.iv_face_p) ImageLoaderView ivFace;
 	@ViewInject(id=R.id.tv_user_name) TextView tvUserName;
-	@ViewInject(id=R.id.tv_time) TextView tvTime;
+	@ViewInject(id=R.id.tv_time_p) TextView tvTime;
 	@ViewInject(id=R.id.btn_close,click="close") Button btnClose;
 	@ViewInject(id=R.id.btn_edit,click="edit") Button btnEdit;
-	@ViewInject(id=R.id.tv_shyj) TextView tvShYj;
-	@ViewInject(id=R.id.tv_shsj) TextView tvShSj;
+	@ViewInject(id=R.id.tv_shyj2) TextView tvShYj;
+	@ViewInject(id=R.id.tv_shsj2) TextView tvShSj;
+	@ViewInject(id=R.id.tv_shyj_label) TextView shstatu;
 	
-	@ViewInject(id=R.id.history_layout) LinearLayout history_layout;
-	@ViewInject(id=R.id.history_content) LinearLayout history_content;
+	@ViewInject(id=R.id.history_layout_p) LinearLayout history_layout;
+	@ViewInject(id=R.id.history_content_p) LinearLayout history_content;
 	@ViewInject(id=R.id.safe_arrow1) ImageView safe_arrow;
 	@ViewInject(id=R.id.lv_lssh) ListView lv_lssh;  // 历史审核条目 
 	@ViewInject(id=R.id.tv_nodatad) TextView tv_nodatad;  // 暂无数据
@@ -64,6 +66,7 @@ public class ProductDetailActivity extends BaseActivity{
 	private String productId;
 	private String[] shyjs;
 	private String[] shbhtimes;
+	private String[] shstatus;;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -87,7 +90,7 @@ public class ProductDetailActivity extends BaseActivity{
 					@Override
 					public void onClick(View v) {
 						switch (v.getId()) {
-							case R.id.history_layout:
+							case R.id.history_layout_p:
 								expand();
 								break;
 							default:
@@ -169,28 +172,36 @@ public class ProductDetailActivity extends BaseActivity{
 			btnClose.setVisibility(View.VISIBLE);
 		}
 		tvTitle.setText(productInfo.spname);
-		tvDesc.setText(productInfo.sptitle);
+		SpannableString ss = new  SpannableString("商品介绍："+productInfo.sptitle);
+		ss.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		tvDesc.setText(ss);
 		tvPrice.setText("￥"+productInfo.price);
 		tvPreferential.setText("￥"+productInfo.discount);
 		ivPhoto.setImageUrl(productInfo.imagepath0);
 		tvTime.setText("   "+StringHelper.formatDate(productInfo.fbtime));
+		
 		//分割字符串
-		String pattern=";";  
-		Pattern pat=Pattern.compile(pattern);  
-		shyjs = pat.split(productInfo.shyj);
-		shbhtimes = pat.split(productInfo.shbhtime); 
+	     shyjs = productInfo.shyj.split(";", -1);
+	     shbhtimes = productInfo.shbhtime.split(";");
+	     shstatus = productInfo.shstatus.split(";", -1);
 		if (shbhtimes.length<=1) {
 			tv_nodatad.setVisibility(View.VISIBLE);
 			lv_lssh.setVisibility(View.GONE);
+			tv_shlsts1.setText("暂无审核历史");
 		}else{
 			tv_nodatad.setVisibility(View.GONE);
 			lv_lssh.setVisibility(View.VISIBLE);
+			tv_shlsts1.setText("共 "+(shbhtimes.length)+" 次");
 		}
-		tv_shlsts1.setText("共 "+shbhtimes.length+" 次");
-		tvShYj.setText(shyjs[0]);
+		SpannableString statu = new  SpannableString("审核状态："+shstatus[0]);
+		statu.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		SpannableString yijian = new  SpannableString("审核意见："+shyjs[0]);
+		yijian.setSpan(new ForegroundColorSpan(Color.BLACK), 0, 5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		tvShYj.setText(yijian);
 		tvShSj.setText(StringHelper.formatDate(shbhtimes[0]));
+		shstatu.setText(statu);
 		if (shyjAdapter == null) {
-			shyjAdapter = new SHYJAdapter(ProductDetailActivity.this, shyjs,shbhtimes);
+			shyjAdapter = new SHYJAdapter(ProductDetailActivity.this, shyjs,shbhtimes,shstatus);
 			lv_lssh.setAdapter(shyjAdapter);
 		}else{
 			shyjAdapter.notifyDataSetChanged();

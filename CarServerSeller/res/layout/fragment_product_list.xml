@@ -3,18 +3,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+    <TextView 
+	        android:id="@+id/tv_nodata"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="暂无数据"
+	        android:visibility="gone"
+	        android:layout_marginTop="@dimen/max_margin_top"
+	        android:layout_gravity="center"/>
 	<cn.com.hyrt.carserverseller.base.view.PullToRefreshView
 	    android:layout_width="fill_parent"
 	    android:layout_height="fill_parent"
 	    android:id="@+id/ptrv">
-	    <TextView 
+	   <!--  <TextView 
 	        android:id="@+id/tv_nodata"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="暂无数据"
 	        android:layout_gravity="center"
-	        android:visibility="gone"/>
+	        android:visibility="gone"/> -->
 	    <ListView 
 	        android:id="@+id/listview"
 	        android:layout_width="fill_parent"
@@ -22,5 +29,4 @@
 	        android:divider="#00000000"
 	        android:dividerHeight="7dp"/>
 	</cn.com.hyrt.carserverseller.base.view.PullToRefreshView>
-    
 </LinearLayout>

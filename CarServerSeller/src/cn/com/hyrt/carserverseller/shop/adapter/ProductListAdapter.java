@@ -51,7 +51,7 @@ public class ProductListAdapter extends BaseAdapter{
 			mHolder.ivFace = (ImageLoaderView) convertView.findViewById(R.id.iv_face);
 			mHolder.tvDesc = (TextView) convertView.findViewById(R.id.tv_desc);
 			mHolder.tvDiscount = (TextView) convertView.findViewById(R.id.tv_discount);
-			mHolder.tvPrice = (TextView) convertView.findViewById(R.id.tv_price);
+			mHolder.tvPrice = (TextView) convertView.findViewById(R.id.tv_price_1);
 			mHolder.tvTitle = (TextView) convertView.findViewById(R.id.tv_title);
 			mHolder.tvDiscount.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 			mHolder.tvStatus = (TextView) convertView.findViewById(R.id.tv_status);
@@ -61,6 +61,7 @@ public class ProductListAdapter extends BaseAdapter{
 		}
 		
 		Define.INFO_PRODUCT_LIST.CDATA productInfo = mData.get(position);
+//		System.out.println(position+"  mmmmmmmmmmmmmm"+mData.size());
 		mHolder.ivFace.setImageUrl(productInfo.attacpath);
 		mHolder.tvDesc.setText(productInfo.sptitle);
 		mHolder.tvDiscount.setText("￥"+productInfo.discount);

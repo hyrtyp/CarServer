@@ -10,7 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="@dimen/view_margin"
+        android:paddingBottom="@dimen/view_margin_small"
         android:paddingLeft="@dimen/view_margin"
         android:paddingTop="@dimen/view_margin" >
 
@@ -30,7 +30,7 @@
 
         <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="96dp"
             android:layout_marginLeft="11dp"
             android:orientation="vertical" >
 
@@ -45,25 +45,25 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_weight="1"
+                    android:singleLine="true"
                     android:text="空调解决方案"
                     android:textColor="#000"
-                    android:textSize="18sp" 
-                    android:singleLine="true"/>
-                
+                    android:textSize="18sp" />
+
                 <TextView
                     android:id="@+id/tv_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
-                    android:text="已通过"
-                    android:textColor="#000"
-                    android:textSize="18sp" 
                     android:layout_marginLeft="@dimen/view_margin_small"
                     android:layout_marginRight="@dimen/view_margin_small"
-                    android:visibility="gone"/>
+                    android:text="已通过"
+                    android:textColor="#000"
+                    android:textSize="18sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
-            <include layout="@layout/layout_line" />
+            <include layout="@layout/layout_line_small" />
 
             <TextView
                 android:id="@+id/tv_desc"
@@ -73,6 +73,7 @@
                 android:layout_marginTop="8dp"
                 android:ellipsize="end"
                 android:lines="2"
+                android:singleLine="true"
                 android:text="简介：停车时使用空调会消耗蓄电池大的电,因为汽车蓄调会消耗蓄电汽会...."
                 android:textColor="#646363"
                 android:textSize="13sp" />
@@ -80,8 +81,8 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:gravity="bottom"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/view_margin" >
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -91,10 +92,10 @@
                     android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/tv_price"
+                    android:id="@+id/tv_price_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/view_margin"
+                    android:layout_marginLeft="@dimen/view_margin_small"
                     android:text="￥260"
                     android:textColor="#c40e0e"
                     android:textSize="18sp" />
@@ -110,7 +111,5 @@
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-
-    <include layout="@layout/layout_line" />
 
 </LinearLayout>
