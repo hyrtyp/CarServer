@@ -18,6 +18,7 @@ public class CommitActivity extends BaseActivity {
 		public void handleMessage(android.os.Message msg) {
 			switch (msg.what) {
 			case 0:
+				setResult(113);  // 与 QuestionActivity页中的code相对应。
 				finish();
 				break;
 
@@ -33,7 +34,8 @@ public class CommitActivity extends BaseActivity {
 		setContentView(R.layout.layout_question_commit);
 		Message msg = new Message();
 		msg.what = 0;
-		mHandler.sendMessageDelayed(msg, 10000);
+		mHandler.sendMessageDelayed(msg, 2000);
+//		mHandler.sendMessageDelayed(msg, 10000);
 	}
 	
 	@Override

@@ -28,7 +28,7 @@ public class RepairInfoFragment extends Fragment{
 
 	private View rootView;
 	private ListView lvYear;
-	private GridView gvItem;
+	private ListView gvItem;
 	
 	private String carId;
 	private CarStatusYearAdapter mAdapter;
@@ -157,6 +157,6 @@ public class RepairInfoFragment extends Fragment{
 	
 	private void findView(){
 		lvYear = (ListView) rootView.findViewById(R.id.lv_year);
-		gvItem = (GridView) rootView.findViewById(R.id.gv_item);
+		gvItem = (ListView) rootView.findViewById(R.id.gv_item);
 	}
 }

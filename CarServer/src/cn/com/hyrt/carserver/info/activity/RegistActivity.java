@@ -65,11 +65,13 @@ public class RegistActivity extends FinalActivity{
 			info.password = password;
 			
 		}
+		AlertHelper.getInstance(this).showLoading(getString(R.string.regist_loadmsg));
 		WebServiceHelper mWebServiceHelper = new WebServiceHelper(
 				new WebServiceHelper.RequestCallback<Define.INFO_LOGIN>() {
 
 					@Override
 					public void onSuccess(INFO_LOGIN result) {
+						AlertHelper.getInstance(RegistActivity.this).hideLoading();
 						if(result != null){
 							AlertHelper.getInstance(RegistActivity.this).showCenterToast(getString(R.string.login_registsuccess));
 							CarServerApplication.loginInfo = result;
@@ -81,6 +83,7 @@ public class RegistActivity extends FinalActivity{
 					}
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
+						AlertHelper.getInstance(RegistActivity.this).hideLoading();
 						AlertHelper.getInstance(RegistActivity.this).showCenterToast(errorMsg);
 					}
 					
@@ -104,7 +107,6 @@ public class RegistActivity extends FinalActivity{
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
-						// TODO Auto-generated method stub
 						
 					}
 		}, this);

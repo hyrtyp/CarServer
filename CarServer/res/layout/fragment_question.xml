@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res/cn.com.hyrt.carserver"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/full_bg"
@@ -8,66 +9,73 @@
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-			<!-- 放置轮播图片位置 -->
-        <LinearLayout
-            android:id="@+id/top_news_viewpager"
-            android:layout_width="fill_parent"
-            android:layout_height="152dp"
-            android:scaleType="centerCrop"
-            android:orientation="horizontal" />
-	
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:layout_alignParentBottom="true"
-            android:background="#88000000"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
-			<!-- 放置图片标题的位置 -->
-            <TextView
-                android:id="@+id/top_news_title"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:text="图片标题"
-                android:layout_marginRight="8dp"
-                android:layout_marginLeft="5dp"
-                android:singleLine="true"
-                android:textColor="#F6F6F6"
-                />
-			<!-- 放置图片中选中点的位置 -->
+
+            <!-- 放置轮播图片位置 -->
+
             <LinearLayout
-                android:id="@+id/dots_ll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="5dp"
-                android:gravity="center"
+                android:id="@+id/top_news_viewpager"
+                android:layout_width="fill_parent"
+                android:layout_height="152dp"
                 android:orientation="horizontal"
-                 />
-        </LinearLayout>
-            <!-- <android.support.v4.view.ViewPager
+                android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:background="#88000000"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <!-- 放置图片标题的位置 -->
+
+                <TextView
+                    android:id="@+id/top_news_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:singleLine="true"
+                    android:text="图片标题"
+                    android:textColor="#F6F6F6" />
+                <!-- 放置图片中选中点的位置 -->
+
+                <LinearLayout
+                    android:id="@+id/dots_ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center"
+                    android:orientation="horizontal" />
+            </LinearLayout>
+            <!--
+                 <android.support.v4.view.ViewPager
                 android:id="@+id/bannerPager"
                 android:layout_width="fill_parent"
                 android:layout_height="152dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_question_banner" />
-    -->
-            <ImageView
+                android:src="@drawable/img_question_banner" />-->
+            <!--
+                 <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/main_top_margin"
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_line" />
- 
-            <include layout="@layout/layout_line" />
+            -->
+
+
+            <!-- <include layout="@layout/layout_line" /> -->
 
             <LinearLayout
                 android:layout_width="fill_parent"
-                android:layout_height="119dp"
+                android:layout_height="@dimen/dimen_size_60"
                 android:background="#fff"
                 android:gravity="center"
                 android:orientation="vertical" >
@@ -82,7 +90,8 @@
                     android:textColor="#fff"
                     android:textSize="24sp" />
 
-                <TextView
+                <!--
+                     <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
@@ -90,8 +99,26 @@
                     android:gravity="center_horizontal"
                     android:paddingTop="12dp"
                     android:text="@string/question_note"
-                    android:textColor="#111" />
+                    android:textColor="#111" />-->
             </LinearLayout>
+
+            <!--
+                 <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/main_top_margin"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_line" /> -->
+
+            <include layout="@layout/layout_line" />
+
+            <cn.com.hyrt.carserver.base.view.FullGridView
+                android:id="@+id/gvQuestion"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="1dp"
+                android:numColumns="2"
+                android:verticalSpacing="1dp" />
 
             <ImageView
                 android:layout_width="fill_parent"
@@ -100,10 +127,23 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_line" />
 
-            <include layout="@layout/layout_line" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/main_top_margin"
+                android:text="@string/knowledge_related_knowledge"
+                android:textColor="@color/tab_text"
+                android:textSize="@dimen/text_size"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/line_size"
+                android:layout_marginTop="@dimen/main_top_margin"
+                android:background="@color/line_color" />
 
             <cn.com.hyrt.carserver.base.view.FullGridView
-                android:id="@+id/gvQuestion"
+                android:id="@+id/gvRelatedKnowledge1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:horizontalSpacing="1dp"
@@ -138,45 +178,227 @@
                 android:layout_height="wrap_content"
                 android:horizontalSpacing="1dp"
                 android:numColumns="2"
-                android:verticalSpacing="1dp" />
+                android:verticalSpacing="1dp"/>
 
-            <ImageView
+            <!--
+                 <ImageView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/main_top_margin"
                 android:scaleType="fitXY"
-                android:src="@drawable/bg_line" />
-            
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/main_top_margin"
-                android:text="@string/knowledge_related_knowledge"
-                android:textColor="@color/tab_text"
-                android:textSize="@dimen/text_size"
-                android:textStyle="bold" />
-            
+                android:src="@drawable/bg_line" />-->
+
+
+            <!-- awen made -->
 
             <View
                 android:layout_width="fill_parent"
-                android:layout_height="@dimen/line_size"
-                android:layout_marginTop="@dimen/main_top_margin"
-                android:background="@color/line_color" />
+                android:layout_height="0.05dp"
+                android:background="@drawable/bg_line" />
 
-            <cn.com.hyrt.carserver.base.view.FullGridView
-                android:id="@+id/gvRelatedKnowledge1"
-                android:layout_width="fill_parent"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:horizontalSpacing="1dp"
-                android:numColumns="2"
-                android:verticalSpacing="1dp" />
+                android:layout_marginBottom="@dimen/dimen_size_14"
+                android:background="@color/white1" >
 
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/main_top_margin"
-                android:scaleType="fitXY"
-                android:src="@drawable/bg_line" />
+                <RelativeLayout
+                    android:id="@+id/rl_more_expert"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/dimen_size_10" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="汽车专家"
+                        android:textColor="@color/tab_text"
+                        android:textSize="@dimen/text_size"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/tv_more_experts"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="3dp"
+                        android:drawableRight="@drawable/gengduo"
+                        android:text="更多 "
+                        android:textColor="@color/tab_text"
+                        android:textSize="@dimen/text_size" />
+                </RelativeLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rl_more_expert" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_size_14"
+                        android:orientation="horizontal" >
+
+                        <LinearLayout
+                            android:layout_width="@dimen/dimen_size_expertimage"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginLeft="@dimen/dimen_size_5" >
+
+                            <ImageView
+                                android:id="@+id/iv_expert_photo1"
+                                android:layout_width="@dimen/dimen_size_expertfase"
+                                android:layout_height="@dimen/dimen_size_expertfase"
+                                android:src="@drawable/expert_face"/>
+
+                            <TextView
+                                android:id="@+id/tv_expert_name1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="魏军"
+                                android:textColor="@color/tab_text"
+                                android:textSize="@dimen/dimen_size_13" />
+
+                            <TextView
+                                android:id="@+id/tv_expert_jianjie1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="汽车轮胎补胎，换轮胎"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:textColor="@color/tab_text"
+                                android:textSize="@dimen/dimen_size_12" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="@dimen/dimen_size_expertimage"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginLeft="@dimen/dimen_size_10" >
+
+                            <ImageView
+                                android:id="@+id/iv_expert_photo2"
+                                android:layout_width="@dimen/dimen_size_expertfase"
+                                android:layout_height="@dimen/dimen_size_expertfase"
+                                android:src="@drawable/expert_face"  />
+
+                            <TextView
+                                android:id="@+id/tv_expert_name2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="魏军"
+                                android:textColor="@color/tab_text"
+                                android:textSize="@dimen/dimen_size_13" />
+
+                            <TextView
+                                android:id="@+id/tv_expert_jianjie2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="汽车轮胎补胎，换轮胎"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:textColor="@color/tab_text"
+                                android:textSize="@dimen/dimen_size_12" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="@dimen/dimen_size_expertimage"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginLeft="@dimen/dimen_size_10" >
+
+                            <ImageView
+                                android:id="@+id/iv_expert_photo3"
+                                android:layout_width="@dimen/dimen_size_expertfase"
+                                android:layout_height="@dimen/dimen_size_expertfase"
+                                android:src="@drawable/expert_face" />
+
+                            <TextView
+                                android:id="@+id/tv_expert_name3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="魏军"
+                                android:textColor="@color/tab_text"
+                                android:textSize="@dimen/dimen_size_13" />
+
+                            <TextView
+                                android:id="@+id/tv_expert_jianjie3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="汽车轮胎补胎，换轮胎"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:textColor="@color/tab_text"
+                                android:textSize="@dimen/dimen_size_12" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="@dimen/dimen_size_expertimage"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginLeft="@dimen/dimen_size_10" >
+
+                            <ImageView
+                                android:id="@+id/iv_expert_photo4"
+                                android:layout_width="@dimen/dimen_size_expertfase"
+                                android:layout_height="@dimen/dimen_size_expertfase"
+                                android:src="@drawable/expert_face"/>
+
+                            <TextView
+                                android:id="@+id/tv_expert_name4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="魏军"
+                                android:textColor="@color/tab_text"
+                                android:textSize="@dimen/dimen_size_13" />
+
+                            <TextView
+                                android:id="@+id/tv_expert_jianjie4"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="汽车轮胎补胎，换轮胎"
+                                android:textColor="@color/tab_text"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:textSize="@dimen/dimen_size_12" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="@dimen/dimen_size_expertimage"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_marginLeft="@dimen/dimen_size_10" >
+
+                            <ImageView
+                                android:id="@+id/iv_expert_photo5"
+                                android:layout_width="@dimen/dimen_size_expertfase"
+                                android:layout_height="@dimen/dimen_size_expertfase"
+                                android:src="@drawable/expert_face" />
+
+                            <TextView
+                                android:id="@+id/tv_expert_name5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="魏军"
+                                android:textColor="@color/tab_text"
+                                android:textSize="@dimen/dimen_size_13" />
+								
+                            <TextView
+                                android:id="@+id/tv_expert_jianjie5"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="汽车轮胎补胎，换轮胎"
+                                android:ellipsize="end"
+                                android:singleLine="true"
+                                android:textColor="@color/tab_text"
+                                android:textSize="@dimen/dimen_size_12" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </HorizontalScrollView>
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

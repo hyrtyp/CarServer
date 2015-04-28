@@ -3,6 +3,7 @@
     <string name="method_login">getLogininfo</string>
     <string name="method_getCLWDfl3tb">getCLWDfl3tb</string>
     <string name="method_getCodingArea">getCodingArea</string>
+    <string name="method_getselbrandlist">getSelBrandList</string>
     <string name="method_saveUserinfo">saveUserinfo</string>
     <string name="method_getIntegrationList">getMwpmSysTerminalIntegrlHistoryList</string>
     <string name="method_getUserInfo">getUserInfo</string>
@@ -16,6 +17,7 @@
     <string name="method_getTerminalCarMaintenanceYear">getTerminalCarMaintenanceYear</string>
     <string name="method_getTerminalCarStatusYearList">getTerminalCarStatusYearList</string>
     <string name="method_getTerminalCarMaintenanceList">getTerminalCarMaintenanceList</string>
+    <string name="method_getTerminalCarMaintenanceInfo">getTerminalCarMaintenanceInfo</string>
     
     <!-- 福利中心 -->
      <string name="method_get_cap_sys_user_search">getCapSysUserSearch</string>

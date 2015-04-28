@@ -1,10 +1,6 @@
 package cn.com.hyrt.carserver.info.activity;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,7 +199,7 @@ public class QuestionActivity extends BaseActivity{
 				intent.putExtra("type", type);
 				String replyId = (String) datas.get(position).get("consultationid");
 				intent.putExtra("replyId", replyId);
-				//TODO  判断是新问题还是历史问题
+				// 判断是新问题还是历史问题
 				if (type == 0) {
 					startActivityForResult(intent, 0);
 				}else{
@@ -219,18 +215,18 @@ public class QuestionActivity extends BaseActivity{
 		super.onActivityResult(arg0, resultCode, arg2);
 		if(resultCode == 0){
 			AlertHelper.getInstance(QuestionActivity.this).showLoading(null);
-			refresh();
-//			loadData(false);
+//			refresh();
+			loadData(false);
+			ptrv.headerRefreshing1();
 		}
 	}
 	
-	/** 
-     * 刷新 Activity
-     */  
+	// 刷新 Activity
+     /*  
     private void refresh() {  
         finish();  
         Intent intent = new Intent(this, QuestionActivity.class);
         intent.putExtra("type", QuestionActivity.TYPE_NEW);
         startActivity(intent);  
-    }  
+    }  */
 }

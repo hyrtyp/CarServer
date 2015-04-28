@@ -40,7 +40,7 @@ public class CorrelationAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int position) {
-		return data.get(position);
+		return position;
 	}
 
 	@Override
@@ -55,15 +55,12 @@ public class CorrelationAdapter extends BaseAdapter {
 					R.layout.layout_question_search_result_item, null);
 		}
 
-		ImageLoaderView iv_face_img = (ImageLoaderView) convertView
-				.findViewById(R.id.iv_face_img);
+		ImageLoaderView iv_face_img = (ImageLoaderView) convertView.findViewById(R.id.iv_face_img);
 
-		TextView tv_content = (TextView) convertView
-				.findViewById(R.id.tv_content);
+		TextView tv_content = (TextView) convertView.findViewById(R.id.tv_content);
 		TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
 		TextView tv_work = (TextView) convertView.findViewById(R.id.tv_work);
-		LinearLayout llyout = (LinearLayout) convertView
-				.findViewById(R.id.llyout);
+		LinearLayout llyout = (LinearLayout) convertView.findViewById(R.id.llyout);
 
 		String content = data.get(position).get("content") + "";
 		Spanned contenttext = StringHelper.KeywordHighlight(content, name);

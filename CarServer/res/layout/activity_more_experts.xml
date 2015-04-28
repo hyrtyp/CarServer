@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/full_bg" >
+    
+    <!-- <LinearLayout 
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_size_50"
+        android:orientation="horizontal"
+        android:background="@color/gray">
+        <TextView android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_size_50"
+            android:layout_weight="1"
+            android:text="选择品牌"
+            android:gravity="center_horizontal|center_vertical"
+            android:drawableRight="@drawable/bg_shuzhi"/>
+        <TextView android:layout_width="0dp"
+            android:layout_height="@dimen/dimen_size_50"
+            android:layout_weight="1"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="选择专业"/>
+    </LinearLayout> -->
+    
+     <LinearLayout
+        android:layout_width="fill_parent"
+        android:id="@+id/ll"
+        android:layout_height="58dp"
+        android:background="@drawable/bg_search_result_bar"
+        android:layout_weight="0">
+
+        <LinearLayout
+            android:id="@+id/expert_search_zhuanye"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_expert_search_zhuanye_result"
+                style="@style/medium_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:text="选择专业"
+                android:textColor="#767676" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_down" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="23dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:background="#c8c8c8" />
+
+        <LinearLayout
+            android:id="@+id/expert_search_brands"
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_expert_search_brands_result"
+                style="@style/medium_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="0dp"
+                android:text="选择品牌"
+                android:textColor="#767676" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/spinner_down" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_below="@id/ll"
+        android:id="@+id/tv_noData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/no_data"
+        android:visibility="gone" />
+
+    <cn.com.hyrt.carserver.base.view.PullToRefreshView
+        android:id="@+id/ptrv"
+        android:layout_below="@id/ll"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" 
+        android:paddingTop="@dimen/main_top_margin">
+
+        <ListView
+            android:id="@+id/fulllistview_moreexperts"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:divider="#00000000"
+            android:dividerHeight="@dimen/main_top_margin" />
+    </cn.com.hyrt.carserver.base.view.PullToRefreshView>
+
+</RelativeLayout>
+
+
+

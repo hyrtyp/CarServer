@@ -51,17 +51,20 @@ public class MainActivity extends BaseActivity {
 	@ViewInject(id = R.id.iv_topright)
 	ImageView ivTopRight;
 
-	private Class<?> fragmentArray[] = { ClassifyFragment.class,
-			WelfareCenterFragment.class, QuestionFragment.class,
-			InfoFragment.class, EmergencyFragment.class };
+//	private Class<?> fragmentArray[] = { ClassifyFragment.class,
+//			WelfareCenterFragment.class, QuestionFragment.class,
+//			InfoFragment.class, EmergencyFragment.class };
+	private Class<?> fragmentArray[] = {QuestionFragment.class,WelfareCenterFragment.class, InfoFragment.class, EmergencyFragment.class };
 
-	private int mTextArray[] = { R.string.classify_label,
-			R.string.welfare_label, R.string.question_label,
-			R.string.info_label, R.string.emergency_label };
+//	private int mTextArray[] = { R.string.classify_label,
+//			R.string.welfare_label, R.string.question_label,
+//			R.string.info_label, R.string.emergency_label };
+	private int mTextArray[] = { R.string.question_label,R.string.welfare_label, R.string.info_label, R.string.emergency_label };
 
-	private int mImgArray[] = { R.drawable.bg_classify_tab,
-			R.drawable.bg_knowledge_tab, R.drawable.bg_question_tab,
-			R.drawable.bg_info_tab, R.drawable.bg_emergency_tab };
+//	private int mImgArray[] = { R.drawable.bg_classify_tab,
+//			R.drawable.bg_knowledge_tab, R.drawable.bg_question_tab,
+//			R.drawable.bg_info_tab, R.drawable.bg_emergency_tab };
+	private int mImgArray[] = { R.drawable.bg_question_tab,R.drawable.bg_knowledge_tab,R.drawable.bg_info_tab, R.drawable.bg_emergency_tab };
 	
 	private static final int EXIT = 0;
 	
@@ -132,13 +135,15 @@ public class MainActivity extends BaseActivity {
 
 	private void changeActionBar(int index) {
 		curIndex = index;
-		if(index == 2){
+//		if(index == 2){
+		if(index == 0){
 			ivTopRight.setVisibility(View.VISIBLE);
 			ivTopRight.setImageResource(R.drawable.ic_search2);
 		}else{
 			ivTopRight.setVisibility(View.GONE);
 		}
-		if (index == 4 || index == 0 || index == 2) {
+//		if (index == 4 || index == 0 || index == 2) {
+		if (index == 0 || index == 3) {
 			layout_line.setVisibility(View.GONE);
 			layoutMainTop.setVisibility(View.VISIBLE);
 		} else {
@@ -153,7 +158,8 @@ public class MainActivity extends BaseActivity {
 			
 			@Override
 			public void onClick(View arg0) {
-				if(curIndex == 2){
+//				if(curIndex == 2){
+				if(curIndex == 0){
 					Intent intent = new Intent();
 					intent.setClass(MainActivity.this, KnowledgeSearchResultActivity.class);
 					intent.putExtra("str", "发动机");
@@ -166,7 +172,8 @@ public class MainActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(curIndex == 3){
+//		if(curIndex == 3){
+		if(curIndex == 2){
 			List<Fragment> mFragments = getSupportFragmentManager().getFragments();
 			if(mFragments == null){
 				return;

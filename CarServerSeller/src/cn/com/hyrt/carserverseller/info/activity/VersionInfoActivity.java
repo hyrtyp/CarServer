@@ -28,8 +28,7 @@ import android.widget.Toast;
 import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.activity.BaseActivity;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define;
-import cn.com.hyrt.carserverseller.base.baseFunction.Define.VS_INFO_LIST;
-import cn.com.hyrt.carserverseller.base.baseFunction.Define.VS_INFO_LIST.VS_INFO;
+import cn.com.hyrt.carserverseller.base.baseFunction.Define.SELLER_VS_INFO;
 import cn.com.hyrt.carserverseller.base.helper.AlertHelper;
 import cn.com.hyrt.carserverseller.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserverseller.base.helper.FileHelper;
@@ -41,12 +40,8 @@ public class VersionInfoActivity extends BaseActivity{
 	@ViewInject(id=R.id.roundProgressBar) RoundProgressBar roundProgressBar;
 	@ViewInject(id=R.id.ll_loading) LinearLayout ll_loading;
 	@ViewInject(id=R.id.ll_upload) LinearLayout ll_upload;
-	private List<VS_INFO_LIST.VS_INFO> mVsInfos;
-	private VS_INFO_LIST.VS_INFO mVsInfo;
-	private String apkurl = "http://192.168.13.124:8080/CarServerSeller.apk";
-	//private String apkurl = "http://192.168.56.1:8080/CarServerSeller.apk";
-	private String versionClassi;
-	private int maxLength = 0;
+	private Define.SELLER_VS_INFO mVsInfo;
+//	private String url = "http://192.168.13.120:8080/carserverseller1.1.apk";
 	private int progress = 0;
 	
 	private Handler handler = new Handler(){
@@ -55,7 +50,6 @@ public class VersionInfoActivity extends BaseActivity{
 			case 0:
 				ll_loading.setVisibility(View.VISIBLE);
 				ll_upload.setVisibility(View.GONE);
-				//roundProgressBar.setMax(maxLength);
 				roundProgressBar.setProgress(progress);
 				break;
 
@@ -70,50 +64,36 @@ public class VersionInfoActivity extends BaseActivity{
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_version_info);
-		Intent intent = getIntent();
-		versionClassi = intent.getStringExtra("vc");
 	}
 	
-	public void update(View view){/*
+	public void update(View view){
 		WebServiceHelper VersionInfoListHelper = new WebServiceHelper(
-				new BaseWebServiceHelper.RequestCallback<Define.VS_INFO_LIST>() {
+				new BaseWebServiceHelper.RequestCallback<Define.SELLER_VS_INFO>() {
 					@Override
-					public void onSuccess(VS_INFO_LIST result) {
-						mVsInfos.clear();
-						mVsInfos.addAll(result.vsdata);
-						for (VS_INFO mVsIf : mVsInfos) {
-							mVsInfo = mVsIf;
-							if (mVsInfo.versionClassi != null && !"".equals(mVsInfo.versionClassi) && mVsInfo.versionClassi == versionClassi) {
-								if (mVsInfo.versionNum != null && mVsInfo.versionNum == getVersion()) {
-									updateVersion(mVsInfo.versionPkName, mVsInfo.apkurl);
-								}else{
-									AlertHelper.getInstance(getApplicationContext()).showCenterToast("已是最新版本");
-								}
+					public void onSuccess(SELLER_VS_INFO result) {
+						mVsInfo = result;
+//						System.out.println(result.toString());
+						if (!"".equals(mVsInfo.versioncode) ||"".equals(mVsInfo.url)) {
+							int versioncode = Integer.parseInt(mVsInfo.versioncode);
+							if (versioncode>getVersion()) {
+								updateVersion(mVsInfo.versionid,mVsInfo.description, mVsInfo.url);
 							}else{
-								AlertHelper.getInstance(getApplicationContext()).showCenterToast("不存在商家的版本");
+								AlertHelper.getInstance(getApplicationContext()).showCenterToast("已是最新版本");
 							}
+						}else{
+							AlertHelper.getInstance(getApplicationContext()).showCenterToast("不存在商家的版本");
 						}
 					}
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
-						switch (errorNo) {
-						case 202:
-							AlertHelper.getInstance(VersionInfoActivity.this).hideLoading();
-							AlertHelper.getInstance(VersionInfoActivity.this).showCenterToast("获取版本信息失败");
-							break;
-
-						default:
-							break;
-						}
 					}
 				}, this);
-		VersionInfoListHelper.getVersionInfoList();*/
-		updateVersion();
+		VersionInfoListHelper.getEdition();
 	}
-	//public void updateVersion(String packName,final String apkurl){
-	public void updateVersion(){
+	public void updateVersion(String versionName,String description,final String apkurl){
 		AlertDialog.Builder builder = new Builder(this);
 		builder.setTitle("新版本");
+		builder.setMessage(description+"新版本："+versionName);
 		builder.setOnCancelListener(new OnCancelListener() {
 
 			@Override
@@ -129,6 +109,7 @@ public class VersionInfoActivity extends BaseActivity{
 					// 下载APK 覆盖安装
 					FinalHttp finalHttp = new FinalHttp();
 					finalHttp.download(apkurl, Environment.getExternalStorageDirectory()
+//							finalHttp.download(url, Environment.getExternalStorageDirectory()
 							+ "/CarServerSeller.apk", 
 							new AjaxCallBack<File>() {
 						@Override
@@ -163,6 +144,7 @@ public class VersionInfoActivity extends BaseActivity{
 							Intent intent = new Intent();
 							intent.setAction("android.intent.action.VIEW");
 							intent.addCategory("android.intent.category.DEFAULT");
+							intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  // 覆盖安装后。提示选择"完成，打开"的窗口。
 							intent.setDataAndType(Uri.fromFile(t),
 									"application/vnd.android.package-archive");
 							startActivity(intent);
@@ -186,14 +168,14 @@ public class VersionInfoActivity extends BaseActivity{
 	/*
 	 * 获取版本信息
 	 */
-	private String getVersion() {
+	private int getVersion() {
 		PackageManager pm = getPackageManager();
-		try {
-			PackageInfo packInfo = pm.getPackageInfo(getPackageName(), 0);
-			return packInfo.versionName;
-		} catch (NameNotFoundException e) {
-			e.printStackTrace();
-			return "";
-		}
+			PackageInfo packInfo = null;
+			try {
+				packInfo = pm.getPackageInfo(getPackageName(), 0);
+			} catch (NameNotFoundException e) {
+				e.printStackTrace();
+			}
+			return packInfo.versionCode;
 	}
 }

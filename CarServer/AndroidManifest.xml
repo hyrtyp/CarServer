@@ -181,6 +181,12 @@
 		    android:theme="@android:style/Theme.NoTitleBar.Fullscreen"
 		    android:screenOrientation="landscape"/>
 		<activity android:name="com.soundcloud.android.crop.CropImageActivity"/>
+		<activity android:name=".question.activity.MoreExpertsActivity"
+		    android:label="@string/question_more_experts"/>
+		<activity android:name=".question.activity.ExpertDetitalActivity"
+		    android:label="@string/question_expert_detital"/>
+		<activity android:name=".question.activity.ExpertAnsweredQuestionsActivity"
+		    android:label="@string/question_expert_answered_search"/>
 		
     </application>
 

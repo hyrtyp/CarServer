@@ -80,6 +80,17 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(getString(R.string.method_getCodingArea), null, Define.BASE.class);
 	}
 	
+	
+	
+	
+	/**
+	 * 专家版-注册显示品牌列表
+	 */
+	public void getSelBrandList() {
+		AlertHelper.getInstance(mContext).showLoading(null);
+		get(getString(R.string.method_getselbrandlist), null, Define.INFO_BRANDIDS.class);
+	}
+	
 	/**
 	 * 保存用户信息
 	 * @param saveInfo
@@ -265,6 +276,17 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 		get(
 				getString(R.string.method_getTerminalCarMaintenanceList),
 				params, Define.INFO_MAINTENANCE_LIST.class);
+	}
+	/**
+	 * 获取保养详情
+	 * @param Id
+	 */
+	public void getTerminalCarMaintenanceInfo(String id){
+		String params = String.format(
+				"{\"id\":\"%s\"}",id);
+		get(
+				getString(R.string.method_getTerminalCarMaintenanceInfo),
+				params, Define.WXCDATA.class);
 	}
 	
 	public void saveImage(Bitmap image, String imageName, String imageType, String id){

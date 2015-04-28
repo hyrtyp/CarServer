@@ -22,6 +22,7 @@ import java.io.OutputStream;
 import java.util.concurrent.CountDownLatch;
 
 import cn.com.hyrt.carserversurvey.R;
+import cn.com.hyrt.carserversurvey.base.helper.AlertHelper;
 import cn.com.hyrt.carserversurvey.base.helper.LogHelper;
 
 import android.annotation.TargetApi;
@@ -80,6 +81,7 @@ public class CropImageActivity extends MonitoredActivity {
 
         setupFromIntent();
         if (rotateBitmap == null) {
+        	AlertHelper.getInstance(getApplicationContext()).showCenterToast("图片资源太大！");
             finish();
             return;
         }

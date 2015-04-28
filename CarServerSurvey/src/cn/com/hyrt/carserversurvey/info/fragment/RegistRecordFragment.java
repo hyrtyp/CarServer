@@ -154,7 +154,7 @@ public class RegistRecordFragment extends Fragment {
 	}
 
 	public void loadData() {
-//		AlertHelper.getInstance(getActivity()).showLoading(getString(R.string.loading_msg));
+		AlertHelper.getInstance(getActivity()).showLoading(getString(R.string.loading_msg));
 		String id = ((CarServerApplication) getActivity().getApplicationContext()).getLoginInfo().id;
 		WebServiceHelper mwebserviceHelper = new WebServiceHelper(
 				new WebServiceHelper.RequestCallback<Define.REGRECODE>() {

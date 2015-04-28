@@ -1,20 +1,13 @@
 package cn.com.hyrt.carserver.question.activity;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import net.tsz.afinal.annotation.view.ViewInject;
-
-import org.kobjects.base64.Base64;
-
 import com.soundcloud.android.crop.Crop;
-
-import android.R.array;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -42,7 +35,6 @@ import cn.com.hyrt.carserver.base.application.CarServerApplication;
 import cn.com.hyrt.carserver.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserver.base.baseFunction.Define;
 import cn.com.hyrt.carserver.base.baseFunction.Define.BASE;
-import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_POISTION;
 import cn.com.hyrt.carserver.base.baseFunction.Define.QUESTION_SAVE;
 import cn.com.hyrt.carserver.base.helper.AlertHelper;
 import cn.com.hyrt.carserver.base.helper.BaseWebServiceHelper;
@@ -52,9 +44,6 @@ import cn.com.hyrt.carserver.base.helper.PhotoHelper;
 import cn.com.hyrt.carserver.base.helper.StorageHelper;
 import cn.com.hyrt.carserver.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserver.base.view.ImageLoaderView;
-import cn.com.hyrt.carserver.info.activity.ChangeInfoActivity;
-import cn.com.hyrt.carserver.info.activity.QuestionDetailActivity;
-import cn.com.hyrt.carserver.question.adapter.PositionAdapter;
 
 /**
  * 车辆问答
@@ -101,7 +90,11 @@ public class QuestionActivity extends BaseActivity {
 
 		DisplayMetrics metric = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metric);
-
+		if(getIntent().getStringExtra("zjid") != null){
+			setTitle(getString(R.string.question_title1));
+		}else{
+			setTitle(getString(R.string.question_title));
+		}
 		initView();
 
 //		loadData();
@@ -131,9 +124,21 @@ public class QuestionActivity extends BaseActivity {
 			handleCrop(resultCode, data);
 		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
 			beginCrop(questionUri);
+        }else if (requestCode == 113) {
+//        	refresh();
+        	finish();  
         }
 	}
 	
+	/** 
+     * 刷新 Activity
+     */  
+    private void refresh() {  
+        finish();  
+        Intent intent = new Intent(this, QuestionActivity.class);
+        startActivity(intent);  
+    }  
+
 	private void beginCrop(Uri source) {
 		if (FileHelper.sdCardExist()) {
 			if(questionUri == null){
@@ -298,7 +303,7 @@ public class QuestionActivity extends BaseActivity {
 				if (isSuccess) {
 
 					intent.setClass(QuestionActivity.this, CommitActivity.class);
-					startActivity(intent);
+					startActivityForResult(intent, 113);
 				}
 			}
 		});
@@ -479,12 +484,13 @@ public class QuestionActivity extends BaseActivity {
 			CarServerApplication.loginInfo = StorageHelper.getInstance(this)
 					.getLoginInfo();
 		}
-		QUESTION_SAVE question = new QUESTION_SAVE();
+		QUESTION_SAVE question = new QUESTION_SAVE() ;
+		
 		question.terminalid = CarServerApplication.loginInfo.id;
 		question.classid = positionId;
 		String content = contentText.getText().toString();
 		question.content = content;
-
+		
 		if ("".equals(content.trim()) || "".equals(positionId)) {
 			isSuccess = false;
 			if ("".equals(content.trim())) {
@@ -527,8 +533,12 @@ public class QuestionActivity extends BaseActivity {
 							finish();
 						}
 					}, this);
-			mWebServiceHelper.saveQuestionInfo(question);
-
+			if (getIntent().getStringExtra("zjid")  != null) {
+				question.zjid = getIntent().getStringExtra("zjid");
+				mWebServiceHelper.saveQuestionInfo(question);
+			}else{
+				mWebServiceHelper.saveQuestionInfo(question);
+			}
 		}
 
 	}

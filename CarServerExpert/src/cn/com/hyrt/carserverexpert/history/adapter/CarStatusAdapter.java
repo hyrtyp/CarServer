@@ -62,7 +62,7 @@ public class CarStatusAdapter extends BaseAdapter{
 		
 		Define.INFO_CAR_STATUS_LIST.CDATA carStatusInfo = mData.get(position);
 		mHolder.tvName.setText("车辆名称："+carStatusInfo.model);
-		mHolder.tvTime.setText("维修时间："+StringHelper.formatDate(carStatusInfo.wxtime));
+		mHolder.tvTime.setText("保险时间："+StringHelper.formatDate(carStatusInfo.insurancedate));
 		
 		
 		return convertView;

@@ -31,7 +31,7 @@ public class PreferentialDetailActivity extends BaseActivity{
 		WebSettings webseting = webview.getSettings();
 		webseting.setJavaScriptEnabled(true);
 //		String url = "http://192.168.10.238:8083/cspportal/knowledge/view?id="+id;
-		String url = "http://121.42.43.20:84/cspportal/knowledge/view?id="+id;
+		String url = "http://121.42.43.20:84/knowledge/view?id="+id;
 		LogHelper.i("tag", "url:"+url);
 		webview.loadUrl(url);
 	}

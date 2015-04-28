@@ -26,6 +26,7 @@
     <string name="method_getMerchantQualificImage">getMerchantQualificImage</string>
     <string name="method_getMerchantQualificList">getMerchantQualificList</string>
     <string name="method_getMerchantQualificInfo">getMerchantQualificInfo</string>
+    <string name="method_getEdition">getEdition</string>
     <string name="method_saveMerchantQualificStatus">saveMerchantQualificStatus</string>
     <!-- 分类查询ID -->
     <string name="flid_brand">000021</string>

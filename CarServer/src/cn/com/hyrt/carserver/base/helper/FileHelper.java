@@ -6,7 +6,7 @@ import android.os.Environment;
 
 public class FileHelper {
 	
-	/*public static File createFile(String fileName )
+public static File createFile(String fileName )
 	{
 		String folderPath = "carserver";
         boolean sdCardExist = Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);
@@ -21,7 +21,7 @@ public class FileHelper {
         }else{
             return null;
         }
-	}*/
+	}
 	
 	public static boolean sdCardExist(){
 		return Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED);

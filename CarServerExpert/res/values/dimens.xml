@@ -23,9 +23,11 @@
     <dimen name="text_size">15sp</dimen>
     <dimen name="input_text_size">18sp</dimen>
     <dimen name="search_btn_text_size">20sp</dimen>
+    <dimen name="search_btn_text_size1">23sp</dimen>
     
     <dimen name="title_text">20sp</dimen>
     <dimen name="title_text_big">30sp</dimen>
 
     <dimen name="crop__bar_height">48dp</dimen>
+    <dimen name="edited_text_big_height">75dp</dimen>
 </resources>

@@ -105,7 +105,7 @@ public class CorrelationActivity extends BaseActivity {
 							AlertHelper.getInstance(CorrelationActivity.this)
 									.showCenterToast(R.string.info_load_fail);
 							setResult(Define.RESULT_FROM_ALTER_CAR);
-							finish();
+//							finish();
 						} else {
 							if (result == null && data.size() > 0) {
 								AlertHelper.getInstance(
@@ -147,7 +147,6 @@ public class CorrelationActivity extends BaseActivity {
 								correlationAdapter = new CorrelationAdapter(
 										context, data, name);
 								ls_correlation.setAdapter(correlationAdapter);
-								;
 							} else {
 								correlationAdapter.notifyDataSetChanged();
 							}
@@ -162,7 +161,7 @@ public class CorrelationActivity extends BaseActivity {
 								.showCenterToast(R.string.info_load_fail);
 						setResult(Define.RESULT_FROM_ALTER_CAR);
 						ptrv.onFooterRefreshComplete();
-						finish();
+//						finish();
 					}
 				}, this);
 

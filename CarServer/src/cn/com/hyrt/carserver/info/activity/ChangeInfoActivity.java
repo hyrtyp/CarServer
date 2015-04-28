@@ -293,6 +293,9 @@ public class ChangeInfoActivity extends BaseActivity{
 			handleCrop(resultCode, data);
 		}else if (requestCode == PhotoHelper.FROM_CAMERA) {
 			beginCrop(faceUri);
+        }else if(resultCode == Define.RESULT_FROM_ALTER_CAR){
+        	AlertHelper.getInstance(this).showLoading(null);
+        	loadData();
         }
 	}
 	
@@ -364,6 +367,7 @@ public class ChangeInfoActivity extends BaseActivity{
 	}*/
 	
 	public void saveUserInfo(View view){
+		AlertHelper.getInstance(ChangeInfoActivity.this).showLoading("正在保存个人信息");
 		if(CarServerApplication.loginInfo == null){
 			CarServerApplication.loginInfo = StorageHelper.getInstance(this).getLoginInfo();
 		}
@@ -433,6 +437,7 @@ public class ChangeInfoActivity extends BaseActivity{
 	
 	private void uploadImg(){
 		if(imgBitmap == null){
+			AlertHelper.getInstance(ChangeInfoActivity.this).hideLoading();
 			AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(R.string.info_change_success);
 			setResult(Define.RESULT_FROM_CHANGE_INFO);
 			finish();
@@ -443,6 +448,7 @@ public class ChangeInfoActivity extends BaseActivity{
 
 					@Override
 					public void onSuccess(BASE result) {
+						AlertHelper.getInstance(ChangeInfoActivity.this).hideLoading();
 						AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(R.string.info_change_success);
 						setResult(Define.RESULT_FROM_CHANGE_INFO);
 						finish();
@@ -451,6 +457,7 @@ public class ChangeInfoActivity extends BaseActivity{
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
 						LogHelper.i("tag", "onFailure:"+errorMsg);
+						AlertHelper.getInstance(ChangeInfoActivity.this).hideLoading();
 						AlertHelper.getInstance(ChangeInfoActivity.this).showCenterToast(errorMsg);
 						setResult(Define.RESULT_FROM_CHANGE_INFO);
 						finish();

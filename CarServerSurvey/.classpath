@@ -5,5 +5,10 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+	<classpathentry exported="true" kind="lib" path="libs/afinal_0.5.1_bin.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/gson-2.2.4.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/ksoap2-android-assembly-3.0.0-jar-with-dependencies.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/locSDK_4.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="libs/photoview.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

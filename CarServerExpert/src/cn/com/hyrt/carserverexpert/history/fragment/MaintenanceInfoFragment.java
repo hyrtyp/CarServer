@@ -11,13 +11,16 @@ import cn.com.hyrt.carserverexpert.base.helper.AlertHelper;
 import cn.com.hyrt.carserverexpert.base.helper.BaseWebServiceHelper;
 import cn.com.hyrt.carserverexpert.base.helper.LogHelper;
 import cn.com.hyrt.carserverexpert.base.helper.WebServiceHelper;
+import cn.com.hyrt.carserverexpert.history.activity.CarStatusDetailActivity2;
 import cn.com.hyrt.carserverexpert.history.adapter.CarStatusYearAdapter;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -28,7 +31,7 @@ public class MaintenanceInfoFragment extends Fragment{
 
 	private View rootView;
 	private ListView lvYear;
-	private GridView gvItem;
+	private ListView gvItem;
 	
 	private String carId;
 	private CarStatusYearAdapter mAdapter;
@@ -38,6 +41,7 @@ public class MaintenanceInfoFragment extends Fragment{
 	private List<String> mRepairItem = new ArrayList<String>();
 	private ArrayAdapter<String> mArrayAdapter;
 	
+	private List<String> repairIds = new ArrayList<String>();; // 维修主键id集合
 	
 	public MaintenanceInfoFragment(String carId) {
 		super();
@@ -93,8 +97,10 @@ public class MaintenanceInfoFragment extends Fragment{
 			public void onSuccess(Define.INFO_MAINTENANCE_LIST result) {
 				AlertHelper.getInstance(getActivity()).hideLoading();
 				mRepairItem.clear();
+				repairIds.clear();
 				for(int i=0,j=result.data.size(); i<j; i++){
 					mRepairItem.add(result.data.get(i).byitem);
+					repairIds.add(result.data.get(i).id); //awen
 				}
 				
 				if(mArrayAdapter == null){
@@ -153,10 +159,21 @@ public class MaintenanceInfoFragment extends Fragment{
 				getMaintenanceInfoList(mData.get(position).time);
 			}
 		});
+		gvItem.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				Intent intent = new Intent();
+				intent.setClass(getActivity(), CarStatusDetailActivity2.class);
+				intent.putExtra("id", repairIds.get(position));
+				startActivity(intent);
+			}
+		});
 	}
 	
 	private void findView(){
 		lvYear = (ListView) rootView.findViewById(R.id.lv_year);
-		gvItem = (GridView) rootView.findViewById(R.id.gv_item);
+		gvItem = (ListView) rootView.findViewById(R.id.gv_item);
 	}
 }

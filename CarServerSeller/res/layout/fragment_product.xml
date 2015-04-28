@@ -21,10 +21,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/bg_radiobutton"
+                android:checked="true"
                 android:text="上架商品"
                 android:textColor="#302f2f"
-                android:textSize="19sp" 
-                android:checked="true"/>
+                android:textSize="19sp" />
 
             <RadioButton
                 android:id="@+id/rb_service"
@@ -55,26 +55,28 @@
                 android:id="@+id/iv_product_photo"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
-                android:src="@drawable/ic_photo_add"
-                android:layout_marginLeft="@dimen/view_margin"/>
-            
-            <TextView 
+                android:layout_marginLeft="@dimen/view_margin"
+                android:src="@drawable/ic_photo_add" />
+
+            <TextView
                 android:id="@+id/tv_product_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/view_margin"
                 android:text="添加照片"
                 android:textColor="#818181"
-                android:textSize="15sp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/view_margin"/>
-            <!-- <cn.com.hyrt.carserversurvey.base.view.FullGridView
+                android:textSize="15sp" />
+            <!--
+                 <cn.com.hyrt.carserversurvey.base.view.FullGridView
                 android:id="@+id/gv_product_photo"
                 android:layout_width="164dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:numColumns="2"
-                android:verticalSpacing="10dp" /> -->
+                android:verticalSpacing="10dp" />
+            -->
         </LinearLayout>
 
         <LinearLayout
@@ -90,37 +92,41 @@
                 android:text="所属分类"
                 android:textColor="#302f2f"
                 android:textSize="19sp" />
-			<RelativeLayout 
-			    android:id="@+id/rl_setvicetype"
+
+            <RelativeLayout
+                android:id="@+id/rl_setvicetype"
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
-                android:orientation="horizontal">
-           <TextView
-                android:id="@+id/tv_setvicetype"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="@dimen/main_top_margin"
-                android:layout_marginRight="@dimen/view_margin"
-                android:background="@drawable/bg_textview_gray"
-                android:paddingLeft="@dimen/main_top_margin"
-                android:paddingRight="@dimen/main_top_margin"
-                android:singleLine="true"
-                android:gravity="center_vertical"
-                android:textColor="#000"
-                android:textSize="@dimen/text_size_17" />
-            <ImageView 
-                android:layout_width="wrap_content"
-                android:layout_height="33dp"
-                android:background="@color/login_blue"
-                android:layout_marginLeft="@dimen/main_top_margin"
-                android:layout_marginRight="@dimen/view_margin"
-                android:paddingLeft="@dimen/main_top_margin"
-                android:paddingRight="@dimen/main_top_margin"
-                android:src="@drawable/ic_spinner"
-                android:layout_alignParentRight="true"
-                android:layout_alignRight="@id/tv_setvicetype"/>
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/tv_setvicetype"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="@dimen/main_top_margin"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:background="@drawable/bg_textview_gray"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/main_top_margin"
+                    android:paddingRight="@dimen/main_top_margin"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="@dimen/text_size_17" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignRight="@id/tv_setvicetype"
+                    android:layout_marginLeft="@dimen/main_top_margin"
+                    android:layout_marginRight="@dimen/view_margin"
+                    android:background="@color/login_blue"
+                    android:paddingLeft="@dimen/main_top_margin"
+                    android:paddingRight="@dimen/main_top_margin"
+                    android:src="@drawable/ic_spinner" />
             </RelativeLayout>
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -170,12 +176,12 @@
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:background="@drawable/bg_textview_gray"
+                android:inputType="number"
                 android:paddingLeft="@dimen/main_top_margin"
                 android:paddingRight="@dimen/main_top_margin"
                 android:singleLine="true"
                 android:textColor="#000"
-                android:textSize="18sp"
-                android:inputType="number" />
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -199,12 +205,12 @@
                 android:layout_marginLeft="@dimen/main_top_margin"
                 android:layout_marginRight="@dimen/view_margin"
                 android:background="@drawable/bg_textview_gray"
+                android:inputType="number"
                 android:paddingLeft="@dimen/main_top_margin"
                 android:paddingRight="@dimen/main_top_margin"
                 android:singleLine="true"
                 android:textColor="#000"
-                android:textSize="18sp" 
-                android:inputType="number"/>
+                android:textSize="18sp" />
         </LinearLayout>
 
         <LinearLayout

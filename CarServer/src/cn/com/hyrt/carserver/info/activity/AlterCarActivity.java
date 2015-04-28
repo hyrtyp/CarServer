@@ -311,10 +311,7 @@ public class AlterCarActivity extends BaseActivity{
 		mPhotoHelper.getPhoto();*/
 	}
 	
-	boolean isSave = true;
 	public void addCar(View view){
-		if (isSave) {
-			isSave = false;
 			Define.INFO_CAR car = new Define.INFO_CAR();
 			if(!isAdd){
 				car.carid = carId;
@@ -345,7 +342,7 @@ public class AlterCarActivity extends BaseActivity{
 			car.checkdate = StringHelper.getNowTime();
 //			car.imagepath = imgBuffer;
 			car.imagename = imageName;
-			
+			AlertHelper.getInstance(AlterCarActivity.this).showLoading("正在保存车辆信息");
 			if(mWebServiceHelper == null){
 				mWebServiceHelper = new WebServiceHelper(new WebServiceHelper.RequestCallback<Define.INFO_CAR>() {
 
@@ -356,14 +353,10 @@ public class AlterCarActivity extends BaseActivity{
 						}else{
 							uploadImg(result.id);
 						}
-
-//						setResult(Define.RESULT_FROM_ALTER_CAR);
-//						finish();
 					}
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
-						isSave = true;
 						AlertHelper.getInstance(AlterCarActivity.this).showCenterToast("保存失败");
 						LogHelper.i("tag", "errorMsg:"+errorMsg);
 						
@@ -371,9 +364,6 @@ public class AlterCarActivity extends BaseActivity{
 				}, this);
 			}
 			mWebServiceHelper.alterCar(car);
-		}else{
-			AlertHelper.getInstance(getApplicationContext()).showCenterToast("不能重复提交");
-		}
 	}
 	
 	@Override
@@ -547,6 +537,7 @@ public class AlterCarActivity extends BaseActivity{
 	
 	private void uploadImg(String uid){
 		if(imgBitmap == null){
+			AlertHelper.getInstance(AlterCarActivity.this).hideLoading();
 			setResult(Define.RESULT_FROM_ALTER_CAR);
 			finish();
 			return;
@@ -556,13 +547,14 @@ public class AlterCarActivity extends BaseActivity{
 
 					@Override
 					public void onSuccess(BASE result) {
+						AlertHelper.getInstance(AlterCarActivity.this).hideLoading();
 						setResult(Define.RESULT_FROM_ALTER_CAR);
 						finish();
 					}
 
 					@Override
 					public void onFailure(int errorNo, String errorMsg) {
-						isSave = true;
+						AlertHelper.getInstance(AlterCarActivity.this).hideLoading();
 						AlertHelper.getInstance(AlterCarActivity.this).showCenterToast("保存失败");
 						LogHelper.i("tag", "errorMsg:"+errorMsg);
 					}

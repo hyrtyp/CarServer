@@ -39,5 +39,4 @@
             </LinearLayout>
         </ScrollView>
     </cn.com.hyrt.carserver.base.view.PullToRefreshView>
-
 </LinearLayout>

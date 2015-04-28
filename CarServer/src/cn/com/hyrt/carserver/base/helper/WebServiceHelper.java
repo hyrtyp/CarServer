@@ -336,6 +336,15 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				Define.INSURANCE_CLAIM_LIST.class);
 	}
 
+	
+	/**
+	 * 车辆问答 首页分类信息接口
+	 */
+	public void getCLWDclasses(){
+		get(getString(R.string.method_question_getclwdclasses), null, Define.INFO_TOP_PAGER_CLASSES.class);
+	}
+	
+	
 	/**
 	 * 获取维修保养分类
 	 */
@@ -344,6 +353,62 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 				String.format("{\"flid\":\"%s\"}",id);
 		get(getString(R.string.method_question_maintainfl), params, Define.BASE.class);
 	}
+	
+	/**
+	 * 首页－推荐专家列表 2015-4-17
+	 */
+	public void getZJUserMainList() {
+		get(getString(R.string.method_question_getzjusermainlist), null,Define.ZJUSERMAIN_LIST.class);
+	}
+	
+	
+	/**
+	 * 首页－更多专家
+	 */
+	public void getZJUserList(int page){
+		String params = 
+				String.format("{\"page\":\"%s\"}",page);
+		get(getString(R.string.method_question_getzjuserList), params, Define.ZJUSERMAIN_LIST.class);
+	}
+	
+	
+	/**
+	 * 首页－更多专家
+	 */
+	public void getZJUserList(int page,String brandid){
+		String params = 
+				String.format("{\"page\":\"%s\",\"brandid\":\"%s\"}",page,brandid);
+		get(getString(R.string.method_question_getzjuserList), params, Define.ZJUSERMAIN_LIST.class);
+	}
+	
+	/**
+	 * 首页－更多专家
+	 */
+	public void getZJUserList(int page,String brandid,String professionalid){
+		String params = "";
+		if ("".equals(brandid) && "".equals(professionalid)) {
+			params = String.format("{\"page\":\"%s\"}",page);
+		}else if ("".equals(brandid) && !"".equals(professionalid)) {
+			params = String.format("{\"page\":\"%s\",\"professionalid\":\"%s\"}",page,professionalid);
+		}else if (!"".equals(brandid) && "".equals(professionalid)) {
+			params = String.format("{\"page\":\"%s\",\"brandid\":\"%s\"}",page,brandid);
+		}else if (!"".equals(brandid) && !"".equals(professionalid)) {
+			params = String.format("{\"page\":\"%s\",\"brandid\":\"%s\",\"professionalid\":\"%s\"}",page,brandid,professionalid);
+		}
+		get(getString(R.string.method_question_getzjuserList), params, Define.ZJUSERMAIN_LIST.class);
+	}
+	
+	
+	/**
+	 * 更多-显示专家详细信息
+	 */
+	public void getZJTJUserinfo(String userid){
+		String params = 
+				String.format("{\"userid\":\"%s\"}",userid);
+		get(getString(R.string.method_question_getzjtjuserinfo), params, Define.ZJTJUSERINFO.class);
+	}
+
+	
 	
 	/**
 	 * 获取相关问题

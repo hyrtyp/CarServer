@@ -379,6 +379,76 @@ public class Define {
 		}
 	}
 	
+	
+	
+	
+	/**
+	 * 首页－推荐专家列表
+	 *
+	 */
+	public static class ZJUSERMAIN_LIST extends BASE {
+
+		public ArrayList<CDATA> data;
+
+		public class CDATA {
+			public String repairtel;
+			public String zcnames;//专长1,2
+			public String unitname;//"单位名称",
+			public String areaid;// 所属地域
+			public String brandnames;// 专修品牌
+			public String sjname;//专家所属商家名称
+			public String integral;//积分
+			public String id;//专家用户主键ＩＤ
+			public String loginname;//登陆用户名
+			public String level;//专家级别
+			public String imagepath;//专家头像图片路径
+			public String name;//专家姓名
+			public String zcids;//专长id1,id2
+			public String serviceattitude;//专家服务态度指数几个星
+			@Override
+			public String toString() {
+				return "CDATA [repairtel=" + repairtel + ", zcnames=" + zcnames
+						+ ", unitname=" + unitname + ", areaid=" + areaid
+						+ ", brandnames=" + brandnames + ", sjname=" + sjname
+						+ ", integral=" + integral + ", id=" + id
+						+ ", loginname=" + loginname + ", level=" + level
+						+ ", imagepath=" + imagepath + ", name=" + name
+						+ ", zcids=" + zcids + ", serviceattitude="
+						+ serviceattitude + "]";
+			}
+			
+			
+			
+		}
+	}
+	
+	
+	/**
+	 * 首页－推荐专家列表
+	 *
+	 */
+	public static class ZJTJUSERINFO extends BASE {
+		public String zcnames;//专长1,2
+			public String repairtel;
+			public String unitname;//"单位名称",
+			public String areaid;// 所属地域
+			public String brandnames;// 专修品牌
+			public String sjname;//专家所属商家名称
+			public String integral;//积分
+			public String id;//专家用户主键ＩＤ
+			public String loginname;//登陆用户名
+			public String level;//专家级别
+			public String imagepath;//专家头像图片路径
+			public String name;//专家姓名
+			public String zcids;//专长id1,id2
+			public String serviceattitude;//专家服务态度指数几个星
+			public String zjarea ; // 专家简介
+			
+	}
+
+	
+	
+	
 	/**
 	 * 获取新闻图片
 	 * @author gsl
@@ -429,7 +499,9 @@ public class Define {
 		public String classid;//选择分类ID （提问时需要填写）
 		public String image;// 图片二维码
 		public String imagename;// 图片的名称
+		public String zjid;//专家ID 向某个特定的专家提问
 	}
+	
 	
 	public static class QUESTION_SEARCH_RESULT extends BASE {
 
@@ -493,6 +565,27 @@ public class Define {
 		public String toString() {
 			return "COMMENTS [content=" + content + ", level=" + level
 					+ ", pltime=" + pltime + "]";
+		}
+	}
+	
+	/***
+	 * 车辆问答 首页分类信息接口
+	 * @author Administrator
+	 *
+	 */
+	public static class INFO_TOP_PAGER_CLASSES extends BASE {
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String id ;               
+			public String sort  ;            
+			public String isshow  ;          
+			public String name    ;     
+			public String isleaf;
+			public String type;
+			public String infotype;
+			public String depth;
 		}
 	}
 	

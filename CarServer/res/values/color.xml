@@ -16,7 +16,11 @@
      <color name="no_select_btn_color">#7a7a7a</color>
      <color name="blue">#81e2f4</color>
     <color name="white">#ffffff</color>
+    <color name="gray">#C4C2C7</color>
+    <color name="textcolor">#484848</color>
+    <color name="white1">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="black1">#484848</color>
     <color name="blue_1">#82e2f4</color>
     <color name="classification_normal_color">#454545</color>
     

@@ -39,7 +39,9 @@ public class Define {
 		public String unitname;//所属单位
 		public String repairtel;//维修电话
 		public String areaid;//所属区域ID
-		public String zcstatus;
+		public String zcstatus; //"专家是否修改专长,如果修改专长则需要重新审核
+		public String brandids ; //专家品牌id1;专家品牌id2
+		public String zjarea ; //专家简介
 	}
 	
 	public static class SAVE_INFO_RESULT extends BASE {
@@ -61,6 +63,9 @@ public class Define {
 		public String sjname;//所属商家名称
 		public String zsimagepath0;//咨质图证书图片路径1
 		public String zsimagepath1;//咨质图证书图片路径2
+		public String brandids ; //专家品牌id1;专家品牌id2
+		public String brandnames ; //专家品牌1;专家品牌2
+		public String zjarea ; //专家简介 
 	}
 	
 	public static class INFO_INTEGRATION extends BASE {
@@ -72,6 +77,17 @@ public class Define {
 			public String integrlnum;//积分数
 			public String integrltime;//取得积分时间
 			public String integrltype;//取得积分类型
+		}
+	}
+	
+	
+	public static class INFO_BRANDIDS extends BASE {
+		
+		public ArrayList<CDATA> data;
+		
+		public class CDATA{
+			public String id;//品牌主键ID
+			public String name;//名牌名称
 		}
 	}
 	
@@ -242,6 +258,34 @@ public class Define {
 			public String carid;// 车辆ID
 			public String remarks;// 备注（保存接口）
 		}
+	}
+	
+//    "bycost": "556",
+//    "byitem": "来咯没金看看",
+//    "bymileage": "16698",
+//    "bypeople": "某件事",
+//    "bytime": "2015-01-21 12:00:00.0",
+//    "byunit": "好咯那",
+//    "carid": "f9aaab944af1c171014b0b0c0a1b02dd",
+//    "code": "200",
+//    "id": "f9aaab944af1c171014b0b427a0402f1",
+//    "nextbymileage": "796",
+//    "remarks": "咯喔喔喔喔喔"
+	/**
+	 * 显示保养详细信息
+	 * @author Administrator
+	 */
+	public static class WXCDATA extends BASE {
+		public String id;// 主键ID
+		public String bytime;// 保养时间
+		public String bypeople;// 保养人
+		public String bymileage;// 保养里程数
+		public String byitem;// 保养项目
+		public String byunit;// 保养服务单位
+		public String bycost;// 保养费用
+		public String nextbymileage;// 下次保养里程数
+		public String carid;// 车辆ID
+		public String remarks;// 备注（保存接口）
 	}
 	
 }

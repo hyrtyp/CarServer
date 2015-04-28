@@ -13,13 +13,15 @@ public class SHYJAdapter extends BaseAdapter {
 	private Context mContext;
 	private String[] shyjs;
 	private String[] shbhtimes;
+	private String[] shstatus;
 	
 	
-	public SHYJAdapter(Context mContext, String[] shyjs, String[] shbhtimes) {
+	public SHYJAdapter(Context mContext, String[] shyjs, String[] shbhtimes,String [] shstatus) {
 		super();
 		this.mContext = mContext;
 		this.shyjs = shyjs;
 		this.shbhtimes = shbhtimes;
+		this.shstatus = shstatus;
 	}
 
 	@Override
@@ -46,17 +48,23 @@ public class SHYJAdapter extends BaseAdapter {
 			convertView = LayoutInflater.from(mContext).inflate(R.layout.layout_lsshyj_item, null);
 			mHolder.tv_shyj1 = (TextView) convertView.findViewById(R.id.tv_shyj1);
 			mHolder.tv_shsj1 = (TextView) convertView.findViewById(R.id.tv_shsj1);
+			mHolder.tv_shst1 = (TextView) convertView.findViewById(R.id.tv_shst1);
 			convertView.setTag(mHolder);
 		}else{
 			mHolder = (ViewHolder) convertView.getTag();
 		}
+		if (position==shyjs.length) {
+			
+		}
 		mHolder.tv_shyj1.setText(shyjs[position]);
 		mHolder.tv_shsj1.setText(StringHelper.formatDate(shbhtimes[position]));
+		mHolder.tv_shst1 .setText(shstatus[position]);
 		return convertView;
 	}
 	
 	private class ViewHolder{
 		public TextView tv_shyj1;
 		public TextView tv_shsj1;
+		public TextView tv_shst1;
 	}
 }

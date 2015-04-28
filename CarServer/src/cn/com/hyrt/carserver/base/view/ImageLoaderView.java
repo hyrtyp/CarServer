@@ -38,6 +38,7 @@ public class ImageLoaderView extends ImageView{
 			mFinalBitmap.display(this, url);
 //		}
 	}
+	
 
 }
 

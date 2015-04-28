@@ -387,9 +387,9 @@ public class WebServiceHelper extends BaseWebServiceHelper {
 	}
 	
 	/**
-	 * 获取版本号
+	 * 获取版本更新资料
 	 */
-	public void getVersionInfoList(){
-		get("getVersionInfoList",null,Define.VS_INFO_LIST.class);
+	public void getEdition(){
+		get(getString(R.string.method_getEdition),null,Define.SELLER_VS_INFO.class);
 	}
 }

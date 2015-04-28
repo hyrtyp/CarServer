@@ -57,7 +57,7 @@
                 <ListView
                     android:id="@+id/ls_correlation"
                     android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="fill_parent"
                     android:layout_marginLeft="@dimen/main_top_margin"
                     android:layout_marginRight="@dimen/main_top_margin"
                     android:layout_marginBottom="@dimen/main_top_margin" 

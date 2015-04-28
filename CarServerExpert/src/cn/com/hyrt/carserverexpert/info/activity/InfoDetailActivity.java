@@ -34,6 +34,7 @@ import cn.com.hyrt.carserverexpert.base.application.CarServerApplication;
 import cn.com.hyrt.carserverexpert.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define;
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define.BASE;
+import cn.com.hyrt.carserverexpert.base.baseFunction.Define.INFO_BRANDIDS;
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define.INFO_LOGIN;
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define.INFO_USER;
 import cn.com.hyrt.carserverexpert.base.baseFunction.Define.SAVE_INFO_RESULT;
@@ -45,6 +46,7 @@ import cn.com.hyrt.carserverexpert.base.helper.PhotoHelper;
 import cn.com.hyrt.carserverexpert.base.helper.PhotoPopupHelper;
 import cn.com.hyrt.carserverexpert.base.helper.WebServiceHelper;
 import cn.com.hyrt.carserverexpert.base.view.ImageLoaderView;
+import cn.com.hyrt.carserverexpert.info.adapter.InfoBrandsAdapter;
 import cn.com.hyrt.carserverexpert.info.adapter.InfoSpecialtyAdapter;
 
 import com.soundcloud.android.crop.Crop;
@@ -52,6 +54,7 @@ import com.soundcloud.android.crop.Crop;
 public class InfoDetailActivity extends BaseActivity{
 	
 	@ViewInject(id=R.id.et_name) EditText etName;
+	@ViewInject(id=R.id.et_zjarea) EditText etArea;
 //	@ViewInject(id=R.id.et_address) EditText etAddress;
 	@ViewInject(id=R.id.et_unit) EditText etUnit;
 	@ViewInject(id=R.id.iv_face_photo) ImageLoaderView ivFacePhoto;
@@ -64,12 +67,17 @@ public class InfoDetailActivity extends BaseActivity{
 	@ViewInject(id=R.id.layout_specialty1) LinearLayout layoutSpecialty1;
 	@ViewInject(id=R.id.layout_specialty2) LinearLayout layoutSpecialty2;
 	@ViewInject(id=R.id.btn_reselect,click="reselect") Button btnReselect;
+	@ViewInject(id=R.id.layout_specialty3) LinearLayout layoutSpecialty3;
+	@ViewInject(id=R.id.btn_reselect2,click="reselect2") Button btnReselect2;
 	@ViewInject(id=R.id.sp_province) Spinner spProvince;
 	@ViewInject(id=R.id.sp_city) Spinner spCity;
 	@ViewInject(id=R.id.sp_county) Spinner spCounty;
 	@ViewInject(id=R.id.tv_specialty) TextView tvSpecialty;
 	@ViewInject(id=R.id.et_sjname) EditText etSjName;
 	@ViewInject(id=R.id.cb_select_all) CheckBox cbSelectAll;
+	@ViewInject(id=R.id.gv_brand) GridView gvBrand;
+	@ViewInject(id=R.id.cb_select_all_brand) CheckBox cbSelectBrand;
+	@ViewInject(id=R.id.tv_brands) TextView tv_brands;
 	
 	private Bitmap faceBitmap;
 	private String faceImgUrl;
@@ -87,6 +95,7 @@ public class InfoDetailActivity extends BaseActivity{
 	private List<String> twoNames = new ArrayList<String>();
 	private ArrayAdapter<String> mSpecialtyAdapter1;
 	private InfoSpecialtyAdapter mSpecialtyAdapter2;
+	private InfoBrandsAdapter InfoBrandsAdapter3;
 	
 	private List<Map<String, String>> addressOneList 
 	= new ArrayList<Map<String,String>>();
@@ -103,6 +112,8 @@ public class InfoDetailActivity extends BaseActivity{
 	private List<String> cityName = new ArrayList<String>();
 	private List<String> countyId = new ArrayList<String>();
 	private List<String> countyName = new ArrayList<String>();
+	private List<String> brandidsId = new ArrayList<String>();
+	private List<String> brandidsName = new ArrayList<String>(); //awen
 	private ArrayAdapter<String> mProvinceArrayAdapter;
 	private ArrayAdapter<String> mCityArrayAdapter;
 	private ArrayAdapter<String> mCountyArrayAdapter;
@@ -130,9 +141,25 @@ public class InfoDetailActivity extends BaseActivity{
 			@Override
 			public void onSuccess(INFO_USER result) {
 				AlertHelper.getInstance(InfoDetailActivity.this).hideLoading();
+				if (result.zcnames.equals("")) {
+					layoutSpecialty2.setVisibility(View.VISIBLE);
+					layoutSpecialty1.setVisibility(View.GONE);
+				}else{
+					layoutSpecialty2.setVisibility(View.GONE);
+					layoutSpecialty1.setVisibility(View.VISIBLE);
+				}
+				if (result.brandnames.equals("")) {
+					layoutSpecialty3.setVisibility(View.VISIBLE);
+					btnReselect2.setVisibility(View.GONE);
+				}else{
+					layoutSpecialty3.setVisibility(View.GONE);
+					btnReselect2.setVisibility(View.VISIBLE);
+				}
 				mData = result;
 				getCodingArea();
+				getSelBrandList();
 				etName.setText(result.name);
+				etArea.setText(result.zjarea);
 				etSjName.setText(result.sjname);
 				etUnit.setText(result.unitname);
 				faceImgUrl = result.imagepath;
@@ -146,6 +173,7 @@ public class InfoDetailActivity extends BaseActivity{
 					tvLicensePhoto.setVisibility(View.GONE);
 				}
 				tvSpecialty.setText(result.zcnames);
+				tv_brands.setText(result.brandnames);
 			}
 
 			@Override
@@ -201,6 +229,7 @@ public class InfoDetailActivity extends BaseActivity{
 				
 			}
 		}, this).getSpecialtyType();
+		
 	}
 	
 	private void getCodingArea(){
@@ -283,6 +312,38 @@ public class InfoDetailActivity extends BaseActivity{
 		mAddressWebServiceHelper.getCodingArea();
 	}
 	
+	
+	
+	private void getSelBrandList(){
+		brandidsId.clear();
+		brandidsName.clear();
+		
+		WebServiceHelper  mWebServiceHelper = new WebServiceHelper(new WebServiceHelper.RequestCallback<Define.INFO_BRANDIDS>() {
+
+			@Override
+			public void onSuccess(INFO_BRANDIDS result) {
+				for (int i = 0; i < result.data.size(); i++) {
+					brandidsId.add(result.data.get(i).id);
+					brandidsName.add(result.data.get(i).name);
+				}
+				
+				
+				if(InfoBrandsAdapter3 == null){
+					InfoBrandsAdapter3 = new InfoBrandsAdapter(brandidsName, InfoDetailActivity.this);
+					gvBrand.setAdapter(InfoBrandsAdapter3);
+				}else{
+					InfoBrandsAdapter3.notifyDataSetChanged();
+				}
+			}
+
+			@Override
+			public void onFailure(int errorNo, String errorMsg) {
+				AlertHelper.getInstance(InfoDetailActivity.this).showCenterToast("获取商标失败");
+			}
+		}, InfoDetailActivity.this);
+		mWebServiceHelper.getSelBrandList();
+	}
+	
 	public void submit(View view){
 		Define.SAVE_INFO saveInfo = new Define.SAVE_INFO();
 		saveInfo.id = mData.id;
@@ -290,6 +351,7 @@ public class InfoDetailActivity extends BaseActivity{
 		saveInfo.merchantid = etSjName.getText().toString();
 		saveInfo.loginname = mData.loginname;
 		saveInfo.zcstatus = zcstatus+"";
+		saveInfo.zjarea = etArea.getText().toString().trim();
 		List<String> checkedPosition = mSpecialtyAdapter2.getCheckedPosition();
 		String checkedIds = "";
 		for(int i=0,j=checkedPosition.size(); i<j; i++){
@@ -304,6 +366,21 @@ public class InfoDetailActivity extends BaseActivity{
 		saveInfo.unitname = etUnit.getText().toString();
 		if(spCounty.getSelectedItemPosition() > 0){
 			saveInfo.areaid = countyId.get(spCounty.getSelectedItemPosition());
+		}
+		
+		//得到选择的商标的id
+		List<String> checkedBrandPosition = InfoBrandsAdapter3.getCheckedBrandPosition();
+		
+		String checkedBrandIds = "";
+		for (int i = 0; i < checkedBrandPosition.size(); i++) {
+			checkedBrandIds += brandidsId.get(Integer.parseInt(checkedBrandPosition.get(i)))+";";
+		}
+		if(!"".equals(checkedBrandIds)){
+			checkedBrandIds = checkedBrandIds.substring(0, checkedBrandIds.length()-1);
+			saveInfo.brandids = checkedBrandIds;
+		}else{
+			saveInfo.brandids = mData.brandids;
+			LogHelper.d("tag mData.brandids", mData.brandnames);
 		}
 		
 		AlertHelper.getInstance(InfoDetailActivity.this).showLoading(null);
@@ -524,12 +601,25 @@ public class InfoDetailActivity extends BaseActivity{
 			public void onNothingSelected(AdapterView<?> arg0) {}
 		});
 		
+		
+		
 		cbSelectAll.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			
 			@Override
 			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 				if(mSpecialtyAdapter2 != null && needSelectAll){
 					mSpecialtyAdapter2.selectAll(arg1);
+				}
+				needSelectAll = true;
+			}
+		});
+		
+		cbSelectBrand.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
+				if(InfoBrandsAdapter3 != null && needSelectAll){
+					InfoBrandsAdapter3.selectAll(arg1);
 				}
 				needSelectAll = true;
 			}
@@ -642,6 +732,8 @@ public class InfoDetailActivity extends BaseActivity{
         
     }
     
+    
+    
     private void changeCountySelected(){
 		ok:
 		if(mData.areaid != null && !"".equals(mData.areaid)){
@@ -670,6 +762,11 @@ public class InfoDetailActivity extends BaseActivity{
     	zcstatus = 1;
     	layoutSpecialty1.setVisibility(View.GONE);
     	layoutSpecialty2.setVisibility(View.VISIBLE);
+    }
+    public void reselect2(View view){
+    	zcstatus = 1;
+    	layoutSpecialty3.setVisibility(View.VISIBLE);
+		btnReselect2.setVisibility(View.GONE);
     }
     
     public void uploadImage(Bitmap bitmap, String imageName, boolean isZJ){

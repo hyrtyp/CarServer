@@ -638,6 +638,19 @@ public class PullToRefreshView extends LinearLayout {
 			mOnHeaderRefreshListener.onHeaderRefresh(this);
 		}
 	}
+	// 在 setResult(0); 之后 在onActivityResult()中做一次下拉刷新。2015-1-21
+	public void headerRefreshing1() {
+		mHeaderState = REFRESHING;
+		setHeaderTopMargin(0);
+		mHeaderTextView.setVisibility(View.VISIBLE);
+		mHeaderImageView.setVisibility(View.GONE);
+		mHeaderImageView.clearAnimation();
+		mHeaderImageView.setImageDrawable(null);
+		mHeaderProgressBar.setVisibility(View.VISIBLE);
+		mHeaderTextView_rule = (TextView) findViewById(R.id.pull_to_refresh_text_rule);
+		mHeaderTextView_rule.setVisibility(View.VISIBLE);
+		mHeaderTextView.setText(R.string.pull_to_refresh_refreshing_label);
+	}
 
 	/**
 	 * footer refreshing

@@ -2,11 +2,16 @@ package cn.com.hyrt.carserverseller.product.activity;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.soundcloud.android.crop.Crop;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.AlertDialog.Builder;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,12 +20,18 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 import cn.com.hyrt.carserverseller.R;
 import cn.com.hyrt.carserverseller.base.activity.BaseActivity;
+import cn.com.hyrt.carserverseller.base.baseFunction.ClassifyJsonParser;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.BASE;
 import cn.com.hyrt.carserverseller.base.baseFunction.Define.INFO_PRODUCT;
@@ -53,6 +64,18 @@ public class ProductActivity extends BaseActivity{
 	private String productImgUrl;
 	private boolean isProduct;
 	private Define.INFO_PRODUCT_LIST.CDATA productInfo;
+	// 
+	private RelativeLayout rl_setvicetype;
+	private TextView tv_setvicetype;
+	private List<String> spotIdOne = new ArrayList<String>();
+	private List<String> spotNameOne = new ArrayList<String>();
+	private Map<String, List<String>> spotIdTwo = new HashMap<String, List<String>>();
+	private Map<String, List<String>> spotNameTwo = new HashMap<String, List<String>>();
+	private Dialog mSpotDialogOne;
+	private ListView ls_correlation;
+	private ArrayAdapter<String> correAdapter;
+	private String positionId = "";
+	private String istype="sp";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -90,12 +113,20 @@ public class ProductActivity extends BaseActivity{
 		}
 		et_proName.setText(productInfo.spname);
 		et_proPrice.setText(productInfo.price);
-		et_proDisPrice.setText(productInfo.discount);
+		et_proDisPrice.setText(productInfo.discount);   // TODO 要加上商品类型
 		et_proDec.setText(productInfo.sptitle);
 	}
 	
 	
 	private void setListener(){
+		//TODO  商品分类
+		rl_setvicetype.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				loadSpot();
+			}
+		});
+		
 		ivProductPhoto.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
@@ -208,6 +239,8 @@ public class ProductActivity extends BaseActivity{
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == 0) {
+			System.out.println("sssssssss");
+			AlertHelper.getInstance(getApplicationContext()).showCenterToast("sssssssss");//TODO
 			return;
 		}
 		
@@ -299,7 +332,6 @@ public class ProductActivity extends BaseActivity{
 		String curpirce = et_proPrice.getText().toString();
 		String discountprice = et_proDisPrice.getText().toString();
 		String productdec = et_proDec.getText().toString();
-		String istype="";
 		if("".equals(productname) || productname == null){
 			AlertHelper.getInstance(ProductActivity.this).showCenterToast(String.format(getString(R.string.text_not_null), "商品名称"));
 			return;
@@ -363,6 +395,7 @@ public class ProductActivity extends BaseActivity{
 		mProductInfo.discount=discountprice;
 		mProductInfo.sptitle=productdec;
 		mProductInfo.type=istype;
+		mProductInfo.setvicetype = positionId;
 //		mProductInfo.image=pdPhoto;
 //		mProductInfo.imagename=pdPhotoName;
 
@@ -441,7 +474,6 @@ public class ProductActivity extends BaseActivity{
 	}
 	
 	private void findView(){
-//		gvProductPhoto = (GridView) findViewById(R.id.gv_product_photo);
 		et_proName = (TextView) findViewById(R.id.et_proName);
 		et_proPrice = (TextView) findViewById(R.id.et_proPrice);
 		et_proDisPrice = (TextView) findViewById(R.id.et_proDisPrice);
@@ -453,9 +485,104 @@ public class ProductActivity extends BaseActivity{
 		btnSubmit =(Button)findViewById(R.id.btn_prodectsubmit);
 		ivProductPhoto = (ImageLoaderView)findViewById(R.id.iv_product_photo);
 		tvProductPhoto = (TextView)findViewById(R.id.tv_product_photo);
-//		if(productAdapter == null){
-//			productAdapter = new AddPhotoGridAdapter(productPhotos, ProductActivity.this);
-//		}
-//		gvProductPhoto.setAdapter(productAdapter);
+		tv_setvicetype = (TextView) findViewById(R.id.tv_setvicetype);
+		rl_setvicetype = (RelativeLayout)findViewById(R.id.rl_setvicetype);
+	}
+	
+	private void loadSpot(){
+		//防止数据重复
+		spotIdOne.clear();
+		spotNameOne.clear();
+		spotIdTwo.clear();
+		spotNameTwo.clear();
+		
+		WebServiceHelper mSpotServiceHelper = new WebServiceHelper(
+				new WebServiceHelper.OnSuccessListener() {
+			@Override
+			public void onSuccess(String result) {
+				ClassifyJsonParser mClassifyJsonParser = new ClassifyJsonParser();
+				mClassifyJsonParser.parse(result); 
+				List<Map<String, String>> oneList = mClassifyJsonParser.getOneList();
+				List<List<Map<String, String>>> twoList
+				= mClassifyJsonParser.getTwoList();
+				
+				
+				for(int i=0,j=oneList.size(); i<j; i++){
+					spotIdOne.add(oneList.get(i).get("id"));
+					spotNameOne.add(oneList.get(i).get("name"));
+					List<String> ids = new ArrayList<String>();
+					List<String> names = new ArrayList<String>();
+					List<Map<String, String>> cList = twoList.get(i);
+					for(int a=0,b=cList.size(); a<b; a++){
+						ids.add(cList.get(a).get("id"));
+						names.add(cList.get(a).get("name"));
+					}
+					spotIdTwo.put(oneList.get(i).get("id"), ids);
+					spotNameTwo.put(oneList.get(i).get("id"), names);
+				}
+				getPosition(null);
+			}
+		}, ProductActivity.this);
+		mSpotServiceHelper.getFwSpClassList(istype);
+	}
+	
+	/**
+	 * 选择部位
+	 */
+	public void getPosition(final String spotId) {
+		if(mSpotDialogOne == null){
+			mSpotDialogOne = new Dialog(ProductActivity.this, R.style.MyDialog1);
+			mSpotDialogOne.setContentView(R.layout.layout_question_position);
+			mSpotDialogOne.getWindow().setLayout(RelativeLayout.LayoutParams.MATCH_PARENT,
+					RelativeLayout.LayoutParams.MATCH_PARENT);
+			ls_correlation = (ListView) mSpotDialogOne.findViewById(R.id.ls_correlation);
+			
+		}
+		if(spotId != null){
+			correAdapter = new ArrayAdapter<String>(
+					ProductActivity.this,
+					R.layout.layout_question_position_item,
+					R.id.tv_name, spotNameTwo.get(spotId));
+			ls_correlation.setAdapter(correAdapter);
+			((TextView)mSpotDialogOne.findViewById(R.id.text1)).setText("返回");
+		}else{
+			correAdapter = new ArrayAdapter<String>(
+					ProductActivity.this,
+					R.layout.layout_question_position_item,
+					R.id.tv_name, spotNameOne);
+			ls_correlation.setAdapter(correAdapter);
+			((TextView)mSpotDialogOne.findViewById(R.id.text1)).setText(R.string.cancle);
+		}
+		
+		View.OnClickListener mClickListener = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View view) {
+				if(spotId != null){
+					getPosition(null);
+					return;
+				}
+				mSpotDialogOne.dismiss();
+			}
+		};
+		mSpotDialogOne.findViewById(R.id.rl10).setOnClickListener(mClickListener);
+		
+		((ListView) ls_correlation).setOnItemClickListener(new OnItemClickListener() {
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						if(spotId == null){
+							getPosition(spotIdOne.get(position));
+							return;
+						}
+						//TODO 取得选择分类ID
+						positionId = spotIdTwo.get(spotId).get(position); 
+						tv_setvicetype.setText(spotNameTwo.get(spotId).get(position));
+						mSpotDialogOne.dismiss();
+					}
+				});
+		if(!mSpotDialogOne.isShowing()){
+			mSpotDialogOne.show();
+		}
 	}
 }

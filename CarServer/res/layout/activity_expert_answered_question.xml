@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_textview_gray"
+            android:orientation="horizontal" >
+
+            <Spinner
+                android:id="@+id/sp_question_one"
+                style="@style/spinner_style2"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:paddingRight="18dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/sp_question_one"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/view_margin_small"
+                android:src="@drawable/ic_spinner2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_textview_gray"
+            android:orientation="horizontal" >
+
+            <Spinner
+                android:id="@+id/sp_question_two"
+                style="@style/spinner_style2"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:paddingRight="18dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/sp_question_two"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/view_margin_small"
+                android:src="@drawable/ic_spinner2" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_textview_gray"
+            android:orientation="horizontal" >
+
+            <Spinner
+                android:id="@+id/sp_question_third"
+                style="@style/spinner_style2"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
+                android:paddingRight="18dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignRight="@id/sp_question_third"
+                android:layout_centerVertical="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/view_margin_small"
+                android:src="@drawable/ic_spinner2" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.01dp"
+        android:layout_below="@id/ll"
+        android:layout_marginTop="@dimen/dimen_size_10"
+        android:background="@color/gray" />
+
+    <cn.com.hyrt.carserver.base.view.PullToRefreshView
+        android:id="@+id/ptrv"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/view"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:layout_marginTop="@dimen/dimen_size_10" >
+
+        <ListView
+            android:id="@+id/lv_expert_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </cn.com.hyrt.carserver.base.view.PullToRefreshView>
+   <!--  <FrameLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/dimen_size_14"
+        android:layout_marginRight="@dimen/dimen_size_10"
+       >
+        <Button 
+            android:id="@+id/bt_shuaxin"
+            android:layout_width="33dp"
+            android:layout_height="33dp"
+            android:background="@drawable/refresh"
+            android:padding="@dimen/dimen_size_10"/>
+    </FrameLayout> -->
+
+</RelativeLayout>

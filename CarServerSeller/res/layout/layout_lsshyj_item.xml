@@ -9,7 +9,31 @@
     android:background="#fff"
     android:gravity="center_vertical"
     android:orientation="vertical" >
+	<LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:text="审核状态："
+            android:textColor="#050505"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_shst1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            android:text="ysh"
+            android:textColor="#646363"
+            android:textSize="12sp" />
+    </LinearLayout>
+    
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
@@ -59,5 +83,4 @@
             android:textColor="#646363"
             android:textSize="12sp" />
     </LinearLayout>
-
 </LinearLayout>

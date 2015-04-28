@@ -119,6 +119,9 @@
         <activity 
             android:name=".history.activity.CarStatusDetailActivity"
             android:label="@string/car_status_label"/>
+        <activity 
+            android:name="cn.com.hyrt.carserverexpert.history.activity.CarStatusDetailActivity2"
+            android:label="@string/car_status_label1"/>
         
     </application>
 

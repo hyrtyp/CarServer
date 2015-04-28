@@ -126,8 +126,8 @@ public class QuestionDetailAdapter extends BaseAdapter{
 					Intent intent = new Intent();
 					intent.setClass(mContext, WebActivity.class);
 					String url = mContext.getString(R.string.method_weburl)
-//							+"/cspportal/expert/view?id="
-							+"/expert/view?id="
+							+"/cspportal/expert/view?id="
+//							+"/expert/view?id="
 							+data.userterminalid
 							+"&userid="+CarServerApplication.loginInfo.id;
 					LogHelper.i("tag", "url:"+url);
